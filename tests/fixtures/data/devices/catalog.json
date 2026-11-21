@@ -1,0 +1,59 @@
+{
+ "catch_up_after_min": 90,
+ "devices": {
+  "building": {
+   "fans": {
+    "kind": "shed",
+    "kw": 0.0,
+    "label": "Fans",
+    "path": "the building system",
+    "share": 1.0
+   },
+   "plugs": {
+    "kind": "shed",
+    "kw": 0.0,
+    "label": "Plug loads",
+    "path": "plug relays",
+    "share": 1.0
+   }
+  },
+  "home": {
+   "dryer": {
+    "kind": "shift",
+    "kw": 5.6,
+    "label": "Clothes dryer",
+    "order": 3,
+    "path": "the maker's cloud",
+    "share": 1.0
+   },
+   "hpwh": {
+    "kind": "shift",
+    "kw": 1.7,
+    "label": "Heat pump water heater",
+    "order": 1,
+    "path": "the maker's app",
+    "share": 1.0
+   },
+   "v2h": {
+    "eff": 0.9,
+    "event_kwh": 10.0,
+    "kind": "source",
+    "kw": 9.6,
+    "label": "Car, two-way charger",
+    "path": "the maker's cloud",
+    "share": 1.0
+   }
+  }
+ },
+ "rows": {
+  "building": {
+   "building-01": 0
+  },
+  "home": {
+   "home-01": 0,
+   "home-02": 1,
+   "home-03": 2
+  }
+ },
+ "stagger_max_min": 120
+}

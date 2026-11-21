@@ -1,0 +1,40 @@
+<!-- @section -->
+<div class="key">{{key}}</div>
+  <div class="map mini" role="img" aria-label="The architecture, each part marked with the kinds of source it reads">
+<div class="frame agg"><span class="fl">The aggregator and the buyers</span><div class="boxes c7">{{aggregator}}</div></div>
+<div class="town"><b>NANDA Town</b><span>Software. It holds no data.</span>{{town}}</div>
+<div class="parts">
+  <div class="frame co"><span class="fl">Community {{community_marks}}</span>
+    <div class="mrow"><span class="sl">Community agent</span><div class="boxes c6">{{community}}</div></div>
+    <div class="mrow"><span class="sl">Home agents</span><div class="boxes c5">{{homes}}</div></div>
+    <div class="mrow"><span class="sl">Building agents</span><div class="boxes c5">{{buildings}}</div></div></div>
+  <div class="frame pv"><span class="fl">Solar-and-battery plant</span><div class="col">{{plant}}</div></div>
+  <div class="frame dc"><span class="fl">Data center</span><div class="col">{{data_center}}</div></div>
+</div>
+<div class="frame ret"><span class="fl">Return path</span><div class="boxes c4">{{return_path}}</div></div>
+</div>
+<p class="slkey"><span class="sl4"><i class="e on"></i><i class="s on"></i><i class="m on"></i><i class="o on"></i></span> Every part carries four squares, always in this order: ENGIE, survey, measured, ours. A filled square means the part reads that kind of source.
+<span class="sl4"><i class="e"></i><i class="s"></i><i class="m"></i><i class="o"></i></span> Four empty squares: the part holds no data of its own.</p>
+  <div class="mx"><div class="mxh"><span>Part</span>{{heads}}</div>{{groups}}</div>
+<!-- @kind -->
+<div class="kc {{kind}}"><span class="tag {{kind}}">{{tag}}</span><b>{{name}}</b><span>{{what}}</span><em>{{line}}</em></div>
+<!-- @marks -->
+<span class="sl4" title="{{said}}" aria-label="{{said}}">{{squares}}</span>
+<!-- @square -->
+<i class="{{cls}}"></i>
+<!-- @marked_box -->
+<div class="mb"><b>{{name}}</b>{{marks}}</div>
+<!-- @head -->
+<span class="k {{kind}}">{{name}}</span>
+<!-- @group -->
+<section class="grp" id="d-{{group}}"><h3>{{name}}</h3>{{rows}}</section>
+<!-- @row -->
+<div class="row">{{part}}{{cells}}</div>
+<!-- @row_without_data -->
+<div class="row none">{{part}}<div class="span">{{does}}</div></div>
+<!-- @part -->
+<div class="part"><span class="bh"><b>{{name}}</b>{{role}}</span>{{line}}</div>
+<!-- @cell -->
+<div class="cell {{kind}}">{{items}}</div>
+<!-- @cell_items -->
+<span class="cl">{{name}}</span><ul>{{items}}</ul>

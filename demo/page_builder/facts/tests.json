@@ -1,0 +1,25 @@
+{
+ "strained_hours": {
+  "as_recorded": 96,
+  "shared_out": 21,
+  "cut_only": 19,
+  "cut_only_without_plants": 84,
+  "one_in_20_holds_without_the_round": 23,
+  "one_in_20_holds_with_the_round": 23,
+  "everyone_overstates_nobody_checks": 23,
+  "data_centers_pause_all": 17
+ },
+ "sites_equal_to_the_replay": 60,
+ "request_agent": {
+  "requests": 40,
+  "kept_as_written": 40,
+  "notes": 40,
+  "read_exactly_right": 30
+ },
+ "true_shortfall_pct": {
+  "with": -2.7,
+  "without": -16.9
+ },
+ "data_centers_postponable_mw": 53.8,
+ "home_flexibility_usd_an_evening": 27.75071041666666
+}

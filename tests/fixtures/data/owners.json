@@ -1,0 +1,32 @@
+{
+ "homes": {
+  "home-01": {
+   "charge_kw": 7.2,
+   "max_rise_away_c": 2.5,
+   "max_rise_c": 1.5,
+   "online": 1.0,
+   "precool_c": 0.5,
+   "respond": 1.0,
+   "v2h_kwh": 10.0
+  },
+  "home-02": {
+   "charge_kw": 7.2,
+   "max_rise_away_c": 2.5,
+   "max_rise_c": 1.5,
+   "online": 1.0,
+   "precool_c": 0.5,
+   "respond": 1.0,
+   "v2h_kwh": 10.0
+  },
+  "home-03": {
+   "charge_kw": 7.2,
+   "max_rise_away_c": 2.5,
+   "max_rise_c": 1.5,
+   "online": 1.0,
+   "precool_c": 0.5,
+   "respond": 1.0,
+   "v2h_kwh": 10.0
+  }
+ },
+ "tier": 1
+}

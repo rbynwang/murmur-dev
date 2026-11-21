@@ -1,0 +1,60 @@
+{
+ "what": "The chosen evenings of ENGIE's 2025 for one community: how many homes it has, how many chosen evenings fall in each season, the runs that failed, and tier 1 by season with the community agent (kW promised, evenings short of the promise by the buyers' meter, how far the buyers' baseline is off).",
+ "homes": 200,
+ "evenings_by_season": {
+  "winter": 12,
+  "spring": 12,
+  "summer": 12,
+  "autumn": 12
+ },
+ "engie_weather": {
+  "failed_runs": [],
+  "tier1_by_season": {
+   "winter": {
+    "promised_kw": 1526.3,
+    "evenings_short_of_the_promise": 4,
+    "baseline_error_share": 0.05
+   },
+   "spring": {
+    "promised_kw": 1394.758,
+    "evenings_short_of_the_promise": 0,
+    "baseline_error_share": 0.123
+   },
+   "summer": {
+    "promised_kw": 1510.833,
+    "evenings_short_of_the_promise": 1,
+    "baseline_error_share": 0.123
+   },
+   "autumn": {
+    "promised_kw": 1490.275,
+    "evenings_short_of_the_promise": 5,
+    "baseline_error_share": 0.072
+   }
+  }
+ },
+ "real_weather": {
+  "failed_runs": [],
+  "tier1_by_season": {
+   "winter": {
+    "promised_kw": 1524.583,
+    "evenings_short_of_the_promise": 5,
+    "baseline_error_share": 0.076
+   },
+   "spring": {
+    "promised_kw": 1418.475,
+    "evenings_short_of_the_promise": 0,
+    "baseline_error_share": 0.143
+   },
+   "summer": {
+    "promised_kw": 1547.05,
+    "evenings_short_of_the_promise": 0,
+    "baseline_error_share": 0.164
+   },
+   "autumn": {
+    "promised_kw": 1512.258,
+    "evenings_short_of_the_promise": 5,
+    "baseline_error_share": 0.084
+   }
+  }
+ }
+}

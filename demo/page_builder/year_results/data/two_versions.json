@@ -1,0 +1,61 @@
+{
+ "what": "The chosen evenings with the community agent on both versions of the weather, by tier: kW offered and promised, evenings short of the promise by the buyers' meter, the worst evening against the promise as a share of it (negative when short), how far the buyers' baseline is off, and what homes and buildings delivered for each kWh contracted.",
+ "engie_weather": {
+  "tier1": {
+   "offered_kw": 1769.252,
+   "promised_kw": 1480.542,
+   "evenings_short_of_the_promise": 10,
+   "worst_evening_gap_share": -0.075,
+   "baseline_error_share": 0.092,
+   "homes_delivered_over_contract": 0.914,
+   "buildings_delivered_over_contract": 1.092
+  },
+  "tier2": {
+   "offered_kw": 1154.833,
+   "promised_kw": 1049.846,
+   "evenings_short_of_the_promise": 0,
+   "worst_evening_gap_share": 0.036,
+   "baseline_error_share": 0.092,
+   "homes_delivered_over_contract": 1.038,
+   "buildings_delivered_over_contract": 1.088
+  },
+  "tier3": {
+   "offered_kw": 115.792,
+   "promised_kw": 47.91,
+   "evenings_short_of_the_promise": 7,
+   "worst_evening_gap_share": -0.523,
+   "baseline_error_share": 0.198,
+   "homes_delivered_over_contract": 0.427,
+   "buildings_delivered_over_contract": 1.154
+  }
+ },
+ "real_weather": {
+  "tier1": {
+   "offered_kw": 1770.029,
+   "promised_kw": 1500.592,
+   "evenings_short_of_the_promise": 10,
+   "worst_evening_gap_share": -0.08,
+   "baseline_error_share": 0.117,
+   "homes_delivered_over_contract": 0.921,
+   "buildings_delivered_over_contract": 1.205
+  },
+  "tier2": {
+   "offered_kw": 1155.358,
+   "promised_kw": 1050.333,
+   "evenings_short_of_the_promise": 0,
+   "worst_evening_gap_share": 0.026,
+   "baseline_error_share": 0.117,
+   "homes_delivered_over_contract": 1.047,
+   "buildings_delivered_over_contract": 1.195
+  },
+  "tier3": {
+   "offered_kw": 115.433,
+   "promised_kw": 47.944,
+   "evenings_short_of_the_promise": 6,
+   "worst_evening_gap_share": -0.507,
+   "baseline_error_share": 0.208,
+   "homes_delivered_over_contract": 0.439,
+   "buildings_delivered_over_contract": 1.294
+  }
+ }
+}

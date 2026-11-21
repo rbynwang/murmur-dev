@@ -1,0 +1,548 @@
+{
+ "products": {
+  "home": 172,
+  "building": 145
+ },
+ "brands": {
+  "home": 108,
+  "building": 90
+ },
+ "kinds": {
+  "home": 22,
+  "building": 41
+ },
+ "products_all": 317,
+ "brands_all": 180,
+ "units": {
+  "home": [
+   [
+    "Solar",
+    [
+     [
+      "Solar panels",
+      16,
+      "w"
+     ],
+     [
+      "Inverters",
+      7,
+      "w"
+     ]
+    ]
+   ],
+   [
+    "Storage",
+    [
+     [
+      "Home batteries",
+      9,
+      "c"
+     ]
+    ]
+   ],
+   [
+    "Vehicles",
+    [
+     [
+      "Electric cars",
+      20,
+      "v"
+     ],
+     [
+      "Home EV chargers",
+      10,
+      "c"
+     ],
+     [
+      "Two-way car charging",
+      5,
+      "c"
+     ]
+    ]
+   ],
+   [
+    "Heating and cooling",
+    [
+     [
+      "Smart thermostats",
+      10,
+      "c"
+     ],
+     [
+      "Room AC controllers",
+      3,
+      "c"
+     ],
+     [
+      "Central AC and heat pumps",
+      10,
+      "v"
+     ],
+     [
+      "Window air conditioners",
+      11,
+      "c"
+     ]
+    ]
+   ],
+   [
+    "Shiftable loads",
+    [
+     [
+      "Heat pump water heaters",
+      12,
+      "c"
+     ],
+     [
+      "Vented electric dryers",
+      7,
+      "c"
+     ],
+     [
+      "Heat pump dryers",
+      5,
+      "c"
+     ],
+     [
+      "Dishwashers",
+      9,
+      "c"
+     ],
+     [
+      "Refrigerators",
+      7,
+      "w"
+     ],
+     [
+      "Freezers",
+      5,
+      "w"
+     ],
+     [
+      "Pool pumps",
+      3,
+      "c"
+     ],
+     [
+      "Hot tub controls",
+      3,
+      "w"
+     ],
+     [
+      "Dehumidifiers",
+      7,
+      "w"
+     ],
+     [
+      "Smart plugs",
+      4,
+      "w"
+     ],
+     [
+      "Smart electrical panels",
+      5,
+      "w"
+     ]
+    ]
+   ],
+   [
+    "Lighting",
+    [
+     [
+      "Home lighting",
+      4,
+      "w"
+     ]
+    ]
+   ]
+  ],
+  "building": [
+   [
+    "Site and building systems",
+    [
+     [
+      "Meters",
+      4,
+      "w"
+     ],
+     [
+      "Site energy controllers",
+      3,
+      "c"
+     ],
+     [
+      "Grid signal gateways",
+      2,
+      "v"
+     ],
+     [
+      "Building management systems",
+      8,
+      "c"
+     ],
+     [
+      "AI supervisory optimizers",
+      3,
+      "v"
+     ],
+     [
+      "BACnet/SC routers",
+      1,
+      "v"
+     ]
+    ]
+   ],
+   [
+    "Storage",
+    [
+     [
+      "Large batteries",
+      5,
+      "c"
+     ],
+     [
+      "Thermal storage",
+      3,
+      "v"
+     ]
+    ]
+   ],
+   [
+    "Solar",
+    [
+     [
+      "Commercial solar inverters",
+      4,
+      "w"
+     ]
+    ]
+   ],
+   [
+    "Vehicles",
+    [
+     [
+      "Level 2 chargers",
+      6,
+      "c"
+     ],
+     [
+      "DC fast chargers",
+      1,
+      "c"
+     ]
+    ]
+   ],
+   [
+    "Heating and cooling",
+    [
+     [
+      "Water-cooled chillers",
+      5,
+      "v"
+     ],
+     [
+      "Air-cooled chillers",
+      3,
+      "v"
+     ],
+     [
+      "Heat recovery and water-to-water heat pumps",
+      3,
+      "v"
+     ],
+     [
+      "Cooling towers",
+      3,
+      "v"
+     ],
+     [
+      "Plant pumps",
+      3,
+      "v"
+     ],
+     [
+      "Boilers",
+      6,
+      "v"
+     ],
+     [
+      "Plant optimizers",
+      3,
+      "v"
+     ],
+     [
+      "Air handlers",
+      3,
+      "v"
+     ],
+     [
+      "Fan arrays",
+      3,
+      "v"
+     ],
+     [
+      "Fan and pump drives",
+      5,
+      "v"
+     ],
+     [
+      "Dedicated outdoor air",
+      3,
+      "v"
+     ],
+     [
+      "Rooftop units",
+      5,
+      "v"
+     ],
+     [
+      "VRF systems",
+      5,
+      "v"
+     ],
+     [
+      "Water-source heat pumps",
+      3,
+      "v"
+     ],
+     [
+      "VAV controllers",
+      2,
+      "v"
+     ],
+     [
+      "CO2 and air sensors",
+      3,
+      "w"
+     ],
+     [
+      "Occupancy sensing",
+      3,
+      "w"
+     ],
+     [
+      "Room thermostats and controllers",
+      3,
+      "v"
+     ],
+     [
+      "Lab controls",
+      2,
+      "w"
+     ]
+    ]
+   ],
+   [
+    "Lighting",
+    [
+     [
+      "Lighting controls",
+      6,
+      "c"
+     ],
+     [
+      "Shades and dynamic glass",
+      4,
+      "v"
+     ]
+    ]
+   ],
+   [
+    "Shiftable loads",
+    [
+     [
+      "Plug load control",
+      2,
+      "v"
+     ],
+     [
+      "Commercial hot water",
+      4,
+      "v"
+     ],
+     [
+      "Elevators",
+      4,
+      "v"
+     ],
+     [
+      "Escalators",
+      3,
+      "v"
+     ],
+     [
+      "Refrigeration controls",
+      2,
+      "c"
+     ],
+     [
+      "Kitchen hood controls",
+      3,
+      "v"
+     ],
+     [
+      "Garage ventilation",
+      3,
+      "v"
+     ],
+     [
+      "Signs and facade lighting",
+      4,
+      "v"
+     ]
+    ]
+   ],
+   [
+    "Compute",
+    [
+     [
+      "Compute rooms",
+      4,
+      "w"
+     ]
+    ]
+   ]
+  ]
+ },
+ "count": {
+  "community": 20,
+  "datacenter": 10,
+  "pv_bess": 50
+ },
+ "mw": {
+  "community": 25.8,
+  "datacenter": 35.5,
+  "pv_bess": 183.2
+ },
+ "mwh": {
+  "community": 77.8,
+  "datacenter": 116.2,
+  "pv_bess": 526.7
+ },
+ "pv": {
+  "community": 56.9,
+  "datacenter": 83.6,
+  "pv_bess": 388.3
+ },
+ "host_pv": 3416.3344325063936,
+ "host_limit": 3213.5502875477064,
+ "host_kw": 1624.0638236191896,
+ "host_kwh": 4400.292143569136,
+ "weekday_kw": {
+  "homes": [
+   483,
+   346,
+   236,
+   197,
+   199,
+   229,
+   263,
+   264,
+   223,
+   184,
+   167,
+   178,
+   183,
+   190,
+   205,
+   227,
+   275,
+   343,
+   409,
+   451,
+   435,
+   428,
+   526,
+   583
+  ],
+  "office": [
+   35,
+   34,
+   34,
+   34,
+   35,
+   38,
+   41,
+   43,
+   45,
+   46,
+   46,
+   47,
+   47,
+   48,
+   47,
+   46,
+   45,
+   43,
+   42,
+   41,
+   40,
+   39,
+   37,
+   36
+  ],
+  "shops": [
+   58,
+   55,
+   55,
+   54,
+   54,
+   55,
+   56,
+   56,
+   58,
+   57,
+   58,
+   120,
+   121,
+   123,
+   127,
+   131,
+   128,
+   123,
+   120,
+   122,
+   115,
+   55,
+   54,
+   58
+  ],
+  "other": [
+   213,
+   336,
+   443,
+   482,
+   493,
+   573,
+   868,
+   1291,
+   1435,
+   1077,
+   728,
+   483,
+   321,
+   281,
+   345,
+   536,
+   1028,
+   1839,
+   2530,
+   2564,
+   1974,
+   1170,
+   472,
+   188
+  ]
+ },
+ "households": {
+  "family": 28,
+  "retiree": 40,
+  "commuter": 38,
+  "evening_shift": 25,
+  "wfh": 31,
+  "hybrid": 38
+ },
+ "homes": 200,
+ "hours_at_80_as_read": 196,
+ "hours_at_80_cleaned": 96
+}

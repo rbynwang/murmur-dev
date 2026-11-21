@@ -1,0 +1,30 @@
+{
+ "buildings": [
+  {
+   "battery": {
+    "eta": 0.95,
+    "kw": 0.0,
+    "kwh": 0.0,
+    "reserve_pct": 0.0,
+    "soc0_pct": 0.0,
+    "soc_max_pct": 100.0,
+    "source": "none"
+   },
+   "export_limit_kw": 0.0,
+   "floor_area_sqft": 30400,
+   "has_ev": false,
+   "host": "offline",
+   "kind": "building",
+   "label": "Small office (synthetic)",
+   "name": "building-01",
+   "params": "buildings/office.json",
+   "place": {
+    "lat": 42.36,
+    "lon": -71.06,
+    "name": "Test community"
+   },
+   "profile": "buildings/office",
+   "short": "Small office"
+  }
+ ]
+}

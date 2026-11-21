@@ -1,0 +1,25 @@
+<!-- @tail -->
+<section class="tail" id="changes">
+<h2 class="tailh">What changed since the last version</h2>
+<p class="why">The fixes of 6 Nov are live on the 200-home system, on 68aacc4. Plans by code, the small model for notes and the community coordinator&#x27;s part are on a branch: they ran on the eight recorded days on a local NANDA Town and aren&#x27;t deployed yet. What was wrong sits beside each title in its layer.</p>
+<div class="ctw" tabindex="0"><table class="ct"><thead><tr><th scope="col">Part</th><th scope="col">What it does now</th><th scope="col">Layer</th><th scope="col">Commit</th></tr></thead><tbody>{{changes}}</tbody></table></div>
+<h2 class="tailh">Where it stands</h2>
+<div class="stat3"><div><h3 class="subt">Built</h3><ul><li>Plans by code and the small model for notes: on a branch, run on the eight scenario days, not merged or deployed</li><li>The community agent&#x27;s part: switched on in this evening, on branch engie-buildings, not deployed</li><li>The aggregator&#x27;s request, the community&#x27;s answer and its report as signed messages, with a stand-in for the aggregator&#x27;s agent</li><li>The market, signing, nine steps, guard, receipts and records</li></ul><h3 class="subt">Live</h3><ul><li>200 homes and 3 buildings on 68aacc4, since 18:01 on 7 Nov</li><li>There, 3 homes and the 3 buildings have a model, and the other 197 homes run on rules</li></ul><h3 class="subt">The record of 11 Nov</h3><ul><li>8 homes of ENGIE&#x27;s community 19 and the aggregator&#x27;s agent on a local NANDA Town</li><li>{{when}}, checked against the same evening's run with homes only</li><li>Code makes every plan, and each decision leaves a receipt with its reason</li></ul><h3 class="subt">Not built</h3><ul><li>This code on the 200-home system</li><li>An aggregator&#x27;s agent that shares out the need itself and writes in words</li><li>The members&#x27; batteries as devices, and a meter of the community&#x27;s own</li><li>Real device drivers and a meter the seller doesn&#x27;t control</li><li>Overnight planning</li></ul></div>{{columns}}</div>
+<p class="why">Every terminal line and every number on this sheet comes from the trace of commit {{commit}}, recorded {{made_at}}. {{made_by}} The notes on what changed quote the fix notes of 6 Nov, the all-agent commits of 7 Nov and the record of 10 Nov. Names stand for the record's own ids. Rerun the trace and rebuild this page with build.py to refresh it.</p>
+{{lacks}}
+<h2 class="tailh">What the flow doesn't do</h2>
+<div class="ctw" tabindex="0"><table class="ct"><thead><tr><th scope="col">Gap</th><th scope="col">You might expect</th><th scope="col">What happens</th></tr></thead><tbody>{{gaps}}</tbody></table></div>
+</section>
+<!-- @change_row -->
+<tr><td><span class="chg">{{title}}</span><span class="rev">{{tag}}</span></td><td>{{now}}</td><td><a href="#L{{layer}}">{{layer_name}}</a></td><td class="mono">{{where}}</td></tr>
+<!-- @column -->
+<div>{{sections}}</div>
+<!-- @column_section -->
+<h3 class="subt">{{title}}</h3><ul>{{items}}</ul>
+<!-- @item -->
+<li>{{text}}</li>
+<!-- @lacks -->
+<h2 class="tailh">What this record doesn't hold</h2>
+<ul class="gapl">{{items}}</ul>
+<!-- @gap_row -->
+<tr><td>{{title}}</td><td>{{expect}}</td><td>{{actual}}</td></tr>

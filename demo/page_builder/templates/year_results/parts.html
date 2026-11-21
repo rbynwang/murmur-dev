@@ -1,0 +1,30 @@
+<!-- @tiles -->
+<div class="tile"><b>{{runs}}</b><span>evening runs counted: {{evenings}} evenings, three tiers, two weather versions, with the community agent and without it. {{failed}}</span></div><div class="tile"><b>{{miss_with}} <i>against</i> {{miss_without}}</b><span>average true shortfall against the promise, with the community agent and without it (tier 1, ENGIE's weather)</span></div><div class="tile"><b>{{kept_with}} <i>against</i> {{kept_without}}</b><span>evenings of {{evenings}} on which the promise was truly met, with it and without it</span></div><div class="tile"><b>{{paid_with}} <i>and</i> {{paid_without}}</b><span>paid to members an evening, with it and without it: the pay is the same</span></div>
+<!-- @agent_card -->
+<article class="card"><h3>Tier {{tier}}<small>{{words}}</small></h3><div class="bars" aria-label="Average true shortfall, ENGIE's weather"><p>Average true shortfall, ENGIE's weather</p>{{bars}}</div>{{table}}</article>
+<!-- @bar -->
+<div class="bar {{mode}}"><span class="bl">{{label}}</span><span class="bt"><i style="width:{{width}}%"></i></span><b>{{value}}</b></div>
+<!-- @card -->
+<article class="card"><h3>{{title}}</h3>{{table}}</article>
+<!-- @table -->
+<table class="{{kind}}"><thead>{{head}}</thead><tbody>{{rows}}</tbody></table>
+<!-- @head_rows -->
+<tr><th></th>{{groups}}</tr><tr><th></th>{{columns}}</tr>
+<!-- @head_row -->
+<tr><th></th>{{columns}}</tr>
+<!-- @group -->
+<th colspan="2" scope="colgroup">{{label}}</th>
+<!-- @column -->
+<th scope="col">{{label}}</th>
+<!-- @version_columns -->
+<th scope="col">ENGIE's</th><th scope="col">real</th>
+<!-- @row -->
+<tr><th scope="row">{{label}}</th>{{cells}}</tr>
+<!-- @cell -->
+<td>{{value}}</td>
+<!-- @mode_cell -->
+<td class="{{mode}}">{{value}}</td>
+<!-- @town_head -->
+<tr><th scope="col">Evening</th><th scope="col">Promised</th><th scope="col">Truth</th><th scope="col">Meter</th><th scope="col">Short<small>half hours, truth</small></th><th scope="col">Share<small>promised</small></th></tr>
+<!-- @town_row -->
+<tr><th scope="row">{{day}}</th><td>{{promised}}</td><td>{{truth}}</td><td>{{meter}}</td><td>{{short}} of {{half_hours}}</td><td>{{share}}<small>{{share_from}}</small></td></tr>

@@ -1,0 +1,53 @@
+/* ---------- the three levels on the map: the market and the utility, the community coordinator, home and building agents, people and devices */
+/* the top band: the market and the utility side by side, and under the market the two buyers that stand in its place. The last, narrow column is a free lane:
+   the utility's limit runs down it, past the buyers, onto the community coordinator's band */
+.band.lv.m.u{grid-template-columns:repeat(10,minmax(0,1fr)) 16px;grid-template-areas:"mkt mkt mkt mkt mkt mkt utl utl utl utl utl" "bu bu bu bu bu bg bg bg bg bg ."}
+.band.lv.m:not(.u){grid-template-areas:"mkt mkt" "bu bg"}
+.band.lv.u:not(.m){grid-template-columns:repeat(10,minmax(0,1fr)) 16px;grid-template-areas:". . . . . . utl utl utl utl utl" "bu bu bu bu bu bg bg bg bg bg ."}
+.band.lv [data-b="mkt"]{grid-area:mkt}
+.band.lv [data-b="buy-u"]{grid-area:bu}
+.band.lv [data-b="buy-g"]{grid-area:bg}
+.band.lv [data-b="utl"]{grid-area:utl}
+.band.lv [data-b="trade"]{grid-area:tr}
+.band.lv [data-b="mkt"] .bh,.band.lv [data-b="utl"] .bh{flex-wrap:wrap;gap:0 7px}
+.band.lv [data-b="mkt"] .sb,.band.lv [data-b="utl"] .sb,.band.lv [data-b="mkt"] .in,.band.lv [data-b="utl"] .in{white-space:normal}
+.blk.nod,.wb.nod{border-style:dashed}
+.lk.lim{stroke-dasharray:3 4}
+/* the branches get a little more width for the longer words of the three-level blocks, and the forks stay over their middles */
+.branches.lv,.forks:has(+.branches.lv){gap:48px;padding:0 26px}
+.band.co.lv{margin-top:11px}
+.band.co.lv+.band.town{margin-top:11px}
+.branches.lv+.band.ret{margin-top:14px}
+.lgx{margin-left:16px;font:inherit;letter-spacing:inherit;color:inherit;text-decoration:underline;text-underline-offset:2px}
+.lgx i{font-style:normal}
+.lgx:hover{color:var(--ink)}
+
+.lvd{flex:0 0 auto;display:flex;align-items:center;gap:8px;min-height:calc(var(--fs-small)*1.3);font:600 var(--fs-small)/1.3 var(--disp);letter-spacing:.01em;color:var(--muted);white-space:nowrap}
+.lvd::after{content:"";flex:1 1 auto;border-top:1px solid var(--hair)}
+.wlv{position:absolute;z-index:1;font:600 46px/1 var(--disp);letter-spacing:.01em;color:var(--muted);white-space:nowrap}
+/* where code decides the plans, the line from the agent to the tools is the plan's own way, and the model's lines carry a note or a report only */
+[data-rec="code"] .lk.skip{stroke-dasharray:none}
+[data-rec="code"] .lk.ml{stroke-dasharray:2 4}
+[data-rec="code"] .lk.ml.on{stroke-dasharray:none}
+.over .band.lv.m.u{grid-template-columns:repeat(10,minmax(0,1fr)) 16px;grid-template-areas:"mkt mkt mkt mkt mkt utl utl utl utl utl utl" "bu bu bu bg bg bg tr tr tr tr ."}
+.over .band.lv.m:not(.u){grid-template-columns:repeat(2,minmax(0,1fr)) minmax(0,1.3fr);grid-template-areas:"mkt mkt mkt" "bu bg tr"}
+.over .band.lv.u:not(.m){grid-template-columns:repeat(10,minmax(0,1fr)) 16px;grid-template-areas:". . . . . utl utl utl utl utl utl" "bu bu bu bg bg bg tr tr tr tr ."}
+.over .band.lv [data-b="mkt"],.over .band.lv [data-b="utl"]{grid-template-columns:auto auto minmax(0,1fr);gap:0 14px}
+.over .band.lv [data-b="mkt"] .in,.over .band.lv [data-b="utl"] .in{grid-column:auto;white-space:nowrap}
+.over .band.lv [data-b="mkt"] .bh,.over .band.lv [data-b="utl"] .bh{flex-wrap:nowrap}
+.over:has(.band.lv) .rootrow{margin-bottom:8px}
+.over .band.co.lv,.over .band.co.lv+.band.town{margin-top:9px}
+.over .branches.lv+.band.ret{margin-top:11px}
+.over:has(.band.lv) .forks{margin:3px 0 1px}
+/* on a screen too low for the tree at a glance, it scrolls. No block is squeezed until its words are cut */
+.over:has(.band.lv)>*{flex-shrink:0}
+.over .branches.lv .blk{flex:1 0 auto}
+.over .branches.lv .br{gap:5px}
+.over:has(.band.lv){padding-top:8px;padding-bottom:6px}
+.over:has(.band.lv) .blk{padding-top:2px;padding-bottom:2px}
+.over:has(.band.lv) .band{padding-top:11px;padding-bottom:5px;gap:8px 10px}
+.over:has(.band.lv) .rootrow{margin-bottom:7px}
+.over .lvd{min-height:calc(var(--fs-small)*1.15);line-height:1.15}
+/* no arrival line is cut short: where a row is too narrow for it, the line goes on to a second row */
+.over:has(.band.lv) .in{white-space:normal;overflow:visible;text-overflow:clip}
+

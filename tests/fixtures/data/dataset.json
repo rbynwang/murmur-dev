@@ -1,0 +1,27 @@
+{
+ "agent_defaults": {
+  "clock_profile": "homes/HH001",
+  "profile": "homes/HH001"
+ },
+ "baseline_from": "2025-01-27",
+ "community": {
+  "lat": 42.36,
+  "lon": -71.06,
+  "name": "Test community"
+ },
+ "default_event": "2025-01-28",
+ "events_file": "grid_events.json",
+ "holidays": [],
+ "label": "Synthetic test community: three homes and one office over two days",
+ "models": "models/forecast",
+ "models_2026": "models/forecast",
+ "name": "fixture",
+ "profile_alias": {},
+ "range": [
+  "2025-01-27",
+  "2025-01-28"
+ ],
+ "replay_start": "2025-01-27 00:00",
+ "tz_label": "local",
+ "tz_offset_h": -5
+}

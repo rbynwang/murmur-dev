@@ -1,0 +1,187 @@
+{
+ "what": "The chosen evenings run with the community agent and without it (without it the community promises everything its members offer), counted the same way from each run's own rows. kW are averages over 18:00 to 21:00. A miss is the true shortfall against the promise in percent, negative when short; pay is in US dollars an evening.",
+ "engie_weather": {
+  "tier1": {
+   "with": {
+    "evenings": 48,
+    "promised_kw": 1480.5,
+    "delivered_by_the_truth_kw": 1468.4,
+    "delivered_by_the_meter_kw": 1622.8,
+    "evenings_kept_by_the_truth": 22,
+    "evenings_kept_by_the_meter": 38,
+    "half_hours_short_by_the_truth": 145,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -2.7,
+    "worst_evening_by_the_truth_pct": -12.1,
+    "buyers_pay_usd": 8022,
+    "members_get_usd": 5617
+   },
+   "without": {
+    "evenings": 48,
+    "promised_kw": 1769.2,
+    "delivered_by_the_truth_kw": 1469.6,
+    "delivered_by_the_meter_kw": 1624.1,
+    "evenings_kept_by_the_truth": 0,
+    "evenings_kept_by_the_meter": 5,
+    "half_hours_short_by_the_truth": 288,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -16.9,
+    "worst_evening_by_the_truth_pct": -24.6,
+    "buyers_pay_usd": 8029,
+    "members_get_usd": 5622
+   }
+  },
+  "tier2": {
+   "with": {
+    "evenings": 48,
+    "promised_kw": 1049.8,
+    "delivered_by_the_truth_kw": 1048.2,
+    "delivered_by_the_meter_kw": 1201.2,
+    "evenings_kept_by_the_truth": 23,
+    "evenings_kept_by_the_meter": 48,
+    "half_hours_short_by_the_truth": 154,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -1.2,
+    "worst_evening_by_the_truth_pct": -6.4,
+    "buyers_pay_usd": 5641,
+    "members_get_usd": 3957
+   },
+   "without": {
+    "evenings": 48,
+    "promised_kw": 1154.8,
+    "delivered_by_the_truth_kw": 1052.6,
+    "delivered_by_the_meter_kw": 1205.7,
+    "evenings_kept_by_the_truth": 0,
+    "evenings_kept_by_the_meter": 26,
+    "half_hours_short_by_the_truth": 283,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -8.8,
+    "worst_evening_by_the_truth_pct": -14.8,
+    "buyers_pay_usd": 5663,
+    "members_get_usd": 3974
+   }
+  },
+  "tier3": {
+   "with": {
+    "evenings": 48,
+    "promised_kw": 47.9,
+    "delivered_by_the_truth_kw": 66.9,
+    "delivered_by_the_meter_kw": 66.1,
+    "evenings_kept_by_the_truth": 41,
+    "evenings_kept_by_the_meter": 43,
+    "half_hours_short_by_the_truth": 64,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -4.0,
+    "worst_evening_by_the_truth_pct": -50.4,
+    "buyers_pay_usd": 166,
+    "members_get_usd": 116
+   },
+   "without": {
+    "evenings": 48,
+    "promised_kw": 115.8,
+    "delivered_by_the_truth_kw": 67.1,
+    "delivered_by_the_meter_kw": 66.4,
+    "evenings_kept_by_the_truth": 1,
+    "evenings_kept_by_the_meter": 0,
+    "half_hours_short_by_the_truth": 241,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -41.0,
+    "worst_evening_by_the_truth_pct": -68.4,
+    "buyers_pay_usd": 167,
+    "members_get_usd": 117
+   }
+  }
+ },
+ "real_weather": {
+  "tier1": {
+   "with": {
+    "evenings": 48,
+    "promised_kw": 1500.6,
+    "delivered_by_the_truth_kw": 1472.3,
+    "delivered_by_the_meter_kw": 1638.3,
+    "evenings_kept_by_the_truth": 15,
+    "evenings_kept_by_the_meter": 38,
+    "half_hours_short_by_the_truth": 167,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -3.4,
+    "worst_evening_by_the_truth_pct": -10.4,
+    "buyers_pay_usd": 8059,
+    "members_get_usd": 5643
+   },
+   "without": {
+    "evenings": 48,
+    "promised_kw": 1770.0,
+    "delivered_by_the_truth_kw": 1473.2,
+    "delivered_by_the_meter_kw": 1639.4,
+    "evenings_kept_by_the_truth": 0,
+    "evenings_kept_by_the_meter": 7,
+    "half_hours_short_by_the_truth": 288,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -16.8,
+    "worst_evening_by_the_truth_pct": -24.3,
+    "buyers_pay_usd": 8065,
+    "members_get_usd": 5647
+   }
+  },
+  "tier2": {
+   "with": {
+    "evenings": 48,
+    "promised_kw": 1050.3,
+    "delivered_by_the_truth_kw": 1051.0,
+    "delivered_by_the_meter_kw": 1215.7,
+    "evenings_kept_by_the_truth": 24,
+    "evenings_kept_by_the_meter": 48,
+    "half_hours_short_by_the_truth": 140,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -1.0,
+    "worst_evening_by_the_truth_pct": -6.1,
+    "buyers_pay_usd": 5677,
+    "members_get_usd": 3984
+   },
+   "without": {
+    "evenings": 48,
+    "promised_kw": 1155.4,
+    "delivered_by_the_truth_kw": 1055.5,
+    "delivered_by_the_meter_kw": 1220.5,
+    "evenings_kept_by_the_truth": 0,
+    "evenings_kept_by_the_meter": 35,
+    "half_hours_short_by_the_truth": 285,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -8.6,
+    "worst_evening_by_the_truth_pct": -14.6,
+    "buyers_pay_usd": 5700,
+    "members_get_usd": 4001
+   }
+  },
+  "tier3": {
+   "with": {
+    "evenings": 48,
+    "promised_kw": 47.9,
+    "delivered_by_the_truth_kw": 68.1,
+    "delivered_by_the_meter_kw": 70.3,
+    "evenings_kept_by_the_truth": 40,
+    "evenings_kept_by_the_meter": 41,
+    "half_hours_short_by_the_truth": 57,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -3.9,
+    "worst_evening_by_the_truth_pct": -48.2,
+    "buyers_pay_usd": 181,
+    "members_get_usd": 127
+   },
+   "without": {
+    "evenings": 48,
+    "promised_kw": 115.4,
+    "delivered_by_the_truth_kw": 68.3,
+    "delivered_by_the_meter_kw": 70.9,
+    "evenings_kept_by_the_truth": 1,
+    "evenings_kept_by_the_meter": 0,
+    "half_hours_short_by_the_truth": 237,
+    "half_hours": 288,
+    "mean_miss_by_the_truth_pct": -39.7,
+    "worst_evening_by_the_truth_pct": -67.0,
+    "buyers_pay_usd": 182,
+    "members_get_usd": 128
+   }
+  }
+ }
+}

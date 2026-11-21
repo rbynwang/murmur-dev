@@ -1,0 +1,41 @@
+{
+ "homes": {
+  "home-01": {
+   "cap_kwh_per_c": 8.0,
+   "comfort_band_c": 1.5,
+   "cool_cap_kw": 8.0,
+   "cooling_type": "window_ac",
+   "heat_pump": false,
+   "setpoint_summer_c": 24.0,
+   "synthetic_home": "T-HH001",
+   "tau_h": 17.8,
+   "ua_kw_per_c": 0.45,
+   "window_fraction": 0.5
+  },
+  "home-02": {
+   "cap_kwh_per_c": 8.0,
+   "comfort_band_c": 1.5,
+   "cool_cap_kw": 8.0,
+   "cooling_type": "window_ac",
+   "heat_pump": false,
+   "setpoint_summer_c": 24.0,
+   "synthetic_home": "T-HH002",
+   "tau_h": 17.8,
+   "ua_kw_per_c": 0.45,
+   "window_fraction": 0.5
+  },
+  "home-03": {
+   "cap_kwh_per_c": 8.0,
+   "comfort_band_c": 1.5,
+   "cool_cap_kw": 8.0,
+   "cooling_type": "window_ac",
+   "heat_pump": false,
+   "setpoint_summer_c": 24.0,
+   "synthetic_home": "T-HH003",
+   "tau_h": 17.8,
+   "ua_kw_per_c": 0.45,
+   "window_fraction": 0.5
+  }
+ },
+ "source": "synthetic"
+}

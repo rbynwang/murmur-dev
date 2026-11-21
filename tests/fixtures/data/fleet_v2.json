@@ -1,0 +1,101 @@
+{
+ "counties": [
+  {
+   "bus": 1,
+   "county": "Test county",
+   "county_id": "C01",
+   "households": 3,
+   "lat": 42.36,
+   "lon": -71.06
+  }
+ ],
+ "homes": [
+  {
+   "battery": {
+    "eta": 0.95,
+    "kw": 5.0,
+    "kwh": 13.5,
+    "reserve_pct": 20.0,
+    "soc0_pct": 60.0,
+    "soc_max_pct": 100.0,
+    "source": "synthetic"
+   },
+   "county": "Test county",
+   "county_id": "C01",
+   "export_limit_kw": 5.0,
+   "forecast_place": "test",
+   "has_ev": true,
+   "heating_type": "gas_furnace",
+   "host": "offline",
+   "kind": "replay",
+   "lat": 42.36,
+   "lon": -71.06,
+   "n_ev": 1,
+   "name": "home-01",
+   "profile": "homes/HH001",
+   "pv_kw_dc": 3.0,
+   "pv_scale_kw": 3.0,
+   "synthetic_home": "T-HH001",
+   "tier": 1
+  },
+  {
+   "battery": {
+    "eta": 0.95,
+    "kw": 5.0,
+    "kwh": 10.0,
+    "reserve_pct": 20.0,
+    "soc0_pct": 60.0,
+    "soc_max_pct": 100.0,
+    "source": "synthetic"
+   },
+   "county": "Test county",
+   "county_id": "C01",
+   "export_limit_kw": 5.0,
+   "forecast_place": "test",
+   "has_ev": false,
+   "heating_type": "gas_furnace",
+   "host": "offline",
+   "kind": "replay",
+   "lat": 42.36,
+   "lon": -71.06,
+   "n_ev": 0,
+   "name": "home-02",
+   "profile": "homes/HH002",
+   "pv_kw_dc": 4.0,
+   "pv_scale_kw": 4.0,
+   "synthetic_home": "T-HH002",
+   "tier": 1
+  },
+  {
+   "battery": {
+    "eta": 0.95,
+    "kw": 7.08,
+    "kwh": 9.8,
+    "reserve_pct": 20.0,
+    "soc0_pct": 60.0,
+    "soc_max_pct": 100.0,
+    "source": "synthetic"
+   },
+   "county": "Test county",
+   "county_id": "C01",
+   "export_limit_kw": 7.08,
+   "forecast_place": "test",
+   "has_ev": true,
+   "heating_type": "gas_furnace",
+   "host": "offline",
+   "kind": "replay",
+   "lat": 42.36,
+   "lon": -71.06,
+   "n_ev": 1,
+   "name": "home-03",
+   "profile": "homes/HH003",
+   "pv_kw_dc": 5.0,
+   "pv_scale_kw": 5.0,
+   "synthetic_home": "T-HH003",
+   "tier": 1
+  }
+ ],
+ "homes_per_county": 3,
+ "n_homes": 3,
+ "version": "fixture"
+}

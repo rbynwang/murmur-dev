@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Murmur Simulation Method</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+{{css}}</style>
+
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Murmur · method note · November 2026</p>
+  <h1>How Murmur simulates a community, its homes and its devices</h1>
+  <p class="lead">ENGIE's dataset gives a community as one total at its meter. Everything inside that total is simulated by us, built from public measured data and checked against it.</p>
+  <div class="key">
+    <p>Four tags say where each part comes from.</p>
+    <div><span class="tag e">ENGIE</span>From ENGIE's 2025 dataset, unchanged.</div>
+    <div><span class="tag m">Measured</span>Public measured or published data.</div>
+    <div><span class="tag s">Model</span>Computed by our simulator.</div>
+    <div><span class="tag a">Assumed</span>Set by us where nothing public is measured.</div>
+  </div>
+  <nav class="toc" aria-label="Contents">
+    <a href="#community"><i>1</i>The community</a>
+    <a href="#home"><i>2</i>Each home and household</a>
+    <a href="#devices"><i>3</i>The devices</a>
+    <a href="#real"><i>4</i>What is real</a>
+  </nav>
+</header>
+
+<!-- ============================================================ 1 -->
+<section class="lvl" id="community">
+  <header>
+    <span class="num">1</span><h2>The community</h2>
+    <p class="sub">ENGIE's total, opened into parts.</p>
+  </header>
+
+  <div class="spread">
+    <div class="colx">
+      <p>The host is one of the 20 communities in ENGIE's dataset (COM_19 in the files). Its record stays as ENGIE gave it, for all of 2025 in 15-minute steps. Our homes and buildings are placed inside it.</p>
+
+      <div class="blk">
+        <h3>Taken from ENGIE, unchanged</h3>
+        <ul class="src">
+          <li><span class="tag e">ENGIE</span><span>Net power at the community's meter, every 15 minutes</span></li>
+          <li><span class="tag e">ENGIE</span><span>Its homes' batteries, added up: <span class="num-t">1,624 kW</span> and <span class="num-t">4,400 kWh</span>, with their reported state of charge</span></li>
+          <li><span class="tag e">ENGIE</span><span>Solar size <span class="num-t">3,416 kW</span>, connection limit <span class="num-t">3,214 kW</span></span></li>
+          <li><span class="tag e">ENGIE</span><span>Temperature, sunlight and real-time prices</span></li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3>How the total is opened</h3>
+        <p class="formula"><span>use = solar + battery discharge − net power</span><span>use = 200 homes + office + shops + other use</span></p>
+        <ul class="src">
+          <li><span class="tag s">Model</span><span>Line one turns ENGIE's net power into use. ENGIE does not report a community's solar, so by day it is estimated from ENGIE's sunlight with a rule fitted on ENGIE's 35 metered solar plants (R² 0.92). After dark there is no solar to estimate.</span></li>
+          <li><span class="tag s">Model</span><span>Line two places our parts. Other use is what is left of ENGIE's record. Nobody controls it.</span></li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3>Does it fit?</h3>
+        <ul class="src">
+          <li><span class="tag s">Model</span><span>From 18:00 to 21:00, the hours of every sale, it fits in all <span class="num-t">4,380</span> quarter hours of the year. Other use never falls below <span class="num-t">584 kW</span>.</span></li>
+          <li><span class="tag s">Model</span><span>Over all hours it fits in 94% of quarter hours. In the other 6%, around midnight when our cars charge and around midday when solar is an estimate, our parts exceed ENGIE's record and other use is held at zero.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="colx">
+      <figure class="fig" id="dayfig">
+        <figcaption><b>An average weekday in the host community, by hour</b><span>kW, mean of 2025's weekdays. A whole column is the community's use. Point at a column for its figures.</span></figcaption>
+        <div class="legend">
+          <span><i class="sw ot"></i>Other use, the rest of ENGIE's record</span>
+          <span><i class="sw bd"></i>Our office and shops</span>
+          <span><i class="sw hm"></i>Our 200 homes</span>
+          <span><i class="sw wn"></i>Sale window</span>
+        </div>
+        <div class="chart">
+          <div class="yax" aria-hidden="true">{{y_labels}}</div>
+          <div class="plot">
+            {{gridlines}}
+            <div class="lay g24 bandl" aria-hidden="true"><i></i></div>
+            <div class="lay g24 cols" role="list" aria-label="Community use by hour, in kW">{{columns}}</div>
+            <div class="tip" hidden></div>
+          </div>
+          <div class="xax g24" aria-hidden="true">{{x_labels}}<em>18 to 21</em></div>
+        </div>
+        <p class="callout">{{callout}}</p>
+      </figure>
+      <ul class="src">
+        <li><span class="tag s">Model</span><span>Over the whole year our homes are 23% of the community's use, the office 3% and the shops 6%. Other use is 68%.</span></li>
+        <li><span class="tag e">ENGIE</span><span>Weather is ENGIE's own. Its temperature changes <span class="num-t">0.27 °C</span> from day to day, where measured Massachusetts weather changes <span class="num-t">2.6 °C</span>. So our 200 homes vary 4 to 6% between evenings here, against 7 to 13% on real weather. A second version of the year carries real day-to-day movement.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>How one evening runs</h3>
+    <ol class="steps">
+      <li><b>Request</b>The aggregator asks for less draw from 18:00 to 21:00. The year has 48 such evenings, four a month, chosen by rule before any run.</li>
+      <li><b>Offers</b>Each home and building agent offers what it can give, from its own forecast.</li>
+      <li><b>Promise</b>The community agent adds the offers, holds back a cover learned from earlier evenings, promises the rest and holds its members' batteries for the peak.</li>
+      <li><b>Devices act</b>Agents plan again every 15 minutes. A guard checks every 5-minute part before it reaches a device.</li>
+      <li><b>Measured twice</b>By the meter, against a baseline: the ten most recent similar days, adjusted to the day itself. By the truth, against a twin of each home and building run with no sale.</li>
+    </ol>
+    <p class="note">All 200 homes and both buildings run every evening offline, at three equipment levels. On a sample of those evenings, eight homes, both buildings, the community agent and the aggregator's agent also run as separate programs that exchange signed messages over NANDA Town.</p>
+  </div>
+</section>
+
+<!-- ============================================================ 2 -->
+<section class="lvl" id="home">
+  <header>
+    <span class="num">2</span><h2>Each home and household</h2>
+    <p class="sub">A physics model with people in it.</p>
+  </header>
+
+  <div class="spread">
+    <div class="colx">
+      <p>Each home runs in a house simulator (homesim, from MassHack, extended by us). The house is one thermal mass. Its furnace, heat pump or air conditioner holds the thermostat against the outdoor temperature and the sun. People, appliances, the car and the roof sit on top.</p>
+
+      <figure class="fig">
+        <figcaption><b>What one simulated home is made of</b><span>Each layer adds to the home's meter, in kW every 15 minutes.</span></figcaption>
+        <ul class="stack">
+          <li><span class="tag e">ENGIE</span><b>Weather</b><span>Temperature and sunlight at ENGIE's site.</span></li>
+          <li><span class="tag s">Model</span><b>The house</b><span>One thermal mass. Heat loss <span class="num-t">0.15 to 0.67 kW per °C</span>, heat storage <span class="num-t">5.5 to 22.7 kWh per °C</span>.</span></li>
+          <li><span class="tag s">Model</span><b>Heating, cooling</b><span>Furnace or heat pump. Central air or window units.</span></li>
+          <li><span class="tag a">Assumed</span><b>People</b><span>One of six household types sets who is home, with the holidays and school breaks of 2025.</span></li>
+          <li><span class="tag m">Measured</span><b>Appliances</b><span>Owned at the federal survey's rates. Each draws its product's rating.</span></li>
+          <li><span class="tag a">Assumed</span><b>Car</b><span>Charging sessions with an arrival, a departure and energy owed.</span></li>
+          <li><span class="tag m">Measured</span><b>Roof solar</b><span>ENGIE's sunlight through one measured roof's conversion.</span></li>
+          <li><span class="tag m">Measured</span><b>Battery</b><span>Power, capacity and losses from its datasheet.</span></li>
+        </ul>
+      </figure>
+
+      <div class="blk">
+        <h3>Three equipment levels, same 200 homes</h3>
+        <ul class="src">
+          <li><span class="tag s">Model</span><span><b>Least.</b> The newest solar and a car on a smart charger.</span></li>
+          <li><span class="tag s">Model</span><span><b>Middle.</b> Adds a home battery, a smart thermostat and a heat pump water heater.</span></li>
+          <li><span class="tag a">Assumed</span><span><b>Full.</b> Adds the larger smart appliances and a two-way car. That car is an ideal case: 34 of the 200 cars are models that can power a home today.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="colx">
+      <figure class="fig">
+        <figcaption><b>The 200 households</b><span>Number of homes. Every bar is on one scale, 0 to 200.</span></figcaption>
+        <div class="hh">{{household_groups}}</div>
+        <p class="callout">All 200 have rooftop solar (<span class="num-t">3.5 to 19.3 kW</span>) and a car, from 19 models. Batteries run from <span class="num-t">8.6 to 44 kWh</span> across seven products.</p>
+      </figure>
+
+      <figure class="fig">
+        <figcaption><b>One home's record, as an example</b><span>The simulator and the home's agent both read it.</span></figcaption>
+        <dl class="spec">
+          <div><dt>Household</dt><dd>A family of three</dd></div>
+          <div><dt>House</dt><dd>Detached, built 1950 to 1990, 3,240 sq ft</dd></div>
+          <div><dt>Physics</dt><dd>Heat loss 0.47 kW per °C, storage 14.4 kWh per °C</dd></div>
+          <div><dt>Comfort</dt><dd>Gas furnace, four window units, summer setting 24.4 °C</dd></div>
+          <div><dt>Roof</dt><dd>10 Qcells panels, 4.4 kW, facing south at 20°</dd></div>
+          <div><dt>Battery</dt><dd>Enphase IQ Battery 10C: 9.8 kWh, 7.1 kW, 20% reserve</dd></div>
+          <div><dt>Car</dt><dd>Rivian R1S, 109.8 kWh, on an 11.5 kW charger</dd></div>
+          <div><dt>Owner</dt><dd>At most 1.8 °C warmer, car on a timer, smart plugs off limits</dd></div>
+        </dl>
+      </figure>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>What we set ourselves</h3>
+    <ul class="src two">
+      <li><span class="tag a">Assumed</span><span>Each owner's limits: how much warmer the house may get (<span class="num-t">0.8 to 3.0 °C</span>), a car timer (118 homes), devices that are off limits (189 owners).</span></li>
+      <li><span class="tag a">Assumed</span><span>The homes are Massachusetts house types placed in ENGIE's community. Heating and cooling are worked out again on ENGIE's weather.</span></li>
+    </ul>
+  </div>
+
+  <div class="blk">
+    <h3>The data behind the homes</h3>
+    <table class="t">
+      <thead><tr><th>Source</th><th>Used for</th><th>How the homes compare</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag m">Measured</span><br>National Grid load research: the average Massachusetts home, hour by hour</td><td data-h="Used for">Calibrating the homes' load.</td><td data-h="How the homes compare">Shape of the day r = 0.92, daily energy r = 0.81. Our homes use 1.36 times that home; NREL's ResStock puts single-family homes at 1.40 times.</td></tr>
+        <tr><td><span class="tag m">Measured</span><br>A measured multi-story instrumented research house dataset, circuit-level heat pump, lighting, and plug loads: one measured house, its solar and its heat pump</td><td data-h="Used for">Solar output. How a heat pump answers the cold.</td><td data-h="How the homes compare">Heat pump r = 0.95 to 0.97. Solar 954 to 975 kWh per kW a year, against 985 measured.</td></tr>
+        <tr><td><span class="tag m">Measured</span><br>The federal household survey (EIA RECS 2024), Massachusetts single-family homes</td><td data-h="Used for">Which home owns which appliance.</td><td data-h="How the homes compare">Dishwasher 88%, electric dryer 76%, second fridge 43%, freezer 31%, pool 10%, hot tub 6%.</td></tr>
+        <tr><td><span class="tag m">Measured</span><br>Makers' datasheets: 172 products of 108 brands</td><td data-h="Used for">The ratings of every panel, battery, car, charger and appliance.</td><td data-h="How the homes compare">191 product records checked against their sources: 93 right, 61 corrected, 37 still open.</td></tr>
+      </tbody>
+    </table>
+    <p class="note">The first two comparisons were made on the Massachusetts build of the same simulator, on measured weather.</p>
+  </div>
+</section>
+
+<!-- ============================================================ 3 -->
+<section class="lvl" id="devices">
+  <header>
+    <span class="num">3</span><h2>The devices</h2>
+    <p class="sub">Each one a model with limits, reached by one road.</p>
+  </header>
+
+  <div class="blk">
+    <h3>In a home</h3>
+    <ul class="src">
+      <li><span class="tag m">Measured</span><span>Each power rating comes from the product's datasheet.</span></li>
+      <li><span class="tag s">Model</span><span>How a device waits, catches up or gives stored energy is computed.</span></li>
+    </ul>
+    <table class="t dev">
+      <thead><tr><th>Device</th><th>How it is simulated</th><th>What the agent may do</th><th>A real one is reached by</th></tr></thead>
+      <tbody>
+        <tr><td>Home battery</td><td data-h="How it is simulated">Its product's power, capacity and losses, with the owner's reserve: 20% in most homes, 10 to 45% across all. Left alone it is held for the evening: spare solar charges it, and it refills overnight at 2 kW.</td><td data-h="What the agent may do">Charge, hold or discharge.</td><td data-h="A real one is reached by">The maker's interface. Some take a kW command, others only a mode.</td></tr>
+        <tr><td>Car charger</td><td data-h="How it is simulated">Sessions with an arrival, a departure and energy owed, on a charger of 11.5 to 19.2 kW.</td><td data-h="What the agent may do">Pause or cap charging. The car is full by departure.</td><td data-h="A real one is reached by">OCPP, or the maker's cloud.</td></tr>
+        <tr><td>Two-way car</td><td data-h="How it is simulated">Gives up to 9.6 kW at 90% efficiency while plugged in.</td><td data-h="What the agent may do">Discharge. What it gave is charged back before it leaves.</td><td data-h="A real one is reached by">The maker's app.</td></tr>
+        <tr><td>Air conditioning, heat pump</td><td data-h="How it is simulated">The house's own physics, with x the drift of the indoor temperature from the home's own day and Δq the change in the heat removed, negative when cooling is eased: <span class="eq">x(t+Δt) = a·x(t) − (Δq ⁄ UA)(1 − a)</span>, <span class="eq">a = e<sup>−Δt ⁄ τ</sup></span>, <span class="eq">τ = C ⁄ UA</span>. Afterwards the house returns to its day: the rebound.</td><td data-h="What the agent may do">Move the setting inside the owner's limit. Pre-cool or pre-heat.</td><td data-h="A real one is reached by">OpenADR 2.0b, or the maker's cloud.</td></tr>
+        <tr><td>Water heater, 1.7 kW</td><td data-h="How it is simulated">Held, it waits. Then it catches up at its own power.</td><td data-h="What the agent may do">Hold through the window. Load up before it.</td><td data-h="A real one is reached by">The CTA-2045 port.</td></tr>
+        <tr><td>Dryer, 5.6 kW. Dishwasher, 1.2 kW</td><td data-h="How it is simulated">The start moves. The cycle still ends by its done-by time.</td><td data-h="What the agent may do">Delay the start.</td><td data-h="A real one is reached by">The maker's cloud.</td></tr>
+        <tr><td>Pool pump, 1.35 kW</td><td data-h="How it is simulated">Slowed, then it makes up its filter hours.</td><td data-h="What the agent may do">Slow it.</td><td data-h="A real one is reached by">Its own controller.</td></tr>
+        <tr><td>Everything else</td><td data-h="How it is simulated">Fridges, freezer, hot tub, dehumidifier, lights, plugs and cooking are load at the product's rating.</td><td data-h="What the agent may do">Nothing. Each is too small to be worth a tool.</td><td data-h="A real one is reached by">Not reached.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="spread even">
+    <div class="blk">
+      <h3>The control loop</h3>
+      <ol class="chain">
+        <li><span>Plan, every 15 minutes</span></li>
+        <li><span>Three 5-minute parts</span></li>
+        <li><span>Guard</span></li>
+        <li><span>Device</span></li>
+      </ol>
+      <p>While a home owes something, a small linear program plans the battery, the car and the cooling again every 15 minutes. It weighs the shortfall, new peaks around the window, and discomfort. It can't break the battery's reserve or leave a car short at departure, and the guard holds the house inside the owner's temperature limit.</p>
+      <p>A twin of the same home runs beside it with no sale. The gap between the two meters is the truth we score against.</p>
+    </div>
+    <div class="blk">
+      <h3>One road to a device</h3>
+      <ol class="chain">
+        <li><span>Agent</span></li>
+        <li><span>Tool</span></li>
+        <li><span>Controller</span></li>
+        <li><span>Guard</span></li>
+        <li><span>Driver</span></li>
+        <li><span>Device</span></li>
+      </ol>
+      <p>The guard seals the exact values it approved, and a driver accepts nothing else. Real equipment needs only a different driver. The rest of the code is the same.</p>
+      <p>Code decides every amount. The language model's part is words: it reads an owner's note, such as a wish for a full battery tonight, and turns it into limits the code must keep.</p>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>In a building</h3>
+    <p>A building runs the same loop with a building's levers. We built an office, a shopping center and a university campus. ENGIE's community holds a small office and a strip of shops, each at 4% of the full model. The office averages 39 kW with a peak of 58. The shops average 81 kW with a peak of 156.</p>
+  </div>
+
+  <div class="spread even">
+    <div class="blk">
+      <table class="t">
+        <thead><tr><th>Lever</th><th>The limit the guard keeps</th></tr></thead>
+        <tbody>
+          <tr><td>Zone cooling: run warmer, or pre-cool</td><td data-h="The limit the guard keeps">At most 1.5 °C warmer than the building's own day while open, 3 °C while closed.</td></tr>
+          <tr><td>Air handler fans: cap the speed</td><td data-h="The limit the guard keeps">Never stopped. Free zones slow to half flow, the code's minimum.</td></tr>
+          <tr><td>Zone standby: a free zone cuts air and cooling</td><td data-h="The limit the guard keeps">Not while open if any room lacks a sensor.</td></tr>
+          <tr><td>Cooling plant: lower its limit, or stop it early</td><td data-h="The limit the guard keeps">Only a plant cleared to stop. Never one that serves labs.</td></tr>
+          <tr><td>Lights: dim a group</td><td data-h="The limit the guard keeps">At most 25% in the shops, 50% in the office. Never stairs or exits.</td></tr>
+          <tr><td>Plug loads: switch a group off</td><td data-h="The limit the guard keeps">Empty rooms only. Never network or security.</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Each building is a set of zones with an occupancy plan made the day before and the day as it truly went. Kitchen hoods, garage fans and food refrigeration are watched, never switched.</p>
+    </div>
+    <div class="blk">
+      <table class="t">
+        <thead><tr><th>Source</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag m">Measured</span><br>Boston's building energy reports (BERDO 2025)</td><td data-h="Used for">Size. Our office uses about what 56 Boston offices report, whose middle size is 37,000 sq ft. Our shops match 8 strip malls and stores, middle size 50,000 sq ft.</td></tr>
+          <tr><td><span class="tag m">Measured</span><br>National Grid's business classes</td><td data-h="Used for">The hourly shape of each building type.</td></tr>
+          <tr><td><span class="tag m">Measured</span><br>Boston Public Library, kW every 5 minutes</td><td data-h="Used for">Real day-to-day variation, from 380 usable days.</td></tr>
+          <tr><td><span class="tag m">Measured</span><br>Makers' documents and the mechanical code</td><td data-h="Used for">What each lever may do. 145 products of 90 brands, 224 control rules checked.</td></tr>
+          <tr><td><span class="tag a">Assumed</span><br>Assigned by floor area</td><td data-h="Used for">How cooling, fans, lights and plugs split among zones. No public source gives it.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 4 -->
+<section class="lvl" id="real">
+  <header>
+    <span class="num">4</span><h2>What is real</h2>
+    <p class="sub">The four sources, gathered in one place.</p>
+  </header>
+  <div class="real">
+    <div>
+      <span class="tag e">ENGIE</span>
+      <h3>Unchanged</h3>
+      <ul>
+        <li>The community's meter, battery, solar size and limit</li>
+        <li>Weather and prices</li>
+        <li>Other use: the 68% of the community's year we leave as it is</li>
+      </ul>
+    </div>
+    <div>
+      <span class="tag m">Measured</span>
+      <h3>Public data we build on</h3>
+      <ul>
+        <li>National Grid's average home and business classes</li>
+        <li>A measured multi-story instrumented research house dataset, circuit-level heat pump, lighting, and plug loads</li>
+        <li>Boston Public Library's meter, Boston's building reports</li>
+        <li>The federal household survey, makers' datasheets</li>
+      </ul>
+    </div>
+    <div>
+      <span class="tag s">Model</span>
+      <h3>Computed</h3>
+      <ul>
+        <li>Each house's heating and cooling</li>
+        <li>Every device's power and limits</li>
+        <li>The community's solar by day</li>
+        <li>The agents' plans and the guard's checks</li>
+      </ul>
+    </div>
+    <div>
+      <span class="tag a">Assumed</span>
+      <h3>Set by us</h3>
+      <ul>
+        <li>Car driving and charging habits. No public measured home-charging data exists.</li>
+        <li>Household types and owners' limits</li>
+        <li>A two-way car in every home at the full level</li>
+        <li>How a building's loads split among zones</li>
+      </ul>
+    </div>
+  </div>
+  <p class="plain">No real home, meter or device is connected. A command travels the road it would travel to real equipment, and only the last step, the driver, is simulated.</p>
+</section>
+
+<footer>Murmur method note, 15 November 2026. Figures come from the build on ENGIE's 2025 dataset.</footer>
+
+</div>
+
+<script>
+{{script}}</script>
+

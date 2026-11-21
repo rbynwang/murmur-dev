@@ -1,0 +1,208 @@
+
+/* ---------- a phone: stacked, with the map as a strip of stages */
+.strip{display:none}
+@media (max-width:1179px){
+  .split{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .map{display:none}
+  .strip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;padding:8px 16px 0}
+  .stg{font:500 13px/1.2 var(--body);padding:5px 0;border-radius:4px;background:var(--sheet);box-shadow:inset 0 0 0 1px var(--hair);color:var(--muted);text-align:center;min-width:0}
+  .stg.in{color:var(--ink)}
+  .stg.on{color:var(--ink);background:color-mix(in srgb,var(--c3) 16%,var(--sheet));box-shadow:inset 0 0 0 1px var(--ink)}
+  .stg.now{background:var(--ink);color:var(--paper);box-shadow:none}
+  .panel{padding:6px 16px 8px;gap:6px}
+  .intro p,.intro h1{display:none}
+  .intro .truth2{display:block}
+  .inputs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
+  .inputs::-webkit-scrollbar{display:none}
+  .layer{display:flex;flex-direction:column;gap:7px;overflow:auto;overscroll-behavior:contain;padding:7px 10px 10px}
+  .layer>*,.nowp>*{flex:none}
+  .nowp{display:contents}
+  .lh{order:1}.ov{order:2}.ess{order:3}.term{order:4;height:min(46vh,400px)}.cards{order:5}.revs{order:6}.lstat{order:7}
+  .nowp h2{white-space:normal}
+  .eye{flex-wrap:wrap;gap:0 8px;white-space:normal}
+  .eye .rv{margin-left:0}
+  .eye .tail{display:none}
+  .ov{height:calc(var(--fs-small)*1.34*2)}
+  .lstat,.cards,.revs{height:auto}
+  .cards.two{grid-template-rows:none}
+  .card{overflow:visible}
+  .revs{gap:8px 16px}
+  .subt{white-space:normal;flex-wrap:wrap}
+  .bar{grid-template-columns:minmax(0,1fr);gap:6px;padding:6px 16px}
+  .truth{display:none}
+  .scen{flex-direction:column;align-items:stretch;gap:2px;padding:4px 16px}
+  .scl{white-space:normal}
+  .ctl{justify-content:space-between}
+  .pb{padding:7px 10px}
+  .pb.go{padding:7px 16px}
+  .tabs{justify-content:space-between}
+  .tab{flex:1 1 0;text-align:center}
+  .whead{grid-template-columns:minmax(0,1fr);padding:8px 16px 6px}
+  .wnow{height:calc(13px*1.5 + 25px*2.3 + 32px*1.16 + 14.5px*1.3 + 10px)}
+  .lab .tail{display:none}
+  .wctl .inputs{order:1}
+  .over{padding:10px 16px 8px}
+  .over>*{flex:0 0 auto}
+  .over .band.co,.over .band.ret{grid-template-columns:repeat(2,minmax(0,1fr));margin-left:0;margin-right:0}
+  .over .band.buy{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .over .band.buy .trade-b{grid-column:1/-1}
+  .over .branches,.over .forks{gap:14px;padding:0}
+  .over .rootrow{margin:0 0 12px}
+  .over .band .blk,.over .br .blk,.over .root{display:flex;flex-direction:column;align-items:stretch;flex:0 0 auto;min-height:0;padding:5px 8px 5px 12px}
+  .over .kd{display:none}
+  .over .bh{flex-wrap:wrap}
+  .over .br{gap:8px}
+  .mini{width:96px;right:8px;bottom:8px}
+}
+@media (max-width:640px){
+  .tabs{gap:3px}
+  .tab{padding:7px 3px;font-size:13px}
+  .tabs .pb{display:none}
+  .ess,.revs{grid-template-columns:minmax(0,1fr)}
+  .ess{gap:7px}
+  .nowp h2{height:calc(var(--fs-now)*1.2*2)}
+  .eye #c-layer{display:none}
+  .flow{height:calc(var(--fs-small)*1.34*11 + 2px)}
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .cards.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .big{height:calc(var(--fs-big)*1.06 + 13px*1.26*2 + 12px)}
+  .big.wd b{white-space:nowrap}
+  .term .ln{grid-template-columns:5.1em 1em minmax(0,1fr)}
+  .term>figcaption span{display:none}
+  .term>figcaption em{margin-left:auto}
+}
+@media (max-height:620px) and (min-width:1180px){
+  .app{height:auto;min-height:100vh;overflow:visible}
+  body{overflow:auto}
+  .split{min-height:700px}
+  .long{height:calc(100vh - 60px)}
+}
+@media (max-height:780px) and (min-width:1180px){
+  .panel{gap:5px;padding-top:6px;padding-bottom:6px}
+  .map{padding-top:12px;padding-bottom:8px}
+  .br{gap:6px}
+  .band.ret{margin-top:12px}
+  .lstat{display:none}
+}
+@media (max-height:740px) and (min-width:1180px){
+  .ov{display:none}
+}
+@media (max-width:1400px) and (min-width:1180px){
+  .panel{--fs-small:12.5px;--fs-kv:12px;--fs-kvh:12.5px;--fs-term:11.5px;--fs-st:10px;padding-left:10px;padding-right:10px}
+  .layer{padding:6px 9px 7px;gap:6px}
+  .cards{gap:5px}
+  .card{padding:3px 7px}
+  .ess{grid-template-columns:minmax(0,26%) minmax(0,1fr);gap:9px}
+  .big{padding:3px 8px}
+  .big b{font-size:calc(var(--fs-big)*.86)}
+  .big.md b{font-size:calc(var(--fs-big)*.72)}
+  .big.sm b{font-size:calc(var(--fs-big)*.6)}
+  .big.wd b{font-size:calc(var(--fs-now)*.74)}
+  .big.tk b{font-size:calc(var(--fs-now)*.6)}
+  .kv,.flow{column-gap:7px}
+  .term>figcaption span{display:none}
+  .term>figcaption em{margin-left:auto}
+}
+@media (max-height:740px) and (min-width:1180px){
+  .br .sb{display:none}
+}
+@media (max-width:1320px) and (min-width:1180px){
+  .band .sb,.band .rv{display:none}
+  .band{padding-top:12px}
+  .revs{height:calc(var(--fs-kv)*1.36*5 + var(--fs-kvh)*1.3 + 1px)}
+  .rt{font-size:11.5px}
+}
+@media (max-width:1279px) and (min-width:1180px){
+  .ov{height:calc(var(--fs-small)*1.34*2)}
+  .lstat{height:calc(var(--fs-st)*3 + 7px)}
+  .flow{height:calc(var(--fs-small)*1.34*8 + 1px)}
+  .cards{height:calc(var(--fs-kv)*1.36*7 + var(--fs-kvh)*1.3 + 14px)}
+  .card{padding:3px 6px}
+  .rt th,.rt td{padding-left:4px}
+  .lad em{display:none}
+  .lad .on em{display:inline}
+}
+/* the map in three levels is taller, and its blocks' words are longer: a lower or narrower screen closes the gaps first, then drops the branches' second lines, so no word is cut */
+@media (max-height:860px) and (min-width:1180px){
+  .map:has(.band.lv){padding-top:12px;padding-bottom:8px}
+  .branches.lv .br{gap:5px}
+  .band.lv{padding-top:11px;padding-bottom:5px}
+  .band.co.lv,.band.co.lv+.band.town{margin-top:9px}
+  .branches.lv+.band.ret{margin-top:10px}
+}
+@media (max-height:812px) and (min-width:1180px){
+  .branches.lv .br .sb{display:none}
+}
+/* the tree at a glance on a lower screen: smaller figures and closer rows, so it still fits one screen at 1280 by 800 */
+@media (max-height:840px) and (min-width:1180px){
+  .whole:has(.band.lv) .whead{padding-top:6px;padding-bottom:4px}
+  .over:has(.band.lv){padding-top:6px;padding-bottom:4px}
+  .over:has(.band.lv) .kn{font-size:16px}
+  .over:has(.band.lv) .blk{padding-top:1px;padding-bottom:1px}
+  .over:has(.band.lv) .band{padding-top:10px;padding-bottom:4px;gap:6px 10px}
+  .over .branches.lv .br{gap:4px}
+  .over .band.co.lv,.over .band.co.lv+.band.town{margin-top:7px}
+  .over .branches.lv+.band.ret{margin-top:9px}
+  .over:has(.band.lv) .rootrow{margin-bottom:5px}
+}
+@media (max-width:1320px) and (min-width:1180px){
+  .over .branches.lv .blk{gap:0 10px}
+  .over:has(.band.lv) .kd{display:none}
+}
+@media (max-width:1412px) and (min-width:1180px){
+  .branches.lv .br .sb,.band.lv [data-b^="buy-"] .sb{display:none}
+  .over .band.lv [data-b="mkt"],.over .band.lv [data-b="utl"]{grid-template-columns:minmax(0,1fr) auto}
+  .over .band.lv [data-b="mkt"] .in,.over .band.lv [data-b="utl"] .in{grid-column:1/-1;white-space:normal}
+}
+@media (max-width:1179px){
+  .zoom{flex-wrap:wrap}
+  .over .band.lv.m.u{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"mkt mkt" "bu bg" "tr tr" "utl utl"}
+  .over .band.lv.m:not(.u){grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"mkt mkt" "bu bg" "tr tr"}
+  .over .band.lv.u:not(.m){grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"bu bg" "tr tr" "utl utl"}
+  .over .band.lv [data-b="mkt"] .in,.over .band.lv [data-b="utl"] .in{white-space:normal}
+  .over .band.lv [data-b="mkt"] .bh,.over .band.lv [data-b="utl"] .bh{flex-wrap:wrap}
+  .lgx{display:none}
+  /* stacked, the lines run behind the blocks: a block that isn't lit stays solid, so no line shows through its words */
+  .over:has(.band.lv) .blk.off,.over.live:has(.band.lv) .blk:not(.on){background:var(--paper)}
+  .whole.part .wctl{flex-direction:column;align-items:stretch}
+  .strip{display:flex;flex-wrap:wrap}
+  .stg{flex:1 1 auto;padding:5px 8px;white-space:nowrap}
+  .engie{padding:10px 16px 10px}
+  .eh,.ecs{grid-template-columns:minmax(0,1fr)}
+  .ecs{flex:0 0 auto}
+}
+/* nothing is cut on a desktop screen: every day's button stays whole and the day's line wraps, and the input's sentence has the width to stay short */
+@media (min-width:1180px){
+  .scbs{flex:0 0 auto;overflow:visible}
+  .scen{gap:10px}
+  .scb{padding:2px 8px}
+  .scl{white-space:normal;overflow:visible;text-overflow:clip}
+  .over:has(.band.lv) .rootrow{margin-left:18%;margin-right:4%}      /* it starts right of the level's name, which stands on the band's top edge */
+}
+/* the tree at a glance keeps every row at its fullest height through a story, so a lower screen closes the gaps a little more and it still fits one screen */
+@media (max-height:920px) and (min-width:1180px){
+  .over .branches.lv .br{gap:4px}
+  .over:has(.band.lv) .band{padding-top:10px}
+  .over .band.co.lv,.over .band.co.lv+.band.town{margin-top:8px}
+  .over .branches.lv+.band.ret{margin-top:10px}
+}
+@media (max-height:840px) and (min-width:1180px){
+  .over:has(.band.lv){padding-top:5px;padding-bottom:3px}
+  .over:has(.band.lv) .band{padding-top:9px;padding-bottom:3px}
+  .over .band.co.lv,.over .band.co.lv+.band.town{margin-top:6px}
+  .over .branches.lv+.band.ret{margin-top:8px}
+  .over:has(.band.lv) .rootrow{margin-bottom:3px}
+}
+/* on the narrowest desktop screens, when several steps are lit at once their tags give way, so no step's name is cut */
+@media (max-width:1279px) and (min-width:1180px){
+  .lad:has(.on ~ .on) em{display:none}
+  .kv{column-gap:4px}
+  .card{padding:3px 5px}      /* the narrowest cards keep each value and its unit on one line */
+}
+/* the last 20 pixels before the page stacks: no step tags at all, and the cards' own edge gives the words the room */
+@media (max-width:1199px) and (min-width:1180px){
+  .lad .on em{display:none}
+  .card{padding:3px 4px}
+  .kv{column-gap:3px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

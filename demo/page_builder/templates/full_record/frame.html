@@ -1,0 +1,76 @@
+<!-- @page -->
+<!doctype html>
+<html lang="en">
+<head><script>{{keep_links}}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Murmur Three Levels Record</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+{{css}}</style>
+</head>
+<body>
+{{app}}
+<script type="application/json" id="fg-data">{{data}}</script>
+<script>
+{{js}}</script>
+</body>
+</html>
+
+<!-- @app -->
+<div class="app" id="app">
+<aside class="rail" id="rail" aria-label="Layers and special events">
+<div class="brand">Murmur<small>agent framework</small></div>
+<nav class="nav" aria-label="Layers">{{nav}}<a href="#changes" data-l="0" style="--h:var(--chg-edge)"><i></i><span>What changed</span></a></nav>
+
+</aside>
+<main class="sheet" id="sheet">
+<svg id="wire" aria-hidden="true"><g id="busg"></g><g id="paths"></g></svg>
+<div class="head"><div><h1>Murmur Agent Framework</h1><p class="lede">One recorded day, from a buyer's order to the last payment, shown at every layer. Each terminal holds the record of that layer. Grey lines are still to come, and the marked line is now.</p></div><dl class="tblock">{{block}}</dl></div>
+
+<div class="truth"><span class="tag">Status</span><span class="say">Every home and building has its own agent</span><span class="say">This recording: code makes every plan for all {{total}} nodes</span><span class="say">Not live on the 200 homes yet</span><span class="say">Buyers don't think</span><span class="say">Every load is simulated</span></div>
+<div class="key"><span><span class="rev">fixed</span><span class="rev">new</span><span class="rev">changed</span> lime marks what changed</span><span><b class="g gm">◆</b> model</span><span><b class="g">=</b> worked out</span><span><b class="g">→ ←</b> message out, in</span><span><b class="g">#</b> signature or seal</span><span><b class="g">▸</b> tool call</span><span><b class="g">■</b> guard</span><span><b class="g">⇒</b> device write</span><span><b class="g">·</b> note from the record</span><button type="button" class="iconbtn" id="b-theme">Theme: system</button></div>
+<div class="sub honest" id="a-who"><h3 class="subt"><span class="gm">◆</span> Who decides what</h3><p class="why">In the record of 11 Nov 2026: one of ENGIE&#x27;s evenings in January 2025, with eight homes, a small office and shops of its community 19 and a stand-in for the aggregator&#x27;s own agent on a local NANDA Town. This code isn&#x27;t on the 200-home live system yet.</p><ul class="gapl"><li><b>The 8 nodes.</b> Each home has its own agent, and code makes every one of its plans: the offer, the commitment, the sale&#x27;s opening and each exception. Each receipt reads &quot;rule: plans are decided by code&quot;.</li><li><b>The offer.</b> Code&#x27;s planner works out the safe amount inside the person&#x27;s limits, and offers it. A need read from a note lowers it, and the person is told.</li><li><b>Sizing.</b> Code picks the devices and works out each one&#x27;s exact kW.</li><li><b>The guard.</b> Code. It checks every device call against the safety and money limits and what a person asked to keep, and it has the last word.</li><li><b>The small model.</b> A stand-in answered in its place in this evening: it worded each home&#x27;s report and made no plan. On the eight scenario days the reader was Qwen 3.5 4B.</li><li><b>The aggregator.</b> Shares one grid need among 80 participants and asks each community for its part. Here a stand-in for its own agent sends its request for the members' batteries as a signed message, and receives the community&#x27;s signed answer and its report. It sends a list it is given: it does not share out the need itself. Two stand-in desks with fixed orders still carry the order to the homes and buildings.</li><li><b>The utility.</b> Sets a limit at the community&#x27;s connection, which can overrule a sale. The limit is set in this evening and checked at the clearing.</li><li><b>Community agent.</b> By code, with its community switch on. It adds the offers up, promises only what its own record of finished evenings says its members deliver, clears the sale, keeps to the utility&#x27;s limit, answers the aggregator&#x27;s signed request for the members&#x27; batteries (it takes it, or refuses it and says why), sends its report upward one signed row a quarter hour, checks the readings and pays, keeping a fixed 20%. No AI decides anything here. The record below calls it the coordinator.</li><li><b>The same evening before.</b> The same evening ran this morning with the request given on the same computer and the report not sent. Every amount here equals that run&#x27;s.</li></ul></div>
+{{layers}}
+{{tail}}
+</main>
+{{trade}}
+<div class="bar" id="bar" role="region" aria-label="Playback">
+<div class="brn" id="brn" hidden><span>Branch: <b id="brnname"></b>, <span id="brnpos"></span></span><ol class="brq" id="brq"><li>Reaches the node</li><li>Agent sees it</li><li>Works out it's short</li><li>Adjusts</li><li>Tells the desk</li><li>Others cover</li><li>Effect</li></ol><button type="button" id="b-leave">Back to the main line (Esc)</button></div>
+<div class="brow1"><div class="sayrow"><p id="saying" aria-live="polite"></p><span id="chgnow" hidden></span></div><div class="meta"><span id="meta"></span></div></div>
+<div class="brow2">
+<div class="ctl"><button type="button" class="pb" id="b-pstage" title="Previous stage ([)" aria-label="Previous stage">|◀</button><button type="button" class="pb" id="b-back" title="Step back (left arrow)" aria-label="Step back">◀</button><button type="button" class="pb go" id="b-play" title="Play or pause (space)">Play</button><button type="button" class="pb" id="b-fwd" title="Step forward (right arrow)" aria-label="Step forward">▶</button><button type="button" class="pb" id="b-nstage" title="Next stage (])" aria-label="Next stage">▶|</button></div>
+<div class="ctl bspeed"><button type="button" class="pb" id="b-speed" title="Speed (- and =)" aria-label="Speed">1×</button></div>
+<div class="scrub"><div class="marks" id="marks"></div><input type="range" id="scrub" min="0" max="1" value="0" aria-label="Position in the day"><div class="ticks" id="ticks" aria-hidden="true"></div></div>
+<div class="bside"><button type="button" class="pb" id="b-follow" aria-pressed="true" title="The page follows the step (F)">Follow</button><button type="button" class="pb phoneonly" id="b-trade" aria-pressed="false">Trade</button><button type="button" class="pb phoneonly" id="b-events">Events</button><button type="button" class="pb" id="b-keys" aria-expanded="false" title="Keys (?)">Keys</button></div>
+</div>
+<div id="keys" hidden><kbd>Space</kbd><span>play, pause</span><kbd>← → Enter</kbd><span>step back, forward</span><kbd>[ ]</kbd><span>stage back, forward</span><kbd>- =</kbd><span>slower, faster</span><kbd>F</kbd><span>follow the step</span><kbd>1 to 8</kbd><span>go to a layer</span><kbd>Esc</kbd><span>leave a branch</span></div>
+</div>
+</div>
+<!-- @nav_link -->
+<a href="#L{{n}}" data-l="{{n}}" style="--h:var(--c{{hue}})"><i></i><span>{{name}}</span></a>
+<!-- @block_row -->
+<dt>{{name}}</dt><dd>{{value}}</dd>
+<!-- @trade -->
+<aside class="trade" id="trade" aria-label="The trade">
+<div class="trh"><h2>The trade</h2><span id="tr-clock">{{day}}</span></div>
+<div class="effect" id="effect" hidden></div>
+<div class="tile"><div class="tl"><span>Asked <span id="tv-price"></span></span><span class="tv big" id="tv-asked">—</span></div><div class="btrack"><i class="ask" id="b-asked"></i></div></div>
+<div class="tile"><div class="tl"><span>Offered</span><span class="tv big" id="tv-offered">—</span></div><div class="btrack"><i class="firm" id="b-firm"></i><i class="tent" id="b-tent"></i></div>
+<div class="tl"><span>Offers in</span><span class="tv" id="tv-offers">—</span></div><div class="tl"><span>Firm</span><span class="tv" id="tv-firm">—</span></div><div class="tl"><span>Tentative</span><span class="tv" id="tv-tent">—</span></div></div>
+<div class="tile"><div class="tl"><span>Sold</span><span class="tv big" id="tv-sold">—</span></div><div class="btrack"><i class="sold" id="b-sold"></i></div>
+<div class="tl"><span>Reserve <span id="tv-margin"></span></span><span class="tv" id="tv-reserve">—</span></div><div class="tl"><span>Asked of nodes</span><span class="tv" id="tv-nodes">—</span></div></div>
+<div class="tsep"></div>
+<div class="hb"><div class="tl"><span>Homes against buildings</span><span class="tv" style="font-size:12px" id="hb-what"></span></div><div class="btrack"><i class="hom" id="b-hom"></i><i class="bld" id="b-bld"></i></div><div class="hbl"><span class="a" id="hb-a">Homes</span><span class="b" id="hb-b">Buildings</span></div></div>
+<div class="tl"><span>Contracts</span><span class="tv" style="font-size:13px" id="tv-acc">—</span></div>
+<div class="tl"><span>Buyer's call</span><span class="tv" style="font-size:13px" id="tv-call">none on this day</span></div>
+<div class="tsep"></div>
+<div class="tile"><div class="tl"><span>Delivered</span><span class="tv" id="tv-deliv">—</span></div><div class="hh" aria-hidden="true">{{columns}}</div><div class="hhl">{{labels}}</div></div>
+<div class="tile"><div class="tl"><span>Readings in</span><span class="tv" id="tv-read">—</span></div><div class="prog"><i id="b-read"></i></div></div>
+<div class="tsep"></div>
+<dl class="money"><dt>Buyer: utility pays</dt><dd id="tv-pay-util">—</dd><dt>Buyer: grid operator pays</dt><dd id="tv-pay-grid">—</dd><dt>To sellers</dt><dd id="tv-paid">—</dd><dt>of which homes</dt><dd id="tv-paid-h">—</dd><dt>of which buildings</dt><dd id="tv-paid-b">—</dd><dt>Deposits placed</dt><dd id="tv-deposit">—</dd><dt>Deposits held</dt><dd id="tv-dheld">—</dd><dt>Deposits back</dt><dd id="tv-dback">—</dd><dt class="tot">Coordinator keeps</dt><dd class="tot" id="tv-keep">—</dd></dl>
+</aside>
+<!-- @trade_column -->
+<div class="col" id="hh-{{k}}" title="{{start}}"><i></i><em style="--m:{{mark}}"></em></div>
+<!-- @trade_label -->
+<span>{{start}}<b id="hhv-{{k}}">—</b></span>

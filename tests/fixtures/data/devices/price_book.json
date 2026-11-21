@@ -1,0 +1,15 @@
+{
+ "as_of": "2025-01-01",
+ "coordinator_keeps": 0.3,
+ "kept_split": {
+  "aggregator": 0.2,
+  "community_operator": 0.1
+ },
+ "note": "synthetic price book for tests",
+ "same_day_adjustment": true,
+ "x": {
+  "building": 0.5075,
+  "home_battery": 0.7,
+  "home_other": 0.18375
+ }
+}

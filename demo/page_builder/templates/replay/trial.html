@@ -1,0 +1,28 @@
+<!-- @part -->
+<section class="engie" id="engie" hidden aria-label="What the community coordinator adds, from the ENGIE trial"><header class="eh"><div><h2>What the community coordinator adds, from the ENGIE trial</h2><p>This evening shows the community&#x27;s part with eight homes. The numbers below are the same community with all 200 of our homes, on {{n}} sale evenings in {{months}}, {{window}}.</p></div><div class="ek"><span><i class="off"></i>As recorded, or the switch off</span><span><i class="on"></i>With the community coordinator</span></div></header><div class="ecs">{{promise}}{{batteries}}{{midday}}</div><p class="ef">Tier 1 homes have the most equipment an agent can run, and tier 3 the least. In real life only the buyer&#x27;s meter exists. The simulator also knows the truth. Counted again on 11 Nov: the cover&#x27;s record holds finished evenings only (the trial page reads {{was}}). Result files: {{files}}.</p></section>
+<!-- @promise -->
+<article class="ec" data-src="{{src}}"><h3>The promise, against what was delivered</h3><p class="es">{{n}} evenings through the node agents. Off is the same code with the switch off: the coordinator sells all that the homes offer. On, it holds a cover back and promises less.</p><table class="etab"><thead><tr><td></td>{{tiers}}</tr><tr><th scope="row">The switch</th>{{switch}}</tr></thead><tbody><tr class="all"><th scope="row">The 200 homes offered, kW</th>{{offered}}</tr>{{rows}}</tbody></table><h4 class="ech">The cover&#x27;s path: the share of the offers it promises</h4><div class="ecvs">{{paths}}</div><p class="es">It starts on the fixed margin, then takes its cover from its own record.</p></article>
+<!-- @tier -->
+<th scope="colgroup" colspan="2">{{name}}</th>
+<!-- @switch -->
+<th scope="col" class="off">off</th><th scope="col" class="on">on</th>
+<!-- @offered -->
+<td colspan="2">{{kw}}</td>
+<!-- @row -->
+<tr><th scope="row">{{label}}</th>{{cells}}</tr>
+<!-- @cells -->
+<td class="off">{{off}}</td><td class="on">{{on}}</td>
+<!-- @path -->
+<figure class="ecv"><figcaption><b>{{name}}</b><span>{{first}} at the start, {{last}} at the end</span></figcaption><svg viewBox="0 0 150 56" role="img" aria-label="{{name}}: the share of the offers promised, {{n}} evenings, from {{first}} to {{last}}"><path class="ax" d="M5.0 5.0H143.0M5.0 51.0H143.0"/><path class="ln" d="{{line}}"/><circle class="dot" cx="{{cx}}" cy="{{cy}}" r="3.5"/>{{tips}}</svg></figure>
+<!-- @tip -->
+<rect class="hit" x="{{x}}" y="0" width="{{w}}" height="56"><title>{{date}}: {{share}} of the offers promised, from {{source}}</title></rect>
+<!-- @batteries -->
+<article class="ec" data-src="{{src}}"><h3>The members&#x27; batteries, and the limit at the connection</h3><p class="es">{{n}} evenings, worked out by rule from offers, not deliveries.</p>{{bars}}</article>
+<!-- @midday -->
+<article class="ec" data-src="{{src}}"><h3>Power sent out around midday</h3><p class="es">{{days}} days, {{start}} to {{end}}. The rule: the members&#x27; batteries charge when power is leaving the community.</p>{{bars}}</article>
+<!-- @bars -->
+<div class="eg"><h4>{{title}}</h4>{{rows}}{{note}}</div>
+<!-- @bar -->
+<div class="eb"><span class="en">{{label}}</span><span class="et"><i class="{{state}}" style="width:calc((100% - 7.6em)*{{share}})"></i><b>{{value}} {{unit}}</b></span></div>
+<!-- @note -->
+<p>{{text}}</p>

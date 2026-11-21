@@ -1,0 +1,80 @@
+{
+ "about": "Figures the architecture-and-data page quotes from sources this repository does not hold. Each block says where its figures come from.",
+ "engie": {
+  "from": "ENGIE's 2025 asset ratings: its participants by kind, and the ratings of the community that hosts our homes and buildings.",
+  "participants": 80,
+  "solar_and_battery_plants": 50,
+  "data_centers": 10,
+  "communities": 20,
+  "host_solar_kw": 3416.3344325063936,
+  "host_connection_limit_kw": 3213.5502875477064,
+  "host_home_batteries_kw": 1624.0638236191896,
+  "host_home_batteries_kwh": 4400.292143569136
+ },
+ "evening": {
+  "from": "The recorded evening of 28 January 2025: the moments of its replay page as that page shows them, the run's own result, and the twelve evenings of the year set on ENGIE's weather.",
+  "ended": "settled",
+  "moments_in_the_replay": 38,
+  "moments": {
+   "orders": {
+    "number": 1,
+    "headline": "136 kW"
+   },
+   "call": {
+    "number": 3,
+    "headline": "10"
+   },
+   "offers-in": {
+    "number": 8,
+    "headline": "110 kW"
+   },
+   "cover": {
+    "number": 11,
+    "headline": "100 kW"
+   },
+   "agg-share": {
+    "number": 21,
+    "headline": "1,624 kW"
+   },
+   "battery-ask": {
+    "number": 22,
+    "headline": "Taken"
+   },
+   "site-ask": {
+    "number": 23,
+    "headline": "9.9 MW"
+   },
+   "window": {
+    "number": 28,
+    "headline": "92 kW"
+   },
+   "agg-ref": {
+    "number": 33,
+    "headline": "155 of 155"
+   },
+   "settle": {
+    "number": 36,
+    "headline": "$497.07"
+   },
+   "pay": {
+    "number": 37,
+    "headline": "$347.95"
+   }
+  },
+  "needed_at_19_mw": 341.7,
+  "all_batteries_can_give_mw": 244.5,
+  "settled_kwh": 294,
+  "less_at_18_kw": {
+   "all": 91.8,
+   "homes": 71.9,
+   "buildings": 19.9
+  },
+  "messages": 854,
+  "bad_signatures": 0,
+  "site_rows": 468,
+  "site_rows_as_planned": 468,
+  "promised_kw": 98.033,
+  "delivered_kw": 97.966,
+  "year_set_messages": 4240
+ }
+}

@@ -1,0 +1,85 @@
+{
+ "what": "What buyers pay and members are paid an evening, averaged over the chosen evenings with the community agent, in US dollars: the members' share of what buyers pay, a home on average, the lowest and the highest home, how many homes were paid, and each building.",
+ "engie_weather": {
+  "tier1": {
+   "buyers_pay": 8022.022591666667,
+   "members_get": 5616.93625,
+   "share": 0.7001895327289296,
+   "home_avg": 27.75071041666666,
+   "home_min": 9.770000000000001,
+   "home_max": 55.53874999999999,
+   "homes_paid": 200,
+   "buildings": {
+    "building-01": 30.419583333333332,
+    "building-02": 36.374583333333334
+   }
+  },
+  "tier2": {
+   "buyers_pay": 5640.628287500001,
+   "members_get": 3957.381041666666,
+   "share": 0.7015851497317205,
+   "home_avg": 19.447178125,
+   "home_min": 7.395208333333334,
+   "home_max": 50.38312500000001,
+   "homes_paid": 200,
+   "buildings": {
+    "building-01": 30.890208333333334,
+    "building-02": 37.05520833333333
+   }
+  },
+  "tier3": {
+   "buyers_pay": 165.98649166666667,
+   "members_get": 116.190625,
+   "share": 0.70000048698742,
+   "home_avg": 0.22804895833333333,
+   "home_min": 0.0,
+   "home_max": 1.4124999999999999,
+   "homes_paid": 95,
+   "buildings": {
+    "building-01": 32.452708333333334,
+    "building-02": 38.128125000000004
+   }
+  }
+ },
+ "real_weather": {
+  "tier1": {
+   "buyers_pay": 8059.3641875,
+   "members_get": 5643.113333333334,
+   "share": 0.7001933653880229,
+   "home_avg": 27.844807291666665,
+   "home_min": 9.874166666666666,
+   "home_max": 55.817499999999995,
+   "homes_paid": 200,
+   "buildings": {
+    "building-01": 35.206041666666664,
+    "building-02": 38.94583333333333
+   }
+  },
+  "tier2": {
+   "buyers_pay": 5677.253049999999,
+   "members_get": 3983.5358333333334,
+   "share": 0.7016660695322245,
+   "home_avg": 19.540296875,
+   "home_min": 7.405,
+   "home_max": 50.39854166666667,
+   "homes_paid": 200,
+   "buildings": {
+    "building-01": 35.833333333333336,
+    "building-02": 39.643125
+   }
+  },
+  "tier3": {
+   "buyers_pay": 180.97525208333332,
+   "members_get": 126.68208333333332,
+   "share": 0.6999967226181858,
+   "home_avg": 0.23514375,
+   "home_min": 0.0,
+   "home_max": 1.4458333333333335,
+   "homes_paid": 95,
+   "buildings": {
+    "building-01": 38.258125,
+    "building-02": 41.395208333333336
+   }
+  }
+ }
+}

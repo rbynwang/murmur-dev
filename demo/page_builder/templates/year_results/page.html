@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Murmur NG Year Results</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+{{css}}</style>
+</head>
+<body>
+<header class="top"><b>Murmur · the year in numbers</b><nav aria-label="Sections"><a href="#agent">With and without the community agent</a><a href="#weather">Two weather versions</a><a href="#pay">Pay</a><a href="#town">Over NANDA Town</a><a href="#baseline">Baseline</a></nav></header>
+<main>
+<p class="lab">ENGIE's 2025 records · {{evenings}} evenings · three tiers · two weather versions</p>
+<h1>A year of evenings: what the community promised, and what was delivered</h1>
+<p class="lead">{{evenings}} chosen evenings of ENGIE's 2025, {{per_season}} in each season, for one community: {{homes}} homes, a small office and shops, with its homes' batteries held for the peak. Each evening was run with code plans at three tiers of equipment
+(tier 1: {{tier1}}; tier 2: {{tier2}}; tier 3: {{tier3}}), on ENGIE's own weather and on the real day-to-day weather of 2025, with the community agent and without it. The truth is what the simulated devices did. The buyers' meter is what the buyers measured and paid on.</p>
+<div class="tiles">{{tiles}}</div>
+
+<section id="agent"><h2>With the community agent and without it</h2>
+<p class="find">{{agent_find}}</p>
+<div class="grid3">{{agent_cards}}</div>
+<p class="note">Averages of the {{evenings}} evenings, 18:00 to 21:00. Without the community agent the market promises everything the members offer. Counted the same way for both, from each run's own rows.</p></section>
+
+<section id="weather"><h2>The same evenings on two versions of the weather</h2>
+<p class="find">{{weather_find}}</p>
+<div class="grid2w"><div class="wide">{{weather_table}}</div><div class="wide"><h3>Tier 1 by season</h3>{{season_table}}</div></div>
+<p class="note">With the community agent. ENGIE's dataset gives a smooth seasonal curve for the weather. The second version keeps ENGIE's seasons and adds the real day-to-day movement of 2025.</p></section>
+
+<section id="pay"><h2>What members are paid, an evening</h2>
+<p class="find">The community agent keeps the pay where it was: buyers pay on what their meter shows, and members get their share of it whether the promise was cautious or not.</p>
+<div class="wide">{{pay_table}}</div>
+<p class="note">Averages of the {{evenings}} evenings, with the community agent. An upper bound: the buyers' order always exceeds the offer, so everything offered is sold; pay follows the buyers' meter, which reads more than was truly delivered; the price and the share are assumptions; and no cost to the member is counted, such as battery wear or buying the energy back later.</p></section>
+
+<section id="town"><h2>One evening a month over NANDA Town</h2>
+<p class="find">{{town_find}}</p>
+<div class="grid3">{{town_cards}}</div>
+<p class="note">Promised, and delivered by the truth and by the buyers' meter, in kW averaged over the evening. Short: half hours in which the truth was under the promise. The share promised is the part of the members' offers the community agent promises: a fixed margin on the first evenings, then its own record of what was delivered.</p></section>
+
+<section id="baseline"><h2>A better baseline: a first look</h2>
+<p class="find">{{baseline_find}}</p>
+<div class="grid2w"><div class="wide">{{baseline_table}}</div><div class="wide"><h3>Mean error by season</h3>{{baseline_season_table}}</div></div>
+<p class="note">{{baseline_limit}}</p></section>
+
+<div class="foot"><p><b>What is not real.</b> Devices and meters are simulated. The buyers are stand-ins with fixed orders, and in the NANDA Town evenings a stand-in takes the place of the aggregator's own agent. The homes' batteries are replayed from ENGIE's record as one total. No data center is in these runs.</p>
+<p>Every number on this page is read from the runs' own result files by the script that wrote the page.</p></div>
+</main>
+</body>
+</html>
+

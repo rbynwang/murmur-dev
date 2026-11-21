@@ -1,0 +1,59 @@
+<!-- @world -->
+<div class="ww" id="ww" style="width:{{w}}px;height:{{h}}px"><svg class="wires" id="w-wires" width="{{w}}" height="{{h}}" aria-hidden="true"></svg>{{root}}{{status}}{{trade}}{{blocks}}{{levels}}</div>
+<!-- @level -->
+<p class="wlv" style="left:{{x}}px;top:{{y}}px">{{name}}</p>
+<!-- @root -->
+<article class="wb c3 wroot" data-b="input" id="W-input" style="left:{{x}}px;top:{{y}}px;width:{{w}}px;height:{{h}}px">
+<header class="wh"><h3 id="w-story"></h3></header>
+<div class="wi"><b>Input</b><span data-in="input"></span></div>
+<div class="wbd"><div class="wa"><p class="wp" id="w-note"></p></div><div class="wt"><ol class="tb" id="T-input" style="height:{{term}}px" tabindex="0" aria-label="Input: raw record"></ol></div></div>
+</article>
+<!-- @status -->
+<article class="wb cm wstat" data-b="status" id="W-status" style="left:{{x}}px;top:{{y}}px;width:{{w}}px;height:{{h}}px">
+<header class="wh"><h3>Where it stands</h3></header>
+<section class="wwho"><h4>{{title}}</h4><p>{{scope}}</p><dl>{{rows}}</dl></section>
+<div class="wcols">
+{{cols}}</div></article>
+<!-- @who_row -->
+<dt>{{who}}</dt><dd>{{does}}</dd>
+<!-- @column -->
+<div>{{lists}}</div>
+
+<!-- @list -->
+<h4>{{head}}</h4><ul>{{items}}</ul>
+<!-- @item -->
+<li>{{text}}</li>
+<!-- @trade -->
+<article class="wb cm wtrade" data-b="trade" id="W-trade" style="left:{{x}}px;top:{{y}}px;width:{{w}}px;height:{{h}}px">
+<header class="wh"><h3>The trade</h3><em class="wk" data-kn="trade"></em></header>
+<div class="wi"><b>Effect</b><span id="w-effect"></span></div>
+<div class="wtrade-b"><dl class="tvs">{{rows}}</dl><div class="wled"><table id="w-ledger"></table></div></div>
+</article>
+<!-- @figure -->
+<div class="tvr" data-tv="{{key}}"><dt>{{label}}</dt><dd>—</dd></div>
+<!-- @block -->
+<article class="wb {{hue}}" data-b="{{b}}" id="W-{{b}}" style="left:{{x}}px;top:{{y}}px;width:{{w}}px;height:{{h}}px">
+<header class="wh"><h3>{{full}}</h3>{{tag}}<em class="wk" data-kn="{{b}}"></em></header>
+<div class="wi"><b>Input</b><span data-in="{{b}}"></span></div>
+<div class="wbd"><div class="wa"><p class="wp">{{para}}</p>{{extra}}{{notes}}</div><div class="wt"><ol class="tb" id="T-{{b}}" style="column-count:{{cols}};height:{{term}}px" tabindex="0" aria-label="{{full}}: raw terminal"></ol></div></div>
+</article>
+<!-- @kind -->
+<span class="kd">{{kind}}</span>
+<!-- @nine -->
+<ol class="nine">{{rows}}</ol>
+<!-- @step -->
+<li class="{{mdl}}"><i>{{n}}</i><b>{{name}}</b><span>{{who}}</span></li>
+<!-- @six -->
+<ol class="six">{{rows}}</ol>
+<!-- @check -->
+<li><i>{{n}}</i><b>{{name}}</b><span>{{does}}</span></li>
+<!-- @says -->
+<ul class="says"><li class="sh">What they can write</li>{{write}}<li class="sh">What they hear</li>{{hear}}</ul>
+<!-- @say -->
+<li><code>{{word}}</code><span>{{does}}</span></li>
+<!-- @notes -->
+<ul class="wnotes">{{revs}}{{gaps}}</ul>
+<!-- @rev -->
+<li class="wrev"><h4><span class="chg">{{title}}</span><span class="rv">{{tag}}</span></h4><p><b>Was</b> {{was}}</p><p><b>Now</b> {{now}}</p></li>
+<!-- @gap -->
+<li class="wgap"><h4>{{title}}</h4><p>{{text}}</p></li>

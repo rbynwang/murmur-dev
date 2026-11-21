@@ -1,0 +1,69 @@
+<!-- @app -->
+<div class="app" id="app" data-tab="split">
+{{scen}}<main class="split" id="split">
+<section class="map" id="map" aria-label="The framework, from buyers to payment">{{map}}<div class="pill" id="pill" hidden></div></section>
+<div class="strip" id="strip" aria-label="Stages">{{strip}}</div>
+<section class="panel" id="panel">
+<div class="intro" id="intro"><h1>Murmur agent framework</h1><p id="sent"></p><p class="truth2">Plans by code · Not live · Loads simulated</p></div>
+<div class="inputs" id="inputs" role="group" aria-label="Stories of this day"></div>
+<article class="layer" id="layer">
+<header class="nowp" id="now" aria-live="polite">
+<div class="lh"><span class="lnum" id="c-n" aria-hidden="true"></span><div class="lt"><p class="eye"><b id="now-block"></b><span id="c-layer"></span><span id="now-when"></span><span class="rv" id="now-tag" hidden></span></p><h2 id="now-h"></h2></div></div>
+<p class="ov" id="c-about"></p>
+<div class="lstat" id="c-st"></div>
+<div class="ess"><div class="big" id="c-big"><b id="now-big"></b><span id="now-cap"></span></div><dl class="flow" id="c-flow"></dl></div>
+</header>
+<div class="cards" id="trade" role="group" aria-label="The numbers at this moment"></div>
+<figure class="term" id="term">
+<figcaption><b id="t-name"></b><span id="t-what"></span><em id="t-where"></em><button type="button" class="lnk" id="t-all" aria-pressed="false">Show all steps</button></figcaption>
+<ol class="tb" id="tb" tabindex="0" aria-label="Terminal for this moment"></ol>
+</figure>
+<div class="revs" id="notes"></div>
+</article>
+</section>
+</main>
+<main class="whole" id="whole" hidden>
+<header class="whead">
+<div class="wnow"><p class="lab"><b>Now</b><span id="w-block"></span><span id="w-when"></span></p><h2 id="w-h"></h2><p class="hero"><b id="w-big"></b><span id="w-cap"></span></p></div>
+<div class="wctl"><div class="inputs" id="w-inputs" role="group" aria-label="Stories of this day"></div><div class="zoom" role="group" aria-label="Zoom"><button type="button" class="zb" id="z-part" aria-pressed="false">What the coordinator adds</button>{{story_button}}<button type="button" class="zb" id="z-fit" aria-pressed="true">Overview</button><button type="button" class="zb" id="z-out" aria-label="Zoom out">−</button><span id="z-now" class="zn"></span><button type="button" class="zb" id="z-in" aria-label="Zoom in">+</button></div></div>
+</header>
+<section class="over" id="over" aria-label="The whole tree, in one screen">{{overview}}</section>
+<div class="wv" id="wv" tabindex="0" hidden aria-label="The whole tree, fully expanded. Scroll to move, use the zoom buttons to read."><div class="wz" id="wz"></div></div>
+{{parts}}<div class="mini" id="mini" hidden aria-label="Where you are in the tree"><svg id="mini-s" preserveAspectRatio="xMidYMid meet"></svg></div>
+<button type="button" class="ptr" id="ptr" hidden></button>
+</main>
+<section class="long" id="long" hidden aria-label="Full record"><iframe id="long-f" title="The full record of the day"></iframe></section>
+{{results}}
+<footer class="bar" id="bar" role="region" aria-label="Playback">
+<div class="ctl"><button type="button" class="pb" id="b-back">Back</button><button type="button" class="pb go" id="b-next">Next</button><button type="button" class="pb" id="b-auto" aria-pressed="false">Auto</button><button type="button" class="pb" id="b-speed" title="Auto speed">1×</button><span class="pos" id="pos" aria-live="polite"></span></div>
+<p class="truth" id="truth">{{truth}}</p>
+<div class="tabs" role="tablist" aria-label="View"><button type="button" class="tab" id="tab-split" role="tab" aria-selected="true">Split view</button><button type="button" class="tab" id="tab-whole" role="tab" aria-selected="false">Whole picture</button><button type="button" class="tab" id="tab-long" role="tab" aria-selected="false">Full record</button>{{results_tab}}<button type="button" class="pb sm" id="b-theme">Theme</button></div>
+</footer>
+</div>
+<!-- @part -->
+{{html}}
+
+<!-- @story_button -->
+<button type="button" class="zb" id="z-story" aria-pressed="false">The cut and its tests</button>
+<!-- @truth -->
+A recorded run on ENGIE's data · Devices and buyers are stand-ins
+<!-- @truth_words -->
+Recorded on ENGIE's data · Devices and buyers are stand-ins · Words by a real small model
+<!-- @results_tab -->
+<button type="button" class="tab" id="tab-res" role="tab" aria-selected="false">Results</button>
+<!-- @scen -->
+<nav class="scen" id="scen" aria-label="Scenario"><div class="scbs">{{buttons}}</div><p class="scl" id="sc-line"></p></nav>
+<!-- @scen_button -->
+<button type="button" class="scb" data-sc="{{id}}" aria-pressed="false" title="{{about}}">{{name}}</button>
+<!-- @results -->
+<section class="results yr" id="results" hidden aria-label="Results">
+<div class="resw">
+<h2>{{title}}</h2>
+<p class="resp">{{lead}}</p>
+<div class="rest"><table><thead><tr><th scope="col">Evening</th><th scope="col">Promised from</th><th scope="col">Offered<small>kW, 18:00 to 21:00</small></th><th scope="col">Promised<small>kW</small></th><th scope="col">Delivered<small>kW, by the truth</small></th><th scope="col">Delivered<small>kW, by the buyers' meter</small></th><th scope="col">Promise<small>by the truth</small></th><th scope="col">Half hours short<small>by the buyers' meter</small></th><th scope="col">Messages<small>signed, over Town</small></th></tr></thead><tbody>{{rows}}</tbody></table></div>
+<p class="resn"><b>In short:</b> {{lines}}</p>
+<p class="resn"><b>Not real in these runs:</b> {{not_real}}</p>
+<p class="ress">{{foot}}</p>
+</div></section>
+<!-- @result -->
+<tr data-sc="{{id}}"><th scope="row"><button type="button" class="scr" data-sc="{{id}}">{{name}}</button><small>{{date}}</small></th><td>{{cover_from}}<small>{{share}} of the offers</small></td><td>{{offered}}</td><td>{{promised}}</td><td>{{truth}}</td><td>{{meter}}</td><td class="df">{{kept}}<small>short in {{short_truth}} of {{half_hours}} half hours</small></td><td>{{short_meter}} of {{half_hours}}</td><td>{{messages}}</td></tr>

@@ -1,0 +1,609 @@
+{
+ "files": [
+  "evenings_community_recount_2026-11-11.json",
+  "community_evenings.json",
+  "surplus_charge.json"
+ ],
+ "window": {
+  "start": "18:00",
+  "end": "21:00"
+ },
+ "tiers": {
+  "tier1": {
+   "evenings": 31,
+   "offered_kw": 1661.2,
+   "promised_kw": 1360.7,
+   "delivered_metered_kw": 1418.3,
+   "delivered_true_kw": 1327.8,
+   "held_by_the_meter": 21,
+   "held": 9,
+   "mean_miss_kw": 50.7,
+   "cover": {
+    "first": 0.9091,
+    "last": 0.7836,
+    "path": [
+     {
+      "evening": "2025-01-03",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-06",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-07",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-08",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-09",
+      "share": 0.8666,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-10",
+      "share": 0.865,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-13",
+      "share": 0.8518,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-14",
+      "share": 0.8518,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-15",
+      "share": 0.8196,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-16",
+      "share": 0.8196,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-17",
+      "share": 0.8196,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-20",
+      "share": 0.8079,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-21",
+      "share": 0.8079,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-22",
+      "share": 0.8079,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-23",
+      "share": 0.8079,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-24",
+      "share": 0.8079,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-27",
+      "share": 0.8072,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-28",
+      "share": 0.8072,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-29",
+      "share": 0.8039,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-30",
+      "share": 0.8039,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-31",
+      "share": 0.8039,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-02",
+      "share": 0.7836,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-03",
+      "share": 0.7836,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-04",
+      "share": 0.7836,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-05",
+      "share": 0.7836,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-07",
+      "share": 0.7836,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-10",
+      "share": 0.7836,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-12",
+      "share": 0.7836,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-13",
+      "share": 0.7836,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-14",
+      "share": 0.7836,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-20",
+      "share": 0.7836,
+      "from": "the record"
+     }
+    ]
+   },
+   "kept_by_the_meter_before_recount": 22,
+   "switch_off": {
+    "evenings": 31,
+    "sold_kw": 1661.1,
+    "delivered_metered_kw": 1420.2,
+    "delivered_true_kw": 1329.3,
+    "evenings_the_meter_covered_what_was_sold": 2,
+    "evenings_delivery_covered_what_was_sold": 1,
+    "mean_miss_kw": 335.4
+   },
+   "import_peak_of_day_kw": {
+    "recorded": 4083.3,
+    "battery_held": 3167.0,
+    "with_homes_battery_shaped": 2507.9
+   }
+  },
+  "tier2": {
+   "evenings": 31,
+   "offered_kw": 1141.5,
+   "promised_kw": 1032.5,
+   "delivered_metered_kw": 1109.3,
+   "delivered_true_kw": 1018.9,
+   "held_by_the_meter": 30,
+   "held": 5,
+   "mean_miss_kw": 17.3,
+   "cover": {
+    "first": 0.9091,
+    "last": 0.8951,
+    "path": [
+     {
+      "evening": "2025-01-03",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-06",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-07",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-08",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-09",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-10",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-13",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-14",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-15",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-16",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-17",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-20",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-21",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-22",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-23",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-24",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-27",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-28",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-29",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-30",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-31",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-02-02",
+      "share": 0.8951,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-03",
+      "share": 0.8951,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-04",
+      "share": 0.8951,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-05",
+      "share": 0.8951,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-07",
+      "share": 0.8951,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-10",
+      "share": 0.8951,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-12",
+      "share": 0.8951,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-13",
+      "share": 0.8951,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-14",
+      "share": 0.8951,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-20",
+      "share": 0.8951,
+      "from": "the record"
+     }
+    ]
+   },
+   "kept_by_the_meter_before_recount": 30,
+   "switch_off": {
+    "evenings": 31,
+    "sold_kw": 1141.2,
+    "delivered_metered_kw": 1112.5,
+    "delivered_true_kw": 1022.1,
+    "evenings_the_meter_covered_what_was_sold": 8,
+    "evenings_delivery_covered_what_was_sold": 1,
+    "mean_miss_kw": 119.3
+   },
+   "import_peak_of_day_kw": {
+    "recorded": 4083.3,
+    "battery_held": 3167.0,
+    "with_homes_battery_shaped": 2507.9
+   }
+  },
+  "tier3": {
+   "evenings": 31,
+   "offered_kw": 92.4,
+   "promised_kw": 29.8,
+   "delivered_metered_kw": 38.6,
+   "delivered_true_kw": 26.5,
+   "held_by_the_meter": 24,
+   "held": 14,
+   "mean_miss_kw": 8.8,
+   "cover": {
+    "first": 0.9091,
+    "last": 0.266,
+    "path": [
+     {
+      "evening": "2025-01-03",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-06",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-07",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-08",
+      "share": 0.9091,
+      "from": "the fixed margin"
+     },
+     {
+      "evening": "2025-01-09",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-10",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-13",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-14",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-15",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-16",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-17",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-20",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-21",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-22",
+      "share": 0.329,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-23",
+      "share": 0.2525,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-24",
+      "share": 0.2525,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-27",
+      "share": 0.2525,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-28",
+      "share": 0.2525,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-29",
+      "share": 0.2,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-30",
+      "share": 0.2,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-01-31",
+      "share": 0.2,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-02",
+      "share": 0.2,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-03",
+      "share": 0.2,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-04",
+      "share": 0.2,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-05",
+      "share": 0.2,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-07",
+      "share": 0.2,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-10",
+      "share": 0.2,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-12",
+      "share": 0.266,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-13",
+      "share": 0.266,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-14",
+      "share": 0.266,
+      "from": "the record"
+     },
+     {
+      "evening": "2025-02-20",
+      "share": 0.266,
+      "from": "the record"
+     }
+    ]
+   },
+   "kept_by_the_meter_before_recount": 26,
+   "switch_off": {
+    "evenings": 31,
+    "sold_kw": 92.4,
+    "delivered_metered_kw": 38.7,
+    "delivered_true_kw": 26.5,
+    "evenings_the_meter_covered_what_was_sold": 0,
+    "evenings_delivery_covered_what_was_sold": 0,
+    "mean_miss_kw": 65.9
+   },
+   "import_peak_of_day_kw": {
+    "recorded": 4083.3,
+    "battery_held": 3167.0,
+    "with_homes_battery_shaped": 2588.6
+   }
+  }
+ },
+ "rule": {
+  "evenings": 33,
+  "window": {
+   "start": "18:00",
+   "end": "21:00"
+  },
+  "battery_in_window_as_recorded_kw": 385.0,
+  "battery_given_in_window_kw": 1039.3,
+  "limit_kw": 3213.6,
+  "limit_kept": true,
+  "most_sent_out_kw": {
+   "recorded": 2144.9,
+   "plan": 1421.4
+  }
+ },
+ "midday": {
+  "days": 59,
+  "from": "2025-01-01",
+  "to": "2025-02-28",
+  "sent_out_kwh_a_day": {
+   "as_recorded": 3461.8,
+   "with_the_rule": 2089.1
+  },
+  "highest_sent_out_kw": {
+   "as_recorded": {
+    "mean_of_days": 1424.8,
+    "highest": 2443.9
+   },
+   "with_the_rule": {
+    "mean_of_days": 458.8,
+    "highest": 1965.2
+   }
+  },
+  "days_with_nothing_sent_out": {
+   "as_recorded": 8,
+   "with_the_rule": 10
+  }
+ }
+}

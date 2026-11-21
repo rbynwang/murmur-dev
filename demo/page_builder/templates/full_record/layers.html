@@ -1,0 +1,133 @@
+<!-- @buyers -->
+<section class="layer" data-l="1" id="L1">
+{{head}}
+<div class="grid2">
+<div class="card" id="a-util"><h4>Buyer: utility</h4><dl class="kv"><dt>Demand</dt><dd id="c-util-kw">—</dd><dt>Window</dt><dd id="c-util-win">—</dd><dt>Price</dt><dd id="c-util-price">—</dd><dt>Order value</dt><dd id="c-util-val">—</dd><dt>Deposit</dt><dd id="c-util-dep">—</dd></dl></div>
+<div class="card" id="a-grid"><h4>Buyer: grid operator</h4><dl class="kv"><dt>Demand</dt><dd id="c-grid-kw">—</dd><dt>Window</dt><dd id="c-grid-win">—</dd><dt>Price</dt><dd id="c-grid-price">—</dd><dt>Order value</dt><dd id="c-grid-val">—</dd><dt>Deposit</dt><dd id="c-grid-dep">—</dd></dl></div>
+</div>
+{{terminal}}
+{{gaps}}
+</section>
+<!-- @coordinator -->
+<section class="layer" data-l="2" id="L2">
+{{head}}
+<div class="tiles">
+<div class="tile2" id="a-co-book"><h4>Order book</h4><p class="cs">One sale, one pool, two orders.</p><b id="co-asked">—</b></div>
+<div class="tile2" id="a-co-offers"><h4>Offers</h4><p class="cs">Firm and tentative, per half hour.</p><b id="co-offers-n">—</b></div>
+<div class="tile2" id="a-co-round2"><h4><span class="chg">Second round</span><span class="rev">new</span></h4><p class="cs" id="co-r2">Only if the pool is short.</p></div>
+<div class="tile2" id="a-co-margin"><h4>Margin</h4><p class="cs">They follow the aggregator's signed request. Replayed from ENGIE's record in this evening.</p><b id="co-margin">—</b></div>
+<div class="tile2" id="a-co-hb"><h4>Homes against buildings</h4><p class="cs">The same rule for every node.</p><b id="co-hb">—</b></div>
+<div class="tile2" id="a-co-reserve"><h4>Reserve</h4><p class="cs">Asked of the nodes beyond what is sold.</p><b id="co-res">—</b></div>
+<div class="tile2" id="a-co-contract"><h4>Contracts</h4><p class="cs">One per node, one per buyer.</p><b id="co-acc">—</b></div>
+<div class="tile2" id="a-co-desk"><h4><span class="chg">Desk</span><span class="rev">fixed</span></h4><p class="cs" id="co-desk">Moves gaps and answers calls on the day.</p></div>
+</div>
+{{terminal}}
+<div class="sub"><h3 class="subt">The clearing at a glance</h3>
+<p class="why">Each row lights when the run reaches it. kW per half hour, from the day's ledger.</p>
+<div class="ledw" id="a-co-clear" tabindex="0" aria-label="The clearing, kW per half hour"><table class="led"><thead><tr><th scope="col"></th><th scope="col">kW per half hour</th>{{columns}}</tr></thead><tbody>{{rows}}</tbody></table></div></div>
+{{revs}}
+{{gaps}}
+</section>
+<!-- @ledger_column -->
+<th scope="col">{{start}}</th>
+<!-- @ledger_section -->
+<tr class="sect"><td></td><td colspan="{{span}}">{{title}}</td></tr>
+<!-- @ledger_row -->
+<tr class="{{cls}}" data-s="{{step}}"><td>{{letter}}</td><td>{{label}}{{how}}</td>{{cells}}</tr>
+<!-- @ledger_how -->
+<span class="f">{{how}}</span>
+<!-- @ledger_cell -->
+<td class="val">{{value}}</td>
+<!-- @town -->
+<section class="layer" data-l="3" id="L3">
+{{head}}
+<div class="chan" id="a-town" aria-hidden="true"><span class="env" id="env"></span><span class="lab">only carries</span></div>
+<dl class="envf"><div><dt>Sender</dt><dd id="env-from">—</dd></div><div><dt>Receiver</dt><dd id="env-to">—</dd></div><div><dt>Kind</dt><dd id="env-kind">—</dd></div><div class="w2"><dt>Id</dt><dd id="env-id">—</dd></div><div><dt>Signature</dt><dd id="env-sig">—</dd></div><div><dt>Body</dt><dd id="env-size">—</dd></div></dl>
+<div class="towns"><span>Envelopes followed here <b id="town-n">0</b></span><span>Messages in the run <b>{{messages}}</b></span><span>Reads the body <b>no</b></span><span>Sets a price or picks a seller <b>never</b></span></div>
+{{terminal}}
+{{revs}}
+{{gaps}}
+</section>
+<!-- @nodes -->
+<section class="layer" data-l="4" id="L4">
+{{head}}
+<div class="sub honest" id="a-honest"><h3 class="subt"><span class="gm">◆</span> What decides today</h3>
+<p class="why">On the recorded days all {{homes}} homes and {{buildings}} buildings plan by code at every point, and no model is asked for a plan. The small model, {{reader}}, reads what a person writes and words each report. A node that gives less than asked tells its owner or manager why. Who decides what is at the top of this page.</p></div>
+<div class="nodes3">
+{{home}}
+{{building}}
+<div class="nodecol qcol a-qc" id="a-queue"><div class="nh"><h3 class="mq">Small model</h3><span>{{reader}}</span></div>
+<p class="cs">One small model, one request at a time. It reads what a person writes and words each report. It makes no plan, and no plan waits for it.</p>
+<div class="qbars" id="q-bars"><div class="qbar"><span>Offers</span><u id="q-offer"><i></i></u><em id="qn-offer">0</em></div><div class="qbar"><span>Accepts</span><u id="q-accept"><i></i></u><em id="qn-accept">0</em></div><div class="qbar"><span>Plans</span><u id="q-plan"><i></i></u><em id="qn-plan">0</em></div><div class="qbar"><span>Notes</span><u id="q-note"><i></i></u><em id="qn-note">0</em></div><div class="qbar"><span>Reports</span><u id="q-report"><i></i></u><em id="qn-report">0</em></div><div class="qbar"><span>Margin</span><u id="q-margin"><i></i></u><em id="qn-margin">0</em></div><div class="qbar"><span>Other</span><u id="q-other"><i></i></u><em id="qn-other">0</em></div><p class="cs">Answers for the nodes followed here. All nodes in the run: {{answers}}.</p></div>
+<p class="cs mono" id="q-last"></p>
+</div>
+<div class="a-qt">{{queue}}</div>
+</div>
+<div class="sub" id="a-cells"><h3 class="subt">The community, node by node</h3>
+<div class="cells" role="img" aria-label="{{total}} nodes: three buildings then the homes. Each node has its own agent.">{{cells}}</div>
+<div class="cellkey"><span><i style="background:var(--panel)"></i>nothing yet</span><span><i style="background:color-mix(in srgb,var(--c4h) 32%,var(--panel))"></i>offered</span><span><i style="background:color-mix(in srgb,var(--c4h) 58%,var(--panel))"></i>accepted</span><span><i style="background:var(--c4h)"></i>paid</span><span><i style="box-shadow:0 0 0 1.5px var(--model)"></i>its own agent</span><span>Counts from the run, so which cell lights first means nothing. Hover a cell for that node's numbers.</span></div></div>
+{{revs}}
+{{gaps}}
+</section>
+<!-- @node_column -->
+<div class="nodecol {{col}} a-{{side}}l" id="a-{{block}}">
+<div class="nh"><h3>{{label}}</h3><span>{{node}} · its own agent, plans by code{{bits}}</span></div>
+<div class="ladder"><div class="lad" id="lad-{{side}}-1"><i>1</i><b>Read schedule <span class="dot" title="Changed in this version"></span></b><span class="k">tool</span><span class="r" id="ladr-{{side}}-1">Recorded when the call for offers arrives</span></div><div class="lad" id="lad-{{side}}-2"><i>2</i><b>Forecast <span class="dot" title="Changed in this version"></span></b><span class="k">regression</span><span class="r" id="ladr-{{side}}-2">A simple temperature regression, as a tool. Recorded when the call for offers arrives</span></div><div class="lad" id="lad-{{side}}-3"><i>3</i><b>Check devices <span class="dot" title="Changed in this version"></span></b><span class="k">tool</span><span class="r" id="ladr-{{side}}-3">Recorded when the offer is built</span></div><div class="lad" id="lad-{{side}}-4"><i>4</i><b>Sellable kW <span class="dot" title="Changed in this version"></span></b><span class="k">tool</span><span class="r" id="ladr-{{side}}-4">The planner&#x27;s safe amount: the ceiling on its offer</span></div><div class="lad" id="lad-{{side}}-5"><i>5</i><b>Decide offer <span class="dot" title="Changed in this version"></span></b><span class="k">code</span><span class="r" id="ladr-{{side}}-5">Code offers the planner&#x27;s safe amount. A need read from a note lowers it</span></div><div class="lad" id="lad-{{side}}-6"><i>6</i><b>Commit <span class="dot" title="Changed in this version"></span></b><span class="k">code</span><span class="r" id="ladr-{{side}}-6">Code accepts or declines, with a receipt</span></div><div class="lad" id="lad-{{side}}-7"><i>7</i><b>Opening <span class="dot" title="Changed in this version"></span></b><span class="k">code</span><span class="r" id="ladr-{{side}}-7">Code&#x27;s plan for the sale&#x27;s opening, on a receipt</span></div><div class="lad" id="lad-{{side}}-8"><i>8</i><b>Exception <span class="dot" title="Changed in this version"></span></b><span class="k">code</span><span class="r" id="ladr-{{side}}-8">Code answers every exception with one whole plan</span></div><div class="lad mdl" id="lad-{{side}}-9"><i>9</i><b>Report <span class="dot" title="Changed in this version"></span></b><span class="k">small model</span><span class="r" id="ladr-{{side}}-9">The facts are on the record, and the small model writes the words</span></div></div>
+{{also}}
+</div>
+<div class="a-{{side}}t">{{terminal}}</div>
+<!-- @node_also -->
+<p class="cs also"><b class="mono">{{node}}</b>, its own agent, plans by code: <span id="also-{{side}}">same steps, same terminal</span></p>
+<!-- @cell -->
+<i class="cell{{kind}}" data-st="0" title="{{tip}}"></i>
+<!-- @tools -->
+<section class="layer" data-l="5" id="L5">
+{{head}}
+<div class="chain">
+<div class="lnk mn" id="a-menu" data-py="8"><h4>Tool server</h4><p>This step's menu. Only tools that make sense now.</p><div class="v" id="lk-menu"></div></div>
+<div class="lnk pl" id="a-policy" data-py="8"><h4>Policy</h4><p>Who may do what. Deny by default.</p><div class="v" id="lk-policy"></div></div>
+<div class="lnk gd" id="a-guard" data-py="8"><h4><span class="chg">Safety guard</span><span class="rev">fixed</span></h4><ol class="ck"><li id="ck-1"><i>1</i><span><b>Safety state</b> any alarm stops every write</span></li><li id="ck-2"><i>2</i><span><b>Allowed</b> on this turn&#x27;s list, not a protected point</span></li><li id="ck-3"><i>3</i><span><b>Range</b> inside the product&#x27;s range and the limit in force</span></li><li id="ck-4"><i>4</i><span><b>Timing</b> start timers, ramps, one stop a day</span></li><li id="ck-5"><i>5</i><span><b>Service</b> comfort, owner&#x27;s wishes, outdoor air, reserve</span></li><li id="ck-6"><i>6</i><span><b>One writer</b> one call per point at a time</span></li></ol><div class="v" id="lk-guard"></div></div>
+<div class="lnk sl" id="a-seal" data-py="8"><h4>Seal</h4><p>One use. A device takes only what the guard passed.</p><div class="v" id="lk-seal"></div></div>
+<div class="lnk dr" id="a-driver" data-py="8"><h4>Driver</h4><p>Simulated today.</p><div class="v" id="lk-driver"></div></div>
+</div>
+{{terminal}}
+{{revs}}
+{{gaps}}
+</section>
+<!-- @devices -->
+<section class="layer" data-l="6" id="L6">
+{{head}}
+<div class="rtab" id="a-devs" tabindex="0" aria-label="Devices, before and after"><table class="dt"><thead><tr><th scope="col">Device</th><th scope="col">Set</th><th scope="col">Before: at the write</th><th scope="col">After: last reading</th></tr></thead><tbody>{{rows}}</tbody></table></div>
+{{terminal}}
+{{revs}}
+{{gaps}}
+</section>
+<!-- @device_row -->
+<tr id="a-dv-{{key}}"><th scope="row">{{name}}<small id="dv-{{key}}-who">{{who}}</small></th><td id="dv-{{key}}-set">{{set}}</td><td id="dv-{{key}}-was">{{was}}</td><td id="dv-{{key}}-now">{{now}}</td></tr>
+<!-- @people -->
+<section class="layer" data-l="7" id="L7">
+{{head}}
+<div class="grid2">
+<div class="card" id="a-owner"><h4>Home owner</h4><p class="cs">What their home told them, and what is kept for them.</p><div class="chat" id="chat-owner">{{owner}}</div><p class="cs">What they can say</p><ul class="can"><li><code>a note</code> read by the small model as words, never as an order</li><li><code>need_now</code> takes a device back at once</li><li><code>set_limit</code> signed, moves a limit</li><li><code>close_group, open_group</code> signed, shuts or opens a group of devices</li><li><code>clear_alarm</code> only a person ends an alarm</li></ul></div>
+<div class="card" id="a-manager"><h4>Building manager</h4><p class="cs">What their building told them, and what is kept for them.</p><div class="chat" id="chat-manager">{{manager}}</div><p class="cs">What they can say</p><ul class="can"><li><code>a note</code> read by the small model as words, never as an order</li><li><code>need_now</code> takes a device back at once</li><li><code>set_limit</code> signed, moves a limit</li><li><code>close_group, open_group</code> signed, shuts or opens a group of devices</li><li><code>clear_alarm</code> only a person ends an alarm</li></ul></div>
+</div>
+{{terminal}}
+{{revs}}
+{{gaps}}
+</section>
+<!-- @return_path -->
+<section class="layer" data-l="8" id="L8">
+{{head}}
+<div class="grid3 four">
+<div class="card" id="a-rp-read"><h4>Readings</h4><p class="cs">Signed by each node, to the coordinator and both buyers.</p><dl class="kv"><dt>In</dt><dd id="rp-read">—</dd></dl></div>
+<div class="card" id="a-rp-checks"><h4><span class="chg">Checks</span><span class="rev">fixed</span></h4><p class="cs">Refused, capped, or first stands, at every door.</p><dl class="kv"><dt>Result</dt><dd id="rp-chk">—</dd></dl></div>
+<div class="card" id="a-rp-settle"><h4>Settlement</h4><p class="cs">Each buyer settles its share on the same meters.</p><dl class="kv"><dt>Buyers pay</dt><dd id="rp-buy">—</dd></dl></div>
+<div class="card" id="a-rp-pay"><h4>Payment</h4><p class="cs">By delivery, at each class's share. The coordinator keeps the rest.</p><dl class="kv"><dt>To sellers</dt><dd id="rp-pay">—</dd></dl></div>
+</div>
+{{terminal}}
+<div class="rtab" tabindex="0" aria-label="Half hour by half hour"><table class="rt"><thead><tr><th scope="col">Half hour</th><th scope="col">Sold kW</th><th scope="col">Delivered kW</th><th scope="col">True kW</th><th scope="col">Readings</th><th scope="col">Buyers pay</th><th scope="col">To nodes</th><th scope="col">Coordinator</th></tr></thead><tbody>{{rows}}</tbody></table></div>
+{{revs}}
+{{gaps}}
+</section>
+<!-- @return_row -->
+<tr><td>{{start}}</td><td>{{sold}}</td><td id="rt-del-{{k}}">—</td><td id="rt-true-{{k}}">—</td><td id="rt-read-{{k}}">—</td><td id="rt-buy-{{k}}">—</td><td id="rt-node-{{k}}">—</td><td id="rt-keep-{{k}}">—</td></tr>

@@ -1,0 +1,4 @@
+{
+ "about": "What a hostile feed sends in every field: markup that would run if the Live view ever turned a feed's words into markup.",
+ "markup": "<img src=x onerror=\"window.__x=1\"><script>window.__x=1</script>"
+}

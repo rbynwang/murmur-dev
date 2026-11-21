@@ -1,0 +1,22 @@
+<!-- @section -->
+<div class="map" role="img" aria-label="The Murmur architecture: an aggregator, NANDA Town, and three kinds of participant">
+<div class="frame agg"><span class="fl">The aggregator and the buyers</span>
+  <div class="boxes c4 flow">{{aggregator}}</div><div class="boxes c3">{{buyers}}</div></div>
+<div class="town"><b>NANDA Town</b><span>Every message between owners crosses it, signed. It reads nothing inside.</span><i>request · answer · report</i></div>
+<div class="parts">
+  <div class="frame co"><span class="fl">Community</span>
+    <div class="sub"><span class="sl">Community agent <i class="role">CODE</i></span><div class="boxes c6">{{community}}</div></div>
+    <div class="two">
+      <div class="sub"><span class="sl">Home agents</span><div class="chain">{{homes}}</div></div>
+      <div class="sub"><span class="sl">Building agents</span><div class="chain">{{buildings}}</div></div>
+    </div></div>
+  <div class="frame pv"><span class="fl">Solar-and-battery plant</span><p class="fn">Its battery is under a peak contract. What it buys and sells stays its own.</p><div class="col">{{plant}}</div></div>
+  <div class="frame dc"><span class="fl">Data center</span><p class="fn">It buys its power as before. Here it only shifts when it draws.</p><div class="col">{{data_center}}</div></div>
+</div>
+<div class="frame ret"><span class="fl">Return path</span><div class="boxes c4 flow">{{return_path}}</div></div>
+</div>
+  <ol class="rules">{{rules}}</ol>
+<!-- @box -->
+<div class="bx {{size}}" data-b="{{part}}"><span class="bh"><b>{{name}}</b>{{role}}</span>{{line}}</div>
+<!-- @arrow -->
+<i class="ar"></i>

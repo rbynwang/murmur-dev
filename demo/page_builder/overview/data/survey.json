@@ -1,0 +1,401 @@
+{
+ "from": "Our product survey: current US products, each rating read from its maker's datasheet. For each kind of equipment: how many products, and how an agent reaches them (it commands them, through another device or the building's own system, or it only watches them).",
+ "brands_in_homes_and_buildings": 180,
+ "home": {
+  "brands": 108,
+  "dated_2025_or_later": 115,
+  "groups": [
+   {
+    "group": "Solar",
+    "kinds": [
+     {
+      "kind": "Solar panels",
+      "reach": "watched",
+      "products": 16
+     },
+     {
+      "kind": "Inverters",
+      "reach": "watched",
+      "products": 7
+     }
+    ]
+   },
+   {
+    "group": "Storage",
+    "kinds": [
+     {
+      "kind": "Home batteries",
+      "reach": "commanded",
+      "products": 9
+     }
+    ]
+   },
+   {
+    "group": "Vehicles",
+    "kinds": [
+     {
+      "kind": "Electric cars",
+      "reach": "through",
+      "products": 20
+     },
+     {
+      "kind": "Home EV chargers",
+      "reach": "commanded",
+      "products": 10
+     },
+     {
+      "kind": "Two-way car charging",
+      "reach": "commanded",
+      "products": 5
+     }
+    ]
+   },
+   {
+    "group": "Heating and cooling",
+    "kinds": [
+     {
+      "kind": "Smart thermostats",
+      "reach": "commanded",
+      "products": 10
+     },
+     {
+      "kind": "Room AC controllers",
+      "reach": "commanded",
+      "products": 3
+     },
+     {
+      "kind": "Central AC and heat pumps",
+      "reach": "through",
+      "products": 10
+     },
+     {
+      "kind": "Window air conditioners",
+      "reach": "commanded",
+      "products": 11
+     }
+    ]
+   },
+   {
+    "group": "Shiftable loads",
+    "kinds": [
+     {
+      "kind": "Heat pump water heaters",
+      "reach": "commanded",
+      "products": 12
+     },
+     {
+      "kind": "Vented electric dryers",
+      "reach": "commanded",
+      "products": 7
+     },
+     {
+      "kind": "Heat pump dryers",
+      "reach": "commanded",
+      "products": 5
+     },
+     {
+      "kind": "Dishwashers",
+      "reach": "commanded",
+      "products": 9
+     },
+     {
+      "kind": "Refrigerators",
+      "reach": "watched",
+      "products": 7
+     },
+     {
+      "kind": "Freezers",
+      "reach": "watched",
+      "products": 5
+     },
+     {
+      "kind": "Pool pumps",
+      "reach": "commanded",
+      "products": 3
+     },
+     {
+      "kind": "Hot tub controls",
+      "reach": "watched",
+      "products": 3
+     },
+     {
+      "kind": "Dehumidifiers",
+      "reach": "watched",
+      "products": 7
+     },
+     {
+      "kind": "Smart plugs",
+      "reach": "watched",
+      "products": 4
+     },
+     {
+      "kind": "Smart electrical panels",
+      "reach": "watched",
+      "products": 5
+     }
+    ]
+   },
+   {
+    "group": "Lighting",
+    "kinds": [
+     {
+      "kind": "Home lighting",
+      "reach": "watched",
+      "products": 4
+     }
+    ]
+   }
+  ]
+ },
+ "building": {
+  "brands": 90,
+  "dated_2025_or_later": 87,
+  "groups": [
+   {
+    "group": "Site and building systems",
+    "kinds": [
+     {
+      "kind": "Meters",
+      "reach": "watched",
+      "products": 4
+     },
+     {
+      "kind": "Site energy controllers",
+      "reach": "commanded",
+      "products": 3
+     },
+     {
+      "kind": "Grid signal gateways",
+      "reach": "through",
+      "products": 2
+     },
+     {
+      "kind": "Building management systems",
+      "reach": "commanded",
+      "products": 8
+     },
+     {
+      "kind": "AI supervisory optimizers",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "BACnet/SC routers",
+      "reach": "through",
+      "products": 1
+     }
+    ]
+   },
+   {
+    "group": "Storage",
+    "kinds": [
+     {
+      "kind": "Large batteries",
+      "reach": "commanded",
+      "products": 5
+     },
+     {
+      "kind": "Thermal storage",
+      "reach": "through",
+      "products": 3
+     }
+    ]
+   },
+   {
+    "group": "Solar",
+    "kinds": [
+     {
+      "kind": "Commercial solar inverters",
+      "reach": "watched",
+      "products": 4
+     }
+    ]
+   },
+   {
+    "group": "Vehicles",
+    "kinds": [
+     {
+      "kind": "Level 2 chargers",
+      "reach": "commanded",
+      "products": 6
+     },
+     {
+      "kind": "DC fast chargers",
+      "reach": "commanded",
+      "products": 1
+     }
+    ]
+   },
+   {
+    "group": "Heating and cooling",
+    "kinds": [
+     {
+      "kind": "Water-cooled chillers",
+      "reach": "through",
+      "products": 5
+     },
+     {
+      "kind": "Air-cooled chillers",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Heat recovery and water-to-water heat pumps",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Cooling towers",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Plant pumps",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Boilers",
+      "reach": "through",
+      "products": 6
+     },
+     {
+      "kind": "Plant optimizers",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Air handlers",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Fan arrays",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Fan and pump drives",
+      "reach": "through",
+      "products": 5
+     },
+     {
+      "kind": "Dedicated outdoor air",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Rooftop units",
+      "reach": "through",
+      "products": 5
+     },
+     {
+      "kind": "VRF systems",
+      "reach": "through",
+      "products": 5
+     },
+     {
+      "kind": "Water-source heat pumps",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "VAV controllers",
+      "reach": "through",
+      "products": 2
+     },
+     {
+      "kind": "CO2 and air sensors",
+      "reach": "watched",
+      "products": 3
+     },
+     {
+      "kind": "Occupancy sensing",
+      "reach": "watched",
+      "products": 3
+     },
+     {
+      "kind": "Room thermostats and controllers",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Lab controls",
+      "reach": "watched",
+      "products": 2
+     }
+    ]
+   },
+   {
+    "group": "Lighting",
+    "kinds": [
+     {
+      "kind": "Lighting controls",
+      "reach": "commanded",
+      "products": 6
+     },
+     {
+      "kind": "Shades and dynamic glass",
+      "reach": "through",
+      "products": 4
+     }
+    ]
+   },
+   {
+    "group": "Shiftable loads",
+    "kinds": [
+     {
+      "kind": "Plug load control",
+      "reach": "through",
+      "products": 2
+     },
+     {
+      "kind": "Commercial hot water",
+      "reach": "through",
+      "products": 4
+     },
+     {
+      "kind": "Elevators",
+      "reach": "through",
+      "products": 4
+     },
+     {
+      "kind": "Escalators",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Refrigeration controls",
+      "reach": "commanded",
+      "products": 2
+     },
+     {
+      "kind": "Kitchen hood controls",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Garage ventilation",
+      "reach": "through",
+      "products": 3
+     },
+     {
+      "kind": "Signs and facade lighting",
+      "reach": "through",
+      "products": 4
+     }
+    ]
+   },
+   {
+    "group": "Compute",
+    "kinds": [
+     {
+      "kind": "Compute rooms",
+      "reach": "watched",
+      "products": 4
+     }
+    ]
+   }
+  ]
+ }
+}

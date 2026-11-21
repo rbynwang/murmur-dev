@@ -1,0 +1,18 @@
+{
+ "run": "demo-run",
+ "host": "127.0.0.1",
+ "folder": "../../out/runs/{time}",
+ "ports": "free",
+ "data_dir": "../../out/example/data",
+ "models_dir": "../../out/example/models",
+ "evening": "../../out/example/evening.json",
+ "sites": "../../out/example/sites.json",
+ "step_seconds": 2,
+ "quiet_s": 1.5,
+ "devices": "all",
+ "model": {"stand_in": true},
+ "events": [
+  {"at": "2025-01-28 17:00", "kind": "note", "homes": ["home-02"], "text": "Please keep the battery full tonight, we leave early tomorrow."}
+ ],
+ "feed_port": 0
+}

@@ -1,0 +1,272 @@
+{
+ "context": {
+  "action": "catalog/publish",
+  "bppId": "utility.murmur.local",
+  "messageId": "fixture",
+  "networkId": "murmur.local/demo-deg",
+  "timestamp": "2025-01-01T00:00:00Z",
+  "transactionId": "fixture",
+  "version": "2.0.0"
+ },
+ "message": {
+  "catalogs": [
+   {
+    "descriptor": {
+     "name": "Test buyer stand-in"
+    },
+    "id": "catalog-fixture",
+    "offers": [
+     {
+      "descriptor": {
+       "name": "Form only",
+       "shortDesc": "the form of an order; never played"
+      },
+      "id": "offer-form-only",
+      "offerAttributes": {
+       "@context": "https://schema.nfh.global/DemandFlexBuyOffer/v2.0/context.jsonld",
+       "@type": "DemandFlexBuyOffer",
+       "contractAttributes": {
+        "@context": "https://schema.nfh.global/DEGContract/v2.0/context.jsonld",
+        "@type": "DEGContract",
+        "policy": {
+         "queryPath": "data.deg.contracts.demand_flex",
+         "url": "https://raw.githubusercontent.com/beckn/DEG/refs/heads/main/specification/policies/demand-flex-contractpolicy.rego"
+        },
+        "roles": [
+         {
+          "participantId": "utility-or-engie-mock",
+          "role": "buyer"
+         },
+         {
+          "participantId": null,
+          "role": "seller"
+         }
+        ]
+       },
+       "inputs": [
+        {
+         "inputs": {
+          "baselineMethodology": {
+           "bestOf": 3,
+           "outOf": 14
+          },
+          "currency": "USD"
+         },
+         "participantId": "utility-or-engie-mock",
+         "role": "buyer"
+        },
+        {
+         "participantId": null,
+         "role": "seller"
+        }
+       ]
+      },
+      "resourceIds": [
+       "flex-need-form-only"
+      ],
+      "validity": {
+       "endDate": "2024-12-31T22:00:00Z"
+      }
+     }
+    ],
+    "provider": {
+     "descriptor": {
+      "name": "Utility (stand-in)"
+     },
+     "id": "utility"
+    },
+    "resources": [
+     {
+      "descriptor": {
+       "name": "Form only",
+       "shortDesc": "the form of an order; never played"
+      },
+      "id": "flex-need-form-only",
+      "quantity": {
+       "@type": "Quantity",
+       "unitCode": "kW",
+       "unitQuantity": 400.0
+      },
+      "resourceAttributes": {
+       "@context": "https://schema.nfh.global/DemandFlexNeed/v2.0/context.jsonld",
+       "@type": "DemandFlexNeed",
+       "intervalPeriod": {
+        "duration": "PT30M",
+        "start": "2024-12-26T00:00:00Z"
+       },
+       "intervals": [
+        {
+         "id": 0,
+         "payloads": [
+          {
+           "type": "CAPACITY_REQUESTED",
+           "values": [
+            400.0
+           ]
+          },
+          {
+           "type": "PRICE",
+           "values": [
+            2.04
+           ]
+          },
+          {
+           "type": "SHORTFALL_PENALTY",
+           "values": [
+            0.0
+           ]
+          }
+         ]
+        },
+        {
+         "id": 1,
+         "payloads": [
+          {
+           "type": "CAPACITY_REQUESTED",
+           "values": [
+            400.0
+           ]
+          },
+          {
+           "type": "PRICE",
+           "values": [
+            2.04
+           ]
+          },
+          {
+           "type": "SHORTFALL_PENALTY",
+           "values": [
+            0.0
+           ]
+          }
+         ]
+        },
+        {
+         "id": 2,
+         "payloads": [
+          {
+           "type": "CAPACITY_REQUESTED",
+           "values": [
+            400.0
+           ]
+          },
+          {
+           "type": "PRICE",
+           "values": [
+            2.04
+           ]
+          },
+          {
+           "type": "SHORTFALL_PENALTY",
+           "values": [
+            0.0
+           ]
+          }
+         ]
+        },
+        {
+         "id": 3,
+         "payloads": [
+          {
+           "type": "CAPACITY_REQUESTED",
+           "values": [
+            400.0
+           ]
+          },
+          {
+           "type": "PRICE",
+           "values": [
+            2.04
+           ]
+          },
+          {
+           "type": "SHORTFALL_PENALTY",
+           "values": [
+            0.0
+           ]
+          }
+         ]
+        },
+        {
+         "id": 4,
+         "payloads": [
+          {
+           "type": "CAPACITY_REQUESTED",
+           "values": [
+            400.0
+           ]
+          },
+          {
+           "type": "PRICE",
+           "values": [
+            2.04
+           ]
+          },
+          {
+           "type": "SHORTFALL_PENALTY",
+           "values": [
+            0.0
+           ]
+          }
+         ]
+        },
+        {
+         "id": 5,
+         "payloads": [
+          {
+           "type": "CAPACITY_REQUESTED",
+           "values": [
+            400.0
+           ]
+          },
+          {
+           "type": "PRICE",
+           "values": [
+            2.04
+           ]
+          },
+          {
+           "type": "SHORTFALL_PENALTY",
+           "values": [
+            0.0
+           ]
+          }
+         ]
+        }
+       ],
+       "location": {
+        "geo": {
+         "coordinates": [
+          -71.06,
+          42.36
+         ],
+         "type": "Point"
+        }
+       },
+       "payloadDescriptors": [
+        {
+         "insertedBy": "buyer",
+         "objectType": "EVENT_PAYLOAD_DESCRIPTOR",
+         "payloadType": "CAPACITY_REQUESTED",
+         "units": "KW"
+        },
+        {
+         "insertedBy": "buyer",
+         "objectType": "EVENT_PAYLOAD_DESCRIPTOR",
+         "payloadType": "PRICE",
+         "units": "USD_PER_KWH"
+        },
+        {
+         "insertedBy": "buyer",
+         "objectType": "EVENT_PAYLOAD_DESCRIPTOR",
+         "payloadType": "SHORTFALL_PENALTY",
+         "units": "USD_PER_KWH"
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "what": "Candidate baselines for the whole community at tier 1, each judged only on evenings it was not fitted on (one month left out at a time): mean error, how far it leans high or low, evenings within 5% and evenings off by more than 15%, all in percent or evenings, and the mean error by season of the rule and of the fitted line.",
+ "engie_weather": {
+  "evenings": 252,
+  "candidates": {
+   "the rule": {
+    "mean_error_pct": 7.6,
+    "bias_pct": 0.9,
+    "evenings_within_5_pct": 115,
+    "evenings_off_by_more_than_15_pct": 36
+   },
+   "the rule, corrected": {
+    "mean_error_pct": 7.8,
+    "bias_pct": 1.0,
+    "evenings_within_5_pct": 115,
+    "evenings_off_by_more_than_15_pct": 38
+   },
+   "yesterday": {
+    "mean_error_pct": 10.8,
+    "bias_pct": 1.7,
+    "evenings_within_5_pct": 70,
+    "evenings_off_by_more_than_15_pct": 58
+   },
+   "fitted line": {
+    "mean_error_pct": 5.5,
+    "bias_pct": 0.5,
+    "evenings_within_5_pct": 139,
+    "evenings_off_by_more_than_15_pct": 13
+   }
+  },
+  "by_season_mean_error_pct": {
+   "winter": {
+    "the rule": 4.4,
+    "fitted line": 3.6
+   },
+   "spring": {
+    "the rule": 10.2,
+    "fitted line": 5.9
+   },
+   "summer": {
+    "the rule": 10.3,
+    "fitted line": 7.7
+   },
+   "autumn": {
+    "the rule": 5.6,
+    "fitted line": 4.9
+   }
+  }
+ },
+ "real_weather": {
+  "evenings": 252,
+  "candidates": {
+   "the rule": {
+    "mean_error_pct": 11.6,
+    "bias_pct": 2.6,
+    "evenings_within_5_pct": 81,
+    "evenings_off_by_more_than_15_pct": 69
+   },
+   "the rule, corrected": {
+    "mean_error_pct": 11.6,
+    "bias_pct": 2.5,
+    "evenings_within_5_pct": 86,
+    "evenings_off_by_more_than_15_pct": 69
+   },
+   "yesterday": {
+    "mean_error_pct": 12.8,
+    "bias_pct": 2.5,
+    "evenings_within_5_pct": 72,
+    "evenings_off_by_more_than_15_pct": 71
+   },
+   "fitted line": {
+    "mean_error_pct": 7.3,
+    "bias_pct": 0.8,
+    "evenings_within_5_pct": 110,
+    "evenings_off_by_more_than_15_pct": 24
+   }
+  },
+  "by_season_mean_error_pct": {
+   "winter": {
+    "the rule": 6.9,
+    "fitted line": 6.0
+   },
+   "spring": {
+    "the rule": 14.5,
+    "fitted line": 8.1
+   },
+   "summer": {
+    "the rule": 17.5,
+    "fitted line": 9.8
+   },
+   "autumn": {
+    "the rule": 7.4,
+    "fitted line": 5.3
+   }
+  }
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "battery": {
+  "eta": 0.95,
+  "kw": 0.0,
+  "kwh": 0.0,
+  "reserve_pct": 0.0,
+  "soc0_pct": 0.0,
+  "soc_max_pct": 100.0,
+  "source": "none"
+ },
+ "cooled_share": 1,
+ "floor_area_sqft": 30400,
+ "free": 0.85,
+ "kind": "building",
+ "label": "Small office (synthetic)",
+ "lighting": {
+  "closed_kw": 5.3,
+  "dim_max_share": 0.5,
+  "open_kw": 8.4
+ },
+ "limits": {
+  "light_dim_max": 0.5,
+  "max_rise_away_c": 2.775,
+  "max_rise_c": 1.5,
+  "precool_c": 1.0
+ },
+ "name": "building-01",
+ "place": {
+  "lat": 42.36,
+  "lon": -71.06,
+  "name": "Test community"
+ },
+ "profile": "buildings/office",
+ "schedule": {
+  "t_in_closed_c": 25.0,
+  "t_in_open_c": 22.8
+ },
+ "sell": {
+  "fans": 0.5,
+  "plugs": 0.2
+ },
+ "short": "Small office",
+ "thermal": {
+  "cap_kwh_per_c": 31.3,
+  "cool_cap_kw": 117.7,
+  "cool_kw_per_c": 0.75,
+  "cooling_type": "plant",
+  "how": "synthetic",
+  "keeps_cold": true,
+  "tau_h": 9.5,
+  "ua_kw_per_c": 3.3
+ }
+}

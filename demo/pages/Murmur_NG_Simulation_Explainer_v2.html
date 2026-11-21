@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Murmur Simulation Method</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a method note that zooms in three steps (community, home, device). Each step is a spread: words on the left, evidence on the right.
+   Every line carries a tag naming where it comes from. Colours and type are the Murmur pages' own. */
+:root{
+  --paper:#EEF1ED;--sheet:#F8FAF7;--panel:#E3E8E2;--ink:#17201C;--muted:#4E5D55;--hair:#C5CFC8;--rule:#93A399;
+  --engie:#8A6100;--meas:#0B7285;--model:#2455C8;--bld:#0E7A4F;--assume:#B52A63;
+  --other:#DCD3B0;--band:#E3E8E2;--tipbg:#17201C;--tipink:#F8FAF7;
+  --disp:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111714;--sheet:#161E1A;--panel:#202B27;--ink:#E7EEE9;--muted:#A9BAB0;--hair:#34423B;--rule:#5C6E64;
+    --engie:#E5BE5A;--meas:#56C8DC;--model:#8FB0FF;--bld:#62D3A0;--assume:#F58FB5;
+    --other:#5A5230;--band:#2B3833;--tipbg:#E7EEE9;--tipink:#111714;color-scheme:dark}
+}
+:root[data-theme="dark"]{
+  --paper:#111714;--sheet:#161E1A;--panel:#202B27;--ink:#E7EEE9;--muted:#A9BAB0;--hair:#34423B;--rule:#5C6E64;
+  --engie:#E5BE5A;--meas:#56C8DC;--model:#8FB0FF;--bld:#62D3A0;--assume:#F58FB5;
+  --other:#5A5230;--band:#2B3833;--tipbg:#E7EEE9;--tipink:#111714;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);
+  padding-block:30px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:46px}
+p{margin:0;max-width:66ch}
+a{color:inherit}
+a:focus-visible,.colm:focus-visible{outline:2px solid var(--model);outline-offset:2px}
+
+/* ---- opening */
+.top{display:flex;flex-direction:column}
+.eyebrow{font:500 12.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font:600 clamp(31px,4.3vw,52px)/1.05 var(--disp);margin:12px 0 16px;text-wrap:balance;max-width:21ch}
+.lead{font-size:clamp(17px,1.5vw,19.5px);line-height:1.5;max-width:63ch}
+.key{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 26px;margin-top:28px;padding-top:16px;border-top:1px solid var(--rule)}
+.key>p{grid-column:1/-1;font-weight:600;max-width:none}
+.key div{display:flex;flex-direction:column;align-items:flex-start;gap:6px;font-size:14.5px;line-height:1.4;color:var(--muted);min-width:0}
+.toc{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:22px;font:500 14.5px/1.3 var(--body)}
+.toc a{text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:2px}
+.toc a:hover{border-bottom-color:var(--ink)}
+.toc i{font:500 12.5px var(--mono);font-style:normal;color:var(--muted);margin-right:7px}
+
+/* ---- source tags */
+.tag{display:inline-block;font:500 10.5px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;padding:4px 6px 3px;border-radius:3px;
+  border:1px solid currentColor;background:color-mix(in srgb,currentColor 9%,transparent);white-space:nowrap}
+.tag.e{color:var(--engie)}.tag.m{color:var(--meas)}.tag.s{color:var(--model)}.tag.a{color:var(--assume)}
+
+/* ---- a level */
+.lvl{display:flex;flex-direction:column;gap:24px;scroll-margin-top:16px}
+.lvl>header{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:16px;align-items:baseline;border-top:2px solid var(--ink);padding-top:14px}
+.num{font:600 clamp(30px,3.4vw,44px)/1 var(--disp);color:var(--muted)}
+h2{font:600 clamp(27px,3.1vw,40px)/1.08 var(--disp);margin:0;text-wrap:balance}
+.sub{grid-column:2;margin:5px 0 0;color:var(--muted);font-size:17px;max-width:none}
+.spread{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:30px 44px;align-items:start}
+.spread.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.colx{display:flex;flex-direction:column;gap:20px;min-width:0}
+.blk{display:flex;flex-direction:column;gap:10px;min-width:0}
+h3{font:600 12.5px/1.3 var(--mono);letter-spacing:.07em;text-transform:uppercase;margin:0;color:var(--ink)}
+.note{color:var(--muted);font-size:14.5px}
+@media(max-width:940px){.spread,.spread.even{grid-template-columns:minmax(0,1fr)}}
+
+/* ---- ledger lines: tag, then the fact */
+.src{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.src li{display:grid;grid-template-columns:5.7rem minmax(0,1fr);gap:10px;align-items:baseline;padding:8px 0;border-top:1px solid var(--hair);font-size:15px;line-height:1.45}
+.src li:last-child{border-bottom:1px solid var(--hair)}
+.src b{font-weight:600}
+.src li>.tag,.stack li>.tag{justify-self:start}
+.src.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:44px}
+.src.two li{border-bottom:1px solid var(--hair)}
+@media(max-width:940px){.src.two{grid-template-columns:minmax(0,1fr)}.src.two li:first-child{border-bottom:0}}
+.num-t{font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.formula{margin:0;font:500 15px/1.75 var(--mono);background:var(--sheet);border:1px solid var(--hair);border-radius:6px;padding:12px 14px;overflow-wrap:anywhere;white-space:normal}
+.formula span{display:block}
+.formula i{font-style:normal;color:var(--muted)}
+
+/* ---- figures */
+.fig{margin:0;background:var(--sheet);border:1px solid var(--hair);border-radius:6px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.fig figcaption b{display:block;font:600 19px/1.2 var(--disp)}
+.fig figcaption span{display:block;color:var(--muted);font-size:13.5px;line-height:1.4;margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13.5px;line-height:1.35}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{flex:none;width:12px;height:12px;border-radius:2px}
+.sw.hm{background:var(--model)}.sw.bd{background:var(--bld)}.sw.ot{background:var(--other)}.sw.wn{background:var(--band);border:1px solid var(--hair)}
+
+.chart{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;row-gap:6px}
+.yax{position:relative;width:2.9em;height:240px;font:400 11.5px/1 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.yax span{position:absolute;right:0;transform:translateY(50%)}
+.plot{position:relative;height:240px;min-width:0}
+.gl{position:absolute;left:0;right:0;height:1px;background:var(--hair)}
+.gl.base{background:var(--rule)}
+.g24{display:grid;grid-template-columns:repeat(24,minmax(0,1fr));column-gap:3px}
+.lay{position:absolute;inset:0}
+.lay.bandl i{grid-column:19 / span 3;background:var(--band);border-radius:4px 4px 0 0;margin:0 -2px}
+.colm{height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;border-radius:3px;min-width:0}
+.colm i{display:block;border-radius:1.5px}
+.colm i:first-child{border-radius:3px 3px 1.5px 1.5px}
+.colm .ot{background:var(--other)}.colm .bd{background:var(--bld)}.colm .hm{background:var(--model)}
+.colm:hover i,.colm.on i{filter:brightness(1.12) saturate(1.1)}
+.xax{grid-column:2;font:400 11.5px/1 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.xax span{justify-self:center;white-space:nowrap}
+.xax em{grid-column:19 / span 3;grid-row:2;justify-self:center;white-space:nowrap;font-style:normal;color:var(--ink);margin-top:7px;padding-top:5px;border-top:1px solid var(--ink);min-width:100%;text-align:center}
+.tip{position:absolute;z-index:3;top:4px;transform:translateX(-50%);background:var(--tipbg);color:var(--tipink);font-size:12.5px;line-height:1.5;padding:8px 11px;border-radius:5px;
+  pointer-events:none;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.tip b{display:block;font:500 12px/1.4 var(--mono);margin-bottom:2px}
+.tip span{display:flex;justify-content:space-between;gap:16px}
+.tip span u{text-decoration:none;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.callout{font-size:14.5px;line-height:1.5;max-width:none}
+
+/* households */
+.hh{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 30px}
+.hh h4{font:600 14px/1.25 var(--body);margin:0 0 7px}
+.hh ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.hh li{display:grid;grid-template-columns:6.9rem minmax(0,1fr) 1.9rem;gap:9px;align-items:center;font-size:13.5px;line-height:1.25}
+.hh .tr{height:10px;background:var(--panel);border-radius:2px}
+.hh .tr i{display:block;height:100%;background:var(--model);border-radius:2px}
+.hh .n{font:500 12.5px/1 var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+@media(max-width:540px){.hh{grid-template-columns:minmax(0,1fr)}}
+
+/* what a home is made of */
+.stack{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.stack li{display:grid;grid-template-columns:5.7rem 7.4rem minmax(0,1fr);gap:10px;align-items:baseline;padding:9px 0;border-top:1px solid var(--hair);font-size:14.5px;line-height:1.45}
+.stack li:first-child{border-top:0;padding-top:0}
+.stack b{font-weight:600}
+.stack .sum{grid-template-columns:minmax(0,1fr);border-top:2px solid var(--ink);font-weight:600;padding-bottom:0}
+@media(max-width:540px){.stack li{grid-template-columns:5.7rem minmax(0,1fr)}.stack li>span:last-child{grid-column:1/-1}}
+
+/* one home's record */
+.spec{margin:0;display:grid;grid-template-columns:minmax(0,1fr)}
+.spec div{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:10px;padding:7px 0;border-top:1px solid var(--hair);font-size:14px;line-height:1.45}
+.spec dt{color:var(--muted)}
+.spec dd{margin:0}
+
+/* steps of an evening */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--rule);padding-top:10px;font-size:14.5px;line-height:1.45;min-width:0}
+.steps li::before{content:counter(s);font:600 24px/1 var(--disp);color:var(--muted)}
+.steps b{font:600 17px/1.2 var(--disp)}
+@media(max-width:1000px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.steps{grid-template-columns:minmax(0,1fr)}}
+
+/* chains */
+.chain{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 0;align-items:center}
+.chain li{display:flex;align-items:center}
+.chain li>span{display:block;border:1px solid var(--rule);border-radius:4px;padding:6px 11px;background:var(--sheet);font:500 14px/1.3 var(--body)}
+.chain li+li::before{content:"\2192";color:var(--muted);padding:0 8px;font-family:var(--mono)}
+
+/* tables */
+.t{width:100%;border-collapse:collapse;font-size:14.5px;line-height:1.45}
+.t th{font:600 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;text-align:left;color:var(--muted);padding:0 16px 8px 0;border-bottom:1px solid var(--rule);vertical-align:bottom}
+.t td{padding:10px 16px 10px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.t td:first-child{font-weight:600}
+.t tr>:last-child{padding-right:0}
+.t .tag{margin-bottom:5px}
+.t.dev th:nth-child(1){width:15%}.t.dev th:nth-child(2){width:45%}.t.dev th:nth-child(3){width:21%}
+.t code,.eq{font-family:var(--mono);font-size:.9em}
+@media(max-width:780px){
+  .t,.t tbody,.t tr,.t td{display:block;width:100%}
+  .t thead{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+  .t tr{padding:12px 0;border-bottom:1px solid var(--rule)}
+  .t td{border:0;padding:2px 0}
+  .t td[data-h]::before{content:attr(data-h);display:block;font:500 10.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+  .t td:first-child::before{content:none}
+}
+
+/* what is real */
+.real{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px 30px}
+.real>div{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0}
+.real h3{font:600 18px/1.2 var(--disp);letter-spacing:0;text-transform:none}
+.real ul{margin:0;padding:0 0 0 1.05em;display:flex;flex-direction:column;gap:6px;font-size:14.5px;line-height:1.45}
+@media(max-width:940px){.real{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:940px){.key{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.real{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:430px){.key{grid-template-columns:minmax(0,1fr)}}
+.plain{font:600 clamp(19px,2vw,24px)/1.3 var(--disp);max-width:46ch;text-wrap:balance}
+footer{border-top:1px solid var(--rule);padding-top:14px;color:var(--muted);font-size:13.5px}
+
+@media print{
+  body{padding-block:0}
+  .toc,.tip{display:none!important}
+  .fig,.steps li,.t tr,.src li{break-inside:avoid}
+}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Murmur · method note · November 2026</p>
+  <h1>How Murmur simulates a community, its homes and its devices</h1>
+  <p class="lead">ENGIE's dataset gives a community as one total at its meter. Everything inside that total is simulated by us, built from public measured data and checked against it.</p>
+  <div class="key">
+    <p>Four tags say where each part comes from.</p>
+    <div><span class="tag e">ENGIE</span>From ENGIE's 2025 dataset, unchanged.</div>
+    <div><span class="tag m">Measured</span>Public measured or published data.</div>
+    <div><span class="tag s">Model</span>Computed by our simulator.</div>
+    <div><span class="tag a">Assumed</span>Set by us where nothing public is measured.</div>
+  </div>
+  <nav class="toc" aria-label="Contents">
+    <a href="#community"><i>1</i>The community</a>
+    <a href="#home"><i>2</i>Each home and household</a>
+    <a href="#devices"><i>3</i>The devices</a>
+    <a href="#real"><i>4</i>What is real</a>
+  </nav>
+</header>
+
+<!-- ============================================================ 1 -->
+<section class="lvl" id="community">
+  <header>
+    <span class="num">1</span><h2>The community</h2>
+    <p class="sub">ENGIE's total, opened into parts.</p>
+  </header>
+
+  <div class="spread">
+    <div class="colx">
+      <p>The host is one of the 20 communities in ENGIE's dataset (COM_19 in the files). Its record stays as ENGIE gave it, for all of 2025 in 15-minute steps. Our homes and buildings are placed inside it.</p>
+
+      <div class="blk">
+        <h3>Taken from ENGIE, unchanged</h3>
+        <ul class="src">
+          <li><span class="tag e">ENGIE</span><span>Net power at the community's meter, every 15 minutes</span></li>
+          <li><span class="tag e">ENGIE</span><span>Its homes' batteries, added up: <span class="num-t">1,624 kW</span> and <span class="num-t">4,400 kWh</span>, with their reported state of charge</span></li>
+          <li><span class="tag e">ENGIE</span><span>Solar size <span class="num-t">3,416 kW</span>, connection limit <span class="num-t">3,214 kW</span></span></li>
+          <li><span class="tag e">ENGIE</span><span>Temperature, sunlight and real-time prices</span></li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3>How the total is opened</h3>
+        <p class="formula"><span>use = solar + battery discharge − net power</span><span>use = 200 homes + office + shops + other use</span></p>
+        <ul class="src">
+          <li><span class="tag s">Model</span><span>Line one turns ENGIE's net power into use. ENGIE does not report a community's solar, so by day it is estimated from ENGIE's sunlight with a rule fitted on ENGIE's 35 metered solar plants (R² 0.92). After dark there is no solar to estimate.</span></li>
+          <li><span class="tag s">Model</span><span>Line two places our parts. Other use is what is left of ENGIE's record. Nobody controls it.</span></li>
+        </ul>
+      </div>
+
+      <div class="blk">
+        <h3>Does it fit?</h3>
+        <ul class="src">
+          <li><span class="tag s">Model</span><span>From 18:00 to 21:00, the hours of every sale, it fits in all <span class="num-t">4,380</span> quarter hours of the year. Other use never falls below <span class="num-t">584 kW</span>.</span></li>
+          <li><span class="tag s">Model</span><span>Over all hours it fits in 94% of quarter hours. In the other 6%, around midnight when our cars charge and around midday when solar is an estimate, our parts exceed ENGIE's record and other use is held at zero.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="colx">
+      <figure class="fig" id="dayfig">
+        <figcaption><b>An average weekday in the host community, by hour</b><span>kW, mean of 2025's weekdays. A whole column is the community's use. Point at a column for its figures.</span></figcaption>
+        <div class="legend">
+          <span><i class="sw ot"></i>Other use, the rest of ENGIE's record</span>
+          <span><i class="sw bd"></i>Our office and shops</span>
+          <span><i class="sw hm"></i>Our 200 homes</span>
+          <span><i class="sw wn"></i>Sale window</span>
+        </div>
+        <div class="chart">
+          <div class="yax" aria-hidden="true"><span style="bottom:0.00%">0</span><span style="bottom:28.57%">1,000</span><span style="bottom:57.14%">2,000</span><span style="bottom:85.71%">3,000</span></div>
+          <div class="plot">
+            <div class="gl base" style="bottom:0.00%"></div><div class="gl" style="bottom:28.57%"></div><div class="gl" style="bottom:57.14%"></div><div class="gl" style="bottom:85.71%"></div>
+            <div class="lay g24 bandl" aria-hidden="true"><i></i></div>
+            <div class="lay g24 cols" role="list" aria-label="Community use by hour, in kW"><div class="colm" role="listitem" tabindex="0" aria-label="00:00, community 788 kW: other use 213, shops 58, office 35, our 200 homes 483" data-h="0" data-t="788" data-hm="483" data-of="35" data-sh="58" data-ot="213"><i class="ot" style="height:6.09%"></i><i class="bd" style="height:2.66%"></i><i class="hm" style="height:13.80%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="01:00, community 772 kW: other use 336, shops 55, office 34, our 200 homes 346" data-h="1" data-t="772" data-hm="346" data-of="34" data-sh="55" data-ot="336"><i class="ot" style="height:9.60%"></i><i class="bd" style="height:2.54%"></i><i class="hm" style="height:9.89%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="02:00, community 768 kW: other use 443, shops 55, office 34, our 200 homes 236" data-h="2" data-t="768" data-hm="236" data-of="34" data-sh="55" data-ot="443"><i class="ot" style="height:12.66%"></i><i class="bd" style="height:2.54%"></i><i class="hm" style="height:6.74%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="03:00, community 767 kW: other use 482, shops 54, office 34, our 200 homes 197" data-h="3" data-t="767" data-hm="197" data-of="34" data-sh="54" data-ot="482"><i class="ot" style="height:13.77%"></i><i class="bd" style="height:2.51%"></i><i class="hm" style="height:5.63%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="04:00, community 781 kW: other use 493, shops 54, office 35, our 200 homes 199" data-h="4" data-t="781" data-hm="199" data-of="35" data-sh="54" data-ot="493"><i class="ot" style="height:14.09%"></i><i class="bd" style="height:2.54%"></i><i class="hm" style="height:5.69%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="05:00, community 895 kW: other use 573, shops 55, office 38, our 200 homes 229" data-h="5" data-t="895" data-hm="229" data-of="38" data-sh="55" data-ot="573"><i class="ot" style="height:16.37%"></i><i class="bd" style="height:2.66%"></i><i class="hm" style="height:6.54%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="06:00, community 1,228 kW: other use 868, shops 56, office 41, our 200 homes 263" data-h="6" data-t="1228" data-hm="263" data-of="41" data-sh="56" data-ot="868"><i class="ot" style="height:24.80%"></i><i class="bd" style="height:2.77%"></i><i class="hm" style="height:7.51%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="07:00, community 1,654 kW: other use 1,291, shops 56, office 43, our 200 homes 264" data-h="7" data-t="1654" data-hm="264" data-of="43" data-sh="56" data-ot="1291"><i class="ot" style="height:36.89%"></i><i class="bd" style="height:2.83%"></i><i class="hm" style="height:7.54%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="08:00, community 1,761 kW: other use 1,435, shops 58, office 45, our 200 homes 223" data-h="8" data-t="1761" data-hm="223" data-of="45" data-sh="58" data-ot="1435"><i class="ot" style="height:41.00%"></i><i class="bd" style="height:2.94%"></i><i class="hm" style="height:6.37%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="09:00, community 1,364 kW: other use 1,077, shops 57, office 46, our 200 homes 184" data-h="9" data-t="1364" data-hm="184" data-of="46" data-sh="57" data-ot="1077"><i class="ot" style="height:30.77%"></i><i class="bd" style="height:2.94%"></i><i class="hm" style="height:5.26%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="10:00, community 1,000 kW: other use 728, shops 58, office 46, our 200 homes 167" data-h="10" data-t="1000" data-hm="167" data-of="46" data-sh="58" data-ot="728"><i class="ot" style="height:20.80%"></i><i class="bd" style="height:2.97%"></i><i class="hm" style="height:4.77%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="11:00, community 829 kW: other use 483, shops 120, office 47, our 200 homes 178" data-h="11" data-t="829" data-hm="178" data-of="47" data-sh="120" data-ot="483"><i class="ot" style="height:13.80%"></i><i class="bd" style="height:4.77%"></i><i class="hm" style="height:5.09%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="12:00, community 671 kW: other use 321, shops 121, office 47, our 200 homes 183" data-h="12" data-t="671" data-hm="183" data-of="47" data-sh="121" data-ot="321"><i class="ot" style="height:9.17%"></i><i class="bd" style="height:4.80%"></i><i class="hm" style="height:5.23%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="13:00, community 641 kW: other use 281, shops 123, office 48, our 200 homes 190" data-h="13" data-t="641" data-hm="190" data-of="48" data-sh="123" data-ot="281"><i class="ot" style="height:8.03%"></i><i class="bd" style="height:4.89%"></i><i class="hm" style="height:5.43%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="14:00, community 724 kW: other use 345, shops 127, office 47, our 200 homes 205" data-h="14" data-t="724" data-hm="205" data-of="47" data-sh="127" data-ot="345"><i class="ot" style="height:9.86%"></i><i class="bd" style="height:4.97%"></i><i class="hm" style="height:5.86%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="15:00, community 939 kW: other use 536, shops 131, office 46, our 200 homes 227" data-h="15" data-t="939" data-hm="227" data-of="46" data-sh="131" data-ot="536"><i class="ot" style="height:15.31%"></i><i class="bd" style="height:5.06%"></i><i class="hm" style="height:6.49%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="16:00, community 1,475 kW: other use 1,028, shops 128, office 45, our 200 homes 275" data-h="16" data-t="1475" data-hm="275" data-of="45" data-sh="128" data-ot="1028"><i class="ot" style="height:29.37%"></i><i class="bd" style="height:4.94%"></i><i class="hm" style="height:7.86%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="17:00, community 2,348 kW: other use 1,839, shops 123, office 43, our 200 homes 343" data-h="17" data-t="2348" data-hm="343" data-of="43" data-sh="123" data-ot="1839"><i class="ot" style="height:52.54%"></i><i class="bd" style="height:4.74%"></i><i class="hm" style="height:9.80%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="18:00, community 3,101 kW: other use 2,530, shops 120, office 42, our 200 homes 409" data-h="18" data-t="3101" data-hm="409" data-of="42" data-sh="120" data-ot="2530"><i class="ot" style="height:72.29%"></i><i class="bd" style="height:4.63%"></i><i class="hm" style="height:11.69%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="19:00, community 3,178 kW: other use 2,564, shops 122, office 41, our 200 homes 451" data-h="19" data-t="3178" data-hm="451" data-of="41" data-sh="122" data-ot="2564"><i class="ot" style="height:73.26%"></i><i class="bd" style="height:4.66%"></i><i class="hm" style="height:12.89%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="20:00, community 2,564 kW: other use 1,974, shops 115, office 40, our 200 homes 435" data-h="20" data-t="2564" data-hm="435" data-of="40" data-sh="115" data-ot="1974"><i class="ot" style="height:56.40%"></i><i class="bd" style="height:4.43%"></i><i class="hm" style="height:12.43%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="21:00, community 1,692 kW: other use 1,170, shops 55, office 39, our 200 homes 428" data-h="21" data-t="1692" data-hm="428" data-of="39" data-sh="55" data-ot="1170"><i class="ot" style="height:33.43%"></i><i class="bd" style="height:2.69%"></i><i class="hm" style="height:12.23%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="22:00, community 1,089 kW: other use 472, shops 54, office 37, our 200 homes 526" data-h="22" data-t="1089" data-hm="526" data-of="37" data-sh="54" data-ot="472"><i class="ot" style="height:13.49%"></i><i class="bd" style="height:2.60%"></i><i class="hm" style="height:15.03%"></i></div><div class="colm" role="listitem" tabindex="0" aria-label="23:00, community 865 kW: other use 188, shops 58, office 36, our 200 homes 583" data-h="23" data-t="865" data-hm="583" data-of="36" data-sh="58" data-ot="188"><i class="ot" style="height:5.37%"></i><i class="bd" style="height:2.69%"></i><i class="hm" style="height:16.66%"></i></div></div>
+            <div class="tip" hidden></div>
+          </div>
+          <div class="xax g24" aria-hidden="true"><span style="grid-column:1">00</span><span style="grid-column:4">03</span><span style="grid-column:7">06</span><span style="grid-column:10">09</span><span style="grid-column:13">12</span><span style="grid-column:16">15</span><span style="grid-column:19">18</span><span style="grid-column:22">21</span><em>18 to 21</em></div>
+        </div>
+        <p class="callout">At 19:00 the community uses <span class="num-t">3,178 kW</span>: our homes 451, the shops 122, the office 41, and other use 2,564.</p>
+      </figure>
+      <ul class="src">
+        <li><span class="tag s">Model</span><span>Over the whole year our homes are 23% of the community's use, the office 3% and the shops 6%. Other use is 68%.</span></li>
+        <li><span class="tag e">ENGIE</span><span>Weather is ENGIE's own. Its temperature changes <span class="num-t">0.27 °C</span> from day to day, where measured Massachusetts weather changes <span class="num-t">2.6 °C</span>. So our 200 homes vary 4 to 6% between evenings here, against 7 to 13% on real weather. A second version of the year carries real day-to-day movement.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>How one evening runs</h3>
+    <ol class="steps">
+      <li><b>Request</b>The aggregator asks for less draw from 18:00 to 21:00. The year has 48 such evenings, four a month, chosen by rule before any run.</li>
+      <li><b>Offers</b>Each home and building agent offers what it can give, from its own forecast.</li>
+      <li><b>Promise</b>The community agent adds the offers, holds back a cover learned from earlier evenings, promises the rest and holds its members' batteries for the peak.</li>
+      <li><b>Devices act</b>Agents plan again every 15 minutes. A guard checks every 5-minute part before it reaches a device.</li>
+      <li><b>Measured twice</b>By the meter, against a baseline: the ten most recent similar days, adjusted to the day itself. By the truth, against a twin of each home and building run with no sale.</li>
+    </ol>
+    <p class="note">All 200 homes and both buildings run every evening offline, at three equipment levels. On a sample of those evenings, eight homes, both buildings, the community agent and the aggregator's agent also run as separate programs that exchange signed messages over NANDA Town.</p>
+  </div>
+</section>
+
+<!-- ============================================================ 2 -->
+<section class="lvl" id="home">
+  <header>
+    <span class="num">2</span><h2>Each home and household</h2>
+    <p class="sub">A physics model with people in it.</p>
+  </header>
+
+  <div class="spread">
+    <div class="colx">
+      <p>Each home runs in a house simulator (homesim, from MassHack, extended by us). The house is one thermal mass. Its furnace, heat pump or air conditioner holds the thermostat against the outdoor temperature and the sun. People, appliances, the car and the roof sit on top.</p>
+
+      <figure class="fig">
+        <figcaption><b>What one simulated home is made of</b><span>Each layer adds to the home's meter, in kW every 15 minutes.</span></figcaption>
+        <ul class="stack">
+          <li><span class="tag e">ENGIE</span><b>Weather</b><span>Temperature and sunlight at ENGIE's site.</span></li>
+          <li><span class="tag s">Model</span><b>The house</b><span>One thermal mass. Heat loss <span class="num-t">0.15 to 0.67 kW per °C</span>, heat storage <span class="num-t">5.5 to 22.7 kWh per °C</span>.</span></li>
+          <li><span class="tag s">Model</span><b>Heating, cooling</b><span>Furnace or heat pump. Central air or window units.</span></li>
+          <li><span class="tag a">Assumed</span><b>People</b><span>One of six household types sets who is home, with the holidays and school breaks of 2025.</span></li>
+          <li><span class="tag m">Measured</span><b>Appliances</b><span>Owned at the federal survey's rates. Each draws its product's rating.</span></li>
+          <li><span class="tag a">Assumed</span><b>Car</b><span>Charging sessions with an arrival, a departure and energy owed.</span></li>
+          <li><span class="tag m">Measured</span><b>Roof solar</b><span>ENGIE's sunlight through one measured roof's conversion.</span></li>
+          <li><span class="tag m">Measured</span><b>Battery</b><span>Power, capacity and losses from its datasheet.</span></li>
+        </ul>
+      </figure>
+
+      <div class="blk">
+        <h3>Three equipment levels, same 200 homes</h3>
+        <ul class="src">
+          <li><span class="tag s">Model</span><span><b>Least.</b> The newest solar and a car on a smart charger.</span></li>
+          <li><span class="tag s">Model</span><span><b>Middle.</b> Adds a home battery, a smart thermostat and a heat pump water heater.</span></li>
+          <li><span class="tag a">Assumed</span><span><b>Full.</b> Adds the larger smart appliances and a two-way car. That car is an ideal case: 34 of the 200 cars are models that can power a home today.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="colx">
+      <figure class="fig">
+        <figcaption><b>The 200 households</b><span>Number of homes. Every bar is on one scale, 0 to 200.</span></figcaption>
+        <div class="hh"><div><h4>Household type</h4><ul><li><span>Retired</span><span class="tr"><i style="width:20.0%"></i></span><span class="n">40</span></li><li><span>Commuter</span><span class="tr"><i style="width:19.0%"></i></span><span class="n">38</span></li><li><span>Hybrid worker</span><span class="tr"><i style="width:19.0%"></i></span><span class="n">38</span></li><li><span>Works from home</span><span class="tr"><i style="width:15.5%"></i></span><span class="n">31</span></li><li><span>Family</span><span class="tr"><i style="width:14.0%"></i></span><span class="n">28</span></li><li><span>Evening shift</span><span class="tr"><i style="width:12.5%"></i></span><span class="n">25</span></li></ul></div><div><h4>People at home</h4><ul><li><span>One</span><span class="tr"><i style="width:23.5%"></i></span><span class="n">47</span></li><li><span>Two</span><span class="tr"><i style="width:36.0%"></i></span><span class="n">72</span></li><li><span>Three</span><span class="tr"><i style="width:21.5%"></i></span><span class="n">43</span></li><li><span>Four</span><span class="tr"><i style="width:17.0%"></i></span><span class="n">34</span></li><li><span>Five</span><span class="tr"><i style="width:2.0%"></i></span><span class="n">4</span></li></ul></div><div><h4>Dwelling</h4><ul><li><span>Detached</span><span class="tr"><i style="width:73.0%"></i></span><span class="n">146</span></li><li><span>Two-family</span><span class="tr"><i style="width:17.0%"></i></span><span class="n">34</span></li><li><span>Attached</span><span class="tr"><i style="width:10.0%"></i></span><span class="n">20</span></li></ul></div><div><h4>Built</h4><ul><li><span>Before 1950</span><span class="tr"><i style="width:34.0%"></i></span><span class="n">68</span></li><li><span>1950 to 1990</span><span class="tr"><i style="width:41.0%"></i></span><span class="n">82</span></li><li><span>After 1990</span><span class="tr"><i style="width:25.0%"></i></span><span class="n">50</span></li></ul></div><div><h4>Heating</h4><ul><li><span>Furnace, gas or oil</span><span class="tr"><i style="width:87.0%"></i></span><span class="n">174</span></li><li><span>Heat pump</span><span class="tr"><i style="width:13.0%"></i></span><span class="n">26</span></li></ul></div><div><h4>Cooling</h4><ul><li><span>Central air</span><span class="tr"><i style="width:45.0%"></i></span><span class="n">90</span></li><li><span>Window units</span><span class="tr"><i style="width:42.0%"></i></span><span class="n">84</span></li><li><span>Heat pump</span><span class="tr"><i style="width:13.0%"></i></span><span class="n">26</span></li></ul></div></div>
+        <p class="callout">All 200 have rooftop solar (<span class="num-t">3.5 to 19.3 kW</span>) and a car, from 19 models. Batteries run from <span class="num-t">8.6 to 44 kWh</span> across seven products.</p>
+      </figure>
+
+      <figure class="fig">
+        <figcaption><b>One home's record, as an example</b><span>The simulator and the home's agent both read it.</span></figcaption>
+        <dl class="spec">
+          <div><dt>Household</dt><dd>A family of three</dd></div>
+          <div><dt>House</dt><dd>Detached, built 1950 to 1990, 3,240 sq ft</dd></div>
+          <div><dt>Physics</dt><dd>Heat loss 0.47 kW per °C, storage 14.4 kWh per °C</dd></div>
+          <div><dt>Comfort</dt><dd>Gas furnace, four window units, summer setting 24.4 °C</dd></div>
+          <div><dt>Roof</dt><dd>10 Qcells panels, 4.4 kW, facing south at 20°</dd></div>
+          <div><dt>Battery</dt><dd>Enphase IQ Battery 10C: 9.8 kWh, 7.1 kW, 20% reserve</dd></div>
+          <div><dt>Car</dt><dd>Rivian R1S, 109.8 kWh, on an 11.5 kW charger</dd></div>
+          <div><dt>Owner</dt><dd>At most 1.8 °C warmer, car on a timer, smart plugs off limits</dd></div>
+        </dl>
+      </figure>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>What we set ourselves</h3>
+    <ul class="src two">
+      <li><span class="tag a">Assumed</span><span>Each owner's limits: how much warmer the house may get (<span class="num-t">0.8 to 3.0 °C</span>), a car timer (118 homes), devices that are off limits (189 owners).</span></li>
+      <li><span class="tag a">Assumed</span><span>The homes are Massachusetts house types placed in ENGIE's community. Heating and cooling are worked out again on ENGIE's weather.</span></li>
+    </ul>
+  </div>
+
+  <div class="blk">
+    <h3>The data behind the homes</h3>
+    <table class="t">
+      <thead><tr><th>Source</th><th>Used for</th><th>How the homes compare</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag m">Measured</span><br>National Grid load research: the average Massachusetts home, hour by hour</td><td data-h="Used for">Calibrating the homes' load.</td><td data-h="How the homes compare">Shape of the day r = 0.92, daily energy r = 0.81. Our homes use 1.36 times that home; NREL's ResStock puts single-family homes at 1.40 times.</td></tr>
+        <tr><td><span class="tag m">Measured</span><br>A measured multi-story instrumented research house dataset, circuit-level heat pump, lighting, and plug loads: one measured house, its solar and its heat pump</td><td data-h="Used for">Solar output. How a heat pump answers the cold.</td><td data-h="How the homes compare">Heat pump r = 0.95 to 0.97. Solar 954 to 975 kWh per kW a year, against 985 measured.</td></tr>
+        <tr><td><span class="tag m">Measured</span><br>The federal household survey (EIA RECS 2024), Massachusetts single-family homes</td><td data-h="Used for">Which home owns which appliance.</td><td data-h="How the homes compare">Dishwasher 88%, electric dryer 76%, second fridge 43%, freezer 31%, pool 10%, hot tub 6%.</td></tr>
+        <tr><td><span class="tag m">Measured</span><br>Makers' datasheets: 172 products of 108 brands</td><td data-h="Used for">The ratings of every panel, battery, car, charger and appliance.</td><td data-h="How the homes compare">191 product records checked against their sources: 93 right, 61 corrected, 37 still open.</td></tr>
+      </tbody>
+    </table>
+    <p class="note">The first two comparisons were made on the Massachusetts build of the same simulator, on measured weather.</p>
+  </div>
+</section>
+
+<!-- ============================================================ 3 -->
+<section class="lvl" id="devices">
+  <header>
+    <span class="num">3</span><h2>The devices</h2>
+    <p class="sub">Each one a model with limits, reached by one road.</p>
+  </header>
+
+  <div class="blk">
+    <h3>In a home</h3>
+    <ul class="src">
+      <li><span class="tag m">Measured</span><span>Each power rating comes from the product's datasheet.</span></li>
+      <li><span class="tag s">Model</span><span>How a device waits, catches up or gives stored energy is computed.</span></li>
+    </ul>
+    <table class="t dev">
+      <thead><tr><th>Device</th><th>How it is simulated</th><th>What the agent may do</th><th>A real one is reached by</th></tr></thead>
+      <tbody>
+        <tr><td>Home battery</td><td data-h="How it is simulated">Its product's power, capacity and losses, with the owner's reserve: 20% in most homes, 10 to 45% across all. Left alone it is held for the evening: spare solar charges it, and it refills overnight at 2 kW.</td><td data-h="What the agent may do">Charge, hold or discharge.</td><td data-h="A real one is reached by">The maker's interface. Some take a kW command, others only a mode.</td></tr>
+        <tr><td>Car charger</td><td data-h="How it is simulated">Sessions with an arrival, a departure and energy owed, on a charger of 11.5 to 19.2 kW.</td><td data-h="What the agent may do">Pause or cap charging. The car is full by departure.</td><td data-h="A real one is reached by">OCPP, or the maker's cloud.</td></tr>
+        <tr><td>Two-way car</td><td data-h="How it is simulated">Gives up to 9.6 kW at 90% efficiency while plugged in.</td><td data-h="What the agent may do">Discharge. What it gave is charged back before it leaves.</td><td data-h="A real one is reached by">The maker's app.</td></tr>
+        <tr><td>Air conditioning, heat pump</td><td data-h="How it is simulated">The house's own physics, with x the drift of the indoor temperature from the home's own day and Δq the change in the heat removed, negative when cooling is eased: <span class="eq">x(t+Δt) = a·x(t) − (Δq ⁄ UA)(1 − a)</span>, <span class="eq">a = e<sup>−Δt ⁄ τ</sup></span>, <span class="eq">τ = C ⁄ UA</span>. Afterwards the house returns to its day: the rebound.</td><td data-h="What the agent may do">Move the setting inside the owner's limit. Pre-cool or pre-heat.</td><td data-h="A real one is reached by">OpenADR 2.0b, or the maker's cloud.</td></tr>
+        <tr><td>Water heater, 1.7 kW</td><td data-h="How it is simulated">Held, it waits. Then it catches up at its own power.</td><td data-h="What the agent may do">Hold through the window. Load up before it.</td><td data-h="A real one is reached by">The CTA-2045 port.</td></tr>
+        <tr><td>Dryer, 5.6 kW. Dishwasher, 1.2 kW</td><td data-h="How it is simulated">The start moves. The cycle still ends by its done-by time.</td><td data-h="What the agent may do">Delay the start.</td><td data-h="A real one is reached by">The maker's cloud.</td></tr>
+        <tr><td>Pool pump, 1.35 kW</td><td data-h="How it is simulated">Slowed, then it makes up its filter hours.</td><td data-h="What the agent may do">Slow it.</td><td data-h="A real one is reached by">Its own controller.</td></tr>
+        <tr><td>Everything else</td><td data-h="How it is simulated">Fridges, freezer, hot tub, dehumidifier, lights, plugs and cooking are load at the product's rating.</td><td data-h="What the agent may do">Nothing. Each is too small to be worth a tool.</td><td data-h="A real one is reached by">Not reached.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="spread even">
+    <div class="blk">
+      <h3>The control loop</h3>
+      <ol class="chain">
+        <li><span>Plan, every 15 minutes</span></li>
+        <li><span>Three 5-minute parts</span></li>
+        <li><span>Guard</span></li>
+        <li><span>Device</span></li>
+      </ol>
+      <p>While a home owes something, a small linear program plans the battery, the car and the cooling again every 15 minutes. It weighs the shortfall, new peaks around the window, and discomfort. It can't break the battery's reserve or leave a car short at departure, and the guard holds the house inside the owner's temperature limit.</p>
+      <p>A twin of the same home runs beside it with no sale. The gap between the two meters is the truth we score against.</p>
+    </div>
+    <div class="blk">
+      <h3>One road to a device</h3>
+      <ol class="chain">
+        <li><span>Agent</span></li>
+        <li><span>Tool</span></li>
+        <li><span>Controller</span></li>
+        <li><span>Guard</span></li>
+        <li><span>Driver</span></li>
+        <li><span>Device</span></li>
+      </ol>
+      <p>The guard seals the exact values it approved, and a driver accepts nothing else. Real equipment needs only a different driver. The rest of the code is the same.</p>
+      <p>Code decides every amount. The language model's part is words: it reads an owner's note, such as a wish for a full battery tonight, and turns it into limits the code must keep.</p>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>In a building</h3>
+    <p>A building runs the same loop with a building's levers. We built an office, a shopping center and a university campus. ENGIE's community holds a small office and a strip of shops, each at 4% of the full model. The office averages 39 kW with a peak of 58. The shops average 81 kW with a peak of 156.</p>
+  </div>
+
+  <div class="spread even">
+    <div class="blk">
+      <table class="t">
+        <thead><tr><th>Lever</th><th>The limit the guard keeps</th></tr></thead>
+        <tbody>
+          <tr><td>Zone cooling: run warmer, or pre-cool</td><td data-h="The limit the guard keeps">At most 1.5 °C warmer than the building's own day while open, 3 °C while closed.</td></tr>
+          <tr><td>Air handler fans: cap the speed</td><td data-h="The limit the guard keeps">Never stopped. Free zones slow to half flow, the code's minimum.</td></tr>
+          <tr><td>Zone standby: a free zone cuts air and cooling</td><td data-h="The limit the guard keeps">Not while open if any room lacks a sensor.</td></tr>
+          <tr><td>Cooling plant: lower its limit, or stop it early</td><td data-h="The limit the guard keeps">Only a plant cleared to stop. Never one that serves labs.</td></tr>
+          <tr><td>Lights: dim a group</td><td data-h="The limit the guard keeps">At most 25% in the shops, 50% in the office. Never stairs or exits.</td></tr>
+          <tr><td>Plug loads: switch a group off</td><td data-h="The limit the guard keeps">Empty rooms only. Never network or security.</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Each building is a set of zones with an occupancy plan made the day before and the day as it truly went. Kitchen hoods, garage fans and food refrigeration are watched, never switched.</p>
+    </div>
+    <div class="blk">
+      <table class="t">
+        <thead><tr><th>Source</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag m">Measured</span><br>Boston's building energy reports (BERDO 2025)</td><td data-h="Used for">Size. Our office uses about what 56 Boston offices report, whose middle size is 37,000 sq ft. Our shops match 8 strip malls and stores, middle size 50,000 sq ft.</td></tr>
+          <tr><td><span class="tag m">Measured</span><br>National Grid's business classes</td><td data-h="Used for">The hourly shape of each building type.</td></tr>
+          <tr><td><span class="tag m">Measured</span><br>Boston Public Library, kW every 5 minutes</td><td data-h="Used for">Real day-to-day variation, from 380 usable days.</td></tr>
+          <tr><td><span class="tag m">Measured</span><br>Makers' documents and the mechanical code</td><td data-h="Used for">What each lever may do. 145 products of 90 brands, 224 control rules checked.</td></tr>
+          <tr><td><span class="tag a">Assumed</span><br>Assigned by floor area</td><td data-h="Used for">How cooling, fans, lights and plugs split among zones. No public source gives it.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 4 -->
+<section class="lvl" id="real">
+  <header>
+    <span class="num">4</span><h2>What is real</h2>
+    <p class="sub">The four sources, gathered in one place.</p>
+  </header>
+  <div class="real">
+    <div>
+      <span class="tag e">ENGIE</span>
+      <h3>Unchanged</h3>
+      <ul>
+        <li>The community's meter, battery, solar size and limit</li>
+        <li>Weather and prices</li>
+        <li>Other use: the 68% of the community's year we leave as it is</li>
+      </ul>
+    </div>
+    <div>
+      <span class="tag m">Measured</span>
+      <h3>Public data we build on</h3>
+      <ul>
+        <li>National Grid's average home and business classes</li>
+        <li>A measured multi-story instrumented research house dataset, circuit-level heat pump, lighting, and plug loads</li>
+        <li>Boston Public Library's meter, Boston's building reports</li>
+        <li>The federal household survey, makers' datasheets</li>
+      </ul>
+    </div>
+    <div>
+      <span class="tag s">Model</span>
+      <h3>Computed</h3>
+      <ul>
+        <li>Each house's heating and cooling</li>
+        <li>Every device's power and limits</li>
+        <li>The community's solar by day</li>
+        <li>The agents' plans and the guard's checks</li>
+      </ul>
+    </div>
+    <div>
+      <span class="tag a">Assumed</span>
+      <h3>Set by us</h3>
+      <ul>
+        <li>Car driving and charging habits. No public measured home-charging data exists.</li>
+        <li>Household types and owners' limits</li>
+        <li>A two-way car in every home at the full level</li>
+        <li>How a building's loads split among zones</li>
+      </ul>
+    </div>
+  </div>
+  <p class="plain">No real home, meter or device is connected. A command travels the road it would travel to real equipment, and only the last step, the driver, is simulated.</p>
+</section>
+
+<footer>Murmur method note, 15 November 2026. Figures come from the build on ENGIE's 2025 dataset.</footer>
+
+</div>
+
+<script>
+(function(){
+  var fig=document.getElementById('dayfig'); if(!fig) return;
+  var plot=fig.querySelector('.plot'), tip=fig.querySelector('.tip'), cols=fig.querySelectorAll('.colm'), cur=null;
+  function n(v){return Number(v).toLocaleString('en-US')}
+  function p2(h){return (h<10?'0':'')+h+':00'}
+  function row(label,v){return '<span>'+label+'<u>'+n(v)+' kW</u></span>'}
+  function show(c){
+    if(cur&&cur!==c) cur.classList.remove('on');
+    cur=c; c.classList.add('on');
+    var d=c.dataset, h=+d.h;
+    tip.innerHTML='<b>'+p2(h)+' to '+p2((h+1)%24)+'</b>'+row('Community',d.t)+row('Other use',d.ot)+row('Shops',d.sh)+row('Office',d.of)+row('Our 200 homes',d.hm);
+    tip.hidden=false;
+    var w=tip.offsetWidth/2, x=c.offsetLeft+c.offsetWidth/2, max=plot.clientWidth;
+    tip.style.left=Math.max(w,Math.min(max-w,x))+'px';
+  }
+  function hide(){ if(cur) cur.classList.remove('on'); cur=null; tip.hidden=true; }
+  cols.forEach(function(c){
+    c.addEventListener('pointerenter',function(){show(c)});
+    c.addEventListener('focus',function(){show(c)});
+    c.addEventListener('click',function(){show(c)});
+    c.addEventListener('blur',hide);
+  });
+  plot.addEventListener('pointerleave',hide);
+})();
+</script>

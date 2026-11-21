@@ -1,0 +1,3521 @@
+{
+ "date": "2025-01-28",
+ "sites": {
+  "site-dc-01": {
+   "feed": {
+    "2025-01-27 00:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04259,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 00:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04004,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 00:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0414,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 00:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04388,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 01:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04602,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 01:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03835,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 01:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03555,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 01:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03861,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 02:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03877,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 02:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04154,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 02:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0391,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 02:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04007,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 03:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03771,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 03:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03979,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 03:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04002,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 03:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04277,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 04:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04151,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 04:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03768,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 04:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03753,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 04:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04091,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 05:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04423,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 05:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04851,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 05:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04291,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 05:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03664,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 06:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03929,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 06:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04055,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 06:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03907,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 06:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04825,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 07:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04492,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 07:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04159,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 07:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04098,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 07:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0438,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 08:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04253,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 08:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04945,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 08:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04373,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 08:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04059,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 09:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04272,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 09:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04087,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 09:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03855,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 09:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04197,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 10:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04081,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 10:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04208,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 10:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04392,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 10:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04319,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 11:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04663,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 11:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0431,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 11:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04312,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 11:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04206,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 12:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0441,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 12:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04067,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 12:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04126,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 12:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04339,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 13:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04052,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 13:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04055,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 13:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04692,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 13:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03681,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 14:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04235,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 14:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03855,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 14:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0399,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 14:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04654,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 15:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04542,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 15:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0442,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 15:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04256,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 15:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03817,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 16:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0471,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 16:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04402,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 16:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04116,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 16:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0378,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 17:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15596,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 17:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14984,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 17:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15641,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 17:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15222,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 18:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15392,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 18:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15173,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 18:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15228,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 18:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15729,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 19:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14859,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 19:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15219,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 19:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.1545,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 19:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15262,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 20:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.1491,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 20:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14792,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 20:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15139,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 20:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14681,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 21:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03952,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 21:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04243,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 21:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0416,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 21:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04204,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 22:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04395,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 22:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04714,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 22:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03855,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 22:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03934,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 23:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04408,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 23:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04593,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 23:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04082,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-27 23:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04178,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 00:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04514,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 00:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04268,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 00:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04156,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 00:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03849,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 01:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04677,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 01:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04277,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 01:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04454,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 01:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03662,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 02:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0386,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 02:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04256,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 02:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04224,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 02:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04019,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 03:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03778,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 03:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04047,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 03:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04845,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 03:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04578,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 04:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04188,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 04:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04186,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 04:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04593,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 04:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0384,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 05:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03889,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 05:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0486,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 05:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04569,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 05:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04252,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 06:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03949,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 06:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04525,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 06:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03883,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 06:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04394,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 07:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04374,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 07:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04451,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 07:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03991,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 07:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03923,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 08:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03608,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 08:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04236,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 08:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04919,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 08:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04117,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 09:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04639,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 09:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04028,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 09:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04066,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 09:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03765,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 10:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04202,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 10:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0371,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 10:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04052,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 10:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03856,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 11:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04145,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 11:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04254,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 11:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04212,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 11:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04081,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 12:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04134,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 12:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04607,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 12:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04265,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 12:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04465,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 13:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.05002,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 13:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0484,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 13:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0418,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 13:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.042,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 14:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.05011,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 14:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04406,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 14:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04223,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 14:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04111,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 15:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.05165,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 15:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04177,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 15:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04406,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 15:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04385,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 16:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04323,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 16:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04432,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 16:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03878,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 16:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04554,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 17:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15364,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 17:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.1516,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 17:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15282,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 17:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14884,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 18:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15634,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 18:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15529,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 18:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15011,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 18:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15237,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 19:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14745,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 19:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15097,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 19:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15521,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 19:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15477,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 20:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15487,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 20:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14856,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 20:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.1523,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 20:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14871,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 21:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04255,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 21:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04566,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 21:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04135,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 21:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03792,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 22:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04249,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 22:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03927,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 22:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04482,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 22:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04498,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 23:00": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04482,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 23:15": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03964,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 23:30": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03879,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    },
+    "2025-01-28 23:45": {
+     "base_kw": -800.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04121,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 400.0
+    }
+   },
+   "requests": [
+    {
+     "id": "req-site-dc-01-2025-01-28",
+     "made_at": "2025-01-28 14:00",
+     "rows": [
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.05011,
+       "ts": "2025-01-28 14:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04406,
+       "ts": "2025-01-28 14:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04223,
+       "ts": "2025-01-28 14:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04111,
+       "ts": "2025-01-28 14:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.05165,
+       "ts": "2025-01-28 15:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04177,
+       "ts": "2025-01-28 15:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04406,
+       "ts": "2025-01-28 15:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04385,
+       "ts": "2025-01-28 15:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04323,
+       "ts": "2025-01-28 16:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04432,
+       "ts": "2025-01-28 16:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03878,
+       "ts": "2025-01-28 16:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04554,
+       "ts": "2025-01-28 16:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.15364,
+       "ts": "2025-01-28 17:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.1516,
+       "ts": "2025-01-28 17:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.15282,
+       "ts": "2025-01-28 17:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.14884,
+       "ts": "2025-01-28 17:45"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.15634,
+       "ts": "2025-01-28 18:00"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.15529,
+       "ts": "2025-01-28 18:15"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.15011,
+       "ts": "2025-01-28 18:30"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.15237,
+       "ts": "2025-01-28 18:45"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.14745,
+       "ts": "2025-01-28 19:00"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.15097,
+       "ts": "2025-01-28 19:15"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.15521,
+       "ts": "2025-01-28 19:30"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.15477,
+       "ts": "2025-01-28 19:45"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.15487,
+       "ts": "2025-01-28 20:00"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.14856,
+       "ts": "2025-01-28 20:15"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.1523,
+       "ts": "2025-01-28 20:30"
+      },
+      {
+       "battery_kw": 240.0,
+       "price_usd_kwh": 0.14871,
+       "ts": "2025-01-28 20:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04255,
+       "ts": "2025-01-28 21:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04566,
+       "ts": "2025-01-28 21:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04135,
+       "ts": "2025-01-28 21:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03792,
+       "ts": "2025-01-28 21:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04249,
+       "ts": "2025-01-28 22:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03927,
+       "ts": "2025-01-28 22:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04482,
+       "ts": "2025-01-28 22:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04498,
+       "ts": "2025-01-28 22:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04482,
+       "ts": "2025-01-28 23:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03964,
+       "ts": "2025-01-28 23:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03879,
+       "ts": "2025-01-28 23:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04121,
+       "ts": "2025-01-28 23:45"
+      }
+     ],
+     "to": "site-dc-01"
+    }
+   ],
+   "site": {
+    "energy_kwh": 800.0,
+    "id": "SITE_DC_01",
+    "kind": "datacenter",
+    "limit_out_kw": 600.0,
+    "out_factor": 0.9,
+    "rating_kw": 400.0,
+    "wait_h": 0.0
+   }
+  },
+  "site-pv-01": {
+   "feed": {
+    "2025-01-27 00:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04259,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 00:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04004,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 00:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0414,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 00:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04388,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 01:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04602,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 01:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03835,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 01:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03555,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 01:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03861,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 02:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03877,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 02:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04154,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 02:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0391,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 02:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04007,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 03:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03771,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 03:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03979,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 03:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04002,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 03:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04277,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 04:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04151,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 04:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03768,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 04:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03753,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 04:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04091,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 05:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04423,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 05:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04851,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 05:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04291,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 05:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03664,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 06:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03929,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 06:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04055,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 06:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03907,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 06:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04825,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 07:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04492,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 07:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04159,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 07:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04098,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 07:45": {
+     "base_kw": -247.707,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0438,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 08:00": {
+     "base_kw": -195.811,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04253,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 08:15": {
+     "base_kw": -144.709,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04945,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 08:30": {
+     "base_kw": -94.788,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04373,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 08:45": {
+     "base_kw": -46.429,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04059,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 09:00": {
+     "base_kw": -0.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04272,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 09:15": {
+     "base_kw": 44.146,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04087,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 09:30": {
+     "base_kw": 85.673,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03855,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 09:45": {
+     "base_kw": 124.264,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04197,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 10:00": {
+     "base_kw": 159.627,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04081,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 10:15": {
+     "base_kw": 191.491,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04208,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 10:30": {
+     "base_kw": 219.615,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04392,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 10:45": {
+     "base_kw": 243.785,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04319,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 11:00": {
+     "base_kw": 263.816,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04663,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 11:15": {
+     "base_kw": 279.555,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0431,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 11:30": {
+     "base_kw": 290.885,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04312,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 11:45": {
+     "base_kw": 297.717,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04206,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 12:00": {
+     "base_kw": 300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0441,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 12:15": {
+     "base_kw": 297.717,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04067,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 12:30": {
+     "base_kw": 290.885,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04126,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 12:45": {
+     "base_kw": 279.555,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04339,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 13:00": {
+     "base_kw": 263.816,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04052,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 13:15": {
+     "base_kw": 243.785,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04055,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 13:30": {
+     "base_kw": 219.615,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04692,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 13:45": {
+     "base_kw": 191.491,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03681,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 14:00": {
+     "base_kw": 159.627,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04235,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 14:15": {
+     "base_kw": 124.264,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03855,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 14:30": {
+     "base_kw": 85.673,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0399,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 14:45": {
+     "base_kw": 44.146,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04654,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 15:00": {
+     "base_kw": 0.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04542,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 15:15": {
+     "base_kw": -46.429,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0442,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 15:30": {
+     "base_kw": -94.788,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04256,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 15:45": {
+     "base_kw": -144.709,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03817,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 16:00": {
+     "base_kw": -195.811,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0471,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 16:15": {
+     "base_kw": -247.707,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04402,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 16:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04116,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 16:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0378,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 17:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15596,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 17:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14984,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 17:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15641,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 17:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15222,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 18:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15392,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 18:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15173,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 18:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15228,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 18:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15729,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 19:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14859,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 19:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15219,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 19:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.1545,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 19:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15262,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 20:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.1491,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 20:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14792,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 20:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15139,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 20:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14681,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 21:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03952,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 21:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04243,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 21:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0416,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 21:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04204,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 22:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04395,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 22:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04714,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 22:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03855,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 22:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03934,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 23:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04408,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 23:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04593,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 23:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04082,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-27 23:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04178,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 00:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04514,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 00:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04268,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 00:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04156,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 00:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03849,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 01:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04677,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 01:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04277,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 01:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04454,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 01:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03662,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 02:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0386,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 02:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04256,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 02:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04224,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 02:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04019,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 03:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03778,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 03:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04047,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 03:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04845,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 03:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04578,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 04:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04188,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 04:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04186,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 04:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04593,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 04:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0384,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 05:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03889,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 05:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0486,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 05:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04569,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 05:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04252,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 06:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03949,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 06:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04525,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 06:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03883,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 06:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04394,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 07:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04374,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 07:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04451,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 07:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03991,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 07:45": {
+     "base_kw": -247.707,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03923,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 08:00": {
+     "base_kw": -195.811,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03608,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 08:15": {
+     "base_kw": -144.709,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04236,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 08:30": {
+     "base_kw": -94.788,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04919,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 08:45": {
+     "base_kw": -46.429,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04117,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 09:00": {
+     "base_kw": -0.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04639,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 09:15": {
+     "base_kw": 44.146,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04028,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 09:30": {
+     "base_kw": 85.673,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04066,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 09:45": {
+     "base_kw": 124.264,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03765,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 10:00": {
+     "base_kw": 159.627,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04202,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 10:15": {
+     "base_kw": 191.491,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0371,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 10:30": {
+     "base_kw": 219.615,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04052,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 10:45": {
+     "base_kw": 243.785,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03856,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 11:00": {
+     "base_kw": 263.816,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04145,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 11:15": {
+     "base_kw": 279.555,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04254,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 11:30": {
+     "base_kw": 290.885,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04212,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 11:45": {
+     "base_kw": 297.717,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04081,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 12:00": {
+     "base_kw": 300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04134,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 12:15": {
+     "base_kw": 297.717,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04607,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 12:30": {
+     "base_kw": 290.885,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04265,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 12:45": {
+     "base_kw": 279.555,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04465,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 13:00": {
+     "base_kw": 263.816,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.05002,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 13:15": {
+     "base_kw": 243.785,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0484,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 13:30": {
+     "base_kw": 219.615,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.0418,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 13:45": {
+     "base_kw": 191.491,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.042,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 14:00": {
+     "base_kw": 159.627,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.05011,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 14:15": {
+     "base_kw": 124.264,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04406,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 14:30": {
+     "base_kw": 85.673,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04223,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 14:45": {
+     "base_kw": 44.146,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04111,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 15:00": {
+     "base_kw": 0.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.05165,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 15:15": {
+     "base_kw": -46.429,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04177,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 15:30": {
+     "base_kw": -94.788,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04406,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 15:45": {
+     "base_kw": -144.709,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04385,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 16:00": {
+     "base_kw": -195.811,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04323,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 16:15": {
+     "base_kw": -247.707,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04432,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 16:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03878,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 16:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04554,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 17:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15364,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 17:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.1516,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 17:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15282,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 17:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14884,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 18:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15634,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 18:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15529,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 18:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15011,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 18:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15237,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 19:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14745,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 19:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15097,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 19:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15521,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 19:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15477,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 20:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.15487,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 20:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14856,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 20:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.1523,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 20:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.14871,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 21:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04255,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 21:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04566,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 21:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04135,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 21:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03792,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 22:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04249,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 22:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03927,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 22:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04482,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 22:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04498,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 23:00": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04482,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 23:15": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03964,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 23:30": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.03879,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    },
+    "2025-01-28 23:45": {
+     "base_kw": -300.0,
+     "own_kwh": 0.0,
+     "price_usd_kwh": 0.04121,
+     "recorded_kw": 0.0,
+     "share": 0.0,
+     "store_before_kwh": 900.0
+    }
+   },
+   "requests": [
+    {
+     "id": "req-site-pv-01-2025-01-28",
+     "made_at": "2025-01-28 14:00",
+     "rows": [
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.05011,
+       "ts": "2025-01-28 14:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04406,
+       "ts": "2025-01-28 14:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04223,
+       "ts": "2025-01-28 14:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04111,
+       "ts": "2025-01-28 14:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.05165,
+       "ts": "2025-01-28 15:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04177,
+       "ts": "2025-01-28 15:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04406,
+       "ts": "2025-01-28 15:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04385,
+       "ts": "2025-01-28 15:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04323,
+       "ts": "2025-01-28 16:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04432,
+       "ts": "2025-01-28 16:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03878,
+       "ts": "2025-01-28 16:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04554,
+       "ts": "2025-01-28 16:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.15364,
+       "ts": "2025-01-28 17:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.1516,
+       "ts": "2025-01-28 17:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.15282,
+       "ts": "2025-01-28 17:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.14884,
+       "ts": "2025-01-28 17:45"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.15634,
+       "ts": "2025-01-28 18:00"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.15529,
+       "ts": "2025-01-28 18:15"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.15011,
+       "ts": "2025-01-28 18:30"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.15237,
+       "ts": "2025-01-28 18:45"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.14745,
+       "ts": "2025-01-28 19:00"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.15097,
+       "ts": "2025-01-28 19:15"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.15521,
+       "ts": "2025-01-28 19:30"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.15477,
+       "ts": "2025-01-28 19:45"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.15487,
+       "ts": "2025-01-28 20:00"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.14856,
+       "ts": "2025-01-28 20:15"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.1523,
+       "ts": "2025-01-28 20:30"
+      },
+      {
+       "battery_kw": 540.0,
+       "price_usd_kwh": 0.14871,
+       "ts": "2025-01-28 20:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04255,
+       "ts": "2025-01-28 21:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04566,
+       "ts": "2025-01-28 21:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04135,
+       "ts": "2025-01-28 21:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03792,
+       "ts": "2025-01-28 21:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04249,
+       "ts": "2025-01-28 22:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03927,
+       "ts": "2025-01-28 22:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04482,
+       "ts": "2025-01-28 22:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04498,
+       "ts": "2025-01-28 22:45"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04482,
+       "ts": "2025-01-28 23:00"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03964,
+       "ts": "2025-01-28 23:15"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.03879,
+       "ts": "2025-01-28 23:30"
+      },
+      {
+       "battery_kw": 0.0,
+       "price_usd_kwh": 0.04121,
+       "ts": "2025-01-28 23:45"
+      }
+     ],
+     "to": "site-pv-01"
+    }
+   ],
+   "site": {
+    "energy_kwh": 1800.0,
+    "id": "SITE_PV_01",
+    "kind": "pv_bess",
+    "limit_out_kw": 1350.0,
+    "out_factor": 0.9,
+    "rating_kw": 900.0,
+    "wait_h": 0.0
+   }
+  }
+ }
+}
