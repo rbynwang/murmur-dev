@@ -2,6 +2,7 @@
   function go(mi, play) {
     stopAll();
     S.m = mi;
+    S.wait = false;
     S.view = 'key';
     S.read = null;
     S.busy = true;
@@ -13,7 +14,9 @@
     FG.lastGo = performance.now();
   }
   function next() {
-    const n = story().moments.length;
+    const st = story();
+    if (st.live && S.m >= st.moments.length - 1) { S.wait = true; updateBar(); return; }   /* a live story waits for its next moment */
+    const n = st.moments.length;
     if (S.m < n) go(S.m + 1, true);
     if (ended()) { S.auto = false; updateBar(); }
   }
@@ -27,6 +30,7 @@
   }
   function setTab(t) {
     if (t === S.tab) return;
+    if (t !== 'split' && story().live) growLeave();
     stopAll();
     S.tab = t;
     $('app').setAttribute('data-tab', t);

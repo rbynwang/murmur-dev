@@ -26,6 +26,7 @@ from demo.runner.buyers.utility_settle import UtilitySettle
 from murmur.settlement import market_checks
 
 log = logging.getLogger("murmur-utility")
+TICK_S = 2.0                   # the loop's cadence: its next pass starts this long after the last, or at once when its clock is set
 
 
 class Utility(UtilityOrders, UtilitySettle):
@@ -319,12 +320,16 @@ class Utility(UtilityOrders, UtilitySettle):
                     log.exception("settling a contract")
 
     def tick_loop(self) -> None:
+        f = self.clock.follower
         while True:
+            seen, now = f.moves, self.now()
             try:
                 self.tick()
+                if not self.unsent:                           # a reply the bus didn't take goes again on the next pass: this one wasn't whole
+                    f.passed(seen, now)
             except Exception as exc:
                 self.event("tick_error", error=str(exc)[:200])
-            time.sleep(2)
+            f.wait(seen, TICK_S)
 
 
     def inbox_loop(self) -> None:

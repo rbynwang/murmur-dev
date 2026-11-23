@@ -33,6 +33,7 @@ ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$")
 SOC_LOW, SOC_HIGH = 10.0, 90.0          # the referee's band for a battery's charge
 STUCK = 4                               # the same power this many quarter hours running, and not zero, reads as a stuck value
 TEXT_MAX = 400                          # a report's line is short. A longer one is cut where it is kept, and is never read as an instruction
+TICK_S = 0.25                           # the loop's cadence: its next pass starts this long after the last, or at once when its clock is set
 
 
 def is_number(v: Any) -> bool:
@@ -136,8 +137,9 @@ class Aggregator:
         return beckn.make("request", sender=self.name, receiver=r["to"], transaction_id=r["id"], key=self.key, sender_role="bap", message_id=f"{self.name}:{r['to']}:request:{r['id']}",
                           message={"request": {"id": r["id"], "community": com["id"], "made_at": r["made_at"], "rows": r["rows"]}})
 
-    def tick(self) -> None:
-        now = self.now()
+    def tick(self) -> bool:
+        """One pass: every request that is due goes. True for a whole pass: the play has started and none that was due is left for the next pass."""
+        now, whole = self.now(), self.started and self.town is not None
         for r in self.plan:
             with self.lock:
                 if r["id"] in self.sent or not self.started or now < r["made_at"][:16] or self.town is None:
@@ -147,18 +149,23 @@ class Aggregator:
                     out = self.town.send(r["to"], REQUEST, body, body["context"]["messageId"])
                 except Exception as exc:                          # tried again on the next tick
                     self.event("request_not_sent", request=r["id"], error=str(exc)[:160])
+                    whole = False
                     continue
                 self.sent[r["id"]] = {"to": r["to"], "at": now, "made_at": r["made_at"], "rows": len(r["rows"]), "wall": time.time(), "town": "duplicate" if isinstance(out, dict) and out.get("duplicate") else "accepted"}
                 wire.note("send", self.name, r["to"], "request", body, sim=now)
                 self.event("request_sent", request=r["id"], to=r["to"], rows=len(r["rows"]))
+        return whole
 
     def tick_loop(self) -> None:
+        f = self.clock.follower
         while True:
+            seen, now = f.moves, self.now()
             try:
-                self.tick()
+                if self.tick():
+                    f.passed(seen, now)
             except Exception:
                 log.error("tick: %s", traceback.format_exc())
-            time.sleep(0.25)
+            f.wait(seen, TICK_S)
 
     # ------------------------------------------------------------------ what comes back
     def take(self, kind: str, sender: str, body: Any) -> str:
@@ -272,7 +279,9 @@ def build_app(a: Aggregator):
     def demo_clock(body: dict = Body(default={})):
         a.clock.configure(body.get("start", a.clock.start), float(body.get("step_seconds", a.clock.step_seconds)), int(body.get("loop_days", a.clock.loop_days)), body.get("at"), body.get("at_wall"),
                           hold=bool(body.get("hold")))
-        a.started = True
+        if not a.started:                                         # the play starts here. The pass the set clock began may have come before this line and done nothing: the loop looks again
+            a.started = True
+            a.clock.follower.moved()
         return a.clock.clock()
 
     return app

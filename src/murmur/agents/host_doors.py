@@ -3,17 +3,27 @@ from __future__ import annotations
 
 import argparse
 import logging
+import math
 import time
 from typing import Any
 import httpx
 from murmur.protocol import doors
 from murmur import replay as replay_mod
 from murmur.node.home import MemberNode
+from murmur.node.simulator import CATCH_UP
 from murmur.protocol import envelope as beckn
 from murmur.agents.host_common import TEL_KEYS, held, log, memory_mb
 from murmur.agents.building import BuildingHost
 from murmur.agents.host_people import comfort_ok, override_ok, raises_a_limit
 from murmur.agents.host import NodeHost
+from murmur.agents import host_reads
+
+
+def rows_after(adapter: Any, since: str, keep: int = CATCH_UP) -> list[list[Any]]:
+    """A node's kept meter rows after dataset time `since`, oldest first, as /telemetry's lists of values: the newest `keep` of them, which is as
+    many quarter hours as a node steps in one move of its clock."""
+    kept = sorted((i, x) for i, x in list((getattr(adapter, "recent", None) or {}).items()) if (x.get("ts") or "") > since)
+    return [[x.get(k) for k in TEL_KEYS] + [adapter.E] for _, x in kept[-keep:]]
 
 
 def build_app(f: NodeHost):
@@ -45,8 +55,9 @@ def build_app(f: NodeHost):
     @app.get("/telemetry")
     def telemetry(since: str | None = None):
         """Every home's latest telemetry in one small answer, for the runner's meter feed (simulation truth).
-        With `since` (a dataset time), also each home's readings of the steps after it, at most 12: the steps a poll
-        every few seconds would miss while the live clock runs fast."""
+        With `since` (a dataset time), also each home's readings of the steps after it: the steps a poll every few
+        seconds would miss while the live clock runs fast, and every step of a clock that moved many at once (192
+        at most, about 150 bytes a row: 120 kB for 8 homes after a move of 96 steps)."""
         keys = list(TEL_KEYS) + ["E"]                   # compact: one list of values per home (~8 kB for 98 homes)
         out: dict[str, Any] = {}
         recent: dict[str, Any] = {}
@@ -54,10 +65,9 @@ def build_app(f: NodeHost):
             t = h.adapter.tel or {}
             out[n] = [t.get(k) for k in TEL_KEYS] + [h.adapter.E]
             if since:
-                rr = sorted(list((getattr(h.adapter, "recent", None) or {}).items()))[-13:]
-                got = [x for _, x in rr if (x.get("ts") or "") > since]
-                if len(got) > 1:
-                    recent[n] = [[x.get(k) for k in TEL_KEYS] + [h.adapter.E] for x in got[-12:]]
+                got = rows_after(h.adapter, since)
+                if len(got) > 1:                        # one row after it is the latest, which `homes` says already
+                    recent[n] = got
         any_home = next(iter(f.homes.values()), None)
         res = {"now": any_home.now_ts() if any_home else None, "keys": keys, "homes": out}
         if since:
@@ -97,6 +107,7 @@ def build_app(f: NodeHost):
         return {"receipts": list(getattr(a, "receipts", ())), "told": list(getattr(a, "told", ())), "reports": list(getattr(a, "reports", ())), "flags": dict(getattr(a, "flags", {})),
                 "fallbacks": dict(getattr(a, "fallbacks", {})) | dict(getattr(f.homes[name].brain, "fallbacks", None) or {})}
 
+    host_reads.mount(app, f)                              # the record door: each node's own log, read from a place on
 
     @app.post("/demo/reset")
     def demo_reset():
@@ -111,6 +122,31 @@ def build_app(f: NodeHost):
             if hasattr(h.adapter, "overrides"):
                 h.adapter.rt_override("clear")          # an alarm stays: this door has no signature
 
+    def with_battery(n: int) -> list[str]:
+        """n nodes with a battery, picked the same way every time: spread evenly over those that have one."""
+        have = [x for x, h in f.homes.items() if h.adapter.E > 0]
+        return have[::max(1, len(have) // max(1, n))][:n]
+
+    def charge_asked(bs: Any) -> tuple[list[str], float]:
+        """Whose battery a battery_soc names, and the charge in percent. Anything else answers 400, before the scenario changes a thing."""
+        def number(v: Any) -> bool:
+            return isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v)
+        if not isinstance(bs, dict) or not number(bs.get("pct")) or not 5 <= bs["pct"] <= 100:
+            raise HTTPException(400, 'battery_soc: {"homes": [names] or "n": N, "pct": a number from 5 to 100}')
+        names, n = bs.get("homes"), bs.get("n")
+        if names:
+            if not isinstance(names, list) or not all(isinstance(x, str) and x in f.homes for x in names):
+                raise HTTPException(400, "battery_soc: homes is a list of nodes here")
+            flat = next((x for x in names if f.homes[x].adapter.E <= 0), None)
+            if flat:
+                raise HTTPException(400, f"battery_soc: {flat} has no battery")
+            return list(dict.fromkeys(names)), float(bs["pct"])
+        if not number(n) or n != int(n) or n < 1:
+            raise HTTPException(400, "battery_soc: homes names nodes here, or n is how many with a battery, 1 or more")
+        if not with_battery(int(n)):
+            raise HTTPException(400, "battery_soc: no node here has a battery")
+        return with_battery(int(n)), float(bs["pct"])
+
     @app.post("/person/{name}")
     def person_word(name: str, body: dict = Body(default={})):
         """A person's signed word for one node (policy.signed): the end of an alarm, a limit, and on a node with an agent a group closed or opened. HostPeople.person_word takes it."""
@@ -122,9 +158,11 @@ def build_app(f: NodeHost):
     def demo_scenario(body: dict = Body(default={})):
         """What if, for the homes here (the demo runner's evening posts these): {"weather": {"pv": 0.3, "load": 1.2}} from now on,
         {"battery_fault": {"n": 10, "on": true}} (n homes with a battery, picked the same way every time) or
-        {"battery_fault": {"homes": [...], "on": false}}, {"reset": true}. Physical truth only: each home's agent
-        reacts with its own code."""
+        {"battery_fault": {"homes": [...], "on": false}}, {"battery_soc": {"homes": [...] or "n": 2, "pct": 5 to 100}} (those
+        batteries hold that charge now, each inside its own band: the answer says what each was set to), {"reset": true}.
+        Physical truth only: each home's agent reacts with its own code."""
         out: dict[str, Any] = {"homes": len(f.homes)}
+        charge = charge_asked(body["battery_soc"]) if body.get("battery_soc") is not None else None
         any_home = next(iter(f.homes.values()), None)
         now = any_home.replay.ts(any_home.replay.current()) if any_home else None
         if body.get("reset"):
@@ -177,13 +215,20 @@ def build_app(f: NodeHost):
             on = bool(bf.get("on", True))
             names = [n for n in (bf.get("homes") or []) if n in f.homes]
             if not names and bf.get("n"):
-                with_batt = [n for n, h in f.homes.items() if h.adapter.E > 0]
-                step = max(1, len(with_batt) // max(1, int(bf["n"])))
-                names = with_batt[::step][:int(bf["n"])]
+                names = with_battery(int(bf["n"]))
             for n in names:
                 f.homes[n].adapter.set_battery_fault(on)
             out["battery_fault"] = {"on": on, "homes": names}
             f.events.append({"t": time.time(), "kind": "what_if_battery_fault", "on": on, "homes": len(names)})
+        if charge:
+            names, pct = charge
+            done = {}
+            for n in names:
+                with f.locks[n]:                          # between two steps of the node, never inside one
+                    done[n] = f.homes[n].adapter.set_soc(pct)
+                f.homes[n].log("what_if", what="battery_soc", **done[n])
+            out["battery_soc"] = {"pct": pct, "homes": names, "set": done}
+            f.events.append({"t": time.time(), "kind": "what_if_battery_soc", "pct": pct, "homes": len(names)})
         out["faulted"] = [n for n, h in f.homes.items() if h.adapter.E > 0 and h.adapter.P == 0]
         out["now"] = now
         return out

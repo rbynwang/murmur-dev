@@ -8,7 +8,8 @@
   window end + 15 min  readings are in -> buyers (update); each answers with actuals and its settlement
   settlement           split and pay by measured delivery, once
 
-The class is assembled from mixins, one module per step: market_above, market_orders, market_clearing, market_delivery, market_settle.
+The class is assembled from mixins, one module per step: market_above, market_orders, market_clearing, market_delivery, market_settle; and
+market_schedule, which says what of all this falls due at a quarter hour to come.
 """
 from __future__ import annotations
 
@@ -29,12 +30,13 @@ from murmur.agents.community.market_orders import MarketOrders
 from murmur.agents.community.market_clearing import MarketClearing
 from murmur.agents.community.market_delivery import MarketDelivery
 from murmur.agents.community.market_settle import MarketSettle
+from murmur.agents.community.market_schedule import MarketSchedule
 from murmur.settlement import market_checks
 
 BROADCAST_AGAIN_S = (15, 45)        # what a broadcast's three quick tries couldn't send goes again this much later: past a dropped connection
 
 
-class Market(MarketAbove, MarketOrders, MarketClearing, MarketDelivery, MarketSettle):
+class Market(MarketAbove, MarketOrders, MarketClearing, MarketDelivery, MarketSettle, MarketSchedule):
     def __init__(self, name: str, key, send: Callable, clock, roster: list[str], pins: dict[str, str],
                  save_pins: Callable, log: Callable[..., None], cfg: dict[str, Any]):
         self.name, self.key, self.send, self.clock = name, key, send, clock

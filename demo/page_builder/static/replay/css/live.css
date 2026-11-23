@@ -1,0 +1,88 @@
+
+/* ---------- Live: the split view playing the running network (live_*.js). Every rule is scoped to #app.lv or to Live's own
+   elements (lv-), and none touches the map's lines, a block's lit states, the pill or the layer: those stay the split view's. */
+#app.lv{--lu:#0B7285;--lo:#8A6100;--ld:#B5472A;--lpk:#E8590C}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #app.lv{--lu:#56C8DC;--lo:#E5BE5A;--ld:#F2A07B;--lpk:#FF922B}}
+:root[data-theme="dark"] #app.lv{--lu:#56C8DC;--lo:#E5BE5A;--ld:#F2A07B;--lpk:#FF922B}
+#app.lv #intro,#app.lv #inputs,#app.lv #b-speed{visibility:hidden}
+#app.lv #truth{display:none}
+#app.lv #panel,#app.lv #split{position:relative}
+/* the parts that answer: a dot in each part's own box */
+.lq{display:none}
+#app.lv .lq{display:block;position:absolute;right:6px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--rule);z-index:2;pointer-events:none}
+#app.lv .map .blk:has(> .lq) > .bh{padding-right:11px}
+#app.lv .lvu > .lq{background:var(--lu)}
+#app.lv .lvo > .lq{background:var(--lo)}
+#app.lv .lvx > .lq{background:var(--ld)}
+
+/* the bar, over the panel's top rows */
+.lv-bar{display:none}
+#app.lv .lv-bar{display:flex;flex-direction:column;justify-content:center;gap:5px;position:absolute;left:16px;right:16px;z-index:5;min-width:0}
+.lv-row{display:flex;align-items:center;gap:6px;min-width:0}
+.lv-ctl{display:none}
+#app.lv .lv-bar.lv-pres .lv-ctl{display:flex}
+.lv-b,.lv-s,.lv-kind,.lv-back{font:600 12.5px/1 var(--body);padding:6px 10px;border-radius:5px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);white-space:nowrap;cursor:pointer}
+.lv-b:hover,.lv-s:hover,.lv-kind:hover,.lv-back:hover{background:var(--tint)}
+.lv-b[aria-pressed="true"],.lv-s[aria-pressed="true"],.lv-kind[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.lv-b:disabled{opacity:.45;cursor:default}
+.lv-speeds{display:inline-flex;border:1px solid var(--rule);border-radius:5px;overflow:hidden;flex:0 0 auto}
+.lv-speeds .lv-s{border:0;border-radius:0;padding:6px 8px}
+.lv-speeds .lv-s + .lv-s{border-left:1px solid var(--hair)}
+.lv-sur{margin-left:auto;border-color:var(--lpk);color:var(--lpk)}
+.lv-sur[aria-expanded="true"]{background:var(--lpk);color:var(--paper)}
+.lv-net::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-left:6px;background:var(--rule);vertical-align:1px}
+.lv-net[data-up="1"]::after{background:var(--lu)}
+.lv-net[hidden]{display:none}
+.lv-stat{gap:10px}
+.lv-clock{flex:0 0 auto;font:600 16px/1 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+.lv-state{flex:0 0 auto;width:13em;text-align:center;font:700 11px/1 var(--body);letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:999px;border:1.5px solid currentColor;white-space:nowrap;color:var(--muted)}
+.lv-state[data-w="live"]{color:var(--lu)}
+.lv-state[data-w="leaping"]{color:var(--lo)}
+.lv-state[data-w="held"],.lv-state[data-w="stopped"],.lv-state[data-w="no"]{color:var(--ld)}
+.lv-state[data-w="settled"]{color:var(--ink)}
+.lv-msg{flex:1 1 auto;min-width:0;font-size:13px;line-height:1.3;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-back{flex:0 0 auto;border-color:var(--lu);color:var(--lu)}
+.lv-back[hidden]{display:none}
+
+/* the surprises drawer, over the map's upper right corner */
+.lv-drawer{position:absolute;top:10px;right:calc(50% + 10px);width:340px;max-width:calc(50% - 20px);z-index:20;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:0 8px 28px var(--shadow)}
+.lv-drawer[hidden]{display:none}
+.lv-kinds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding-right:22px}
+.lv-kind{font-weight:500;padding:6px 7px;text-align:left;overflow:hidden;text-overflow:ellipsis}
+.lv-form{display:flex;flex-direction:column;gap:6px}
+.lv-who,.lv-text,.lv-num input{font:13px/1.2 var(--body);padding:5px 6px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink);min-width:0}
+.lv-num{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.lv-num input{width:6.5em}
+.lv-num input[aria-invalid="true"]{border-color:var(--ld)}
+.lv-send{align-self:flex-end;background:var(--lpk);border-color:var(--lpk);color:var(--paper);padding:7px 18px}
+.lv-x{position:absolute;top:6px;right:8px;font:600 18px/1 var(--body);background:none;border:0;color:var(--muted);cursor:pointer;padding:2px 4px}
+
+/* the timeline, in the bottom bar: pins on its top edge, the parts' words in the middle, a tick under each quarter-hour with moments */
+.lv-tl{display:none}
+#app.lv .lv-tl{display:block;grid-row:1;grid-column:2;height:36px;min-width:0;position:relative}
+.lv-track{position:absolute;left:6px;right:6px;top:3px;bottom:3px}
+.lv-part{position:absolute;top:5px;bottom:0;border-left:1px solid var(--bardim);background:color-mix(in srgb,var(--barink) 7%,transparent);overflow:hidden}
+.lv-part[data-p="window"]{background:color-mix(in srgb,var(--lpk) 34%,transparent);border-left-color:var(--lpk)}
+.lv-lab{position:absolute;left:6px;top:8px;max-width:calc(100% - 10px);font:500 11px/1 var(--body);color:var(--bardim);white-space:nowrap;overflow:hidden}
+.lv-part[data-p="window"] .lv-lab{color:var(--barink);font-weight:600}
+.lv-fold{position:absolute;bottom:0;height:4px;background:repeating-linear-gradient(90deg,var(--bardim) 0 3px,transparent 3px 6px);opacity:.8}
+.lv-tick{position:absolute;bottom:0;width:4px;height:7px;margin-left:-2px;padding:0;border:0;border-radius:1px;background:var(--barink);opacity:.55;cursor:pointer}
+.lv-tick:hover,.lv-tick.on{opacity:1;height:11px}
+.lv-pin{position:absolute;top:0;width:11px;height:11px;margin-left:-5.5px;padding:0;border-radius:50%;border:2px solid var(--barink);background:var(--barbg);cursor:default;z-index:1}
+.lv-pin[data-s="past"]{background:var(--barink)}
+.lv-pin[data-s="next"]{border-color:var(--lu);box-shadow:0 0 0 2px color-mix(in srgb,var(--lu) 40%,transparent)}
+.lv-pin[data-k="surprise"]{border-radius:2px;transform:rotate(45deg);border-color:var(--lpk)}
+.lv-pin[data-k="surprise"][data-s="past"]{background:var(--lpk)}
+.lv-pin:not([tabindex="-1"]){cursor:pointer}
+.lv-now{position:absolute;top:0;bottom:-3px;width:3px;margin-left:-1.5px;border-radius:2px;background:var(--lu);box-shadow:0 0 0 2px var(--barbg);pointer-events:none;z-index:2}
+
+/* below 1,180 px: the bar stands above the layer, and the timeline takes a row of its own across the bottom bar */
+@media (max-width:1179px){
+  #app.lv #panel{grid-template-rows:auto minmax(0,1fr)}
+  #app.lv #intro,#app.lv #inputs{display:none}
+  #app.lv .lv-bar{position:static;grid-row:1;height:auto!important}
+  #app.lv .lv-ctl{flex-wrap:wrap}
+  #app.lv .lv-sur{margin-left:0}
+  #app.lv .lv-tl{grid-column:1/-1;grid-row:1}
+  #app.lv .lv-drawer{right:16px;left:16px;width:auto;max-width:none}
+}

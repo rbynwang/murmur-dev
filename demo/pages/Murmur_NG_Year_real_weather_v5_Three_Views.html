@@ -1427,7 +1427,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     const len = (big[0] || '').length;
     const size = big[0] && !/^[$\d]/.test(big[0]) ? (big[0].indexOf(' ') < 0 && len > 11 ? ' wd tk' : ' wd') : len > 10 ? ' sm' : len > 8 ? ' md' : '';
     let did = m ? k.did : '';
-    const about = b ? BN[b].a1 : (st.id === 'main' ? (st.own ? (oneStory() ? 'One recorded day. Press Next to start.' : 'One recorded day. Press Next, or pick its other story.') : 'One recorded day. Press Next, or send an input.') : (st.own ? 'The same recorded day, from the event on. Press Next to follow it.' : 'A separate recorded run of the same day. Press Next to follow it.'));
+    const about = b ? BN[b].a1 : st.about || (st.id === 'main' ? (st.own ? (oneStory() ? 'One recorded day. Press Next to start.' : 'One recorded day. Press Next, or pick its other story.') : 'One recorded day. Press Next, or send an input.') : (st.own ? 'The same recorded day, from the event on. Press Next to follow it.' : 'A separate recorded run of the same day. Press Next to follow it.'));
     if (fin) { did = nextWords(); }
     $('layer').className = 'layer ' + hueOf(k.cb || null) + (k.kind === 'start' ? ' at-start' : '');
     $('c-n').textContent = k.l ? (k.l === 8 ? 'R' : k.l) : '';
@@ -1477,7 +1477,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     const n = story().moments.length;
     $('pos').textContent = Math.min(S.m + 1, n) + ' of ' + n;
     $('b-back').disabled = S.m < 0;
-    $('b-next').disabled = ended();
+    $('b-next').disabled = ended() || (story().live && S.m >= n - 1);
     $('b-auto').setAttribute('aria-pressed', S.auto ? 'true' : 'false');
     $('b-speed').textContent = S.speed + '×';
     qa('.chip[data-s]').forEach((c) => {
@@ -1499,7 +1499,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     setHue(tb, 'tb', k.cb || null);
     $('t-name').textContent = k.term[0];
     $('t-what').textContent = k.term[1];
-    if (ended()) { html = endHTML(); } else if (!m) { html = briefHTML() + decidesHTML() + legendHTML(); } else if (S.view === 'gap') {
+    if (ended()) { html = endHTML(); } else if (!m) { html = briefHTML() + (story().live ? '' : decidesHTML() + legendHTML()); } else if (S.view === 'gap') {
       html = gapHTML(k.gap);
       where = 'What the flow doesn\'t do';
     } else if (S.view === 'block') {
@@ -1952,6 +1952,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
   function go(mi, play) {
     stopAll();
     S.m = mi;
+    S.wait = false;
     S.view = 'key';
     S.read = null;
     S.busy = true;
@@ -1963,7 +1964,9 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     FG.lastGo = performance.now();
   }
   function next() {
-    const n = story().moments.length;
+    const st = story();
+    if (st.live && S.m >= st.moments.length - 1) { S.wait = true; updateBar(); return; }   /* a live story waits for its next moment */
+    const n = st.moments.length;
     if (S.m < n) go(S.m + 1, true);
     if (ended()) { S.auto = false; updateBar(); }
   }
@@ -1977,6 +1980,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
   }
   function setTab(t) {
     if (t === S.tab) return;
+    if (t !== 'split' && story().live) growLeave();
     stopAll();
     S.tab = t;
     $('app').setAttribute('data-tab', t);
@@ -2170,6 +2174,71 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     }, 120);
   });
 
+  /* ---------- a live story: Live is the split view itself, playing the running network's moments as they come.
+     The live script (live_*.js) makes the story and hands it its steps and moments, already checked; here they are only added and
+     played by the split view's own code. A live story never ends: at its newest moment it waits for the next. */
+  let kept = null;
+  function growEnter(st) {
+    if (!kept) kept = { story: S.story, m: S.m, speed: S.speed, scale: FG.scale };
+    stopAll();
+    D.stories.live = st;
+    S.story = 'live';
+    S.auto = true;
+    S.speed = 1;
+    showSent();
+    if (S.tab !== 'split') setTab('split');
+    go(-1, false);
+    S.wait = true;
+  }
+  function growAdd(steps, moments) {
+    const st = D.stories.live;
+    if (!st || S.story !== 'live') return;
+    steps.forEach((s) => st.steps.push(s));
+    moments.forEach((m) => {
+      st.moments.push(m);
+      m.lit.forEach((b) => { if (st.touched.indexOf(b) < 0) st.touched.push(b); });
+    });
+    updateBar();
+    if (S.auto && S.wait && moments.length) go(S.m + 1, true);
+  }
+  function growShow(i) {
+    const st = D.stories.live;
+    if (!st || i < 0 || i >= st.moments.length) return;
+    S.auto = false;
+    go(i, false);
+  }
+  function growFollow() {
+    const st = D.stories.live;
+    if (!st) return;
+    S.auto = true;
+    if (st.moments.length) go(st.moments.length - 1, true); else { go(-1, false); S.wait = true; }
+  }
+  function growReset() {
+    const st = D.stories.live;
+    if (!st) return;
+    stopAll();
+    st.steps.length = 0;
+    st.moments.length = 0;
+    st.touched.length = 0;
+    S.auto = true;
+    go(-1, false);
+    S.wait = true;
+  }
+  function growLeave() {
+    if (!kept) return;
+    stopAll();
+    delete D.stories.live;
+    const was = kept;
+    kept = null;
+    S.story = D.stories[was.story] ? was.story : 'main';
+    S.speed = was.speed;
+    FG.scale = was.scale;
+    S.auto = false;
+    showSent();
+    go(Math.min(was.m, story().moments.length - 1), false);
+    if (FG.live && FG.live.left) FG.live.left();
+  }
+  FG.grow = { enter: growEnter, add: growAdd, show: growShow, follow: growFollow, reset: growReset, leave: growLeave };
   /* ---------- scenarios: one page plays any of the days. Picking one swaps the story, the map, the tree and the Full record */
   function chipsHTML() { return D.order.map((k) => '<button type="button" class="chip" data-s="' + k + '" title="' + esc(D.stories[k].one) + '" aria-pressed="false">' + esc(D.stories[k].name) + '</button>').join(''); }
   function showChips() { $('inputs').innerHTML = chipsHTML(); $('w-inputs').innerHTML = chipsHTML(); }

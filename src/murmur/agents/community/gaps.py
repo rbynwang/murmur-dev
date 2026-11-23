@@ -35,7 +35,7 @@ class GapDesk(GapCalls, GapSettle):
         self.report_wall: dict[str, float] = {}         # home -> when that report was made: a retry can come after the next one
         self.reasons: dict[str, str] = {}
         self.dirty = False                              # a report came since the last check
-        self.settled: str | None = None                 # with the clock waiting: the step every node has finished, with all it sent read (set by the waiting clock, doors.py)
+        self.settled: str | None = None                 # with the clock waiting: the step every node has finished, with all it sent read (set by the waiting clock, conductor.py)
         self.checked_at: str | None = None
         self.absorbed: dict[str, float] = {}            # ts -> kW of shortfall the margin covered (the record)
         self.no_room: dict[str, str] = {}               # member -> when it may be asked again (the quiet path)

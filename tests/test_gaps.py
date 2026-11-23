@@ -3,7 +3,9 @@
 A buyer's call is asked of every member and filled from the biggest answers up to the call and its margin, each answer held to the member's nameplate.
 A member that will fall short reports it; the report counts for what the member owes and no more, the other members are asked, and the gap is filled
 up to what they say they can give, spread over the short steps and owed under the call it covers. What nobody can give is offered up the price ladder,
-then stays open and the buyer is warned. A shortfall within the sale's margin, or past it by under half a kW, moves no power. A call's settlement pays
+then stays open and the buyer is warned. A gap offered again at a higher price asks only the members not yet dispatched for it and is filled once each
+of them has answered, on the step the clock holds; an answer that comes again from a member already dispatched is refused, not dispatched twice.
+A shortfall within the sale's margin, or past it by under half a kW, moves no power. A call's settlement pays
 each node the desk dispatched, on its measured kWh at the call's price times its class's share, and a top-up only what a node's new share adds; a gap
 filled at a raised price under a booked sale earns its helper the step up on what it delivered beyond its booking, out of the coordinator's keep. A
 repeated call, answer, end or settlement changes nothing. Answers for a gap that does not exist, from a member not asked, under another key or past
@@ -16,6 +18,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from murmur.agents.community.conductor import Conductor
 from murmur.agents.community.gaps_rules import real, steps_between
 from murmur.agents.community.market import Market
 from murmur.protocol import envelope as beckn
@@ -101,6 +104,19 @@ def sale(d, owed):
                             "capacity_offered_final": {i: sum(owed.values()) - 1.0 for i in range(4)}}
 
 
+def raised(folder, **cfg):
+    """A desk whose clock waits (no dataset time passes that could close a round), with the booked sale; home-02 falls 4 kW short, 1 kW of it within
+    the margin; home-01 covers 2 kW and home-03 says the price is under its minimum, so the 1 kW left is offered again at $1.00, to home-03 alone.
+    On the quiet path the desk counts on half the margin, so 1.5 kW are left."""
+    d = Desk(folder, clock_waits=True, **cfg)
+    sale(d, {"home-01": 3.0, "home-02": 5.0, "home-03": 2.0})
+    d.m.rt.settled = d.m.now()                                         # as the waiting clock says it: this step's reports are all in
+    gap = gap_of(d, "home-02", {Q[2]: 4.0, Q[3]: 4.0})
+    d.say("home-01", "rt_answer", {"answer": {"id": gap["id"], "kw": 2.0}})
+    d.say("home-03", "rt_answer", {"answer": {"id": gap["id"], "kw": 0.0, "below_min_price": True}})
+    return d, gap
+
+
 def test_steps_between_lists_each_quarter_hour_from_the_start_up_to_but_not_including_the_end():
     assert steps_between(Q[0], END) == Q
     assert steps_between(f"{DAY} 23:30", "2025-01-29 00:15") == [f"{DAY} 23:30", f"{DAY} 23:45", "2025-01-29 00:00"]
@@ -153,6 +169,29 @@ def test_a_gap_nobody_can_fill_is_offered_up_the_price_ladder_then_left_open_and
     assert [x for _, x in desk.out("rt_dispatch", "dispatch") if x["kind"] == "gap"] == []
     assert desk.out("rt_confirm", "warning") == [("utility", {"id": gap["id"], "short_kw": 8.0, "start": Q[2], "end": END, "why": "not given"})]
     assert (gap["phase"], gap["round"], gap["confirmed_kw"]) == ("dispatched", 2, 0.0)
+
+
+@pytest.mark.parametrize("path, left", [({}, 1.0), ({"report_rule": "exception"}, 1.5)])       # every member asked, and the quiet path a live run takes
+def test_a_gap_offered_again_at_a_higher_price_is_filled_once_the_member_asked_again_has_answered_with_the_clock_still_held(tmp_path, path, left):
+    d, gap = raised(tmp_path, **path)
+    waits = Conductor(SimpleNamespace(market=d.m), wire_files=[]).market_waits      # what the waiting clock holds every clock for at the market
+    assert [(to, a["price_usd_per_kwh"]) for to, a in d.out("rt_ask", "ask")] == [("home-01", 0.8), ("home-03", 0.8), ("home-03", 1.0)]
+    assert (gap["phase"], gap["round"], gap["kw"]) == ("asking", 1, left) and waits(d.m.now()) == [f"call {gap['id']}: answers to come"]
+    d.say("home-03", "rt_answer", {"answer": {"id": gap["id"], "kw": 1.5}})
+    # the one member asked again has answered: filled at once, on the step the clock holds, and the clock has nothing left to wait for
+    assert [(to, x["steps"], x["price_usd_per_kwh"]) for to, x in d.out("rt_dispatch", "dispatch")] == [
+        ("home-01", {Q[2]: 2.0, Q[3]: 2.0}, 0.8), ("home-03", {Q[2]: left, Q[3]: left}, 1.0)]
+    assert (gap["phase"], gap["short_kw"], d.m.now()) == ("dispatched", 0.0, f"{DAY} 16:00") and d.out("rt_confirm", "warning") == []
+    assert waits(d.m.now()) == []
+
+
+def test_a_member_dispatched_for_a_gap_is_not_asked_at_the_higher_price_and_its_answer_come_again_is_not_dispatched_twice(tmp_path):
+    d, gap = raised(tmp_path)
+    twice = d.say("home-01", "rt_answer", {"answer": {"id": gap["id"], "kw": 2.0}})      # its first answer, delivered a second time
+    assert isinstance(twice, beckn.Refused) and twice == "answer ignored" and gap["answers"] == {} and gap["phase"] == "asking"
+    d.say("home-03", "rt_answer", {"answer": {"id": gap["id"], "kw": 1.5}})
+    assert gap["alloc"] == {"home-01": {Q[2]: 2.0, Q[3]: 2.0}, "home-03": {Q[2]: 1.0, Q[3]: 1.0}} and gap["asked_price"] == {"home-01": 0.8, "home-03": 1.0}
+    assert [to for to, _ in d.out("rt_dispatch", "dispatch")] == ["home-01", "home-03"]
 
 
 def test_on_the_quiet_path_a_member_that_just_said_it_has_nothing_is_not_asked_and_what_is_left_is_reported(tmp_path):

@@ -1,0 +1,468 @@
+{
+ "day": "2025-01-28",
+ "window": [
+  "18:00",
+  "21:00"
+ ],
+ "homes": [
+  "home-01",
+  "home-02",
+  "home-03"
+ ],
+ "buildings": [
+  "building-01"
+ ],
+ "sites": [
+  "site-dc-01",
+  "site-pv-01"
+ ],
+ "follow": {
+  "thinking_home": "home-02",
+  "second_home": "home-03",
+  "mall_or_office": "building-01"
+ },
+ "half_hours": [
+  "18:00",
+  "18:30",
+  "19:00",
+  "19:30",
+  "20:00",
+  "20:30"
+ ],
+ "model": "stand-in",
+ "buyers": [
+  "grid-operator",
+  "utility"
+ ],
+ "orders": [
+  {
+   "to": "grid-operator",
+   "date": "2025-01-28",
+   "start": "18:00",
+   "end": "21:00",
+   "kw": 5.4,
+   "price_usd_per_kwh": 2.04,
+   "note": "demo run",
+   "buyer": "demo runner (grid-operator)",
+   "deposit_usd": 3.3
+  },
+  {
+   "to": "utility",
+   "date": "2025-01-28",
+   "start": "18:00",
+   "end": "21:00",
+   "kw": 9.0,
+   "price_usd_per_kwh": 2.04,
+   "note": "demo run",
+   "buyer": "demo runner (utility)",
+   "deposit_usd": 5.51
+  }
+ ],
+ "events": [
+  {
+   "at": "2025-01-28 17:00",
+   "kind": "note",
+   "homes": [
+    "home-02"
+   ],
+   "text": "Please keep the battery full tonight, we leave early tomorrow."
+  }
+ ],
+ "requests": [
+  {
+   "id": "battery-2025-01-28",
+   "to": "community",
+   "made_at": "2025-01-28 14:00"
+  },
+  {
+   "id": "req-site-dc-01-2025-01-28",
+   "to": "site-dc-01",
+   "made_at": "2025-01-28 14:00"
+  },
+  {
+   "id": "req-site-pv-01-2025-01-28",
+   "to": "site-pv-01",
+   "made_at": "2025-01-28 14:00"
+  }
+ ],
+ "feed": {
+  "first": "2025-01-27 10:00",
+  "last": "2025-01-29 02:45"
+ },
+ "step_seconds": 2.0,
+ "quiet_s": 1.5,
+ "pass_s": 0.25,
+ "captures": {
+  "evening": {
+   "files": {
+    "conductor": "evening_conductor.json",
+    "bus": "evening_bus.json",
+    "sale": "evening_sale.json",
+    "rows": "evening_rows.json",
+    "meter": "evening_meter.json",
+    "posts": "evening_posts.json"
+   },
+   "bytes": 162737,
+   "passes": 239,
+   "parts": [
+    "the whole evening, from the start to settled"
+   ],
+   "kept": "all",
+   "wall_s": 60.2,
+   "first_t": 0.001,
+   "last_t": 60.2044,
+   "leap_max_steps": 192,
+   "start": {
+    "event": "2025-01-28",
+    "step_seconds": 2.0,
+    "pace_s": 0,
+    "leap": true,
+    "force": true,
+    "lead_s": 2
+   },
+   "gates": [
+    "2025-01-27 10:00",
+    "2025-01-28 17:00"
+   ],
+   "stops": [
+    "2025-01-27 10:00",
+    "2025-01-28 10:00",
+    "2025-01-28 14:00",
+    "2025-01-28 17:00",
+    "2025-01-28 17:30",
+    "2025-01-28 17:45",
+    "2025-01-28 18:00",
+    "2025-01-28 18:15",
+    "2025-01-28 18:30",
+    "2025-01-28 18:45",
+    "2025-01-28 19:00",
+    "2025-01-28 19:15",
+    "2025-01-28 19:30",
+    "2025-01-28 19:45",
+    "2025-01-28 20:00",
+    "2025-01-28 20:15",
+    "2025-01-28 20:30",
+    "2025-01-28 20:45",
+    "2025-01-28 21:00",
+    "2025-01-28 21:15",
+    "2025-01-28 21:30",
+    "2025-01-28 21:45"
+   ],
+   "sale": "flex-need-2025-01-28",
+   "phase": "done",
+   "leaps": [
+    {
+     "from": "2025-01-27 10:15",
+     "to": "2025-01-28 10:00",
+     "steps": 95,
+     "wall_ms": 241
+    },
+    {
+     "from": "2025-01-28 10:00",
+     "to": "2025-01-28 14:00",
+     "steps": 16,
+     "wall_ms": 244
+    },
+    {
+     "from": "2025-01-28 14:00",
+     "to": "2025-01-28 16:45",
+     "steps": 11,
+     "wall_ms": 241
+    }
+   ],
+   "surprises": [
+    {
+     "kind": "note",
+     "who": "home-02",
+     "at": "2025-01-28 17:00",
+     "stood_at": "2025-01-28 16:45",
+     "to": [
+      "homes"
+     ],
+     "from": "configuration",
+     "in_capture": true
+    }
+   ],
+   "totals": {
+    "seller_usd": 20.7893,
+    "pool_usd": 14.573,
+    "delivered_kwh": 26.067
+   },
+   "bus": {
+    "whole": {
+     "beckn.confirm": 5,
+     "beckn.discover": 10,
+     "beckn.init": 2,
+     "beckn.on_confirm": 5,
+     "beckn.on_discover": 10,
+     "beckn.on_init": 2,
+     "beckn.on_select": 2,
+     "beckn.on_status": 21,
+     "beckn.rt_answer": 4,
+     "beckn.rt_ask": 4,
+     "beckn.rt_capacity": 4,
+     "beckn.rt_confirm": 2,
+     "beckn.rt_dispatch": 4,
+     "beckn.select": 2,
+     "beckn.update": 4,
+     "community.answer": 3,
+     "community.report": 3,
+     "community.request": 3
+    },
+    "reports_counted": 4853,
+    "reports_whole_from": [
+     "community",
+     "site-dc-01",
+     "site-pv-01"
+    ]
+   },
+   "rows": {
+    "building-01": 20,
+    "home-01": 52,
+    "home-02": 41,
+    "home-03": 63
+   },
+   "meter_rows": 164,
+   "summaries": 34,
+   "snapshots": [
+    [
+     "select"
+    ],
+    [
+     "telemetry_done"
+    ],
+    [
+     "settlement",
+     "done"
+    ]
+   ]
+  },
+  "surprises": {
+   "files": {
+    "conductor": "surprises_conductor.json",
+    "bus": "surprises_bus.json",
+    "sale": "surprises_sale.json",
+    "rows": "surprises_rows.json",
+    "meter": "surprises_meter.json",
+    "posts": "surprises_posts.json"
+   },
+   "bytes": 108149,
+   "passes": 158,
+   "parts": [
+    "18:00 to 21:00: from the quarter-hour the clock stood in before each surprise to its last stop",
+    "the quarter-hour in which the emergency's call was settled"
+   ],
+   "kept": [
+    "2025-01-28 18:00",
+    "2025-01-28 18:15",
+    "2025-01-28 18:30",
+    "2025-01-28 18:45",
+    "2025-01-28 19:00",
+    "2025-01-28 19:15",
+    "2025-01-28 19:30",
+    "2025-01-28 19:45",
+    "2025-01-28 20:00",
+    "2025-01-28 20:15",
+    "2025-01-28 20:30",
+    "2025-01-28 20:45",
+    "2025-01-28 21:00",
+    "2025-01-28 23:00"
+   ],
+   "wall_s": 67.0,
+   "first_t": 20.9618,
+   "last_t": 74.0317,
+   "leap_max_steps": 192,
+   "start": {
+    "event": "2025-01-28",
+    "step_seconds": 2.0,
+    "pace_s": 0,
+    "leap": true,
+    "force": true,
+    "lead_s": 2
+   },
+   "gates": [
+    "2025-01-27 10:00",
+    "2025-01-28 17:00",
+    "2025-01-28 18:15",
+    "2025-01-28 18:30",
+    "2025-01-28 19:00",
+    "2025-01-28 19:15",
+    "2025-01-28 19:45",
+    "2025-01-28 20:00",
+    "2025-01-28 20:15"
+   ],
+   "stops": [
+    "2025-01-27 10:00",
+    "2025-01-28 10:00",
+    "2025-01-28 14:00",
+    "2025-01-28 17:00",
+    "2025-01-28 17:30",
+    "2025-01-28 17:45",
+    "2025-01-28 18:00",
+    "2025-01-28 18:15",
+    "2025-01-28 18:30",
+    "2025-01-28 18:45",
+    "2025-01-28 19:00",
+    "2025-01-28 19:15",
+    "2025-01-28 19:30",
+    "2025-01-28 19:45",
+    "2025-01-28 20:00",
+    "2025-01-28 20:15",
+    "2025-01-28 20:30",
+    "2025-01-28 20:45",
+    "2025-01-28 21:00",
+    "2025-01-28 21:15",
+    "2025-01-28 21:30",
+    "2025-01-28 21:45"
+   ],
+   "sale": "grid-operator-need-2025-01-28",
+   "phase": "done",
+   "leaps": [
+    {
+     "from": "2025-01-27 10:15",
+     "to": "2025-01-28 10:00",
+     "steps": 95,
+     "wall_ms": 247
+    },
+    {
+     "from": "2025-01-28 10:00",
+     "to": "2025-01-28 14:00",
+     "steps": 16,
+     "wall_ms": 195
+    },
+    {
+     "from": "2025-01-28 14:00",
+     "to": "2025-01-28 16:45",
+     "steps": 11,
+     "wall_ms": 211
+    }
+   ],
+   "surprises": [
+    {
+     "kind": "note",
+     "who": "home-02",
+     "at": "2025-01-28 17:00",
+     "stood_at": "2025-01-28 16:45",
+     "to": [
+      "homes"
+     ],
+     "from": "configuration",
+     "in_capture": false
+    },
+    {
+     "kind": "emergency",
+     "who": null,
+     "at": "2025-01-28 18:15",
+     "stood_at": "2025-01-28 18:00",
+     "to": [
+      "grid-operator"
+     ],
+     "from": "driver",
+     "in_capture": true
+    },
+    {
+     "kind": "battery_fault",
+     "who": "home-01",
+     "at": "2025-01-28 18:30",
+     "stood_at": "2025-01-28 18:15",
+     "to": [
+      "homes"
+     ],
+     "from": "driver",
+     "in_capture": true
+    },
+    {
+     "kind": "battery_low",
+     "who": "home-02",
+     "at": "2025-01-28 19:00",
+     "stood_at": "2025-01-28 18:45",
+     "to": [
+      "homes"
+     ],
+     "from": "driver",
+     "in_capture": true
+    },
+    {
+     "kind": "weather",
+     "who": null,
+     "at": "2025-01-28 19:15",
+     "stood_at": "2025-01-28 19:00",
+     "to": [
+      "homes",
+      "buildings"
+     ],
+     "from": "driver",
+     "in_capture": true
+    },
+    {
+     "kind": "car_now",
+     "who": "home-03",
+     "at": "2025-01-28 19:45",
+     "stood_at": "2025-01-28 19:30",
+     "to": [
+      "homes"
+     ],
+     "from": "driver",
+     "in_capture": true
+    },
+    {
+     "kind": "building_need",
+     "who": "building-01",
+     "at": "2025-01-28 20:00",
+     "stood_at": "2025-01-28 19:45",
+     "to": [
+      "buildings"
+     ],
+     "from": "driver",
+     "in_capture": true
+    },
+    {
+     "kind": "building_closed",
+     "who": "building-01",
+     "at": "2025-01-28 20:15",
+     "stood_at": "2025-01-28 20:00",
+     "to": [
+      "buildings"
+     ],
+     "from": "driver",
+     "in_capture": true
+    }
+   ],
+   "totals": {
+    "seller_usd": 12.8818,
+    "pool_usd": 9.0407,
+    "delivered_kwh": 18.252
+   },
+   "bus": {
+    "whole": {
+     "beckn.on_status": 11,
+     "beckn.rt_answer": 10,
+     "beckn.rt_ask": 10,
+     "beckn.rt_call": 1,
+     "beckn.rt_capacity": 5,
+     "beckn.rt_confirm": 8,
+     "beckn.rt_dispatch": 9,
+     "community.report": 3
+    },
+    "reports_counted": 39,
+    "reports_whole_from": [
+     "community",
+     "site-dc-01",
+     "site-pv-01"
+    ]
+   },
+   "rows": {
+    "home-01": 47,
+    "home-02": 13,
+    "home-03": 68
+   },
+   "meter_rows": 14,
+   "summaries": 14,
+   "snapshots": [
+    [
+     "settlement"
+    ]
+   ]
+  }
+ }
+}

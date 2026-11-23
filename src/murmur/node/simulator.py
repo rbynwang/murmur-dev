@@ -13,6 +13,8 @@ from murmur.node import rolling
 from murmur.node.simulator_rules import BACKUP, SUB
 from murmur.node.simulator_rolling import SimulatedRolling
 
+CATCH_UP = 96 * 2              # quarter hours a home steps one by one when its clock has moved on (advance); a host gives back as many meter rows (agents/host_doors.py)
+
 
 class SimulatedHome(SimulatedRolling):
     name = "simulated"
@@ -237,7 +239,7 @@ class SimulatedHome(SimulatedRolling):
 
     def advance(self) -> dict[str, Any]:
         cur = self.replay.current()
-        if self.idx is None or cur < self.idx or cur - self.idx > 96 * 2:
+        if self.idx is None or cur < self.idx or cur - self.idx > CATCH_UP:
             if self.reset_on is not None and self.reset_on != self.replay._line:     # the new run's clock is in: a step played since the reset was on the old one, and isn't this run's
                 self.reset_on = None
                 self.afresh()
@@ -276,6 +278,14 @@ class SimulatedHome(SimulatedRolling):
         elif not on and getattr(self, "_P0", None):
             self.P, self._P0 = self._P0, None
         return {"battery_fault": self.P == 0 and self.E > 0, "battery_kw": self.P}
+
+    def set_soc(self, pct: float) -> dict[str, float]:
+        """What-if: the battery holds this much from now on, held inside its own band (reserve to top): below its reserve the next step would put it
+        back there with no energy flowing. The no-event twin holds the same. It is this home without the sale: a charge that changed for another
+        reason changed there too, so nothing of the change reads as the sale's doing (grid_kw - grid_cf_kw, which the meter and the plan rest on)."""
+        was = self.soc
+        self.soc = self.cf["soc"] = min(self.SM, max(self.R, float(pct) / 100))
+        return {"soc_pct": round(self.soc * 100, 2), "was_pct": round(was * 100, 2)}
 
     def set_plan(self, actions: dict[str, dict[str, Any]], ev_hold: tuple[str, str] | None = None) -> None:
         self.plan.update(actions)

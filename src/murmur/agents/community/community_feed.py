@@ -6,6 +6,17 @@ from typing import Any
 from murmur.protocol import envelope as beckn
 from murmur.agents.community.community_rules import FEED, NO_METER, QUIET, RUNS, STEP_MIN, TIME, line, number, row
 
+MOVE_MAX = 96 * 2              # quarter hours of one move of the clock that each get a row: as many as a home steps one by one (node/simulator.py). A move further on, or back, begins again
+
+
+def quarters(after: str, until: str) -> list[str]:
+    """Every quarter hour after one time up to another, in order."""
+    out, t = [], beckn.add_minutes(after, STEP_MIN)
+    while t <= until:
+        out.append(t)
+        t = beckn.add_minutes(t, STEP_MIN)
+    return out
+
 
 class CommunityFeed:
     """The community's meter, quarter hour by quarter hour: what it is fed, the report row it sends up for each step, and the members' batteries where it runs them."""
@@ -59,15 +70,34 @@ class CommunityFeed:
         return {"rows": len(took), "fields": dict(seen), "first": took[0][0], "last": took[-1][0]}
 
     def step(self, market: Any, now: str) -> dict[str, Any] | None:
-        """The tick (6): one report row for each quarter hour, once. The net power is the meter's, the line says what the community promised for that step, and no member is in it."""
+        """The tick (6): one report row for each quarter hour, once, in order. A clock that has moved over several quarter hours in one move leaves none out: each of them
+        gets its row. On a real clock the rows of the quarter hours it passed over are written as their meter readings come in, oldest first, and when the clock next
+        moves at the latest. The last row written now, or None."""
         q = now[:14] + f"{int(now[14:16]) // STEP_MIN * STEP_MIN:02d}"
-        if q == self.last_step:
-            return None
-        first, self.last_step = self.last_step is None, q
-        if self.report_ended:                                # on a real clock the meter's reading of a quarter hour, and the charge at its end, exist once it has ended:
-            if first:                                        # its row is written then, as ENGIE's participants send theirs
-                return None
-            q = beckn.add_minutes(q, -STEP_MIN)
+        wrote = None
+        if q != self.last_step:
+            was, play, self.last_step, self.play = self.last_step, self.play, q, getattr(market, "play", None)
+            new, due, self.rows_due = [q], self.rows_due, []
+            if was is not None and play == self.play and was < q <= beckn.add_minutes(was, STEP_MIN * MOVE_MAX):
+                new = quarters(was, q)                       # one move on, in the same play: every quarter hour of it, and what was still due from the move before
+                for t in due:                                # those can wait no longer: with their reading or without
+                    wrote = self.write_row(market, t)
+            if self.report_ended:                            # on a real clock the meter's reading of a quarter hour, and the charge at its end, exist once it has ended:
+                new = [] if was is None else [beckn.add_minutes(t, -STEP_MIN) for t in new]      # its row is written then, as ENGIE's participants send theirs
+                new, self.rows_due = new[:1], new[1:]        # the step the clock held at was read while it held there. The ones it passed over are only now being read: their rows wait
+            for t in new:
+                wrote = self.write_row(market, t)
+        while self.rows_due and self.read_at(self.rows_due[0]):
+            wrote = self.write_row(market, self.rows_due.pop(0))
+        return wrote
+
+    def read_at(self, q: str) -> bool:
+        """Does the meter have its reading of this quarter hour? Where the agent holds the members' batteries, the reading is its own, once the battery has run."""
+        self.run_battery(q)
+        return self.meter.at(q) is not None
+
+    def write_row(self, market: Any, q: str) -> dict[str, Any]:
+        """One quarter hour's report row. The net power is the meter's, the line says what the community promised for that step, and no member is in it."""
         text = QUIET
         for ev in list(getattr(market, "events", {}).values()):
             n, cap = ev.get("need") or {}, ev.get("capacity_offered")

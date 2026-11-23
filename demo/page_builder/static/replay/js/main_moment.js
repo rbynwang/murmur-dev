@@ -62,7 +62,7 @@
     const len = (big[0] || '').length;
     const size = big[0] && !/^[$\d]/.test(big[0]) ? (big[0].indexOf(' ') < 0 && len > 11 ? ' wd tk' : ' wd') : len > 10 ? ' sm' : len > 8 ? ' md' : '';
     let did = m ? k.did : '';
-    const about = b ? BN[b].a1 : (st.id === 'main' ? (st.own ? (oneStory() ? 'One recorded day. Press Next to start.' : 'One recorded day. Press Next, or pick its other story.') : 'One recorded day. Press Next, or send an input.') : (st.own ? 'The same recorded day, from the event on. Press Next to follow it.' : 'A separate recorded run of the same day. Press Next to follow it.'));
+    const about = b ? BN[b].a1 : st.about || (st.id === 'main' ? (st.own ? (oneStory() ? 'One recorded day. Press Next to start.' : 'One recorded day. Press Next, or pick its other story.') : 'One recorded day. Press Next, or send an input.') : (st.own ? 'The same recorded day, from the event on. Press Next to follow it.' : 'A separate recorded run of the same day. Press Next to follow it.'));
     if (fin) { did = nextWords(); }
     $('layer').className = 'layer ' + hueOf(k.cb || null) + (k.kind === 'start' ? ' at-start' : '');
     $('c-n').textContent = k.l ? (k.l === 8 ? 'R' : k.l) : '';
@@ -112,7 +112,7 @@
     const n = story().moments.length;
     $('pos').textContent = Math.min(S.m + 1, n) + ' of ' + n;
     $('b-back').disabled = S.m < 0;
-    $('b-next').disabled = ended();
+    $('b-next').disabled = ended() || (story().live && S.m >= n - 1);
     $('b-auto').setAttribute('aria-pressed', S.auto ? 'true' : 'false');
     $('b-speed').textContent = S.speed + '×';
     qa('.chip[data-s]').forEach((c) => {
@@ -134,7 +134,7 @@
     setHue(tb, 'tb', k.cb || null);
     $('t-name').textContent = k.term[0];
     $('t-what').textContent = k.term[1];
-    if (ended()) { html = endHTML(); } else if (!m) { html = briefHTML() + decidesHTML() + legendHTML(); } else if (S.view === 'gap') {
+    if (ended()) { html = endHTML(); } else if (!m) { html = briefHTML() + (story().live ? '' : decidesHTML() + legendHTML()); } else if (S.view === 'gap') {
       html = gapHTML(k.gap);
       where = 'What the flow doesn\'t do';
     } else if (S.view === 'block') {

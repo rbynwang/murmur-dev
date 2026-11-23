@@ -1,8 +1,9 @@
 """The community agent's service: its message-bus inbox, the market's tick, the waiting clock, and its HTTP doors.
 
 One process stands for one community. It holds the community's signing key and the keys it pinned for its members, takes every signed message
-from its inbox (market.Market.handle for the contract steps, Market.from_above for its aggregator's requests), ticks the market once a second,
-and, when the clock waits (cfg clock_waits), moves every participant's clock one 15-minute step at a time, once nothing is still on its way.
+from its inbox (market.Market.handle for the contract steps, Market.from_above for its aggregator's requests), ticks the market once a second
+and at once when its clock is set, and, when the clock waits (cfg clock_waits), moves every participant's clock once nothing is still on its
+way: one 15-minute step at a time, or, when it leaps (cfg clock_leap), over the quarter hours nothing is scheduled at in one move (conductor.py).
 
   python -m murmur.agents.community.service run       # the service, on <bind_host>:<community_port>
   python -m murmur.agents.community.service pubkey    # this community's public key
@@ -18,8 +19,6 @@ import traceback
 from collections import deque
 from typing import Any
 
-import httpx
-
 from murmur.protocol import envelope as beckn
 from murmur import config
 from murmur import files
@@ -33,6 +32,7 @@ from murmur.protocol.inbox import LagMeter
 
 log = logging.getLogger("murmur.community")
 TS = "%Y-%m-%d %H:%M"
+TICK_S = 1.0                    # the market loop's cadence: its next pass starts this long after the last, or at once when the clock is set
 
 
 class CommunityAgent:
@@ -133,15 +133,20 @@ class CommunityAgent:
         return out
 
     def market_loop(self) -> None:
+        """The market's tick, once a second and at once when the clock is set. self.clock.ticked is the dataset time of its last whole pass since then:
+        what the waiting clock can read here, in its own process, before it moves every clock on."""
+        f = self.clock.follower
         while True:
+            seen, now = f.moves, self.clock.ts(self.clock.current())
             try:
                 self.market.tick()
                 self.market.failing.pop("the tick", None)
+                f.passed(seen, now)
             except Exception as exc:
                 self.event("market_error", error=str(exc)[:200])
                 log.error("market: %s", traceback.format_exc())
                 self.market.failed("the tick", exc)
-            time.sleep(1.0)
+            f.wait(seen, TICK_S)
 
     def event(self, kind: str, **detail) -> None:
         try:
@@ -201,13 +206,6 @@ class CommunityAgent:
                                   idle_every=float(cfg.get("town_poll_idle_seconds", 3.0)),
                                   claimers=max(1, int(cfg.get("catchup_workers", 16))), on_error=err, on_empty=ready)
         self.poller.run()
-
-
-def opens_brake(answered: str | None, now_ts: str, soon: str) -> bool:
-    """Every day at 10:00 the market asks its buyers for tomorrow's request. The clock waits from 10:00 until the answer is in, or until 16:00
-    without one. `answered`: the last day whose 10:00 question the buyer has answered; `soon`: the step a wait can still reach in time."""
-    d = soon[:10]
-    return soon[11:16] >= "10:00" and now_ts < f"{d} 16:00" and (answered or "") < d
 
 
 def main() -> None:

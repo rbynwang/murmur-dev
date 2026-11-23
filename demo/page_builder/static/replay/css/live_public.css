@@ -1,0 +1,87 @@
+
+/* ---------- Live for an audience (live_crowd.js, live_qr.js): the LIVE mark and a looping console's day in the bar, the strip of
+   six events for every viewer without a presenter's key, the banner when a viewer's event fires, and the card for a phone.
+   Every rule is scoped to Live's own elements (lv-). A control a thumb presses is at least 44 px high below 1,180 px. */
+.lv-live{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;font:700 11px/1 var(--body);letter-spacing:.08em;padding:5px 8px 5px 7px;border-radius:4px;background:var(--rule);color:var(--paper)}
+.lv-live::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.lv-live[data-on="1"]{background:var(--fail);color:var(--white)}
+.lv-live[data-on="1"]::before{animation:lv-pulse 1.4s ease-in-out infinite}
+@keyframes lv-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.lv-day{flex:0 1 auto;min-width:0;font:600 13px/1.2 var(--body);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-day[hidden]{display:none}
+.lv-qrb{flex:0 0 auto;padding:4px 9px;font-size:12px}
+.lv-qrb[aria-expanded="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* the strip of six events */
+.lv-crowd{display:flex;flex-direction:column;gap:5px;min-width:0}
+.lv-crowd[hidden]{display:none}
+.lv-crowd-h{display:flex;align-items:baseline;gap:8px;min-width:0;font-size:12.5px;line-height:1.25;color:var(--muted)}
+.lv-crowd-h b{flex:0 0 auto;font:700 12.5px/1.25 var(--body);color:var(--lpk)}
+.lv-crowd-s{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-crowd-n{flex:0 0 auto;font:600 12px/1.25 var(--mono);color:var(--ink);white-space:nowrap}
+.lv-evs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.lv-ev{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:30px;padding:4px 6px;border-radius:999px;border:1.5px solid var(--lpk);background:var(--sheet);color:var(--ink);font:600 12.5px/1.15 var(--body);text-align:center;cursor:pointer}
+.lv-ev:hover:not(:disabled){background:color-mix(in srgb,var(--lpk) 14%,var(--sheet))}
+.lv-ev[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.lv-ev:disabled{opacity:.5;cursor:default}
+.lv-ev[aria-pressed="true"]:disabled{opacity:1}
+.lv-ev-v{position:absolute;top:-7px;right:-2px;min-width:18px;padding:2px 5px;border-radius:999px;background:var(--ink);color:var(--paper);font:700 10.5px/1.2 var(--mono);font-style:normal;text-align:center}
+.lv-ev-v[hidden]{display:none}
+/* on a wide screen the strip stands in the bar's own place over the panel's top rows, which are given the height it needs */
+@media (min-width:1180px){
+  #app.lv.lv-aud #inputs{min-height:66px}
+  #app.lv.lv-aud .lv-state{width:auto;min-width:8.5em}      /* the state's own width, so that the day beside it is said whole */
+  #app.lv .lv-msg{flex-shrink:30}
+}
+
+/* the banner: over the map's top edge, beside the bar; below 1,180 px along the bottom of the layer, clear of the bar and the strip */
+.lv-flash{position:absolute;left:25%;top:10px;transform:translateX(-50%);z-index:30;width:max-content;max-width:calc(50% - 32px);padding:10px 18px;border-radius:14px;border:2px solid var(--lpk);background:var(--ink);color:var(--paper);font:600 14px/1.3 var(--body);text-align:center;box-shadow:0 8px 28px var(--shadow);pointer-events:none;animation:lv-in .25s ease-out}
+.lv-flash[hidden]{display:none}
+@keyframes lv-in{from{opacity:0}to{opacity:1}}
+
+/* the card for a phone */
+.lv-veil{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:16px;background:color-mix(in srgb,var(--barbg) 60%,transparent)}
+.lv-veil[hidden]{display:none}
+.lv-card{position:relative;width:min(520px,100%);max-height:100%;overflow:auto;padding:20px 22px 18px;border-radius:12px;background:var(--sheet);border:1px solid var(--rule);box-shadow:0 16px 48px var(--shadow)}
+.lv-card h2{font:600 22px/1.2 var(--disp);margin:0 30px 14px 0;color:var(--ink)}
+.lv-card .lv-x{top:10px;right:10px;width:44px;height:44px}
+.lv-card-main{display:grid;grid-template-columns:168px minmax(0,1fr);gap:18px;align-items:center}
+.lv-qr{border-radius:8px;overflow:hidden;background:#FFFFFF;border:1px solid var(--hair)}
+.lv-qr[hidden]{display:none}
+.lv-qr[hidden] + .lv-card-side{grid-column:1/-1}
+.lv-qr svg{display:block;width:100%;height:auto}
+.lv-links{display:flex;flex-direction:column}
+.lv-links a{display:inline-flex;align-items:center;min-height:44px;font:600 16px/1.25 var(--body);color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.lv-addr{margin-top:4px;font:12px/1.3 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.lv-card h3{margin:16px 0 6px;font:700 11px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--lu)}
+.lv-facts li{position:relative;padding:3px 0 3px 14px;font-size:14px;line-height:1.35;color:var(--ink)}
+.lv-facts li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--lu)}
+
+/* below 1,180 px the bar stands above the layer, the LIVE mark's row first: the mark, the day and the card's button, then the clock
+   and its state; the events are two rows of three; what a thumb presses is 44 px high; the stages are one row that scrolls */
+@media (max-width:1179px){
+  #app.lv .lv-stat{order:-1;flex-wrap:wrap;gap:3px 8px}
+  #app.lv .lv-stat::after{content:"";order:3;flex:0 0 100%;height:0}
+  #app.lv .lv-live{order:1}
+  #app.lv .lv-day{order:2;flex:1 1 0;white-space:normal}
+  #app.lv .lv-qrb{order:2;margin-left:auto;min-height:44px;padding-left:12px;padding-right:12px}
+  #app.lv .lv-clock,#app.lv .lv-state,#app.lv .lv-msg,#app.lv .lv-back{order:4}
+  #app.lv .lv-state{width:auto}
+  #app.lv .lv-msg{flex:1 1 0}
+  #app.lv .lv-back{min-height:44px}
+  .lv-evs{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 6px}
+  .lv-ev{min-height:44px;font-size:13px}
+  .lv-crowd-h{flex-wrap:wrap;gap:1px 8px}
+  .lv-crowd-n{margin-left:auto}
+  .lv-crowd-s{order:3;flex:1 1 100%;white-space:normal}
+  #app.lv-aud .strip{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  #app.lv-aud .strip::-webkit-scrollbar{display:none}
+  #app.lv-aud .stg{flex:0 0 auto}
+  .lv-flash{left:16px;right:16px;top:auto;bottom:10px;transform:none;width:auto;max-width:none}
+}
+@media (max-width:480px){
+  .lv-card{padding:16px 16px 14px}
+  .lv-card-main{grid-template-columns:132px minmax(0,1fr);gap:14px}
+  .lv-flash{font-size:13px;border-radius:12px}
+}
+@media (prefers-reduced-motion:reduce){.lv-live::before,.lv-flash{animation:none}}

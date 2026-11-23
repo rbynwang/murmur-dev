@@ -1,14 +1,17 @@
 """The demo runner without starting a process: its configuration and refusals, run grants and the bus's grant join, the stand-in model's
-answers, the state feed's schema, the run folder it writes with the keys and join tokens each part is told, and the synthetic data behind
-the example."""
+answers, the state feed's schema, the run folder it writes with the keys and join tokens each part is told, the synthetic data behind
+the example, and an evening played on scripted parts: its gates and stops, its meter, how it ends and what it keeps."""
 from __future__ import annotations
 
+import gzip
 import hashlib
 import json
 import re
 import stat
 import threading
+from dataclasses import fields
 from pathlib import Path
+from types import SimpleNamespace
 
 import httpx
 import pytest
@@ -16,6 +19,7 @@ from fastapi.testclient import TestClient
 
 from demo.runner import example, grants, settings
 from demo.runner.bus import make_bus, runs_from
+from demo.runner.evening import Evening, stops
 from demo.runner.feed import SCHEMA, state
 from demo.runner.model import REPORT, StandIn
 from demo.runner.stack import Stack
@@ -46,6 +50,9 @@ def test_a_good_configuration_loads_with_its_relative_paths_read_from_its_own_fo
 
 
 @pytest.mark.parametrize("over, words", [({"step_seconds": 1}, "step_seconds must be 2 to 120"), ({"step_seconds": 121}, "step_seconds must be 2 to 120"),
+                                         ({"pace_s": -0.5}, "pace_s must be 0 to 120"), ({"pace_s": 121}, "pace_s must be 0 to 120"),
+                                         ({"leap": "yes"}, "leap must be true or false"), ({"leap_max_steps": 0}, "leap_max_steps must be a whole number from 1 to 192"),
+                                         ({"leap_max_steps": 193}, "leap_max_steps must be"), ({"leap_max_steps": 12.5}, "leap_max_steps must be"),
                                          ({"ports": 50999}, 'ports must be "free" or a first port of 51000 or above'),
                                          ({"data_dir": "/nowhere"}, "no dataset.json in data_dir"),
                                          ({"model": {"url": "http://example.org:80", "name": "m"}}, "model must be"),
@@ -54,6 +61,15 @@ def test_a_good_configuration_loads_with_its_relative_paths_read_from_its_own_fo
 def test_a_bad_value_stops_the_run_before_anything_starts(tmp_path, over, words):
     with pytest.raises(ValueError, match=words):
         settings.load(config(tmp_path, **over))
+
+
+def test_a_configuration_that_names_no_pace_and_no_leap_plays_every_step_at_its_step_seconds_as_a_run_always_did(tmp_path):
+    clock = lambda **over: (lambda s: (s.step_seconds, s.pace_s, s.leap, s.leap_max_steps))(settings.load(config(tmp_path, **over)))      # noqa: E731
+    assert clock(step_seconds=5) == (5.0, 5.0, False, 96)
+    assert {f.name: f.default for f in fields(settings.Settings)}.items() >= {"step_seconds": 2.0, "pace_s": 2.0, "leap": False, "leap_max_steps": 96}.items()
+    assert clock(pace_s=0, leap=True, leap_max_steps=192) == (2.0, 0.0, True, 192) and clock(pace_s=120, leap_max_steps=1) == (2.0, 120.0, False, 1)   # the ends of what a file may name
+    raw = json.loads((Path(settings.__file__).parent / "config.example.json").read_text())   # the example leaps, at the pace a run always had
+    assert (raw["step_seconds"], raw["pace_s"], raw["leap"], raw["leap_max_steps"]) == (2, 2, True, 96)
 
 
 def test_a_run_folder_that_exists_is_refused_and_a_time_placeholder_makes_a_fresh_one(tmp_path):
@@ -169,6 +185,7 @@ def test_the_run_folder_holds_each_parts_configuration_and_grants_the_bus_will_a
     s, k = written
     community = read(s, "community", "agent.json")
     assert community["roster"] == ["home-01", "home-02"] and community["clock_waits"] is True
+    assert (community["clock_leap"], community["clock_leap_max_steps"], community["clock_wait_meter"]) == (False, 96, True)   # every step played, and each waits for its meter reading
     assert set(community["clock_extra_targets"]) == {"grid-operator", "aggregator", "site-pv-01", "site-dc-01"}
     assert community["utility_url"] == k.url["utility"] and community["bind_host"] == s.host == "127.0.0.1"   # every address from the run's settings
     homes = read(s, "homes", "agent.json")
@@ -184,6 +201,15 @@ def test_the_run_folder_holds_each_parts_configuration_and_grants_the_bus_will_a
     agg = read(s, "aggregator", "agent.json")
     assert sorted(agg["aggregator_communities"]) == ["community", "site-dc-01", "site-pv-01"]
     assert len(set(k.port.values())) == len(k.port) and min(k.port.values()) > 0      # a free port for every part, none shared
+
+
+def test_the_community_is_told_that_its_clock_leaps_and_how_far_when_the_configuration_says_so(tmp_path):
+    s = settings.load(config(tmp_path, pace_s=0, leap=True, leap_max_steps=12))
+    s.folder.mkdir()
+    Stack(s).write()
+    community = read(s, "community", "agent.json")
+    assert (community["clock_leap"], community["clock_leap_max_steps"], community["clock_wait_meter"], community["clock_waits"]) == (True, 12, True, True)
+    assert community["replay_step_seconds"] == 2.0 and "pace_s" not in community        # the pace is the evening's word at its start, not a setting of the part
 
 
 def test_each_part_is_told_the_keys_and_the_join_tokens_of_those_it_must_trust(written):
@@ -231,3 +257,143 @@ def test_the_example_evening_covers_its_clock_from_the_day_before_to_the_morning
     assert min(ev["feed"]) == "2025-01-27 10:00" and max(ev["feed"]) == "2025-01-29 02:45"
     assert max(ev["community_definition"]["meter"]) < min(ev["feed"])
     assert {m["member"] for m in ev["community_definition"]["members"]} == set(ev["homes"]) | set(ev["buildings"])
+
+
+class Parts:
+    """The parts an evening talks to, in place of their processes: what each door answers now, every address asked and every post, in order."""
+    def __init__(self):
+        self.posts: list[tuple[str, dict]] = []
+        self.asked: list[str] = []
+        self.clock = {"now": "2025-01-27 09:45", "mode": "playing", "at_gate": None, "pace_s": 0.0, "leap": True, "leap_max_steps": 96, "steps": 0, "held_s": 0.0,
+                      "waiting_on": [], "went_on": [], "leaps": [], "played": []}
+        self.sale = {"phase": "homes", "offers": 3, "accepted": 3, "readings": 0}
+        self.rows: dict[str, dict] = {}                      # a host's name -> its /telemetry answer
+        self.record = {"events": [], "next": 0}
+
+    def get(self, url: str):
+        self.asked.append(url)
+        part, path = url.split("/", 1)
+        doors = {"demo/conductor": self.clock, "v2/summary": {"now": self.clock["now"], "events": {"flex-need-2025-01-28": self.sale}}, "aggregator": {"flagged": 0}}
+        body = self.rows[part] if path.startswith("telemetry") else self.record if path.startswith("runs/") else doors[path]
+        return SimpleNamespace(json=lambda: body, raise_for_status=lambda: None)
+
+    def post(self, url: str, json: dict):
+        self.posts.append((url, json))
+        return SimpleNamespace(json=lambda: {"event": "2025-01-28", "starts_at": "2025-01-27 09:45", "step_seconds": 2.0, "agents": {}}, raise_for_status=lambda: None)
+
+
+def evening(tmp: Path, **over):
+    """An evening of the test configuration on scripted parts, with a wall clock the test moves and no meter thread."""
+    s = settings.load(config(tmp, **over))
+    parts, wall = Parts(), SimpleNamespace(t=1000.0)
+    k = SimpleNamespace(s=s, url={n: n for n in ("bus", "community", "aggregator", "homes", "buildings", *s.buyers)}, port={}, stopped=lambda: [])
+    e = Evening(k, say=lambda *x: None, http=parts, wall=lambda: wall.t)
+    e.halt.set()
+    return e, parts, wall
+
+
+def test_the_clock_is_told_to_play_the_step_each_request_of_the_aggregator_goes_at_and_the_one_after_it(sites):
+    ev = {"date": "2025-01-28", "battery_request": {"made_at": "2025-01-28 09:05", "rows": []}}
+    assert stops(ev, sites) == ["2025-01-28 09:15", "2025-01-28 09:30", "2025-01-28 14:00", "2025-01-28 14:15"]     # made at 09:05, it goes at the first step after; both sites' at 14:00
+    assert stops({**ev, "battery_request": None}, {}) == []
+    early, late = {"made_at": "2025-01-27 09:30", "rows": []}, {"made_at": "2025-01-29 03:00", "rows": []}
+    assert stops({**ev, "battery_request": early}, {}) == [] and stops({**ev, "battery_request": late}, {}) == []      # before the clock starts, and where the evening ends: no step of the run
+
+
+def test_the_start_names_the_gates_and_the_stops_before_the_clock_starts_and_opens_the_buyers_step_once_their_orders_are_in(tmp_path):
+    e, parts, _ = evening(tmp_path, pace_s=0, events=[{"at": "2025-01-28 17:00", "kind": "note", "homes": ["home-02"], "text": "Keep it full."}])
+    e.start()
+    assert parts.posts[:3] == [("utility/demo/reset", {"clear_orders": True}), ("grid-operator/demo/reset", {"clear_orders": True}),
+                               ("community/demo/conductor", {"gates": ["2025-01-27 10:00", "2025-01-28 17:00", "2025-01-29 03:00"], "stops": ["2025-01-28 14:00", "2025-01-28 14:15"]})]
+    url, body = parts.posts[3]
+    assert url == "community/demo/start" and (body["event"], body["step_seconds"], body["pace_s"], body["force"]) == ("2025-01-28", 2.0, 0.0, True) and "leap" not in body
+    assert [u for u, _ in parts.posts[4:]] == ["utility/needs", "grid-operator/needs", "community/demo/conductor"] and parts.posts[-1][1] == {"open": "2025-01-27 10:00"}
+
+
+def test_the_meter_feeds_every_quarter_hour_the_clock_moved_over_and_takes_no_row_dated_after_the_clock(tmp_path):
+    e, parts, _ = evening(tmp_path, pace_s=0)
+    q = [f"2025-01-27 {10 + k // 4:02d}:{15 * (k % 4):02d}" for k in range(6)]          # 10:00 to 11:15
+    e.s.evening["feed"] = {t: {"base_kw": 30.0, "soc_pct": 50.0, "price_usd_kwh": 0.04} for t in q}
+
+    def host(now: str, **rows) -> dict:                                # a host's telemetry: each node's latest row, and under `recent` every row of a node that has more than one
+        return {"now": now, "keys": ["ts", "grid_kw", "grid_cf_kw"], "homes": {n: r[-1] for n, r in rows.items()}, "recent": {n: r for n, r in rows.items() if len(r) > 1}}
+    parts.rows = {"homes": host(q[0], **{"home-01": [[q[5], 5.0, 0.0]], "home-02": [[q[0], 2.0, 2.0]]}), "buildings": host(q[0], **{"building-01": [[q[0], 9.0, 10.0]]})}
+    assert e.meter_pass() == 0 and parts.posts == []                   # home-01's last row is dated after the clock: a run before left it, and it is not this evening's
+    assert parts.asked == ["homes/telemetry?since=2025-01-27 09:30", "buildings/telemetry?since=2025-01-27 09:30"]      # asked from before the clock's first step
+    parts.rows["homes"] = host(q[0], **{"home-01": [[q[0], 1.0, 1.5]], "home-02": [[q[0], 2.0, 2.0]]})
+    assert e.meter_pass() == 1 and parts.posts == [("community/v2/community/feed", {"rows": [{"ts": q[0], "meter_kw": 28.5, "soc_pct": 50.0, "price_usd_kwh": 0.04}]})]
+    parts.rows = {"homes": host(q[5], **{"home-01": [[t, 1.0, 1.0] for t in q[1:5]], "home-02": [[t, 2.0, 2.5] for t in q[1:6]]}),      # the clock leaped five quarter hours,
+                  "buildings": host(q[5], **{"building-01": [[t, 9.0, 9.0] for t in q[1:6]]})}                                           # and home-01 has still to step the last
+    assert e.meter_pass() == 4 and [r["ts"] for r in parts.posts[-1][1]["rows"]] == q[1:5] and {r["meter_kw"] for r in parts.posts[-1][1]["rows"]} == {29.5}
+    assert parts.asked[-2:] == [f"homes/telemetry?since={q[0]}", f"buildings/telemetry?since={q[0]}"] and e.meter_pass() == 0     # every row since the last one fed; none twice
+    parts.rows["homes"] = host(q[5], **{"home-01": [[q[5], 1.0, 1.0]], "home-02": [[q[5], 2.0, 2.5]]})
+    assert e.meter_pass() == 1 and parts.posts[-1][1]["rows"][0]["meter_kw"] == 29.5 and sorted(e.fed) == q      # its own row for 11:15, not the one a run before left
+    assert e.fed[q[1]] == {"homes_kw": -0.5, "buildings_kw": 0.0}
+
+
+def test_the_run_ends_settled_once_the_money_is_final_and_the_clock_it_held_has_finished_its_step(tmp_path):
+    e, parts, wall = evening(tmp_path, pace_s=0, leap=True)
+    assert e.look() is None and parts.posts == []                      # the sale is open: the clock runs
+    parts.sale.update(phase="done", readings=15, readings_missing={"home-01": ["3"]})
+    assert e.look() is None and parts.posts == []                      # done with a reading missing: an alarm stands, and the clock goes on
+    parts.sale["readings_missing"] = {}
+    assert e.look() is None and parts.posts == [("community/demo/conductor", {"hold": True})]      # the money is final: the clock is told to stop where it is
+    wall.t += 600.0
+    assert e.look() is None and len(parts.posts) == 1                  # however long the step in hand takes, it is not finished yet
+    parts.clock["mode"] = "held"
+    assert e.look() == "settled"
+
+
+def test_a_sale_that_fails_ends_the_run_at_once_and_the_end_of_the_evening_ends_it_with_what_stands(tmp_path):
+    e, parts, _ = evening(tmp_path)
+    parts.clock.update(now="2025-01-29 02:45", at_gate="2025-01-29 03:00", mode="at_gate")     # the clock stands before the evening's last step
+    assert e.look() == "not settled"
+    parts.sale.update(phase="done", readings_missing={"home-01": ["3"]})
+    assert e.look() == "settled, with an alarm standing" and parts.posts == []
+    parts.sale.update(readings_missing={})                             # the money became final on the evening's last step: held there, it is settled
+    assert e.look() is None and e.look() == "settled"
+    parts.clock.update(at_gate=None, mode="playing")
+    for parts.sale["phase"] in ("failed", "no_offer"):
+        assert e.look() == parts.sale["phase"]
+
+
+def test_a_gate_is_answered_in_the_look_that_finds_the_clock_at_it_and_a_fast_clock_is_looked_at_twenty_times_a_second(tmp_path):
+    e, parts, _ = evening(tmp_path, pace_s=0, events=[{"at": "2025-01-28 17:00", "kind": "note", "homes": ["home-02"], "text": "Keep it full."}])
+    parts.clock.update(now="2025-01-28 16:45", at_gate="2025-01-28 17:00", mode="at_gate")
+    assert e.look() is None and parts.posts == [("homes/demo/scenario", {"override": {"home": "home-02", "kind": "note", "value": "Keep it full.", "source": "owner's phone"}}),
+                                                ("community/demo/conductor", {"open": "2025-01-28 17:00"})]
+    assert e.look() is None and len(parts.posts) == 2                  # posted once
+    assert [evening(tmp_path, pace_s=p)[0].every for p in (0, 0.2, 1, 2, 120)] == [0.05, 0.05, 0.125, 0.25, 0.25]      # an eighth of the pace, between a twentieth and a quarter of a second
+
+
+def test_a_run_whose_clock_and_sale_say_nothing_new_for_longer_than_a_step_can_last_is_given_up(tmp_path):
+    e, parts, wall = evening(tmp_path, pace_s=30)
+
+    def after(seconds: float) -> str | None:
+        wall.t += seconds
+        return e.look()
+    assert after(0) is None and after(30 + 899) is None                # a step lasts its pace, the clock itself goes on after 600 s of the same waits, and five minutes more
+    parts.clock["waiting_on"] = ["flex-need-2025-01-28: 2 offers to come"]
+    assert after(2) is None and after(929) is None                     # something is new: the count begins again
+    assert after(2) == "timed out"
+
+
+def test_the_summary_keeps_the_bus_record_beside_it_and_what_the_clock_said_of_the_whole_run(tmp_path):
+    e, parts, wall = evening(tmp_path, pace_s=0, leap=True)
+    e.s.folder.mkdir()
+    e.start()
+    leap = {"from": "2025-01-27 10:15", "to": "2025-01-28 10:00", "steps": 95, "wall_ms": 240}
+    first, last = {"sim": "2025-01-27 10:00", "wall_ms": 5100, "waited_on": []}, {"sim": "2025-01-28 21:45", "wall_ms": 2800, "waited_on": ["11 readings to come"]}
+    parts.clock.update(steps=1, played=[first])
+    assert e.look() is None
+    parts.clock.update(now="2025-01-28 21:45", mode="held", steps=144, held_s=3.1, leaps=[leap], played=[last])       # the clock keeps its last 50 steps: the first has left its list
+    parts.sale.update(phase="done", readings=15)
+    assert e.look() is None and e.look() == "settled"
+    parts.record = {"events": [{"event": "accepted", "message_id": "m1", "from": "community", "to": "utility", "kind": "beckn.select", "body": {"message": {}}, "at": 1001.0},
+                               {"event": "ack", "message_id": "m1", "by": "utility", "status": "processed", "note": {}, "at": 1001.2}], "next": 2}
+    wall.t += 61.5
+    out = e.summary("settled")
+    assert out["clock"] == {"now": "2025-01-28 21:45", "mode": "held", "pace_s": 0.0, "leap": True, "leap_max_steps": 96, "steps": 144, "held_s": 3.1, "went_on": [],
+                            "leaps": [leap], "played": [first, last], "wall_s": 61.5}
+    assert out["bus"] == {"messages": 1, "by_kind": {"beckn.select": 1}, "acks": 1} and out["ended"] == "settled" and out["aggregator"] == {"flagged": 0}
+    assert json.loads(gzip.open(e.s.folder / "record.json.gz").read()) == parts.record and read(e.s, "summary.json") == out

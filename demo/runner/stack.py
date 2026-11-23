@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[2]          # the repository: demo.runne
 AGGREGATOR = "aggregator"
 COMMUNITY = "community"
 KEY_FILE = {COMMUNITY: "signing.key", AGGREGATOR: "aggregator.key", "site": "site.key"}
+IDLE_S = 600.0                                       # the community's clock_wait_idle_s: waits that stand unchanged this long let the clock go on, and that is on the record
 
 
 class Stack:
@@ -83,8 +84,9 @@ class Stack:
         definition = {**s.evening["community_definition"], "aggregator": {"id": AGGREGATOR, "public_key": aggregator_pub}}
         community = {**c, "role": "community", "agent_name": COMMUNITY, "community_port": self.port[COMMUNITY], "utility_url": u["utility"],
                      "buildings": s.buildings, "host_url": u["homes"], "building_urls": {b: f"{u['buildings']}/b/{b}" for b in s.buildings},
-                     "roster": s.homes, "clock_waits": True, "clock_wait_idle_s": 600.0, "clock_extra_targets": targets,
-                     "clock_wait_quiet_s": s.quiet_s, "community": definition}
+                     "roster": s.homes, "clock_waits": True, "clock_wait_idle_s": IDLE_S, "clock_extra_targets": targets,
+                     "clock_wait_quiet_s": s.quiet_s, "clock_leap": s.leap, "clock_leap_max_steps": s.leap_max_steps, "clock_wait_meter": True,
+                     "community": definition}
         self.folder(COMMUNITY, community, [COMMUNITY, *s.buyers], {"town_token": self.tokens[COMMUNITY],
                                                                     **{f"{b}_town_token": self.tokens[b] for b in s.buyers}})
         nodes = {**c, "community_pubkeys": [community_pub], "send_workers": 4, "host_sweep_seconds": 10 * s.step_seconds, **self.model()}

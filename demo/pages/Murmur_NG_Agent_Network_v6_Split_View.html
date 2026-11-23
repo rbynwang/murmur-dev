@@ -938,6 +938,181 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 @media (max-width:1271px) and (min-width:1180px){.map{--fs-name:clamp(13.5px,1.14vw,14.5px)}.map .band .blk{padding-left:11px;padding-right:5px}.map .part.pcom .band.co.lv.c6{column-gap:5px}}
 /* before the measure has run: the names alone, unless the window is one where both lines are sure to fit */
 @media (max-height:999px) and (min-width:1180px){.map:not([data-fit]) .branches.lv .br .blk .sb{display:none}}
+
+/* ---------- Live: the split view playing the running network (live_*.js). Every rule is scoped to #app.lv or to Live's own
+   elements (lv-), and none touches the map's lines, a block's lit states, the pill or the layer: those stay the split view's. */
+#app.lv{--lu:#0B7285;--lo:#8A6100;--ld:#B5472A;--lpk:#E8590C}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #app.lv{--lu:#56C8DC;--lo:#E5BE5A;--ld:#F2A07B;--lpk:#FF922B}}
+:root[data-theme="dark"] #app.lv{--lu:#56C8DC;--lo:#E5BE5A;--ld:#F2A07B;--lpk:#FF922B}
+#app.lv #intro,#app.lv #inputs,#app.lv #b-speed{visibility:hidden}
+#app.lv #truth{display:none}
+#app.lv #panel,#app.lv #split{position:relative}
+/* the parts that answer: a dot in each part's own box */
+.lq{display:none}
+#app.lv .lq{display:block;position:absolute;right:6px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--rule);z-index:2;pointer-events:none}
+#app.lv .map .blk:has(> .lq) > .bh{padding-right:11px}
+#app.lv .lvu > .lq{background:var(--lu)}
+#app.lv .lvo > .lq{background:var(--lo)}
+#app.lv .lvx > .lq{background:var(--ld)}
+
+/* the bar, over the panel's top rows */
+.lv-bar{display:none}
+#app.lv .lv-bar{display:flex;flex-direction:column;justify-content:center;gap:5px;position:absolute;left:16px;right:16px;z-index:5;min-width:0}
+.lv-row{display:flex;align-items:center;gap:6px;min-width:0}
+.lv-ctl{display:none}
+#app.lv .lv-bar.lv-pres .lv-ctl{display:flex}
+.lv-b,.lv-s,.lv-kind,.lv-back{font:600 12.5px/1 var(--body);padding:6px 10px;border-radius:5px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);white-space:nowrap;cursor:pointer}
+.lv-b:hover,.lv-s:hover,.lv-kind:hover,.lv-back:hover{background:var(--tint)}
+.lv-b[aria-pressed="true"],.lv-s[aria-pressed="true"],.lv-kind[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.lv-b:disabled{opacity:.45;cursor:default}
+.lv-speeds{display:inline-flex;border:1px solid var(--rule);border-radius:5px;overflow:hidden;flex:0 0 auto}
+.lv-speeds .lv-s{border:0;border-radius:0;padding:6px 8px}
+.lv-speeds .lv-s + .lv-s{border-left:1px solid var(--hair)}
+.lv-sur{margin-left:auto;border-color:var(--lpk);color:var(--lpk)}
+.lv-sur[aria-expanded="true"]{background:var(--lpk);color:var(--paper)}
+.lv-net::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-left:6px;background:var(--rule);vertical-align:1px}
+.lv-net[data-up="1"]::after{background:var(--lu)}
+.lv-net[hidden]{display:none}
+.lv-stat{gap:10px}
+.lv-clock{flex:0 0 auto;font:600 16px/1 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+.lv-state{flex:0 0 auto;width:13em;text-align:center;font:700 11px/1 var(--body);letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:999px;border:1.5px solid currentColor;white-space:nowrap;color:var(--muted)}
+.lv-state[data-w="live"]{color:var(--lu)}
+.lv-state[data-w="leaping"]{color:var(--lo)}
+.lv-state[data-w="held"],.lv-state[data-w="stopped"],.lv-state[data-w="no"]{color:var(--ld)}
+.lv-state[data-w="settled"]{color:var(--ink)}
+.lv-msg{flex:1 1 auto;min-width:0;font-size:13px;line-height:1.3;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-back{flex:0 0 auto;border-color:var(--lu);color:var(--lu)}
+.lv-back[hidden]{display:none}
+
+/* the surprises drawer, over the map's upper right corner */
+.lv-drawer{position:absolute;top:10px;right:calc(50% + 10px);width:340px;max-width:calc(50% - 20px);z-index:20;display:flex;flex-direction:column;gap:8px;padding:12px;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;box-shadow:0 8px 28px var(--shadow)}
+.lv-drawer[hidden]{display:none}
+.lv-kinds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding-right:22px}
+.lv-kind{font-weight:500;padding:6px 7px;text-align:left;overflow:hidden;text-overflow:ellipsis}
+.lv-form{display:flex;flex-direction:column;gap:6px}
+.lv-who,.lv-text,.lv-num input{font:13px/1.2 var(--body);padding:5px 6px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink);min-width:0}
+.lv-num{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;color:var(--muted)}
+.lv-num input{width:6.5em}
+.lv-num input[aria-invalid="true"]{border-color:var(--ld)}
+.lv-send{align-self:flex-end;background:var(--lpk);border-color:var(--lpk);color:var(--paper);padding:7px 18px}
+.lv-x{position:absolute;top:6px;right:8px;font:600 18px/1 var(--body);background:none;border:0;color:var(--muted);cursor:pointer;padding:2px 4px}
+
+/* the timeline, in the bottom bar: pins on its top edge, the parts' words in the middle, a tick under each quarter-hour with moments */
+.lv-tl{display:none}
+#app.lv .lv-tl{display:block;grid-row:1;grid-column:2;height:36px;min-width:0;position:relative}
+.lv-track{position:absolute;left:6px;right:6px;top:3px;bottom:3px}
+.lv-part{position:absolute;top:5px;bottom:0;border-left:1px solid var(--bardim);background:color-mix(in srgb,var(--barink) 7%,transparent);overflow:hidden}
+.lv-part[data-p="window"]{background:color-mix(in srgb,var(--lpk) 34%,transparent);border-left-color:var(--lpk)}
+.lv-lab{position:absolute;left:6px;top:8px;max-width:calc(100% - 10px);font:500 11px/1 var(--body);color:var(--bardim);white-space:nowrap;overflow:hidden}
+.lv-part[data-p="window"] .lv-lab{color:var(--barink);font-weight:600}
+.lv-fold{position:absolute;bottom:0;height:4px;background:repeating-linear-gradient(90deg,var(--bardim) 0 3px,transparent 3px 6px);opacity:.8}
+.lv-tick{position:absolute;bottom:0;width:4px;height:7px;margin-left:-2px;padding:0;border:0;border-radius:1px;background:var(--barink);opacity:.55;cursor:pointer}
+.lv-tick:hover,.lv-tick.on{opacity:1;height:11px}
+.lv-pin{position:absolute;top:0;width:11px;height:11px;margin-left:-5.5px;padding:0;border-radius:50%;border:2px solid var(--barink);background:var(--barbg);cursor:default;z-index:1}
+.lv-pin[data-s="past"]{background:var(--barink)}
+.lv-pin[data-s="next"]{border-color:var(--lu);box-shadow:0 0 0 2px color-mix(in srgb,var(--lu) 40%,transparent)}
+.lv-pin[data-k="surprise"]{border-radius:2px;transform:rotate(45deg);border-color:var(--lpk)}
+.lv-pin[data-k="surprise"][data-s="past"]{background:var(--lpk)}
+.lv-pin:not([tabindex="-1"]){cursor:pointer}
+.lv-now{position:absolute;top:0;bottom:-3px;width:3px;margin-left:-1.5px;border-radius:2px;background:var(--lu);box-shadow:0 0 0 2px var(--barbg);pointer-events:none;z-index:2}
+
+/* below 1,180 px: the bar stands above the layer, and the timeline takes a row of its own across the bottom bar */
+@media (max-width:1179px){
+  #app.lv #panel{grid-template-rows:auto minmax(0,1fr)}
+  #app.lv #intro,#app.lv #inputs{display:none}
+  #app.lv .lv-bar{position:static;grid-row:1;height:auto!important}
+  #app.lv .lv-ctl{flex-wrap:wrap}
+  #app.lv .lv-sur{margin-left:0}
+  #app.lv .lv-tl{grid-column:1/-1;grid-row:1}
+  #app.lv .lv-drawer{right:16px;left:16px;width:auto;max-width:none}
+}
+
+/* ---------- Live for an audience (live_crowd.js, live_qr.js): the LIVE mark and a looping console's day in the bar, the strip of
+   six events for every viewer without a presenter's key, the banner when a viewer's event fires, and the card for a phone.
+   Every rule is scoped to Live's own elements (lv-). A control a thumb presses is at least 44 px high below 1,180 px. */
+.lv-live{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;font:700 11px/1 var(--body);letter-spacing:.08em;padding:5px 8px 5px 7px;border-radius:4px;background:var(--rule);color:var(--paper)}
+.lv-live::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.lv-live[data-on="1"]{background:var(--fail);color:var(--white)}
+.lv-live[data-on="1"]::before{animation:lv-pulse 1.4s ease-in-out infinite}
+@keyframes lv-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.lv-day{flex:0 1 auto;min-width:0;font:600 13px/1.2 var(--body);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-day[hidden]{display:none}
+.lv-qrb{flex:0 0 auto;padding:4px 9px;font-size:12px}
+.lv-qrb[aria-expanded="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* the strip of six events */
+.lv-crowd{display:flex;flex-direction:column;gap:5px;min-width:0}
+.lv-crowd[hidden]{display:none}
+.lv-crowd-h{display:flex;align-items:baseline;gap:8px;min-width:0;font-size:12.5px;line-height:1.25;color:var(--muted)}
+.lv-crowd-h b{flex:0 0 auto;font:700 12.5px/1.25 var(--body);color:var(--lpk)}
+.lv-crowd-s{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-crowd-n{flex:0 0 auto;font:600 12px/1.25 var(--mono);color:var(--ink);white-space:nowrap}
+.lv-evs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.lv-ev{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:30px;padding:4px 6px;border-radius:999px;border:1.5px solid var(--lpk);background:var(--sheet);color:var(--ink);font:600 12.5px/1.15 var(--body);text-align:center;cursor:pointer}
+.lv-ev:hover:not(:disabled){background:color-mix(in srgb,var(--lpk) 14%,var(--sheet))}
+.lv-ev[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.lv-ev:disabled{opacity:.5;cursor:default}
+.lv-ev[aria-pressed="true"]:disabled{opacity:1}
+.lv-ev-v{position:absolute;top:-7px;right:-2px;min-width:18px;padding:2px 5px;border-radius:999px;background:var(--ink);color:var(--paper);font:700 10.5px/1.2 var(--mono);font-style:normal;text-align:center}
+.lv-ev-v[hidden]{display:none}
+/* on a wide screen the strip stands in the bar's own place over the panel's top rows, which are given the height it needs */
+@media (min-width:1180px){
+  #app.lv.lv-aud #inputs{min-height:66px}
+  #app.lv.lv-aud .lv-state{width:auto;min-width:8.5em}      /* the state's own width, so that the day beside it is said whole */
+  #app.lv .lv-msg{flex-shrink:30}
+}
+
+/* the banner: over the map's top edge, beside the bar; below 1,180 px along the bottom of the layer, clear of the bar and the strip */
+.lv-flash{position:absolute;left:25%;top:10px;transform:translateX(-50%);z-index:30;width:max-content;max-width:calc(50% - 32px);padding:10px 18px;border-radius:14px;border:2px solid var(--lpk);background:var(--ink);color:var(--paper);font:600 14px/1.3 var(--body);text-align:center;box-shadow:0 8px 28px var(--shadow);pointer-events:none;animation:lv-in .25s ease-out}
+.lv-flash[hidden]{display:none}
+@keyframes lv-in{from{opacity:0}to{opacity:1}}
+
+/* the card for a phone */
+.lv-veil{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;padding:16px;background:color-mix(in srgb,var(--barbg) 60%,transparent)}
+.lv-veil[hidden]{display:none}
+.lv-card{position:relative;width:min(520px,100%);max-height:100%;overflow:auto;padding:20px 22px 18px;border-radius:12px;background:var(--sheet);border:1px solid var(--rule);box-shadow:0 16px 48px var(--shadow)}
+.lv-card h2{font:600 22px/1.2 var(--disp);margin:0 30px 14px 0;color:var(--ink)}
+.lv-card .lv-x{top:10px;right:10px;width:44px;height:44px}
+.lv-card-main{display:grid;grid-template-columns:168px minmax(0,1fr);gap:18px;align-items:center}
+.lv-qr{border-radius:8px;overflow:hidden;background:#FFFFFF;border:1px solid var(--hair)}
+.lv-qr[hidden]{display:none}
+.lv-qr[hidden] + .lv-card-side{grid-column:1/-1}
+.lv-qr svg{display:block;width:100%;height:auto}
+.lv-links{display:flex;flex-direction:column}
+.lv-links a{display:inline-flex;align-items:center;min-height:44px;font:600 16px/1.25 var(--body);color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.lv-addr{margin-top:4px;font:12px/1.3 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.lv-card h3{margin:16px 0 6px;font:700 11px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--lu)}
+.lv-facts li{position:relative;padding:3px 0 3px 14px;font-size:14px;line-height:1.35;color:var(--ink)}
+.lv-facts li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--lu)}
+
+/* below 1,180 px the bar stands above the layer, the LIVE mark's row first: the mark, the day and the card's button, then the clock
+   and its state; the events are two rows of three; what a thumb presses is 44 px high; the stages are one row that scrolls */
+@media (max-width:1179px){
+  #app.lv .lv-stat{order:-1;flex-wrap:wrap;gap:3px 8px}
+  #app.lv .lv-stat::after{content:"";order:3;flex:0 0 100%;height:0}
+  #app.lv .lv-live{order:1}
+  #app.lv .lv-day{order:2;flex:1 1 0;white-space:normal}
+  #app.lv .lv-qrb{order:2;margin-left:auto;min-height:44px;padding-left:12px;padding-right:12px}
+  #app.lv .lv-clock,#app.lv .lv-state,#app.lv .lv-msg,#app.lv .lv-back{order:4}
+  #app.lv .lv-state{width:auto}
+  #app.lv .lv-msg{flex:1 1 0}
+  #app.lv .lv-back{min-height:44px}
+  .lv-evs{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 6px}
+  .lv-ev{min-height:44px;font-size:13px}
+  .lv-crowd-h{flex-wrap:wrap;gap:1px 8px}
+  .lv-crowd-n{margin-left:auto}
+  .lv-crowd-s{order:3;flex:1 1 100%;white-space:normal}
+  #app.lv-aud .strip{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  #app.lv-aud .strip::-webkit-scrollbar{display:none}
+  #app.lv-aud .stg{flex:0 0 auto}
+  .lv-flash{left:16px;right:16px;top:auto;bottom:10px;transform:none;width:auto;max-width:none}
+}
+@media (max-width:480px){
+  .lv-card{padding:16px 16px 14px}
+  .lv-card-main{grid-template-columns:132px minmax(0,1fr);gap:14px}
+  .lv-flash{font-size:13px;border-radius:12px}
+}
+@media (prefers-reduced-motion:reduce){.lv-live::before,.lv-flash{animation:none}}
 </style>
 </head>
 <body>
@@ -1528,7 +1703,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     const len = (big[0] || '').length;
     const size = big[0] && !/^[$\d]/.test(big[0]) ? (big[0].indexOf(' ') < 0 && len > 11 ? ' wd tk' : ' wd') : len > 10 ? ' sm' : len > 8 ? ' md' : '';
     let did = m ? k.did : '';
-    const about = b ? BN[b].a1 : (st.id === 'main' ? (st.own ? (oneStory() ? 'One recorded day. Press Next to start.' : 'One recorded day. Press Next, or pick its other story.') : 'One recorded day. Press Next, or send an input.') : (st.own ? 'The same recorded day, from the event on. Press Next to follow it.' : 'A separate recorded run of the same day. Press Next to follow it.'));
+    const about = b ? BN[b].a1 : st.about || (st.id === 'main' ? (st.own ? (oneStory() ? 'One recorded day. Press Next to start.' : 'One recorded day. Press Next, or pick its other story.') : 'One recorded day. Press Next, or send an input.') : (st.own ? 'The same recorded day, from the event on. Press Next to follow it.' : 'A separate recorded run of the same day. Press Next to follow it.'));
     if (fin) { did = nextWords(); }
     $('layer').className = 'layer ' + hueOf(k.cb || null) + (k.kind === 'start' ? ' at-start' : '');
     $('c-n').textContent = k.l ? (k.l === 8 ? 'R' : k.l) : '';
@@ -1578,7 +1753,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     const n = story().moments.length;
     $('pos').textContent = Math.min(S.m + 1, n) + ' of ' + n;
     $('b-back').disabled = S.m < 0;
-    $('b-next').disabled = ended();
+    $('b-next').disabled = ended() || (story().live && S.m >= n - 1);
     $('b-auto').setAttribute('aria-pressed', S.auto ? 'true' : 'false');
     $('b-speed').textContent = S.speed + '×';
     qa('.chip[data-s]').forEach((c) => {
@@ -1600,7 +1775,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     setHue(tb, 'tb', k.cb || null);
     $('t-name').textContent = k.term[0];
     $('t-what').textContent = k.term[1];
-    if (ended()) { html = endHTML(); } else if (!m) { html = briefHTML() + decidesHTML() + legendHTML(); } else if (S.view === 'gap') {
+    if (ended()) { html = endHTML(); } else if (!m) { html = briefHTML() + (story().live ? '' : decidesHTML() + legendHTML()); } else if (S.view === 'gap') {
       html = gapHTML(k.gap);
       where = 'What the flow doesn\'t do';
     } else if (S.view === 'block') {
@@ -2053,6 +2228,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
   function go(mi, play) {
     stopAll();
     S.m = mi;
+    S.wait = false;
     S.view = 'key';
     S.read = null;
     S.busy = true;
@@ -2064,7 +2240,9 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     FG.lastGo = performance.now();
   }
   function next() {
-    const n = story().moments.length;
+    const st = story();
+    if (st.live && S.m >= st.moments.length - 1) { S.wait = true; updateBar(); return; }   /* a live story waits for its next moment */
+    const n = st.moments.length;
     if (S.m < n) go(S.m + 1, true);
     if (ended()) { S.auto = false; updateBar(); }
   }
@@ -2078,6 +2256,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
   }
   function setTab(t) {
     if (t === S.tab) return;
+    if (t !== 'split' && story().live) growLeave();
     stopAll();
     S.tab = t;
     $('app').setAttribute('data-tab', t);
@@ -2271,6 +2450,71 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
     }, 120);
   });
 
+  /* ---------- a live story: Live is the split view itself, playing the running network's moments as they come.
+     The live script (live_*.js) makes the story and hands it its steps and moments, already checked; here they are only added and
+     played by the split view's own code. A live story never ends: at its newest moment it waits for the next. */
+  let kept = null;
+  function growEnter(st) {
+    if (!kept) kept = { story: S.story, m: S.m, speed: S.speed, scale: FG.scale };
+    stopAll();
+    D.stories.live = st;
+    S.story = 'live';
+    S.auto = true;
+    S.speed = 1;
+    showSent();
+    if (S.tab !== 'split') setTab('split');
+    go(-1, false);
+    S.wait = true;
+  }
+  function growAdd(steps, moments) {
+    const st = D.stories.live;
+    if (!st || S.story !== 'live') return;
+    steps.forEach((s) => st.steps.push(s));
+    moments.forEach((m) => {
+      st.moments.push(m);
+      m.lit.forEach((b) => { if (st.touched.indexOf(b) < 0) st.touched.push(b); });
+    });
+    updateBar();
+    if (S.auto && S.wait && moments.length) go(S.m + 1, true);
+  }
+  function growShow(i) {
+    const st = D.stories.live;
+    if (!st || i < 0 || i >= st.moments.length) return;
+    S.auto = false;
+    go(i, false);
+  }
+  function growFollow() {
+    const st = D.stories.live;
+    if (!st) return;
+    S.auto = true;
+    if (st.moments.length) go(st.moments.length - 1, true); else { go(-1, false); S.wait = true; }
+  }
+  function growReset() {
+    const st = D.stories.live;
+    if (!st) return;
+    stopAll();
+    st.steps.length = 0;
+    st.moments.length = 0;
+    st.touched.length = 0;
+    S.auto = true;
+    go(-1, false);
+    S.wait = true;
+  }
+  function growLeave() {
+    if (!kept) return;
+    stopAll();
+    delete D.stories.live;
+    const was = kept;
+    kept = null;
+    S.story = D.stories[was.story] ? was.story : 'main';
+    S.speed = was.speed;
+    FG.scale = was.scale;
+    S.auto = false;
+    showSent();
+    go(Math.min(was.m, story().moments.length - 1), false);
+    if (FG.live && FG.live.left) FG.live.left();
+  }
+  FG.grow = { enter: growEnter, add: growAdd, show: growShow, follow: growFollow, reset: growReset, leave: growLeave };
   /* ---------- scenarios: one page plays any of the days. Picking one swaps the story, the map, the tree and the Full record */
   function chipsHTML() { return D.order.map((k) => '<button type="button" class="chip" data-s="' + k + '" title="' + esc(D.stories[k].one) + '" aria-pressed="false">' + esc(D.stories[k].name) + '</button>').join(''); }
   function showChips() { $('inputs').innerHTML = chipsHTML(); $('w-inputs').innerHTML = chipsHTML(); }
@@ -2491,297 +2735,1177 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 })();
 </script>
 <script id="lv-js">
-/* ---- optional live mode. It runs only when the page's own address carries ?live=<base address>.
-   Without that, the first lines below stop and the page is the recorded replay.
-   The base address is never written here: it comes from the link, and the page asks <base address>/live/state.json.
-   Whatever comes back is treated as untrusted: every field is checked and shown as plain text, never as markup. */
+/* ---- Live: the split view, playing what the running network sends. It runs when the page's own address carries
+   ?live=<base address>, and the page then asks <base address>/live/state.json. With no such address a page on the web looks
+   for one itself (live_ask's begin): first in the file live.json beside the page, {"live": "<base address>"}, which whoever
+   publishes the page puts there; then, for a page at its server's own "/", at that server (a console). Where a live state
+   answers, Live opens by itself. Where none does (no such file, a network that is switched off), and always with ?replay=1,
+   nothing of Live is made and the page is the recorded replay.
+   The base address comes from the link, from that file or from the page's own origin, never from this file.
+   Everything that comes back is untrusted: every field is checked, and every text becomes text, never markup.
+   The files live_open to live_ask are one function: this one opens it, live_ask ends it. */
 (function () {
   'use strict';
-  var given = null;
-  try { given = new URLSearchParams(window.location.search).get('live'); } catch (e) { given = null; }
-  if (!given) return;
+  let given = null, replay = false;
+  try { const q = new URLSearchParams(window.location.search); given = q.get('live'); replay = q.get('replay') === '1'; } catch (e) { given = null; }
+  const web = location.protocol === 'http:' || location.protocol === 'https:';
+  const discover = !given && !replay && web;         /* no address in the link: the page looks for one */
+  if (!given && !discover) return;
 
-  var SCHEMA = 'murmur.live.v1', STATE_PATH = '/live/state.json', MAX_CHARS = 65536;
-  var base = null, url = null, refused = '';
-  try { base = new URL(given); } catch (e) { base = null; }
-  if (!base || (base.protocol !== 'http:' && base.protocol !== 'https:')) { refused = 'The live address in this link is not a web address.'; base = null; }
-  else if (base.username || base.password) { refused = 'The live address in this link carries a sign-in, so the page does not use it.'; base = null; }
-  else { url = base.origin + base.pathname.replace(/\/+$/, '') + STATE_PATH; }
+  const STATE_PATH = '/live/state.json', MAX_CHARS = 262144, V1 = 'murmur.live.v1', V2 = 'murmur.live.v2';
+  let base = null, url = null, refused = '', onConsole = false;
+  /* takes a live address: the state's address, or why the page does not use it. The page is on a console when the live address
+     is the page's own origin: only then are a presenter's key and the console's two keyed doors used */
+  function aim(address) {
+    base = null; url = null; refused = '';
+    try { base = new URL(address); } catch (e) { base = null; }
+    if (!base || (base.protocol !== 'http:' && base.protocol !== 'https:')) { refused = 'The live address in this link is not a web address.'; base = null; }
+    else if (base.username || base.password) { refused = 'The live address in this link carries a sign-in, so the page does not use it.'; base = null; }
+    else { url = base.origin + base.pathname.replace(/\/+$/, '') + STATE_PATH; }
+    onConsole = !!base && web && base.origin === location.origin;
+    return !!base;
+  }
+  if (given) aim(given);
 
-  var CSS = [
-    ':root{--lu:#0B7285;--lo:#8A6100;--ld:#B5472A}',
-    '@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--lu:#56C8DC;--lo:#E5BE5A;--ld:#F2A07B}}',
-    ':root[data-theme="dark"]{--lu:#56C8DC;--lo:#E5BE5A;--ld:#F2A07B}',
-    '#lv{display:none}',
-    '#app.lv .panel > :not(#lv),#app.lv #pill{display:none!important}',
-    '#app.lv .panel{display:flex;flex-direction:column}',
-    '#app.lv #lv{display:flex;flex-direction:column;gap:10px;flex:1 1 auto;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain}',
-    '#app.lv .bar .ctl{visibility:hidden}',
-    '#app.lv .wires{opacity:.3}',
-    '#app.lv .map .blk{cursor:default}',
-    '#app.lv .map .blk.on,#app.lv .map .blk.now{background:var(--sheet);border-color:var(--hair);box-shadow:none}',
-    '#app.lv .map .blk::before{opacity:0}',
-    /* a part outside the live network is dimmed with lvdim, not lvd: lvd is the page's own class for the line "People and devices", and a box
-       that took it would take that line's spacing and rule and push its words past its edge. The line itself is dimmed too (span.lvd). */
-    '#app.lv .map .lvdim,#app.lv .map .lvn,#app.lv .map span.lvd{opacity:.28;filter:grayscale(1)}',
-    '#app.lv .map .lvg{opacity:.3}',
-    '#app.lv .map .blk.lvu{border-color:var(--lu);background:color-mix(in srgb,var(--lu) 12%,var(--sheet))}',
-    '#app.lv .map .blk.lvo{border-color:var(--lo);background:color-mix(in srgb,var(--lo) 12%,var(--sheet))}',
-    '#app.lv .map .blk.lvx{border-color:var(--ld);background:color-mix(in srgb,var(--ld) 10%,var(--sheet))}',
-    '.lq{display:none}',
-    '#app.lv .lq{display:block;position:absolute;right:6px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--rule);z-index:2;pointer-events:none}',
-    /* the dot stands in the box's top right corner, so the first line of a box that has one ends before it: a name or its tag is never under the dot */
-    '#app.lv .map .blk:has(> .lq) > .bh{padding-right:11px}',
-    '#app.lv .lvu > .lq{background:var(--lu)}',
-    '#app.lv .lvo > .lq{background:var(--lo)}',
-    '#app.lv .lvx > .lq{background:var(--ld)}',
-    '#app.lv .lg > .lq{position:static;display:inline-block;margin-left:7px;vertical-align:middle}',
-    '.lvh{display:flex;flex-direction:column;gap:6px;padding:0 0 9px;border-bottom:1px solid var(--rule)}',
-    '.lvt{display:flex;align-items:center;gap:12px;flex-wrap:wrap}',
-    '.lvt h2{font:600 24px/1.1 var(--disp);margin:0}',
-    '.lvs{font:500 11.5px/1 var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;border:1px solid var(--rule);color:var(--muted)}',
-    '.lvs.u{border-color:var(--lu);color:var(--lu)}',
-    '.lvs.x{border-color:var(--ld);color:var(--ld)}',
-    '.lvn2{font-size:13.5px;line-height:1.42;color:var(--muted);margin:0}',
-    '.lvv{font:600 14px/1.35 var(--body);margin:0}',
-    '.lvr{background:var(--sheet);border:1px solid var(--hair);border-left:4px solid var(--ink);border-radius:0 6px 6px 0;padding:9px 12px 10px;display:flex;flex-direction:column;gap:4px}',
-    '.lvk{font:500 10.5px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}',
-    '.lvr b{font:600 21px/1.12 var(--disp)}',
-    '.lvr p{font-size:13.5px;line-height:1.4;margin:0;color:var(--muted)}',
-    '.lvq{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 16px;margin:4px 0 0}',
-    '.lvq div{min-width:0}',
-    '.lvq dt{font:500 10.5px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}',
-    '.lvq dd{margin:2px 0 0;font:600 16px/1.2 var(--disp)}',
-    '.lvc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}',
-    '.lc{position:relative;background:var(--sheet);border:1px solid var(--hair);border-radius:6px;padding:8px 10px 9px 28px;display:flex;flex-direction:column;gap:2px;min-width:0}',
-    '.lc i{position:absolute;left:10px;top:11px;width:10px;height:10px;border-radius:50%;background:var(--rule)}',
-    '.lc.u i{background:var(--lu)}',
-    '.lc.o i{background:var(--lo)}',
-    '.lc.x i{background:var(--ld)}',
-    '.lc .ln{font:500 10.5px/1.25 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}',
-    '.lc b{font:600 17px/1.15 var(--disp)}',
-    '.lc .lx{font-size:12.5px;line-height:1.35;color:var(--muted)}',
-    '.lvf{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:12.5px;line-height:1.4;color:var(--muted);border-top:1px solid var(--hair);padding-top:8px}',
-    '@media (max-width:1180px){.lvc{grid-template-columns:repeat(2,minmax(0,1fr))}}'
-  ].join('\n');
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const btn = (cls, text, title) => { const b = el('button', cls, text); b.type = 'button'; if (title) b.title = title; return b; };
+  const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const obj = (x) => (x && typeof x === 'object' && !Array.isArray(x) ? x : null);
+  const arr = (x, n) => (Array.isArray(x) && x.length <= n ? x : null);
+  const str = (x, n) => (typeof x === 'string' ? x.slice(0, n || 600) : null);
+  const whole = (x, lo, hi) => (typeof x === 'number' && isFinite(x) && Math.floor(x) === x && x >= lo && x <= hi ? x : null);
+  const num = (x, lo, hi) => (typeof x === 'number' && isFinite(x) && x >= lo && x <= hi ? x : null);
+  const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const TIME = /^(\d{4})-(\d\d)-(\d\d) (\d\d):(\d\d)$/;
+  /* a quarter-hour of the evening as the bar says it, "Tue 18:30", counted from the timeline's first quarter-hour */
+  function stamp(t0, tq) {
+    const m = TIME.exec(t0 || '');
+    if (!m || tq == null) return '';
+    const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]) + tq * 900000);
+    return DAYS[d.getUTCDay()] + ' ' + String(d.getUTCHours()).padStart(2, '0') + ':' + String(d.getUTCMinutes()).padStart(2, '0');
+  }
+  function hhmm(t0, tq) { const s = stamp(t0, tq); return s ? s.slice(4) : ''; }
+  /* the dataset time of a quarter-hour, as a console takes it: "2025-01-28 18:30" */
+  function tsOf(t0, tq) {
+    const m = TIME.exec(t0 || '');
+    if (!m) return '';
+    const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]) + tq * 900000);
+    const p = (x) => String(x).padStart(2, '0');
+    return d.getUTCFullYear() + '-' + p(d.getUTCMonth() + 1) + '-' + p(d.getUTCDate()) + ' ' + p(d.getUTCHours()) + ':' + p(d.getUTCMinutes());
+  }
+  let FG = null;                         /* the split view's own: set once its page is ready (live_ask) */
+  /* what every file of this function shares: the address, the last answer, the story, and the console */
+  const L = { get base() { return base; }, get refused() { return refused; }, last: null, v2: null, run: null, since: 0, story: null, key: null, console: null, on: false,
+    kind: 'asking', misses: 0, newAt: 0, leapAt: 0, held: false };
 
-  /* what the live network's parts are called on this page, and which boxes of the diagram stand for them */
-  var PARTS = [
-    { key: 'aggregator', name: 'Request agent', boxes: ['mkt'], sub: 'the aggregator\u2019s: sends each request, signed' },
-    { key: 'town', name: 'NANDA Town', boxes: ['town'], sub: 'the channel every message crosses' },
-    { key: 'community', name: 'Community agent', legend: 'Community agent', inner: ['co-fc', 'co-cover', 'co-agent', 'co-market', 'co-desk', 'co-report'], sub: '' },
-    { key: 'homes', name: 'Home agents', boxes: ['h-agent'], inner: ['h-tools', 'h-guard', 'h-seal', 'h-driver', 'h-dev', 'h-person'], sub: '' },
-    { key: 'buildings', name: 'Building agents', boxes: ['b-agent'], inner: ['b-tools', 'b-guard', 'b-seal', 'b-driver', 'b-dev', 'b-person'], sub: '' },
-    { key: 'datacenter', name: 'Data center', boxes: ['site-dc'], frame: true, sub: 'a single site with its own agent' },
-    { key: 'buyer_utility', name: 'Buyer: utility', boxes: ['buy-u'], sub: 'a stand-in buyer' },
-    { key: 'buyer_grid', name: 'Buyer: grid operator', boxes: ['buy-g'], sub: 'a stand-in buyer' },
-    { key: 'model', name: 'Small model', boxes: ['h-model', 'b-model'], sub: 'reads what people write' }
-  ];
-  var PHASE = { offers: 'Collecting offers', cleared: 'Cleared', confirming: 'Confirming the contracts', settling: 'Settling on the meters', settled: 'Settled',
-    no_offers: 'No offers came in', failed: 'Not completed', other: 'In progress' };
-  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  /* ---- reading an answer: of v1 only what the dots and the start card show; v2 against the feed's fixed lists and caps */
+  const STATES = ['idle', 'starting', 'leaping', 'live', 'held', 'settled', 'failed'];
+  const SPEEDS = { '0.5': 16000, '1': 8000, '2': 4000, '4': 2000, max: 0 };      /* ms a moment stays on screen: at 1, the replay's own 8 seconds */
+  const PART_IDS = ['dayahead', 'request', 'before', 'window', 'settle'];
+  const STOP_IDS = ['sale', 'request', 'before', 'delivery', 'end', 'readings'];
+  const KINDS = ['note', 'car_now', 'weather', 'building_closed', 'building_need', 'emergency', 'battery_fault', 'battery_low'];
+  const PART_KEYS = ['town', 'aggregator', 'community', 'homes', 'buildings', 'datacenter', 'buyer_utility', 'buyer_grid', 'model'];
+  function readV1(j) {
+    if (!obj(j) || j.schema !== V1) return null;
+    if (j.withheld === true) return { withheld: true, parts: {}, event: null };
+    const p = obj(j.parts) || {}, parts = {};
+    PART_KEYS.forEach((k) => { const r = obj(p[k]); parts[k] = r ? { up: r.up === true, current: r.current === true ? true : r.current === false ? false : null } : null; });
+    const e = obj(j.event);
+    const ev = e ? { asked: num(e.asked_kw, 0, 1e7), offers: whole(e.offers, 0, 1e6), accepted: whole(e.accepted, 0, 1e6), offered: num(e.offered_kw, 0, 1e7),
+      readings: whole(e.readings, 0, 1e7), expected: whole(e.readings_expected, 0, 1e7),
+      window: arr(e.window, 2) && e.window.every((x) => TIME.test(x)) ? e.window.map((x) => x.slice(11)) : null } : null;
+    return { withheld: false, parts, event: ev, homes: whole((obj(p.homes) || {}).count, 0, 1e5), buildings: whole((obj(p.buildings) || {}).count, 0, 1e5) };
+  }
+  function readClock(c) {
+    c = obj(c) || {};
+    const speed = typeof c.speed === 'string' && has(SPEEDS, c.speed) ? c.speed : '1';
+    const leaps = (arr(c.leaps, 24) || []).map((x) => (obj(x) ? { from: whole(x.from, 0, 400), to: whole(x.to, 0, 400), ms: whole(x.ms, 0, 3600000) } : null))
+      .filter((x) => x && x.from !== null && x.to !== null && x.from < x.to);
+    const dwell = whole(c.dwell_ms, 0, 20000);
+    return { state: STATES.indexOf(c.state) >= 0 ? c.state : 'idle', tq: whole(c.tq, 0, 400) || 0, speed, dwell: dwell === null ? SPEEDS[speed] : dwell,
+      fast: c.fast === true, waiting: whole(c.waiting, 0, 999) || 0, floor: whole(c.floor_ms, 0, 120000) || 0, leaps };
+  }
+  function readTimeline(t) {
+    t = obj(t) || {};
+    const n = whole(t.n, 1, 400);
+    if (!TIME.test(t.t0 || '') || n === null) return null;
+    const parts = (arr(t.parts, 8) || []).map((p) => (obj(p) && PART_IDS.indexOf(p.id) >= 0 ? { id: p.id, from: whole(p.from, 0, 400), to: whole(p.to, 0, 400) } : null))
+      .filter((p) => p && p.from !== null && p.to !== null && p.from < p.to);
+    const pins = (arr(t.pins, 48) || []).map((p) => {
+      if (!obj(p) || whole(p.tq, 0, 400) === null) return null;
+      const ok = (p.kind === 'stop' && STOP_IDS.indexOf(p.id) >= 0) || (p.kind === 'surprise' && KINDS.indexOf(p.id) >= 0);
+      return ok && ['past', 'next', 'ahead'].indexOf(p.state) >= 0 ? { tq: p.tq, kind: p.kind, id: p.id, state: p.state, jump: p.jump === true } : null;
+    }).filter(Boolean);
+    return parts.length ? { t0: t.t0, n, parts, pins } : null;
+  }
+  /* the audience's door and a looping console's day: only on a console that sends them, and only these fields */
+  const PRESETS = ['battery_low', 'car_now', 'weather', 'building_need', 'emergency', 'battery_fault'];
+  function readCrowd(c) {
+    if (!obj(c)) return null;
+    const votes = {}, sent = obj(c.votes) || {}, last = obj(c.last);
+    PRESETS.forEach((k) => { votes[k] = has(sent, k) ? whole(sent[k], 0, 1e6) || 0 : 0; });
+    const most = whole(c.most, 1, 99) || 5;
+    return { open: c.open === true, presets: (arr(c.presets, 6) || []).filter((k) => PRESETS.indexOf(k) >= 0), cooldown: whole(c.cooldown_s, 0, 600) || 0, votes,
+      left: Math.min(most, whole(c.left, 0, 99) || 0), most,
+      last: last && PRESETS.indexOf(last.kind) >= 0 ? { kind: last.kind, by: last.by === 'vote' ? 'vote' : 'viewer', ago: whole(last.ago_s, 0, 1e7) } : null };
+  }
+  function readLoop(l) {
+    if (!obj(l)) return null;
+    const day = whole(l.day, 1, 99), days = whole(l.days, 1, 99);
+    if (day === null || days === null || day > days) return null;
+    return { day, days, date: /^\d{4}-\d\d-\d\d$/.test(l.date || '') ? l.date : '', label: (str(l.label, 40) || '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim(),
+      next: whole(l.next_s, 0, 3600) };
+  }
+  function readV2(v) {
+    if (!obj(v) || v.schema !== V2) return null;
+    const run = whole(v.run, 0, 1e9), since = whole(v.since, 0, 1e6), next = whole(v.next, 0, 1e6);
+    const timeline = readTimeline(v.timeline);
+    if (run === null || since === null || next === null || !timeline) return null;
+    const net = obj(v.net) || {};
+    return { run, since, next, more: v.more === true, every: Math.min(5000, Math.max(250, whole(v.every_ms, 0, 1e6) || 2000)), clock: readClock(v.clock), timeline,
+      net: { key: str(net.key, 20) || '', boxes: (arr(net.boxes, 64) || []).filter(known) },
+      crowd: readCrowd(v.crowd), loop: readLoop(v.loop), steps: arr(v.steps, 6 * 24) || [], moments: arr(v.moments, 6) || [] };
+  }
+  /* an answer as text: refused over its cap, or when it is no JSON, or no live state */
+  function readAnswer(text) {
+    if (text.length > MAX_CHARS) return null;
+    let j = null;
+    try { j = JSON.parse(text); } catch (e) { return null; }
+    const v1 = readV1(j);
+    return v1 ? { v1, v2: obj(j) && j.v2 !== undefined ? readV2(j.v2) : null } : null;
+  }
 
-  /* ---- reading what came back: only these fields, only these kinds of value */
-  function whole(x, hi) { return typeof x === 'number' && isFinite(x) && x >= 0 && x <= (hi || 1e7) ? Math.floor(x) : null; }
-  function number(x, hi) { return typeof x === 'number' && isFinite(x) && x >= 0 && x <= (hi || 1e9) ? x : null; }
-  function clock(x) { return typeof x === 'string' && /^\d{4}-\d\d-\d\d \d\d:\d\d$/.test(x) ? x : null; }
-  function obj(x) { return x && typeof x === 'object' && !Array.isArray(x) ? x : null; }
-  function read(j) {
-    if (!obj(j) || j.schema !== SCHEMA) return null;
-    if (j.withheld === true) return { withheld: true, every: 5, parts: {}, event: null, clock: null };
-    var p = obj(j.parts) || {}, parts = {}, e = obj(j.event), ev = null;
-    PARTS.forEach(function (d) {
-      var r = obj(p[d.key]);
-      parts[d.key] = r ? { up: r.up === true, seen: whole(r.seen_s, 1e9), current: r.current === true ? true : r.current === false ? false : null, ready: r.ready === true,
-        nodes: whole(r.nodes), count: whole(r.count), contracts: whole(r.contracts), waiting: whole(r.waiting) } : null;
+  /* ---- adopting what the feed sends as the split view's own steps and moments. Nothing becomes markup but the pieces of a line,
+     each escaped, in a span only of a listed class. A box must be one of this page's; a path must run along the map's own lines.
+     A step that fails becomes an empty step, so the indexes hold; a moment that fails is dropped. */
+  const LINE_KINDS = ['in', 'out', 'think', 'calc', 'sign', 'tool', 'guard', 'write', 'note'];
+  const LINE_CLS = ['', 'no', 'tbl'], PIECE_CLS = ['', 'n', 'd', 'w', 'q', 'h', 'b'];
+  const CARD_KINDS = ['aggpart', 'buyers', 'market', 'node', 'model', 'chain', 'device', 'people', 'ret', 'desk'];
+  const COLS = /^(repeat\([1-8],minmax\(0,1fr\)\)|\d(\.\d{1,2})?fr( \d(\.\d{1,2})?fr){0,7})$/;
+  let IDX = null, EDGE = null;
+  function maps() {
+    if (IDX) return;
+    IDX = {};
+    FG.D.blocks.forEach((b, i) => { IDX[b.id] = i; });
+    EDGE = {};
+    (FG.D.edges || []).forEach((e) => { EDGE[e[0] + '>' + e[1]] = 1; EDGE[e[1] + '>' + e[0]] = 1; });
+  }
+  const known = (b) => typeof b === 'string' && has(IDX, b);
+  const fail = () => { throw new Error('form'); };
+  const txt = (x, n) => { const s = str(x, n); return s === null ? fail() : s; };
+  function pieces(ps) {
+    if (!arr(ps, 24)) fail();
+    return ps.map((p) => {
+      if (!Array.isArray(p) || PIECE_CLS.indexOf(p[0]) < 0 || typeof p[1] !== 'string') fail();
+      const t = esc(p[1].slice(0, 600));
+      return p[0] ? '<span class="' + p[0] + '">' + t + '</span>' : t;
+    }).join('');
+  }
+  function line(l) {
+    if (!Array.isArray(l) || LINE_KINDS.indexOf(l[0]) < 0 || LINE_CLS.indexOf(l[1]) < 0 || whole(l[4], 0, 3) === null) fail();
+    const b = (arr(l[3], 64) || []).filter(known).map((x) => IDX[x]);
+    const row = [l[0], l[1], pieces(l[2]), b.length === 1 ? b[0] : b, l[4]];
+    if (l.length > 5 && l[5] != null) row.push(pieces(l[5]));
+    return row;
+  }
+  function step(s, t0) {
+    try {
+      if (!obj(s)) fail();
+      const ls = arr(s.l, 40) || fail();
+      return { t: hhmm(t0, whole(s.tq, 0, 400)), n: txt(s.n, 90), w: str(s.w, 60) || '', wn: str(s.w, 60) || '', sd: s.sd === 'b' ? 'b' : 'h',
+        b: (arr(s.b, 64) || []).filter(known).map((x) => IDX[x]), l: ls.map(line) };
+    } catch (e) {
+      return { t: '', n: '', w: '', wn: '', sd: 'h', b: [], l: [] };
+    }
+  }
+  const pair = (x, n) => (x == null || (Array.isArray(x) && !x.length) ? null : arr(x, 2) && x.length === 2 ? [txt(x[0], n), txt(x[1], n)] : fail());
+  function rows(rs, n) {
+    return (arr(rs, n) || fail()).map((r) => {
+      if (!Array.isArray(r) || r.length < 2 || r.length > 3) fail();
+      return [txt(r[0], 60), r[1] == null ? '' : txt(r[1], 60), r[2] ? 1 : 0];
     });
-    if (e) {
-      var w = Array.isArray(e.window) && e.window.length === 2 ? [clock(e.window[0]), clock(e.window[1])] : [null, null];
-      ev = { phase: Object.prototype.hasOwnProperty.call(PHASE, e.phase) ? e.phase : 'other', from: w[0], to: w[1], asked: number(e.asked_kw), halfHours: whole(e.half_hours, 96),
-        offers: whole(e.offers), accepted: whole(e.accepted), declined: whole(e.declined), offered: number(e.offered_kw), readings: whole(e.readings), expected: whole(e.readings_expected),
-        buyers: whole(e.buyers, 50), paid: whole(e.paid_nodes), income: number(e.income_usd), askedAll: e.asked_all === true };
+  }
+  function card(c) {
+    if (!obj(c)) fail();
+    const out = { h: txt(c.h, 90), hot: c.hot === true };
+    if (c.q != null) out.q = txt(c.q, 220);
+    if (c.rows != null) out.rows = rows(c.rows, 8);
+    if (c.six != null) out.six = (arr(c.six, 8) || fail()).map((x) => [whole(x[0], 0, 99) ?? fail(), txt(x[1], 60), txt(x[2] || '', 10)]);
+    if (c.nine != null) out.nine = (arr(c.nine, 12) || fail()).map((x) => [whole(x[0], 0, 99) ?? fail(), txt(x[1], 60), txt(x[2] || '', 60), x[3] ? 1 : 0, x[4] ? 1 : 0]);
+    if (c.tbl != null) out.tbl = (arr(c.tbl, 6) || fail()).map((r) => (arr(r, 9) || fail()).map((x) => (x === null ? null : txt(String(x), 60))));
+    if (c.says != null) out.says = (arr(c.says, 6) || fail()).map((x) => [txt(x[0], 60), txt(x[1], 120)]);
+    return out;
+  }
+  function cardOfMoment(k) {
+    if (!obj(k) || CARD_KINDS.indexOf(k.kind) < 0) fail();
+    const l = whole(k.l, 0, 8);
+    if (l === null || (l > 0 && !has(FG.D.layers, String(l)) && !FG.D.layers[l])) fail();
+    const cb = k.cb === '' ? '' : known(k.cb) ? k.cb : fail();
+    if (l > 0 && !cb) fail();
+    const cols = typeof k.cols === 'string' && COLS.test(k.cols) ? k.cols : fail();
+    const who = (arr(k.who, 4) || fail()).map((r) => (Array.isArray(r) ? [txt(r[0], 60), r[1] == null ? '' : txt(r[1], 40)] : fail()));
+    const three = (x) => (x == null || (Array.isArray(x) && !x.length) ? [] : arr(x, 3) && x.length === 3 ? [txt(x[0], 220), txt(x[1] || '', 60), x[2] ? txt(String(x[2]), 20) : ''] : fail());
+    return { kind: k.kind, cb, l, who, in: three(k.in), out: three(k.out), did: str(k.did, 400) || '', rule: str(k.rule, 220) || '', cd: (arr(k.cd, 8) || fail()).map(card),
+      cols, term: pair(k.term, 90) || fail(), big: pair(k.big, 90) || [] };
+  }
+  function path(p) {
+    const hops = arr(p, 9) || [];
+    if (!hops.every(known)) return [];
+    for (let i = 1; i < hops.length; i++) if (!EDGE[hops[i - 1] + '>' + hops[i]]) return [];
+    return hops.slice();
+  }
+  /* a moment of the feed as the split view's own, or null; `count` is how many steps the story holds once this answer's are in */
+  function moment(m, count, t0) {
+    try {
+      if (!obj(m)) fail();
+      const s = arr(m.s, 24) || fail();
+      if (!s.length || !s.every((i, j) => whole(i, 0, count - 1) !== null && (j === 0 || i > s[j - 1]))) fail();
+      const b = known(m.b) ? m.b : fail();
+      const k = cardOfMoment(m.k);
+      const tq = whole(m.tq, 0, 400) ?? fail();
+      return { id: txt(m.id, 40), n: txt(m.n, 90), b, bn: FG.D.blocks[IDX[b]].fn, w: str(m.w, 60) || '', wn: str(m.w, 60) || '', t: stamp(t0, tq), tq, y: '',
+        hero: pair(m.hero, 120), nt: '', tag: pair(m.tag, 60), gap: null, p: path(m.p), c: str(m.c, 40) || '', lit: (arr(m.lit, 40) || []).filter(known),
+        s: s.slice(), tr: [], tv: m.tv === 1 ? { x: 1 } : {}, ms: 8000, k, q: whole(m.q, 1, 1e6) };
+    } catch (e) {
+      return null;
     }
-    return { withheld: false, every: Math.min(60, Math.max(3, whole(j.every_s, 3600) || 5)), parts: parts, event: ev, clock: clock(j.clock) };
   }
 
-  /* ---- words */
-  function fig(n, places) { return n.toLocaleString('en-US', { maximumFractionDigits: places == null ? 1 : places, minimumFractionDigits: places === 2 ? 2 : 0 }); }
-  function count(n, one, many) { return fig(n, 0) + ' ' + (n === 1 ? one : many); }
-  function ago(s) { return s < 2 ? 'just now' : s < 90 ? Math.round(s) + ' s ago' : Math.round(s / 60) + ' min ago'; }
-  /* Between the contracts and the settlement the network's own word for its stage stays the same. The clock and the window say where the evening is. */
-  function stage(e, now) {
-    if (e.phase === 'confirming' && now && e.from && e.to && e.offers != null && e.accepted != null && e.accepted + (e.declined || 0) >= e.offers) {
-      return now < e.from ? 'Contracts signed, delivery to come' : now < e.to ? 'Delivering' : 'Delivered, readings coming in';
-    }
-    return PHASE[e.phase];
+  /* ---- the live story with its start card, and the dots: which parts of the running network answer, each on its own boxes */
+  const PART_BOXES = { aggregator: ['mkt'], town: ['town'], community: ['co-fc', 'co-cover', 'co-agent', 'co-market', 'co-desk', 'co-report'],
+    homes: ['h-agent'], buildings: ['b-agent'], datacenter: ['site-dc'], buyer_utility: ['buy-u'], buyer_grid: ['buy-g'], model: ['h-model', 'b-model'] };
+  const fig = (x, unit) => (x == null ? '' : x.toLocaleString('en-US', { maximumFractionDigits: 1 }) + (unit || ''));
+  function startCard(v1) {
+    const e = (v1 && v1.event) || {};
+    const parts = v1 ? PART_KEYS.filter((k) => v1.parts[k]) : [];
+    const up = parts.filter((k) => v1.parts[k].up).length;
+    return { kind: 'start', cb: '', l: 0, who: [], in: [], out: [], did: '', rule: '', flow: [], brief: null, big: [], cols: '1fr 1fr',
+      term: ['Terminal', 'the real lines of each live moment'],
+      cd: [{ h: 'The network', rows: [['Parts answering', parts.length ? up + ' of ' + parts.length : ''], ['Homes', fig(v1 && v1.homes)], ['Buildings', fig(v1 && v1.buildings)]] },
+        { h: 'The sale', rows: [['Window', e.window ? e.window[0] + ' to ' + e.window[1] : ''], ['Asked', fig(e.asked, ' kW')], ['Offers', fig(e.offers)],
+          ['Accepted', fig(e.accepted)]] }] };
   }
-  function day(c) { var m = /^(\d{4})-(\d\d)-(\d\d) (\d\d):(\d\d)$/.exec(c); return m ? { d: (+m[3]) + ' ' + MONTHS[(+m[2]) - 1] + ' ' + m[1], t: m[4] + ':' + m[5] } : null; }
-  function stateOf(r) { return !r ? 'none' : !r.up ? 'down' : r.current === false ? 'old' : 'up'; }
-  function partWords(d, r) {
-    if (!r) return ['Not set up', 'no source is set for it'];
-    if (!r.up) return ['No answer', r.seen != null ? 'last answer ' + ago(r.seen) : 'not reached yet'];
-    var main = 'Answering', sub = d.sub;
-    if (d.key === 'community') { main = r.nodes != null ? count(r.nodes, 'node on its roster', 'nodes on its roster') : main; sub = r.ready ? 'ready for a request' : 'starting up'; }
-    else if (d.key === 'homes') { main = r.count != null ? count(r.count, 'home', 'homes') : main; sub = r.ready ? 'reporting' : 'starting up'; }
-    else if (d.key === 'buildings') { main = r.count != null ? count(r.count, 'building', 'buildings') : main; sub = r.ready ? 'reporting' : 'starting up'; }
-    else if (d.key === 'model') { main = r.waiting != null ? count(r.waiting, 'request waiting', 'requests waiting') : main; }
-    else if (d.key === 'buyer_utility' || d.key === 'buyer_grid') { main = r.contracts != null ? count(r.contracts, 'contract', 'contracts') : main; }
-    if (r.current === false) sub = (sub ? sub + ' \u00b7 ' : '') + 'old code';
-    return [main, sub];
+  function makeStory(net) {
+    return { id: 'live', live: true, own: true, name: 'Live', one: 'Live: the running network, moment by moment',
+      about: 'The running network, moment by moment. It follows the newest moment; Back, a tick or a pin on the timeline shows an earlier one.',
+      sent: { who: 'Live', text: '', full: '', plain: '', t: '' }, moments: [], steps: [], touched: (net.boxes || []).slice(), k0: startCard(L.last && L.last.v1) };
   }
-  function codeWords(st) {
-    var tot = 0, cur = 0;
-    PARTS.forEach(function (d) { var r = st.parts[d.key]; if (r && r.up && r.current !== null) { tot += 1; if (r.current) cur += 1; } });
-    if (!tot) return 'Code: no part that answers says which code it runs.';
-    if (cur === tot) return 'Code: all ' + tot + ' parts that report it run the current code.';
-    return 'Code: ' + cur + ' of ' + tot + ' parts that report it run the current code. The others run old code.';
-  }
-
-  (function wait() {
-    if (!(window.FG && window.FG.ready)) { setTimeout(wait, 40); return; }
-    var FG = window.FG, app = document.getElementById('app'), map = document.getElementById('map'), panel = document.getElementById('panel'), truth = document.getElementById('truth');
-    var tabs = document.querySelector('#bar .tabs'), ts = document.getElementById('tab-split'), td = document.getElementById('tab-data');
-    if (!app || !map || !panel || !tabs || !ts) return;
-    function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-
-    var style = el('style'); style.id = 'lv-css'; style.textContent = CSS; document.head.appendChild(style);
-
-    /* the diagram: a dot on each part the live network can have; everything else goes grey while the live view is on */
-    var marks = {}, frames = {}, inner = {}, lit = [], kept = [];
-    PARTS.forEach(function (d) {
-      var nodes = [];
-      (d.boxes || []).forEach(function (id) { var b = map.querySelector('.blk[data-b="' + id + '"]'); if (b) nodes.push(b); });
-      if (d.legend) [].forEach.call(map.querySelectorAll('.lg'), function (g) { if (g.textContent.replace(/\s+/g, ' ').trim() === d.legend) nodes.push(g); });
-      nodes.forEach(function (n) { var q = el('i', 'lq'); q.setAttribute('aria-hidden', 'true'); n.appendChild(q); lit.push(n); });
-      marks[d.key] = nodes; frames[d.key] = d.frame && nodes[0] ? nodes[0].closest('.part.psite') : null;
-      inner[d.key] = (d.inner || []).map(function (id) { return map.querySelector('.blk[data-b="' + id + '"]'); }).filter(Boolean); kept = kept.concat(inner[d.key]);
+  /* a new answer's steps and moments, adopted in order. A step goes to its own place by its number: a gap is held by empty steps
+     and a step the story holds already is not taken again, so a moment's steps are always the ones it names */
+  function grow(v) {
+    const st = L.story;
+    if (!st) return;
+    const steps = [];
+    let at = st.steps.length;
+    v.steps.forEach((s) => {
+      const i = obj(s) ? whole(s.i, 0, 3000) : null;
+      if (i !== null && i < at) return;
+      for (; i !== null && at < i; at++) steps.push(step(null, v.timeline.t0));
+      steps.push(step(s, v.timeline.t0));
+      at++;
     });
-    [].forEach.call(map.querySelectorAll('.blk[data-b]'), function (b) { if (lit.indexOf(b) < 0 && kept.indexOf(b) < 0 && !b.closest('.part.psite')) b.classList.add('lvdim'); });
-    [].forEach.call(map.querySelectorAll('.part.psite'), function (f) { f.classList.add('lvg'); });
-    /* the diagram's two counts are the replay's; in the live view they show the live network's, and go back afterwards */
-    var forkH = map.querySelector('.forks .c4h'), forkB = map.querySelector('.forks .c4b'), forkWas = [forkH ? forkH.textContent : '', forkB ? forkB.textContent : ''];
-    function forks(st) {
-      var h = st ? st.parts.homes : null, b = st ? st.parts.buildings : null;
-      if (forkH) forkH.textContent = !on ? forkWas[0] : h && h.up && h.count != null ? count(h.count, 'home agent', 'home agents') : 'home agents';
-      if (forkB) forkB.textContent = !on ? forkWas[1] : b && b.up && b.count != null ? count(b.count, 'building agent', 'building agents') : 'building agents';
-    }
-
-    /* the right side */
-    var lv = el('article'); lv.id = 'lv';
-    var head = el('header', 'lvh'), top = el('div', 'lvt'), status = el('span', 'lvs', 'asking'), codeLine = el('p', 'lvv', ''); status.setAttribute('role', 'status');
-    top.appendChild(el('h2', '', 'Live network')); top.appendChild(status); head.appendChild(top);
-    head.appendChild(el('p', 'lvn2', 'What is running now on our own hardware, by the network\u2019s own clock. Lit boxes are answering. Ochre means answering, but on old code. Grey means not in the live network.'));
-    head.appendChild(codeLine); lv.appendChild(head);
-    var req = el('section', 'lvr'), reqH = el('b', '', 'Asking the live address'), reqP = el('p', '', ''), reqQ = el('dl', 'lvq');
-    req.appendChild(el('span', 'lvk', 'Request')); req.appendChild(reqH); req.appendChild(reqP); req.appendChild(reqQ); lv.appendChild(req);
-    var grid = el('div', 'lvc'), cards = {};
-    PARTS.forEach(function (d) {
-      var c = el('div', 'lc'), i = el('i'), b = el('b', '', 'Asking'), x = el('span', 'lx', '');
-      i.setAttribute('aria-hidden', 'true'); c.appendChild(i); c.appendChild(el('span', 'ln', d.name)); c.appendChild(b); c.appendChild(x); grid.appendChild(c); cards[d.key] = { c: c, b: b, x: x };
-    });
-    lv.appendChild(grid);
-    var foot = el('footer', 'lvf'), fClock = el('span', '', ''), fSrc = el('span', '', '');
-    foot.appendChild(fClock); foot.appendChild(fSrc); lv.appendChild(foot);
-    panel.appendChild(lv);
-
-    var on = false, last = null, lastAt = 0, misses = 0, kind = refused ? 'refused' : 'asking', timer = null, asking = false, truthWas = truth ? truth.textContent : '';
-
-    function row(dl, k, v) { var d = el('div'); d.appendChild(el('dt', '', k)); d.appendChild(el('dd', '', v)); dl.appendChild(d); }
-    function paintStatus() {
-      var s = (Date.now() - lastAt) / 1000, cls = '', t;
-      if (kind === 'refused') { t = 'not asked'; cls = 'x'; }
-      else if (kind === 'withheld') { t = 'the feed withheld its state'; cls = 'x'; }
-      else if (!last) { t = misses ? 'no answer yet' : 'asking'; cls = misses ? 'x' : ''; }
-      else if (misses >= 2) { t = 'no answer for ' + Math.round(s) + ' s'; cls = 'x'; }
-      else { t = 'updated ' + ago(s); cls = 'u'; }
-      status.textContent = t; status.className = 'lvs' + (cls ? ' ' + cls : '');
-    }
-    function paint() {
-      var st = last && misses < 2 && kind !== 'withheld' ? last : null;
-      PARTS.forEach(function (d) {
-        var r = st ? st.parts[d.key] : null, s = st ? stateOf(r) : 'none', c = cards[d.key];
-        var w = st ? partWords(d, r) : ['No answer', kind === 'refused' ? 'the page did not ask' : last ? 'the live address stopped answering' : 'not reached yet'];
-        if (!st && kind === 'asking' && !misses) w = ['Asking', ''];
-        c.b.textContent = w[0]; c.x.textContent = w[1]; c.c.className = 'lc' + (s === 'up' ? ' u' : s === 'old' ? ' o' : s === 'down' ? ' x' : '');
-        marks[d.key].forEach(function (n) { n.classList.toggle('lvu', s === 'up'); n.classList.toggle('lvo', s === 'old'); n.classList.toggle('lvx', s === 'down'); n.classList.toggle('lvn', s === 'none'); });
-        if (frames[d.key]) frames[d.key].classList.toggle('lvg', s === 'none');
-        inner[d.key].forEach(function (n) { n.classList.toggle('lvdim', s === 'none' || s === 'down'); });
+    const count = st.steps.length + steps.length;
+    const moments = v.moments.map((m) => moment(m, count, v.timeline.t0)).filter(Boolean);
+    FG.grow.add(steps, moments);
+    if (moments.length) L.newAt = Date.now();
+  }
+  function dots(v1) {
+    const blocks = FG.V.split.blocks;
+    Object.keys(PART_BOXES).forEach((k) => {
+      const r = v1 && v1.parts[k];
+      PART_BOXES[k].forEach((b) => {
+        const box = blocks[b];
+        if (!box) return;
+        if (!box.querySelector(':scope > i.lq')) box.appendChild(el('i', 'lq'));
+        box.classList.toggle('lvu', !!r && r.up && r.current !== false);
+        box.classList.toggle('lvo', !!r && r.up && r.current === false);
+        box.classList.toggle('lvx', !!r && !r.up);
       });
-      codeLine.textContent = st ? codeWords(st) : '';
-      while (reqQ.firstChild) reqQ.removeChild(reqQ.firstChild);
-      var e = st ? st.event : null;
-      if (kind === 'refused') { reqH.textContent = 'No live address to ask'; reqP.textContent = refused; }
-      else if (kind === 'shape') { reqH.textContent = 'Not a live state'; reqP.textContent = 'The address answered, but not with a state this page reads. Nothing from it is shown.'; }
-      else if (kind === 'withheld') { reqH.textContent = 'State withheld'; reqP.textContent = 'The feed answered, and held its state back after its own check.'; }
-      else if (!st) { reqH.textContent = last || misses ? 'No answer from the live address' : 'Asking the live address'; reqP.textContent = last || misses ? 'The page keeps asking. If the browser asked for permission to reach this address, it needs a yes.' : ''; }
-      else if (!e) { reqH.textContent = 'No request is open right now'; reqP.textContent = 'When a request is open, its numbers show here as the network works through it.'; }
-      else {
-        var a = e.from ? day(e.from) : null, b = e.to ? day(e.to) : null;
-        reqH.textContent = stage(e, st.clock);
-        reqP.textContent = a && b ? 'For ' + a.t + ' to ' + b.t + ' on ' + a.d + ', by the network\u2019s own clock.' : '';
-        /* one figure a network gives is its first buyer's order, and which buyer came first changes from evening to evening; a source that knows every order says so, and gives their sum */
-        if (e.asked != null) row(reqQ, e.askedAll ? 'Ordered by ' + count(e.buyers || 1, 'buyer', 'buyers') : e.buyers > 1 ? 'First order' : 'Asked', fig(e.asked) + ' kW' + (e.halfHours ? ' for ' + count(e.halfHours, 'half hour', 'half hours') : ''));
-        if (e.offers != null) row(reqQ, 'Offers', fig(e.offers, 0) + ' in' + (e.accepted != null ? ', ' + fig(e.accepted, 0) + ' accepted' : '') + (e.declined ? ', ' + fig(e.declined, 0) + ' declined' : ''));
-        if (e.offered != null) row(reqQ, 'On offer, on average', fig(e.offered) + ' kW');
-        if (e.expected) row(reqQ, 'Meter readings', fig(e.readings || 0, 0) + ' of ' + fig(e.expected, 0) + ' in');
-        if (e.buyers != null) row(reqQ, 'Buyers', fig(e.buyers, 0));
-        if (e.paid != null) row(reqQ, 'Paid', count(e.paid, 'node', 'nodes'));
-        if (e.income != null) row(reqQ, 'Flexibility income', '$' + fig(e.income, 2));
+    });
+  }
+  function clearDots() {
+    Object.keys(FG.V.split.blocks).forEach((b) => {
+      const box = FG.V.split.blocks[b];
+      box.classList.remove('lvu', 'lvo', 'lvx');
+      const i = box.querySelector(':scope > i.lq');
+      if (i) i.remove();
+    });
+  }
+
+  /* ---- the timeline in the bottom bar: the evening's five parts with the window highlighted, where the clock stands, the quiet
+     stretches it leapt, a pin for each named stop and each surprise, and a tick for every quarter-hour that holds a moment. A tick
+     shows its first moment. A pin the clock has not reached is, on a console, a button that runs the clock to it. */
+  const SHARE = { dayahead: 14, request: 18, before: 14, window: 36, settle: 18 };
+  const LABELS = { dayahead: ['Day-ahead sale', 'Day-ahead'], request: ['Morning request', 'Request'], before: ['Pre-delivery', 'Before'],
+    window: ['', 'Peak'], settle: ['Settlement', 'Settle'] };
+  const PIN_WORDS = { sale: 'The day-ahead sale', request: "The aggregator's request", before: 'An hour before the window', delivery: 'The evening peak begins',
+    end: 'The evening peak ends', readings: 'Readings and settlement' };
+  let TL = null;
+  function tlBuild() {
+    TL = el('div', 'lv-tl');
+    TL.id = 'lv-tl';
+    TL.setAttribute('role', 'group');
+    TL.setAttribute('aria-label', 'The evening, from the day-ahead sale to the settlement');
+    TL.appendChild(el('div', 'lv-track'));
+    $('bar').appendChild(TL);
+  }
+  /* how far along the track a quarter-hour is, in percent: linear inside its part */
+  function along(t, q) {
+    let left = 0;
+    for (let i = 0; i < t.parts.length; i++) {
+      const p = t.parts[i], w = SHARE[p.id] || 10;
+      if (q < p.to || i === t.parts.length - 1) return left + w * Math.max(0, Math.min(1, (q - p.from) / (p.to - p.from)));
+      left += w;
+    }
+    return left;
+  }
+  function nowTq(v) {
+    const st = L.story, m = FG.moment();
+    return st && m && FG.S.m < st.moments.length - 1 ? m.tq : v.clock.tq;
+  }
+  let drawn = '';
+  /* the timeline is drawn again only when what it shows has changed, so a tick or a pin stays put under the pointer */
+  function tlPaint() {
+    const v = L.v2;
+    if (!TL || !v) return;
+    const t = v.timeline, track = TL.firstChild, m = FG.moment();
+    const now = along(t, nowTq(v));
+    const key = JSON.stringify([t.t0, t.n, t.parts, t.pins, v.clock.leaps.length, L.story ? L.story.moments.length : 0, m ? m.tq : -1, !!(L.console && L.console.ok)]);
+    if (key === drawn) { const n = track.querySelector('.lv-now'); if (n) n.style.left = now + '%'; return; }
+    drawn = key;
+    track.textContent = '';
+    let left = 0;
+    t.parts.forEach((p) => {
+      const w = SHARE[p.id] || 10, d = el('div', 'lv-part');
+      d.dataset.p = p.id;
+      d.style.left = left + '%';
+      d.style.width = w + '%';
+      const words = p.id === 'window' ? hhmm(t.t0, p.from) + ' to ' + hhmm(t.t0, p.to) + ' evening peak' : LABELS[p.id][0];
+      const lab = el('span', 'lv-lab', words);
+      lab.dataset.short = LABELS[p.id][1];
+      lab.dataset.long = words;
+      d.appendChild(lab);
+      track.appendChild(d);
+      left += w;
+    });
+    v.clock.leaps.forEach((x) => {
+      const f = el('i', 'lv-fold'), a = along(t, x.from), b = along(t, x.to);
+      f.style.left = a + '%';
+      f.style.width = Math.max(0.4, b - a) + '%';
+      f.title = 'Leapt ' + (x.to - x.from) + ' quiet quarter-hours in ' + x.ms + ' ms';
+      track.appendChild(f);
+    });
+    const st = L.story, first = {};
+    if (st) st.moments.forEach((m, i) => { if (!has(first, m.tq)) first[m.tq] = i; });
+    Object.keys(first).forEach((q) => {
+      const i = first[q], b = btn('lv-tick', '', stamp(t.t0, +q) + ': ' + st.moments[i].n);
+      b.style.left = along(t, +q) + '%';
+      b.classList.toggle('on', !!FG.moment() && FG.moment().tq === +q);
+      b.addEventListener('click', () => FG.grow.show(i));
+      track.appendChild(b);
+    });
+    t.pins.forEach((p) => {
+      const word = p.kind === 'stop' ? PIN_WORDS[p.id] : 'Surprise: ' + (WORDS[p.id] || p.id);
+      const run = p.jump && L.console && L.console.ok;
+      const b = btn('lv-pin', '', stamp(t.t0, p.tq) + ': ' + word + (run ? '. Press to run the clock to it' : ''));
+      b.dataset.k = p.kind;
+      b.dataset.s = p.state;
+      b.style.left = along(t, p.tq) + '%';
+      if (run) b.addEventListener('click', () => L.send({ do: 'run_to', ts: tsOf(t.t0, p.tq) })); else b.tabIndex = -1;
+      track.appendChild(b);
+    });
+    const mark = el('i', 'lv-now');
+    mark.style.left = now + '%';
+    track.appendChild(mark);
+    fitLabels();
+  }
+  /* each part's label as long as it fits, else its short word, else none */
+  function fitLabels() {
+    TL.querySelectorAll('.lv-lab').forEach((lab) => {
+      lab.textContent = lab.dataset.long;
+      lab.hidden = false;
+      if (lab.scrollWidth > lab.clientWidth) lab.textContent = lab.dataset.short;
+      if (lab.scrollWidth > lab.clientWidth) lab.hidden = true;
+    });
+  }
+
+  /* ---- the bar over the panel's top rows: a LIVE mark, a looping console's day, where the clock is and what it is doing, what the
+     page says, back to live, and the card for a phone. A presenter's page has a row of controls above it: Start, Hold or Continue,
+     Step, the speeds, the surprises, the other network. No other viewer is shown that row; a viewer of a console that takes the
+     audience's taps has the strip of six events there (live_crowd). */
+  const SPEED_WORDS = [['0.5', '½×'], ['1', '1×'], ['2', '2×'], ['4', '4×'], ['max', 'Max']];
+  const B = {};
+  function barBuild() {
+    const bar = el('div', 'lv-bar');
+    bar.id = 'lv-bar';
+    const ctl = el('div', 'lv-row lv-ctl');
+    ctl.setAttribute('role', 'toolbar');
+    ctl.setAttribute('aria-label', "The presenter's controls");
+    B.start = btn('lv-b', 'Start', 'Start the evening from the day before the sale');
+    B.hold = btn('lv-b', 'Hold', 'Hold the clock once the step in hand is finished');
+    B.step = btn('lv-b', 'Step', 'Show the next moment; at the newest, play one move of the clock');
+    B.speeds = el('span', 'lv-speeds');
+    B.speeds.setAttribute('role', 'group');
+    B.speeds.setAttribute('aria-label', 'How long each moment stays on screen');
+    SPEED_WORDS.forEach((x) => {
+      const b = btn('lv-s', x[1], x[0] === 'max' ? 'As fast as the network' : 'Each moment ' + SPEEDS[x[0]] / 1000 + ' s on screen');
+      b.dataset.speed = x[0];
+      b.addEventListener('click', () => L.send({ do: 'pace', speed: x[0] }));
+      B.speeds.appendChild(b);
+    });
+    B.sur = btn('lv-b lv-sur', 'Surprise', 'Trigger a surprise: a note, a car, the weather, a building, an emergency, a battery');
+    B.sur.setAttribute('aria-expanded', 'false');
+    B.net = btn('lv-b lv-net', 'Other network', 'Switch to the other network');
+    [B.start, B.hold, B.step, B.speeds, B.sur, B.net].forEach((x) => ctl.appendChild(x));
+    const row = el('div', 'lv-row lv-stat');
+    B.live = el('span', 'lv-live', 'LIVE');
+    B.day = el('span', 'lv-day');
+    B.day.hidden = true;
+    B.clock = el('b', 'lv-clock');
+    B.state = el('span', 'lv-state');
+    B.msg = el('span', 'lv-msg');
+    B.back = btn('lv-back', '', 'Follow the running network again');
+    B.qr = btn('lv-b lv-qrb', 'Phone', 'Try it on your phone: a QR code of this page, and what is live now');
+    B.qr.setAttribute('aria-expanded', 'false');
+    [B.live, B.day, B.clock, B.state, B.msg, B.back, B.qr].forEach((x) => row.appendChild(x));
+    bar.appendChild(ctl);
+    bar.appendChild(row);
+    $('panel').appendChild(bar);
+    B.bar = bar;
+    crowdBuild(bar, row);
+    B.qr.addEventListener('click', () => cardToggle());
+    B.start.addEventListener('click', startPressed);
+    B.hold.addEventListener('click', () => {
+      const held = L.console && L.console.state && L.console.state.hold;
+      if (held) { L.send({ do: 'go' }); FG.S.auto = true; if (FG.S.wait || !FG.S.busy) FG.next(); } else { L.send({ do: 'hold' }); FG.S.auto = false; }
+    });
+    B.step.addEventListener('click', () => {
+      const st = L.story;
+      if (st && FG.S.m < st.moments.length - 1) FG.grow.show(FG.S.m + 1); else L.send({ do: 'step' });
+    });
+    B.sur.addEventListener('click', () => drawerToggle());
+    B.net.addEventListener('click', switchNet);
+    B.back.addEventListener('click', () => FG.grow.follow());
+    if (window.ResizeObserver) new ResizeObserver(barPlace).observe($('panel'));
+    barPlace();
+  }
+  /* the bar covers the panel's intro and its row of stories, which keep their boxes: the layer below stays where it was */
+  function barPlace() {
+    if (!B.bar) return;
+    const a = $('intro'), b = $('inputs');
+    B.bar.style.top = a.offsetTop + 'px';
+    B.bar.style.height = Math.max(0, b.offsetTop + b.offsetHeight - a.offsetTop) + 'px';
+  }
+  let armed = 0;
+  function startPressed() {
+    const play = L.console && L.console.state ? L.console.state.play : 'idle';
+    if ((play === 'running' || play === 'held') && Date.now() - armed > 5000) {
+      armed = Date.now();
+      B.start.textContent = 'Press again to start anew';
+      setTimeout(() => { armed = 0; barPaint(); }, 5000);
+      return;
+    }
+    armed = 0;
+    L.send({ do: 'start' });
+  }
+  function switchNet() {
+    const peer = L.console && L.console.state && L.console.state.peer;
+    let to = null;
+    try { to = peer && peer.url ? new URL(peer.url) : null; } catch (e) { to = null; }
+    if (!to || to.protocol !== location.protocol || to.hostname !== location.hostname) return;
+    const go = () => { location.href = to.pathname && to.pathname !== '/' ? to.href : to.origin + '/?live=' + encodeURIComponent(to.origin) + '#k=' + encodeURIComponent(L.key); };
+    const other = L.console.state.other || {};
+    if (other.play === 'settled' && (!to.pathname || to.pathname === '/')) fetch(to.origin + '/console/do', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Murmur-Console': L.key },
+      body: JSON.stringify({ do: 'start', run_to: L.console.state.ready && L.console.state.ready.ts }), credentials: 'omit', redirect: 'error' }).finally(go);
+    else go();
+  }
+  /* the state word: what the clock does, as the screen shows it */
+  function stateWord(v) {
+    const st = L.story, behind = st && FG.S.m < st.moments.length - 1;
+    if (L.kind === 'down') return 'No answer';
+    if (!v) return L.kind === 'ok' ? 'Not started' : 'Waiting';
+    const c = v.clock;
+    if (c.state === 'settled') return behind ? 'Live event' : 'Settled';
+    if (c.state === 'failed') return 'Stopped';
+    if (c.state === 'idle') return 'Not started';
+    if (c.state === 'starting') return 'Starting';
+    if (c.state === 'held') return behind && FG.S.auto ? 'Live event' : 'Held';
+    if (c.state === 'leaping' || Date.now() - L.leapAt < 700) return behind ? 'Live event' : 'Leaping to next event';
+    if (!behind && c.waiting > 0 && Date.now() - L.newAt > 3 * Math.max(1000, c.dwell)) return 'Waiting for the network';
+    return 'Live event';
+  }
+  function message() {
+    if (L.refused) return L.refused;
+    if (L.kind === 'shape') return 'Not a live state';
+    if (L.kind === 'withheld') return 'State withheld';
+    const pres = !!(L.console && L.console.ok);      /* only a presenter is told the live address's host: no other viewer's screen names it */
+    if (L.kind === 'down') return 'No answer from ' + (pres ? L.base.host : 'the network');
+    const s = L.console && L.console.state;
+    if (s && (s.error || s.warn || s.busy || s.said)) return s.said || s.error || s.warn || s.busy;
+    const loop = L.v2 && L.v2.loop;
+    if (loop && loop.next !== null && !(CR.box && !CR.box.hidden)) return 'Next day starting in ' + loop.next + 's…';      /* the audience's strip says it, once */
+    return pres ? 'Live from ' + L.base.host : '';
+  }
+  function barPaint() {
+    if (!B.bar) return;
+    const v = L.v2, st = L.story, c = L.console;
+    const ok = !!(c && c.ok), s = ok ? c.state || {} : {};
+    B.bar.classList.toggle('lv-pres', ok);
+    B.live.dataset.on = L.kind === 'ok' && v && ['starting', 'leaping', 'live', 'held'].indexOf(v.clock.state) >= 0 ? '1' : '0';
+    B.day.hidden = !(v && v.loop);
+    if (v && v.loop) B.day.title = B.day.textContent = dayWords(v.loop);
+    B.clock.textContent = v ? stamp(v.timeline.t0, nowTq(v)) : '';
+    const word = stateWord(v);
+    B.state.textContent = word;
+    B.state.dataset.w = word.split(' ')[0].toLowerCase();
+    const msg = message();
+    B.msg.textContent = msg;
+    B.msg.title = msg;
+    const behind = st ? Math.max(0, st.moments.length - 1 - FG.S.m) : 0;
+    B.back.hidden = !st || (FG.S.auto && behind === 0);
+    B.back.textContent = behind ? 'Back to live, ' + behind + ' new' : 'Back to live';
+    if (!ok) return;
+    if (!armed) B.start.textContent = s.play === 'running' || s.play === 'held' || s.play === 'settled' ? 'Start anew' : 'Start';
+    B.hold.textContent = s.hold ? 'Continue' : 'Hold';
+    B.hold.setAttribute('aria-pressed', s.hold ? 'true' : 'false');
+    B.speeds.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.speed === s.speed ? 'true' : 'false'));
+    const mx = B.speeds.querySelector('[data-speed="max"]');
+    if (mx && v) mx.title = 'As fast as the network: about ' + (Math.max(500, v.clock.floor) / 1000).toFixed(1) + ' s a quarter-hour';
+    const peer = s.peer && s.peer.url;
+    B.net.hidden = !peer;
+    if (peer) B.net.dataset.up = s.other && s.other.up ? '1' : '0';
+  }
+
+  /* ---- the audience's side: where the live state says its console takes viewers' taps (the feed's crowd), every viewer without a
+     presenter's key has a strip of six events in the bar, on the console's own page and on a copy of the page published
+     elsewhere alike. A tap posts its event's one word to the live address's door and nothing else: no text, no number and no
+     name is ever sent. The first tap fires; while the network settles the taps are votes, and the strip shows the
+     seconds left, each event's votes and how many events the evening still has. A banner says so when a viewer's event fires. */
+  const EVENTS = ['battery_low', 'car_now', 'weather', 'building_need', 'emergency', 'battery_fault'];
+  /* an event: its word on the strip, its words in the banner, and what it does */
+  const EVENT_WORDS = { battery_low: ['Battery 10%', 'Battery at 10%', 'A home battery drops to 10% charge'],
+    car_now: ['Car now', 'Car needed now', 'An owner needs the car now'],
+    weather: ['Solar −80%', 'Solar drop (−80%)', 'Clouds cut the sun to a fifth for three hours'],
+    building_need: ['Building need', 'Building needs power', 'A building takes a quarter of its flexible load back'],
+    emergency: ['Grid 20 kW', 'Grid emergency (20 kW)', 'The grid operator calls for 20 kW for an hour'],
+    battery_fault: ['Battery fault', 'Battery fault', 'A home battery fails'] };
+  const TAP_SAID = { fire: 'Sent. The agents are recalculating.', vote: 'Your vote is in for the next event.', again: 'You have voted in this round.',
+    done: "All of tonight's events are used.", closed: 'Events open while an evening is running.' };
+  const TAP_PATH = '/live/surprise', VIEWER_HEAD = 'X-Murmur-Viewer', VIEWER_STORE = 'murmur-viewer';
+  const CR = { id: null, voted: null, left: null, said: null, saidAt: 0, busy: false, pills: {} };
+  /* this tab's own token, made here: it tells one viewer's vote from the next one's, and is sent to the live address only */
+  function viewer() {
+    if (CR.id) return CR.id;
+    try { CR.id = sessionStorage.getItem(VIEWER_STORE); } catch (e) { CR.id = null; }
+    if (!CR.id || !/^[A-Za-z0-9_-]{16,64}$/.test(CR.id)) {
+      const a = new Uint8Array(16);
+      crypto.getRandomValues(a);
+      CR.id = Array.from(a, (x) => x.toString(16).padStart(2, '0')).join('');
+      try { sessionStorage.setItem(VIEWER_STORE, CR.id); } catch (e) { /* the token then lasts this page only */ }
+    }
+    return CR.id;
+  }
+  function crowdBuild(bar, before) {
+    const box = el('div', 'lv-crowd');
+    box.id = 'lv-crowd';
+    box.hidden = true;
+    box.setAttribute('role', 'group');
+    box.setAttribute('aria-label', 'Trigger a live grid event');
+    const head = el('p', 'lv-crowd-h');
+    head.appendChild(el('b', '', 'Trigger a live grid event'));
+    CR.status = el('span', 'lv-crowd-s');
+    CR.status.setAttribute('aria-live', 'polite');
+    CR.count = el('span', 'lv-crowd-n');
+    head.appendChild(CR.status);
+    head.appendChild(CR.count);
+    const evs = el('div', 'lv-evs');
+    EVENTS.forEach((k) => {
+      const b = btn('lv-ev', '', EVENT_WORDS[k][2]);
+      b.dataset.kind = k;
+      b.appendChild(el('span', 'lv-ev-n', EVENT_WORDS[k][0]));
+      b.appendChild(el('i', 'lv-ev-v'));
+      b.addEventListener('click', () => crowdTap(k));
+      evs.appendChild(b);
+      CR.pills[k] = b;
+    });
+    box.appendChild(head);
+    box.appendChild(evs);
+    bar.insertBefore(box, before);
+    CR.box = box;
+    CR.flash = el('p', 'lv-flash');
+    CR.flash.hidden = true;
+    CR.flash.setAttribute('role', 'status');
+    $('split').appendChild(CR.flash);
+  }
+  function crowdTap(kind) {
+    if (CR.busy || !base) return;
+    CR.busy = true;
+    fetch(base.origin + TAP_PATH, { method: 'POST', headers: { 'Content-Type': 'application/json', [VIEWER_HEAD]: viewer() }, body: JSON.stringify({ kind }),
+      credentials: 'omit', redirect: 'error', cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        const did = obj(j) && typeof j.did === 'string' && has(TAP_SAID, j.did) ? j.did : null;
+        if (did === 'vote' || did === 'again') CR.voted = CR.voted || kind;
+        crowdSay(did ? TAP_SAID[did] : 'The network did not take that.');
+      })
+      .catch(() => crowdSay('No answer from the network.'))
+      .then(() => { CR.busy = false; ask(); });
+  }
+  function crowdSay(words) {
+    CR.said = words;
+    CR.saidAt = Date.now();
+    paint();
+  }
+  /* what the strip says of the round: the next day's countdown, the cooldown, or the invitation */
+  function crowdWords(c, loop) {
+    if (CR.said && Date.now() - CR.saidAt < 4000) return CR.said;
+    if (!c.open && loop && loop.next !== null) return 'Next day starting in ' + loop.next + 's…';
+    if (!c.open) return c.left === 0 ? "All of tonight's events are used" : 'Opens while an evening is running';
+    const votes = EVENTS.reduce((n, k) => n + c.votes[k], 0);
+    if (c.cooldown > 0) return (votes ? 'Top vote fires in ' : 'Vote for the next event: ') + c.cooldown + 's';
+    return votes ? 'Top vote fires now' : 'Tap one: the agents answer live';
+  }
+  function crowdPaint() {
+    if (!CR.box) return;
+    const v = L.v2, c = v && v.crowd;
+    const show = !!c && !(L.console && L.console.ok);
+    CR.box.hidden = !show;
+    if ($('app').classList.contains('lv-aud') !== show) { $('app').classList.toggle('lv-aud', show); barPlace(); }      /* the strip has its own height in the bar */
+    flashPaint(c);
+    if (!show) return;
+    const strip = $('strip'), stage = strip && strip.querySelector('.stg.now');          /* a phone's row of stages keeps the one in hand in sight */
+    if (stage && strip.scrollWidth > strip.clientWidth) strip.scrollLeft = stage.offsetLeft - strip.offsetLeft - (strip.clientWidth - stage.offsetWidth) / 2;
+    if (c.left !== CR.left || (c.cooldown === 0 && EVENTS.every((k) => !c.votes[k]))) { CR.left = c.left; CR.voted = null; }      /* a new round */
+    CR.status.textContent = crowdWords(c, v.loop);
+    CR.count.textContent = c.left + '/' + c.most + ' left tonight';
+    EVENTS.forEach((k) => {
+      const b = CR.pills[k], n = c.votes[k];
+      b.disabled = !c.open || c.presets.indexOf(k) < 0 || CR.busy || !!CR.voted;
+      b.setAttribute('aria-pressed', CR.voted === k ? 'true' : 'false');
+      b.lastChild.textContent = n ? String(n) : '';
+      b.lastChild.hidden = !n;
+    });
+  }
+  /* the banner: for twelve seconds after an event of the audience's has fired */
+  function flashPaint(c) {
+    const last = c && c.last, on = !!last && last.ago !== null && last.ago < 12;
+    CR.flash.hidden = !on;
+    if (on) CR.flash.textContent = '⚡ ' + (last.by === 'vote' ? 'Live viewers voted: ' : 'Live viewer triggered: ') + EVENT_WORDS[last.kind][1] + ' — agents recalculating…';
+  }
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  /* a looping console's day as the bar says it: "Day 1 of 3 · Jan 28 Winter peak" */
+  function dayWords(loop) {
+    const m = /^\d{4}-(\d\d)-(\d\d)$/.exec(loop.date), date = m && MONTHS[+m[1] - 1] ? MONTHS[+m[1] - 1] + ' ' + +m[2] : '';
+    return [loop.days > 1 ? 'Day ' + loop.day + ' of ' + loop.days : '', [date, loop.label].filter(Boolean).join(' ')].filter(Boolean).join(' · ');
+  }
+
+  /* ---- "Try it on your phone": a card with a QR code of this page's own address (the one a viewer has in the address bar, never
+     the live address behind it), three links and two lines of what is live now. The code is made here, in this file: nothing is
+     fetched for it and no address stands in this file. On a console "How the network works" is the console's own /how; on a
+     copy of the page published elsewhere it is the architecture page beside this one. Byte mode, error correction M, versions 1 to 6 (an address of up to 106 bytes); a longer address gets
+     the card without a code. */
+  const QR_SIZES = [null, [16, 10, 1], [28, 16, 1], [44, 26, 1], [32, 18, 2], [43, 24, 2], [27, 16, 4]];      /* by version: data words and check words of a block, blocks */
+  const QR_ALIGN = [0, 0, 18, 22, 26, 30, 34];                                                               /* by version: the centre of its one alignment mark */
+  const QR_MASKS = [(r, c) => (r + c) % 2 === 0, (r) => r % 2 === 0, (r, c) => c % 3 === 0, (r, c) => (r + c) % 3 === 0,
+    (r, c) => (Math.floor(r / 2) + Math.floor(c / 3)) % 2 === 0, (r, c) => ((r * c) % 2) + ((r * c) % 3) === 0,
+    (r, c) => (((r * c) % 2) + ((r * c) % 3)) % 2 === 0, (r, c) => (((r + c) % 2) + ((r * c) % 3)) % 2 === 0];
+  /* the code words of a text: its bytes with their header, padded, cut into blocks, each block's check words after them, interleaved */
+  function qrWords(bytes, v) {
+    const dc = QR_SIZES[v][0], ec = QR_SIZES[v][1], nb = QR_SIZES[v][2], total = dc * nb, bits = [];
+    const push = (x, n) => { for (let i = n - 1; i >= 0; i--) bits.push((x >> i) & 1); };
+    push(4, 4);
+    push(bytes.length, 8);
+    bytes.forEach((b) => push(b, 8));
+    push(0, Math.min(4, total * 8 - bits.length));
+    while (bits.length % 8) bits.push(0);
+    const data = [];
+    for (let i = 0; i < bits.length; i += 8) data.push(bits.slice(i, i + 8).reduce((a, b) => a * 2 + b, 0));
+    for (let pad = 0xEC; data.length < total; pad ^= 0xEC ^ 0x11) data.push(pad);
+    const exp = [], log = [];
+    for (let i = 0, x = 1; i < 255; i++) { exp[i] = x; log[x] = i; x <<= 1; if (x & 256) x ^= 0x11D; }
+    const mul = (a, b) => (a && b ? exp[(log[a] + log[b]) % 255] : 0);
+    let gen = [1];
+    for (let i = 0; i < ec; i++) {
+      const next = new Array(gen.length + 1).fill(0);
+      gen.forEach((g, j) => { next[j] ^= g; next[j + 1] ^= mul(g, exp[i]); });
+      gen = next;
+    }
+    const check = (block) => {
+      const r = block.concat(new Array(ec).fill(0));
+      for (let i = 0; i < block.length; i++) { const f = r[i]; if (f) for (let j = 1; j < gen.length; j++) r[i + j] ^= mul(gen[j], f); }
+      return r.slice(block.length);
+    };
+    const blocks = [], checks = [], words = [];
+    for (let b = 0; b < nb; b++) { blocks.push(data.slice(b * dc, (b + 1) * dc)); checks.push(check(blocks[b])); }
+    for (let i = 0; i < dc; i++) blocks.forEach((b) => words.push(b[i]));
+    for (let i = 0; i < ec; i++) checks.forEach((c) => words.push(c[i]));
+    return words;
+  }
+  function qrPenalty(m) {
+    const n = m.length, lines = [];
+    let p = 0, dark = 0;
+    for (let i = 0; i < n; i++) { lines.push(m[i].join('')); lines.push(m.map((row) => row[i]).join('')); }
+    lines.forEach((s) => {
+      (s.match(/0{5,}|1{5,}/g) || []).forEach((run) => { p += run.length - 2; });
+      for (let i = 0; i + 11 <= n; i++) { const w = s.slice(i, i + 11); if (w === '10111010000' || w === '00001011101') p += 40; }
+    });
+    for (let r = 0; r < n - 1; r++) for (let c = 0; c < n - 1; c++) { const a = m[r][c]; if (a === m[r][c + 1] && a === m[r + 1][c] && a === m[r + 1][c + 1]) p += 3; }
+    m.forEach((row) => row.forEach((x) => { dark += x; }));
+    return p + 10 * Math.floor(Math.abs(dark * 20 - n * n * 10) / (n * n));
+  }
+  /* the modules of a text's code, rows of 0 and 1, or null when the text is longer than version 6 holds */
+  function qrMatrix(text) {
+    const bytes = Array.from(new TextEncoder().encode(text));
+    let v = 1;
+    while (v <= 6 && bytes.length > QR_SIZES[v][0] * QR_SIZES[v][2] - 2) v++;
+    if (v > 6) return null;
+    const words = qrWords(bytes, v), n = 17 + 4 * v, M = [], fixed = [];
+    for (let i = 0; i < n; i++) { M.push(new Array(n).fill(0)); fixed.push(new Array(n).fill(false)); }
+    const set = (r, c, on) => { M[r][c] = on ? 1 : 0; fixed[r][c] = true; };
+    [[0, 0], [0, n - 7], [n - 7, 0]].forEach((at) => {                                   /* the three finders, each with its light edge */
+      for (let r = -1; r <= 7; r++) for (let c = -1; c <= 7; c++) {
+        const y = at[0] + r, x = at[1] + c, ring = Math.max(Math.abs(r - 3), Math.abs(c - 3));
+        if (y >= 0 && x >= 0 && y < n && x < n) set(y, x, ring !== 2 && ring !== 4);
       }
-      var c = st && st.clock ? day(st.clock) : null;
-      fClock.textContent = c ? 'Network clock: ' + c.d + ', ' + c.t + ' (its own simulated time)' : 'Network clock: not known';
-      fSrc.textContent = base ? 'Source: ' + base.host + ', asked every ' + (st ? st.every : 5) + ' s. Figures only.' : 'Source: none';
-      forks(st); paintStatus();
+    });
+    for (let i = 8; i < n - 8; i++) { set(6, i, i % 2 === 0); set(i, 6, i % 2 === 0); }
+    if (v > 1) for (let r = -2; r <= 2; r++) for (let c = -2; c <= 2; c++) set(QR_ALIGN[v] + r, QR_ALIGN[v] + c, Math.max(Math.abs(r), Math.abs(c)) !== 1);
+    const format = (m, bits) => {                                                        /* fifteen bits, twice: beside the first finder, and split over the other two */
+      const put = (r, c, i) => { m[r][c] = i < 0 ? 1 : (bits >> i) & 1; fixed[r][c] = true; };
+      for (let i = 0; i <= 5; i++) put(i, 8, i);
+      put(7, 8, 6);
+      put(8, 8, 7);
+      put(8, 7, 8);
+      for (let i = 9; i < 15; i++) put(8, 14 - i, i);
+      for (let i = 0; i < 8; i++) put(8, n - 1 - i, i);
+      for (let i = 8; i < 15; i++) put(n - 15 + i, 8, i);
+      put(n - 8, 8, -1);                                                                 /* the one module that is always dark */
+    };
+    format(M, 0);                                                                        /* their places are kept free of the words */
+    let k = 0, up = true;
+    for (let c = n - 1; c > 0; c -= 2) {                                                 /* the words, in pairs of columns from the right, up and down */
+      if (c === 6) c = 5;
+      for (let i = 0; i < n; i++) {
+        const r = up ? n - 1 - i : i;
+        for (let d = 0; d < 2; d++) {
+          if (fixed[r][c - d]) continue;
+          const w = words[k >> 3];
+          M[r][c - d] = w === undefined ? 0 : (w >> (7 - (k & 7))) & 1;
+          k++;
+        }
+      }
+      up = !up;
     }
+    let best = null, least = Infinity;
+    QR_MASKS.forEach((mask, id) => {                                                     /* of the eight masks, the one that reads best */
+      const m = M.map((row, r) => row.map((x, c) => (fixed[r][c] ? x : x ^ (mask(r, c) ? 1 : 0))));
+      let rem = id;
+      for (let i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >> 9) * 0x537);
+      format(m, ((id << 10) | rem) ^ 0x5412);
+      const p = qrPenalty(m);
+      if (p < least) { least = p; best = m; }
+    });
+    return best;
+  }
+  const SVG_NS = 'http://www.w3.org/2000/svg', QR_INK = '#1B2A38', QR_PAPER = '#FFFFFF', QR_QUIET = 4;
+  function qrSvg(text) {
+    const m = qrMatrix(text);
+    if (!m) return null;
+    const n = m.length + 2 * QR_QUIET, svg = document.createElementNS(SVG_NS, 'svg'), paper = document.createElementNS(SVG_NS, 'rect'), ink = document.createElementNS(SVG_NS, 'path');
+    svg.setAttribute('viewBox', '0 0 ' + n + ' ' + n);
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'QR code of ' + text);
+    svg.setAttribute('shape-rendering', 'crispEdges');
+    paper.setAttribute('width', n);
+    paper.setAttribute('height', n);
+    paper.setAttribute('fill', QR_PAPER);
+    const d = [];
+    m.forEach((row, r) => row.forEach((x, c) => { if (x) d.push('M' + (c + QR_QUIET) + ' ' + (r + QR_QUIET) + 'h1v1h-1z'); }));
+    ink.setAttribute('d', d.join(''));
+    ink.setAttribute('fill', QR_INK);
+    svg.appendChild(paper);
+    svg.appendChild(ink);
+    return svg;
+  }
 
-    function again(s) { if (timer) clearTimeout(timer); timer = on ? setTimeout(ask, s * 1000) : null; }
-    function ask() {
-      if (!on || !url || asking) return;
-      if (document.visibilityState === 'hidden') { again(2); return; }
-      asking = true;
-      var ctl = window.AbortController ? new AbortController() : null, stop = ctl ? setTimeout(function () { ctl.abort(); }, 4000) : null, opts = { method: 'GET', mode: 'cors', credentials: 'omit', cache: 'no-store', redirect: 'error', referrerPolicy: 'no-referrer' };
-      if (ctl) opts.signal = ctl.signal;
-      fetch(url, opts).then(function (r) {
-        if (!r.ok) throw new Error('none');
-        var n = +r.headers.get('content-length'); if (n && n > MAX_CHARS) throw new Error('shape');
-        return r.text();
-      }).then(function (t) {
-        if (t.length > MAX_CHARS) throw new Error('shape');
-        var j; try { j = JSON.parse(t); } catch (e) { throw new Error('shape'); }
-        var s = read(j); if (!s) throw new Error('shape');
-        last = s; lastAt = Date.now(); misses = 0; kind = s.withheld ? 'withheld' : 'ok';
-      }).catch(function (e) {
-        misses += 1; if (e && e.message === 'shape') { kind = 'shape'; last = null; } else if (kind !== 'ok' && kind !== 'withheld') kind = 'asking';
-      }).then(function () {
-        if (stop) clearTimeout(stop); asking = false; paint();
-        again(misses ? Math.min(30, 5 * Math.pow(2, Math.min(3, misses - 1))) : (last ? last.every : 5));
-      });
-    }
+  const QC = { lines: [] }, HOW_PAGE = 'Murmur_NG_Architecture_and_Data.html';
+  /* a link whose live address the page does not use has no card, and no button for one */
+  function cardBuild() {
+    B.qr.hidden = !base;
+    if (!base) return;
+    const home = web ? location.origin + location.pathname : base.origin + '/';
+    const how = onConsole ? base.origin + '/how' : new URL(HOW_PAGE, location.href).href;
+    const veil = el('div', 'lv-veil');
+    veil.id = 'lv-card';
+    veil.hidden = true;
+    const card = el('div', 'lv-card');
+    card.setAttribute('role', 'dialog');
+    card.setAttribute('aria-modal', 'true');
+    card.setAttribute('aria-labelledby', 'lv-card-h');
+    const h = el('h2', '', 'Try it on your phone');
+    h.id = 'lv-card-h';
+    const close = btn('lv-x', '×', 'Close');
+    const main = el('div', 'lv-card-main'), code = el('div', 'lv-qr'), side = el('div', 'lv-card-side'), links = el('ul', 'lv-links');
+    const svg = qrSvg(home);
+    if (svg) code.appendChild(svg); else code.hidden = true;
+    [['Open the live demo', home, null], ['Data view', home + '#data', 'data'], ['How the network works', how, null]].forEach((x) => {
+      const li = el('li'), a = el('a', '', x[0]);
+      a.href = x[1];
+      if (x[2] === 'data') a.addEventListener('click', (e) => { if (web && FG.dataView) { e.preventDefault(); cardToggle(false); setLive(false); FG.dataView.set(true); } });
+      else if (x[1] === home) a.addEventListener('click', (e) => { if (web) { e.preventDefault(); cardToggle(false); } });
+      else { a.target = '_blank'; a.rel = 'noopener'; }
+      li.appendChild(a);
+      links.appendChild(li);
+    });
+    side.appendChild(links);
+    side.appendChild(el('p', 'lv-addr', home));
+    main.appendChild(code);
+    main.appendChild(side);
+    const now = el('ul', 'lv-facts');
+    QC.lines = [el('li'), el('li')];
+    QC.lines.forEach((li) => now.appendChild(li));
+    [close, h, main, el('h3', '', 'Live now'), now].forEach((x) => card.appendChild(x));
+    veil.appendChild(card);
+    $('app').appendChild(veil);
+    QC.veil = veil;
+    QC.close = close;
+    close.addEventListener('click', () => cardToggle(false));
+    veil.addEventListener('click', (e) => { if (e.target === veil) cardToggle(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !veil.hidden) cardToggle(false); });
+    window.addEventListener('hashchange', () => { if (location.hash === '#qr') cardToggle(true); });
+  }
+  function cardToggle(on) {
+    if (!QC.veil) return;
+    const open = on === undefined ? QC.veil.hidden : on;
+    QC.veil.hidden = !open;
+    B.qr.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (location.hash === '#qr' && !open) history.replaceState(null, '', location.pathname + location.search);
+    if (open) { cardPaint(); QC.close.focus(); } else B.qr.focus();
+  }
+  /* the two lines under "Live now", from the last answer: who answers and how often the page asks; what this evening has played */
+  function cardPaint() {
+    if (!QC.veil || QC.veil.hidden) return;
+    const a = L.last && L.last.v1, v = L.v2, e = (a && a.event) || {};
+    const parts = a && !a.withheld ? PART_KEYS.filter((k) => k !== 'homes' && k !== 'buildings' && a.parts[k] && a.parts[k].up).length : 0;
+    const who = [[a && a.homes, 'home'], [a && a.buildings, 'building'], [parts, 'service']].filter((x) => x[0]).map((x) => x[0] + ' ' + x[1] + (x[0] === 1 ? '' : 's'));
+    const every = v ? (v.every / 1000).toFixed(v.every % 1000 ? 1 : 0) + ' s' : '';
+    QC.lines[0].textContent = who.length && L.kind === 'ok' ? who.join(', ') + ' answering now' + (every ? ', asked again every ' + every : '') : 'No answer from the network right now';
+    const played = L.story ? L.story.moments.length : 0, day = v && v.loop ? dayWords(v.loop) : '';
+    const sale = [e.asked != null ? fig(e.asked, ' kW asked') : '', e.offered != null ? fig(e.offered, ' kW offered') : ''].filter(Boolean).join(', ');
+    QC.lines[1].textContent = [played + (played === 1 ? ' moment' : ' moments') + ' played this evening', sale, day].filter(Boolean).join(' · ');
+  }
 
-    /* a third tab, only in this mode */
-    var tl = el('button', 'tab', 'Live'); tl.type = 'button'; tl.id = 'tab-live'; tl.setAttribute('role', 'tab'); tl.setAttribute('aria-selected', 'false');
-    tabs.insertBefore(tl, document.getElementById('tab-whole') || null);
-    function setLive(v) {
-      if (v) { if (FG.dataView) FG.dataView.set(false); if (FG.setTab) FG.setTab('split'); }
-      on = v; app.classList.toggle('lv', v); tl.setAttribute('aria-selected', v ? 'true' : 'false');
-      if (v) { ts.setAttribute('aria-selected', 'false'); if (td) td.setAttribute('aria-selected', 'false'); }
-      if (truth) truth.textContent = v ? 'Live: what runs now on our own hardware, by its own clock' : truthWas;
-      if (FG.measure && FG.V) { try { FG.measure(FG.V.split); } catch (err) {} }
-      paint();
-      if (v) ask(); else if (timer) { clearTimeout(timer); timer = null; }
+  /* ---- the surprises drawer, over the map's upper right corner: a kind, who it is for, its fields at their defaults, and Send.
+     Two presses make a surprise: Surprise, then Send. A form outside its limits posts nothing. */
+  const WORDS = { note: "Owner's note", car_now: 'Car needed now', weather: 'Weather change', building_closed: 'Building closes',
+    building_need: 'Building needs power', emergency: 'Grid emergency', battery_fault: 'Battery fault', battery_low: 'Battery low' };
+  const WHO = { note: 'homes', car_now: 'homes', building_closed: 'buildings', building_need: 'buildings', battery_fault: 'battery', battery_low: 'battery', emergency: 'buyers' };
+  /* field: label, least, most, default, step */
+  const FIELDS = { weather: [['pv', 'Sun, share', 0, 1, 0.2, 0.05], ['load', 'Load, times', 0.5, 2, 1.3, 0.1], ['dT', 'Warmer by, °C', -10, 10, 6, 1], ['hours', 'For, hours', 0.5, 24, 3, 0.5]],
+    building_need: [['share', 'Zone back, share', 0.05, 1, 0.25, 0.05], ['hours', 'For, hours', 0.5, 6, 3.5, 0.5]],
+    emergency: [['kw', 'kW', 1, 2000, 20, 1], ['minutes', 'Minutes', 15, 240, 60, 15]], battery_low: [['pct', 'Charge, %', 5, 100, 10, 5]] };
+  const DR = { kind: 'note' };
+  function drawerBuild() {
+    const d = el('div', 'lv-drawer');
+    d.id = 'lv-drawer';
+    d.hidden = true;
+    d.setAttribute('role', 'dialog');
+    d.setAttribute('aria-label', 'Trigger a surprise');
+    const kinds = el('div', 'lv-kinds');
+    KINDS.forEach((k) => {
+      const b = btn('lv-kind', WORDS[k]);
+      b.dataset.kind = k;
+      b.addEventListener('click', () => { DR.kind = k; drawerFill(); });
+      kinds.appendChild(b);
+    });
+    DR.form = el('div', 'lv-form');
+    DR.send = btn('lv-b lv-send', 'Send');
+    DR.send.addEventListener('click', drawerSend);
+    const close = btn('lv-x', '×', 'Close');
+    close.addEventListener('click', () => drawerToggle(false));
+    [kinds, DR.form, DR.send, close].forEach((x) => d.appendChild(x));
+    $('split').appendChild(d);
+    DR.box = d;
+  }
+  function drawerToggle(on) {
+    if (!DR.box) return;
+    const open = on === undefined ? DR.box.hidden : on;
+    DR.box.hidden = !open;
+    B.sur.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) { drawerFill(); DR.send.focus(); }
+  }
+  function choices(kind) {
+    const r = (L.console && L.console.state && L.console.state.roster) || {};
+    const pick = WHO[kind];
+    if (pick === 'buyers') return (r.buyers || []).map((b) => [b, b === 'utility' ? 'The utility' : b === 'grid-operator' ? 'The grid operator' : b]);
+    if (pick === 'buildings') return (r.buildings || []).map((b) => [b.id, b.name]);
+    if (pick === 'battery') return (r.homes || []).filter((h) => h.battery).map((h) => [h.id, h.name]);
+    return pick ? (r.homes || []).map((h) => [h.id, h.name]) : [];
+  }
+  function drawerFill() {
+    const f = DR.form, k = DR.kind;
+    f.textContent = '';
+    DR.box.querySelectorAll('.lv-kind').forEach((b) => b.setAttribute('aria-pressed', b.dataset.kind === k ? 'true' : 'false'));
+    const who = choices(k);
+    if (WHO[k]) {
+      const s = el('select', 'lv-who');
+      s.id = 'lv-who';
+      s.setAttribute('aria-label', 'For');
+      who.forEach((x) => { const o = el('option', '', x[1]); o.value = x[0]; s.appendChild(o); });
+      f.appendChild(s);
     }
-    tl.addEventListener('click', function () { setLive(true); });
-    ts.addEventListener('click', function () { if (on) setLive(false); ts.setAttribute('aria-selected', 'true'); });
-    if (td) td.addEventListener('click', function () { if (on) setLive(false); });
-    map.addEventListener('click', function (e) { if (on) { e.stopPropagation(); e.preventDefault(); } }, true);
-    document.addEventListener('keydown', function (e) {
-      if (on && ['ArrowLeft', 'ArrowRight', ' ', 'Enter'].indexOf(e.key) >= 0 && !e.target.closest('.tabs')) { e.stopImmediatePropagation(); e.preventDefault(); }
-    }, true);
-    document.addEventListener('visibilitychange', function () { if (on && document.visibilityState === 'visible') ask(); });
-    setInterval(function () { if (on) paintStatus(); }, 1000);
-    FG.live = { set: setLive, state: function () { return { on: on, kind: kind, misses: misses, last: last }; } };
-    setLive(true);
-  })();
+    if (k === 'note') {
+      const t = el('input', 'lv-text');
+      t.type = 'text';
+      t.maxLength = 200;
+      t.value = 'Please keep the battery full tonight.';
+      t.setAttribute('aria-label', 'The note');
+      f.appendChild(t);
+    }
+    (FIELDS[k] || []).forEach((x) => {
+      const lab = el('label', 'lv-num', x[1]);
+      const i = el('input');
+      i.type = 'number';
+      i.min = x[2];
+      i.max = x[3];
+      i.step = x[5];
+      i.value = x[4];
+      i.dataset.f = x[0];
+      lab.appendChild(i);
+      f.appendChild(lab);
+    });
+    DR.send.disabled = !!WHO[k] && !who.length;
+  }
+  function drawerSend() {
+    const k = DR.kind, body = { do: 'surprise', kind: k }, f = DR.form;
+    const who = f.querySelector('.lv-who');
+    if (who) body[WHO[k] === 'buyers' ? 'buyer' : 'who'] = who.value;
+    const t = f.querySelector('.lv-text');
+    if (t) { const v = t.value.trim(); if (!v || v.length > 200) return; body.text = v; }
+    let ok = true;
+    (FIELDS[k] || []).forEach((x) => {
+      const i = f.querySelector('[data-f="' + x[0] + '"]'), v = Number(i.value);
+      if (!isFinite(v) || v < x[2] || v > x[3]) { ok = false; i.setAttribute('aria-invalid', 'true'); } else { body[x[0]] = v; i.removeAttribute('aria-invalid'); }
+    });
+    if (!ok) return;
+    L.send(body);
+    drawerToggle(false);
+  }
+
+  /* ---- the console: a presenter's key and the console's two doors, used only on the console's own origin. The key comes after
+     "#k=" in the link: it is read once into this tab's own store and taken out of the address before anything else asks. On any
+     other origin the fragment is taken out unread, no stored key is used, and nothing asks the console's doors. */
+  const DOOR = '/console/do', STATE = '/console/state', STORE = 'murmur-console-key', HEAD = 'X-Murmur-Console';
+  function keyFromLink() {
+    const h = location.hash || '';
+    const m = /(?:^#|&)k=([A-Za-z0-9_-]{16,})(?:&|$)/.exec(h);
+    if (/(?:^#|&)k=/.test(h)) history.replaceState(null, '', location.pathname + location.search);
+    if (!onConsole) return null;
+    if (m) { try { sessionStorage.setItem(STORE, m[1]); } catch (e) { /* the key then lasts this page only */ } return m[1]; }
+    try { return sessionStorage.getItem(STORE); } catch (e) { return null; }
+  }
+  function forget() {
+    L.key = null;
+    L.console = null;
+    try { sessionStorage.removeItem(STORE); } catch (e) { /* nothing kept */ }
+    paint();
+  }
+  const door = (path, body) => fetch(path, { method: body ? 'POST' : 'GET', headers: Object.assign({ [HEAD]: L.key }, body ? { 'Content-Type': 'application/json' } : {}),
+    body: body ? JSON.stringify(body) : undefined, credentials: 'omit', redirect: 'error', cache: 'no-store' });
+  function hello() {
+    if (!L.key) return;
+    door(DOOR, { do: 'hello' }).then((r) => {
+      if (r.status === 202) { L.console = { ok: true, state: null }; consoleRead(); } else if (r.status === 403) forget();
+    }).catch(() => { setTimeout(hello, 3000); });
+  }
+  /* what the console says of itself, checked: only these fields, only these kinds of value */
+  function consoleState(j) {
+    if (!obj(j) || j.schema !== 'murmur.console.v1') return null;
+    const r = obj(j.roster) || {};
+    const homes = (arr(r.homes, 400) || []).filter((h) => obj(h) && str(h.id, 40)).map((h) => ({ id: h.id, name: str(h.name, 60) || h.id, battery: h.battery === true }));
+    const builds = (arr(r.buildings, 100) || []).filter((b) => obj(b) && str(b.id, 40)).map((b) => ({ id: b.id, name: str(b.name, 60) || b.id }));
+    const peer = obj(j.peer), other = obj(j.other) || {}, ready = obj(j.ready) || {};
+    return { play: str(j.play, 20) || 'idle', speed: has(SPEEDS, j.speed) ? j.speed : '1', hold: j.hold === true, busy: str(j.busy, 200), error: str(j.error, 200),
+      warn: str(j.warn, 200), roster: { homes, buildings: builds, buyers: (arr(r.buyers, 10) || []).filter((b) => str(b, 40)) },
+      peer: peer && str(peer.url, 200) ? { url: peer.url } : null, other: { up: other.up === true, play: str(other.play, 20) },
+      ready: { ts: TIME.test(ready.ts || '') ? ready.ts : null }, said: L.console && L.console.state ? L.console.state.said : null };
+  }
+  function consoleRead() {
+    if (!L.console || !L.on) return;
+    door(STATE).then((r) => {
+      if (r.status === 403) { forget(); return null; }
+      return r.ok ? r.json() : null;
+    }).then((j) => {
+      const s = j ? consoleState(j) : null;
+      if (s && L.console) { L.console.state = s; paint(); }
+    }).catch(() => {}).then(() => { if (L.console) setTimeout(consoleRead, 1000); });
+  }
+  /* one command; a refusal's words stand in the bar for a few seconds */
+  L.send = function (body) {
+    if (!L.console || !L.key) return;
+    door(DOOR, body).then((r) => {
+      if (r.status === 403) { forget(); return; }
+      if (r.status === 400) return r.json().then((j) => say(str(obj(j) && j.error, 200) || 'The console refused that.'));
+      say(null);
+    }).catch(() => say('No answer from the console.'));
+  };
+  function say(words) {
+    if (!L.console || !L.console.state) return;
+    L.console.state.said = words;
+    paint();
+    if (words) setTimeout(() => { if (L.console && L.console.state && L.console.state.said === words) { L.console.state.said = null; paint(); } }, 4000);
+  }
+
+  /* ---- asking: the state address with the cursor of the last moment held, every every_ms, at once again while more waits (at most
+     80 times in a row). The Live tab; leaving it (the Split view or Data view tab, or the whole picture) stops the asking. */
+  let timer = null, asking = false, burst = 0, filled = false;
+  function ask() {
+    if (!url || asking || !L.on) return;
+    asking = true;
+    const ctl = new AbortController(), stop = setTimeout(() => ctl.abort(), 8000);
+    fetch(url + '?since=' + L.since, { cache: 'no-store', credentials: 'omit', redirect: 'error', signal: ctl.signal })
+      .then((r) => { if (!r.ok) throw new Error('status'); return r.text(); })
+      .then((t) => { const a = readAnswer(t); if (a) take(a); else { L.kind = 'shape'; L.misses += 1; } })
+      .catch(() => { L.misses += 1; L.kind = L.kind === 'shape' ? 'shape' : 'down'; })
+      .then(() => { clearTimeout(stop); asking = false; paint(); schedule(); });
+  }
+  function take(a) {
+    L.misses = 0;
+    L.last = a;
+    L.kind = a.v1.withheld ? 'withheld' : 'ok';
+    dots(a.v1);
+    const v = a.v2;
+    if (!v) {                                         /* no live log here: the start card alone, its figures renewed */
+      L.v2 = null;
+      if (L.story) { L.story.k0 = startCard(a.v1); if (FG.S.m < 0) FG.go(-1, false); }
+      return;
+    }
+    if (L.run !== null && v.run !== L.run) {          /* a new run: the story starts again, and the log is asked from its start */
+      L.run = v.run;
+      L.since = 0;
+      burst = 1;
+      filled = false;
+      FG.grow.reset();
+      L.story.k0 = startCard(a.v1);
+      return;
+    }
+    L.run = v.run;
+    const leaps = L.v2 ? L.v2.clock.leaps.length : 0;
+    L.v2 = v;
+    if (v.clock.leaps.length > leaps) L.leapAt = Date.now();
+    FG.scale = Math.max(0.02, v.clock.dwell / 8000);
+    if (v.since === L.since) {
+      grow(v);
+      if (v.next > L.since) L.since = v.next;
+    }
+    burst = v.more && v.next > v.since ? burst + 1 : 0;
+    follow(v);
+  }
+  /* the follower jumps to the newest moment after a first fill, when over 12 behind, and at speed max when over 2 behind */
+  function follow(v) {
+    const st = L.story;
+    if (!st || !FG.S.auto || !st.moments.length) return;
+    const behind = st.moments.length - 1 - FG.S.m;
+    if ((!filled && !v.more && behind > 1) || behind > 12 || (v.clock.fast && behind > 2)) FG.grow.follow();
+    if (!v.more) filled = true;
+  }
+  function schedule() {
+    clearTimeout(timer);
+    if (!L.on) return;
+    const wait = burst > 0 && burst <= 80 ? 0 : L.misses ? Math.min(30000, 2000 * Math.pow(2, Math.min(4, L.misses - 1))) : L.v2 ? L.v2.every : 2000;
+    timer = setTimeout(ask, wait);
+  }
+  function paint() {
+    if (!L.on) return;
+    barPaint();
+    crowdPaint();
+    cardPaint();
+    tlPaint();
+  }
+
+  /* ---- the Live tab */
+  function setLive(on) {
+    const app = $('app'), tl = $('tab-live');
+    if (on === L.on) return;
+    if (on) {
+      if (FG.dataView) FG.dataView.set(false);
+      L.on = true;
+      app.classList.add('lv');
+      tl.setAttribute('aria-selected', 'true');
+      ['tab-split', 'tab-data', 'tab-whole'].forEach((id) => { if ($(id)) $(id).setAttribute('aria-selected', 'false'); });
+      L.story = makeStory((L.v2 && L.v2.net) || { boxes: [] });
+      L.run = null;
+      L.since = 0;
+      filled = false;
+      FG.grow.enter(L.story);
+      barPlace();
+      if (L.key && !L.console) hello(); else if (L.console) consoleRead();
+      ask();
+    } else {
+      left();
+      FG.grow.leave();
+    }
+  }
+  function left() {
+    if (!L.on) return;
+    L.on = false;
+    clearTimeout(timer);
+    drawerToggle(false);
+    cardToggle(false);
+    CR.flash.hidden = true;
+    $('app').classList.remove('lv', 'lv-aud');
+    $('tab-live').setAttribute('aria-selected', 'false');
+    clearDots();
+    L.story = null;
+  }
+  function boot() {
+    if (!(window.FG && window.FG.ready && window.FG.grow)) { setTimeout(boot, 40); return; }
+    FG = window.FG;
+    maps();
+    L.key = keyFromLink();
+    const tabs = document.querySelector('#bar .tabs');
+    const tl = btn('tab', 'Live');
+    tl.id = 'tab-live';
+    tl.setAttribute('role', 'tab');
+    tl.setAttribute('aria-selected', 'false');
+    tabs.insertBefore(tl, $('tab-whole') || null);
+    tl.addEventListener('click', () => setLive(true));
+    ['tab-split', 'tab-data'].forEach((id) => { if ($(id)) $(id).addEventListener('click', () => { if (L.on) setLive(false); }); });
+    barBuild();
+    drawerBuild();
+    cardBuild();
+    tlBuild();
+    FG.live = { set: setLive, left, state: () => ({ on: L.on, kind: L.kind, run: L.run, since: L.since, console: !!(L.console && L.console.ok), key: !!L.key }) };
+    document.addEventListener('visibilitychange', () => { if (L.on && document.visibilityState === 'visible') { ask(); if (L.story && FG.S.auto) FG.grow.follow(); } });
+    window.addEventListener('resize', () => { barPlace(); if (L.on && TL) requestAnimationFrame(fitLabels); });
+    setInterval(() => { if (L.on) { barPaint(); crowdPaint(); } }, 500);
+    /* a page that found its console by itself keeps a view its address names; any other opens Live */
+    if (!(discover && /^#(data|split|whole|full|results|coordinator)$/.test(location.hash))) setLive(true);
+    if (location.hash === '#qr') cardToggle(true);
+  }
+  /* with no live address in the link, the page looks for one: at its own server when it stands at that server's "/" (a console
+     answers there, and is then asked for nothing it does not have), else in live.json beside the page. Each address found is
+     asked once, and only a live state there opens Live. Whatever fails on the way (no file, no answer, an answer that is no live
+     state), nothing is said and the page stays the recorded replay. */
+  const get = (address) => {
+    const ctl = new AbortController(), stop = setTimeout(() => ctl.abort(), 8000);
+    return fetch(address, { cache: 'no-store', credentials: 'omit', redirect: 'error', signal: ctl.signal })
+      .then((r) => (r.ok ? r.text() : '')).catch(() => '').then((t) => { clearTimeout(stop); return t; });
+  };
+  const answers = (address) => (aim(address) ? get(url + '?since=0').then((t) => !!readAnswer(t)) : Promise.resolve(false));
+  function begin() {
+    if (!discover) { boot(); return; }
+    const own = location.pathname === '/' || location.pathname === '/index.html';
+    const named = () => get(new URL('live.json', location.href).href).then((t) => {
+      let j = null;
+      try { j = t.length <= 2048 ? JSON.parse(t) : null; } catch (e) { j = null; }
+      return obj(j) && typeof j.live === 'string' && j.live.length <= 400 ? answers(j.live) : false;
+    });
+    (own ? answers(location.origin) : Promise.resolve(false)).then((found) => found || named()).then((found) => { if (found) boot(); });
+  }
+  begin();
 })();
 </script>
 </body>

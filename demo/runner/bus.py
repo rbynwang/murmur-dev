@@ -168,4 +168,13 @@ def make_bus(runs: dict[str, Run]) -> FastAPI:
         with r.lock:
             return {"events": r.record[after:], "next": len(r.record)}
 
+    @app.post("/runs/{run_id}/reset")
+    def reset(run_id: str):
+        r = run_of(run_id)
+        with r.lock:
+            r.messages.clear()
+            for q in r.inbox.values():
+                q.clear()
+        return {"ok": True}
+
     return app

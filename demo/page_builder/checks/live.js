@@ -1,20 +1,24 @@
 /* What the live check reads inside the two-view page. Each snippet is one function expression. */
 
-// @snap
-/* The Live view and the replay as they stand: which parts of the live mode exist, the tabs (the selected one marked *), the live
-   panel's words (status, code, request, rows, a card per part, foot), the bar, the replay's controls, how each box of the diagram is
-   lit, the diagram's two counts, whether anything a feed sent became markup or ran (window.__x), and whether the panel fits. */
-() => { const q = (s) => document.querySelector(s), t = (s) => (q(s) || {}).textContent || '', lv = q('#lv'), panel = q('#panel');
+// @state
+/* Live as it stands: whether it exists and is on, its bar and timeline, the split view's moment (headline, cards, terminal lines,
+   position), the state word and the bar's message, the timeline's pins and ticks, whether the page follows the newest moment,
+   anything a feed sent that became an element or ran (window.__x), leaves of the bar and the timeline that are cut (the message may
+   be), the bar over the layer, and a page that scrolls sideways. */
+() => { const q = (s) => document.querySelector(s), t = (s) => ((q(s) || {}).textContent || '').trim();
   const vis = (e) => { if (!e) return false; const c = getComputedStyle(e), r = e.getBoundingClientRect(); return c.display !== 'none' && c.visibility !== 'hidden' && r.width > 0 && r.height > 0; };
-  const pr = panel.getBoundingClientRect(); let wide = 0, cut = [];
-  if (lv && vis(lv)) lv.querySelectorAll('*').forEach((e) => { const r = e.getBoundingClientRect(); if (r.width && r.right > pr.right + 1) wide += 1; if (e.children.length === 0 && e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).display !== 'inline') cut.push(e.textContent.slice(0, 30)); });
-  return { tabLive: !!q('#tab-live'), lv: !!lv, css: !!q('#lv-css'), live: !!(window.FG && FG.live), on: !!(q('#app') && q('#app').classList.contains('lv')), shown: vis(lv),
-    tabs: [...document.querySelectorAll('#bar .tab')].filter(vis).map((e) => e.textContent + (e.getAttribute('aria-selected') === 'true' ? '*' : '')),
-    status: t('#lv .lvs'), code: t('#lv .lvv'), reqH: t('#lv .lvr b'), reqP: t('#lv .lvr p'), rows: [...document.querySelectorAll('#lv .lvq div')].map((e) => e.children[0].textContent + ': ' + e.children[1].textContent),
-    cards: [...document.querySelectorAll('#lv .lc')].map((c) => c.querySelector('.ln').textContent + ' | ' + c.querySelector('b').textContent + ' | ' + c.querySelector('.lx').textContent + ' | ' + (c.className.split(' ')[1] || '-')),
-    foot: t('#lv .lvf'), truth: t('#truth'), pos: t('#pos'), ctl: q('#bar .ctl') ? getComputedStyle(q('#bar .ctl')).visibility : '', layer: q('#layer') ? getComputedStyle(q('#layer')).display : '',
-    boxes: Object.fromEntries(['mkt', 'town', 'h-agent', 'b-agent', 'site-dc', 'buy-u', 'buy-g', 'h-model', 'co-market', 'h-guard', 'agg-ref', 'r-pay'].map((id) => { const b = q('#map .blk[data-b="' + id + '"]'); return [id, b ? ['lvu', 'lvo', 'lvx', 'lvn', 'lvdim'].filter((c) => b.classList.contains(c)).join('+') || '-' : 'missing']; })),
-    forks: [(q('#map .forks .c4h') || {}).textContent || '', (q('#map .forks .c4b') || {}).textContent || ''],
-    dcFrameGrey: (() => { const b = q('#map .blk[data-b="site-dc"]'); const f = b && b.closest('.part.psite'); return f ? f.classList.contains('lvg') : null; })(),
-    markup: lv ? lv.querySelectorAll('img, script, iframe, a, svg, object').length : 0, x: window.__x || 0, html: lv ? /[<>]/.test(lv.textContent) : false,
-    wide: wide, cut: cut, scroll: lv && vis(lv) ? lv.scrollHeight - lv.clientHeight : 0, sideways: document.documentElement.scrollWidth > innerWidth + 1 }; };
+  const leaves = (root) => (root ? [...root.querySelectorAll('*')].filter((e) => !e.children.length && vis(e) && e.textContent.trim()) : []);
+  const cut = leaves(q('#lv-bar')).concat(leaves(q('#lv-tl'))).filter((e) => !e.classList.contains('lv-msg') && (e.scrollWidth > e.clientWidth + 1 || e.scrollHeight > e.clientHeight + 2)).map((e) => e.className + ': ' + e.textContent.trim().slice(0, 30));
+  const bar = q('#lv-bar'), layer = q('#layer'), pos = /(\d+) of (\d+)/.exec(t('#pos')) || [0, 0, 0];
+  const markup = ['#layer', '#lv-bar', '#lv-tl', '#lv-drawer'].reduce((n, s) => n + (q(s) ? q(s).querySelectorAll('img, script, iframe, a, svg, object, embed, form').length : 0), 0);
+  const k = window.FG && FG.moment && FG.moment() ? FG.moment().k.kind : 'start';
+  return { tab: !!q('#tab-live'), on: !!q('#app.lv'), bar: vis(bar), tl: q('#lv-tl') && vis(q('#lv-tl')) ? Math.round(q('#lv-tl').getBoundingClientRect().width) : 0,
+    now_h: t('#now-h'), cards: document.querySelectorAll('#trade .card').length, lines: document.querySelectorAll('#tb li.ln').length, k,
+    pos_m: +pos[1], pos_n: +pos[2], state: t('.lv-state'), msg: t('.lv-msg'), pins: document.querySelectorAll('.lv-pin').length,
+    ticks: document.querySelectorAll('.lv-tick').length, auto: !!(window.FG && FG.S && FG.S.auto), back: !!(q('.lv-back') && !q('.lv-back').hidden),
+    markup, x: window.__x || 0, cut, over: !!(bar && layer && vis(bar) && bar.getBoundingClientRect().bottom > layer.getBoundingClientRect().top + 1),
+    sideways: document.documentElement.scrollWidth > innerWidth + 1 }; };
+
+// @tick
+/* a press on the first tick of the timeline: the split view shows that quarter-hour's first moment */
+() => { const b = document.querySelector('.lv-tick'); if (b) b.click(); return !!b; };

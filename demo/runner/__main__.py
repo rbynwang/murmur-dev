@@ -2,6 +2,8 @@
 
   python -m demo.runner example [--out FOLDER]           writes the synthetic example evening that config.example.json names
   python -m demo.runner evening --config FILE           starts every part, plays the evening to its settlement, writes summary.json
+                                                         and record.json.gz
+  python -m demo.runner compare RUN_A RUN_B             says whether two finished runs are the same evening, or what differs
   python -m demo.runner feed --run FOLDER [--port 0]    the read-only state feed of a run that is going on
   python -m demo.runner bus --port PORT --runs FILE     the local message bus on its own (the evening command starts one)
 
@@ -32,10 +34,12 @@ def evening(config: str, feed_port: int | None) -> int:
         say(f"parts up; state feed at http://{s.host}:{srv.server_address[1]}{live.PATH}")
         e = Evening(k, say)
         st = e.start()
-        say(f"evening {st['event']} from {st['starts_at']}, {st['step_seconds']} s a step")
+        say(f"evening {st['event']} from {st['starts_at']}: {'leaping over empty quarter hours' if st['leap'] else 'every step played'}, a played step {st['pace_s']:g} s at least")
         ended = e.follow()
         out = e.summary(ended)
-        say(f"ended: {ended}; {out['bus']['messages']} messages on the bus; summary in {s.folder / 'summary.json'}")
+        c = out["clock"]
+        say(f"ended: {ended} after {c['wall_s']} s; the clock moved {c['steps']} quarter hours: {len(c['played'])} steps played, {len(c['leaps'])} leaps over "
+            f"{sum(x['steps'] for x in c['leaps'])} quarter hours; {out['bus']['messages']} messages on the bus; summary and record in {s.folder}")
         return 0 if ended.startswith("settled") else 1
     finally:
         k.stop()
@@ -63,6 +67,9 @@ def main() -> int:
     ev = sub.add_parser("evening", help="play one evening to its settlement")
     ev.add_argument("--config", required=True)
     ev.add_argument("--feed-port", type=int, default=None)
+    cp = sub.add_parser("compare", help="say whether two finished runs are the same evening")
+    cp.add_argument("run_a")
+    cp.add_argument("run_b")
     fd = sub.add_parser("feed", help="the read-only state feed of a run")
     fd.add_argument("--run", required=True)
     fd.add_argument("--host", default="127.0.0.1")
@@ -78,6 +85,9 @@ def main() -> int:
         return 0
     if a.cmd == "evening":
         return evening(a.config, a.feed_port)
+    if a.cmd == "compare":
+        from .compare import main as compare
+        return compare(a.run_a, a.run_b)
     if a.cmd == "feed":
         feed(a.run, a.host, a.port)
     else:

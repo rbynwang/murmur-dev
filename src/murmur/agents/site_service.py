@@ -27,6 +27,7 @@ log = logging.getLogger("murmur.site")
 REQUEST, ANSWER, REPORT = "community.request", "community.answer", "community.report"
 TIME = re.compile(r"\d{4}-\d{2}-\d{2} ([01]\d|2[0-3]):[0-5]\d")    # a request row's time: a quarter hour of the dataset's clock
 ANSWER_RETRY_S = 5.0                                                # an answer the bus didn't take goes again this long after
+TICK_S = 0.25                                                       # the loop's cadence: its next pass starts this long after the last, or at once when its clock is set
 
 
 class SiteNode:
@@ -130,9 +131,11 @@ class SiteNode:
         self.town.ack(msg["message_id"], msg["fence"], status, note)
 
     # ------------------------------------------------------------------ the quarter hours
-    def tick(self) -> None:
+    def tick(self) -> bool:
+        """One pass: every quarter hour that is due is stepped, and its row goes up. True for a whole pass: the play has started and no row is left
+        for the next pass."""
         if not self.started or self.town is None:
-            return
+            return False
         now = self.now()
         q = now[:14] + f"{int(now[14:16]) // 15 * 15:02d}"
         with self.lock:
@@ -157,14 +160,18 @@ class SiteNode:
                 if self.outbox and self.outbox[0] is row:
                     self.outbox.pop(0)
                     self.sent_up += 1
+        return not self.outbox
 
     def tick_loop(self) -> None:
+        f = self.clock.follower
         while True:
+            seen, now = f.moves, self.now()
             try:
-                self.tick()
+                if self.tick():
+                    f.passed(seen, now)
             except Exception:
                 log.error("tick: %s", traceback.format_exc())
-            time.sleep(0.25)
+            f.wait(seen, TICK_S)
 
     def inbox_loop(self) -> None:
         self.poller = InboxPoller(self.town, self.handle, every=float(self.cfg.get("town_poll_seconds", 1.0)), idle_every=float(self.cfg.get("town_poll_idle_seconds", 3.0)), claimers=1,
@@ -206,7 +213,9 @@ def build_app(n: SiteNode):
     @app.post("/demo/clock")
     def demo_clock(body: dict = Body(default={})):
         n.clock.configure(body.get("start", n.clock.start), float(body.get("step_seconds", n.clock.step_seconds)), int(body.get("loop_days", n.clock.loop_days)), body.get("at"), body.get("at_wall"), hold=bool(body.get("hold")))
-        n.started = True
+        if not n.started:                                       # the play starts here. The pass the set clock began may have come before this line and done nothing: the loop looks again
+            n.started = True
+            n.clock.follower.moved()
         return n.clock.clock()
 
     return app

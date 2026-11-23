@@ -1,0 +1,2228 @@
+{
+ "about": "A made-up evening for the browser checks of the Live view (checks/feed.py serves it by cursor). Its twelve moments are the recorded evening's own (demo/recordings/evening_2025-01-28), built by the page builder and put into the feed's wire forms, so every card, line, path and box id is one the page already draws. Made up: the choice of the twelve; the clock time of two of them (the morning moment stands at 10:00, 96 quarter-hours after the contracts, and the words to the owner at 19:00, as a surprise); the surprise's tag; the timeline, its six stops and the two leaps. A moment of more than 24 steps keeps its first 24, as a live moment closes there.",
+ "net": {
+  "key": "one",
+  "boxes": ["mkt", "buy-u", "buy-g", "co-fc", "co-cover", "co-agent", "co-market", "co-desk", "co-report", "site-pv", "site-dc", "town", "h-agent", "h-model", "h-tools", "h-guard", "h-seal", "h-driver", "h-dev", "h-person", "b-agent", "b-model", "b-tools", "b-guard", "b-seal", "b-driver", "b-dev", "b-person", "r-read", "r-check", "r-settle", "r-pay"]
+ },
+ "timeline": {
+  "t0": "2025-01-27 09:45",
+  "n": 147,
+  "parts": [
+   {"id": "dayahead", "from": 0, "to": 57},
+   {"id": "request", "from": 57, "to": 125},
+   {"id": "before", "from": 125, "to": 129},
+   {"id": "window", "from": 129, "to": 141},
+   {"id": "settle", "from": 141, "to": 147}
+  ],
+  "pins": [
+   {"tq": 1, "kind": "stop", "id": "sale"},
+   {"tq": 113, "kind": "stop", "id": "request"},
+   {"tq": 125, "kind": "stop", "id": "before"},
+   {"tq": 129, "kind": "stop", "id": "delivery"},
+   {"tq": 141, "kind": "stop", "id": "end"},
+   {"tq": 142, "kind": "stop", "id": "readings"}
+  ]
+ },
+ "leaps": [{"from": 1, "to": 97, "ms": 181}, {"from": 97, "to": 113, "ms": 62}],
+ "surprise": {"q": 9, "pin": {"tq": 133, "kind": "surprise", "id": "note"}},
+ "steps": [
+  {
+   "i": 0,
+   "tq": 0,
+   "n": "The grid operator places its order",
+   "w": "",
+   "sd": "h",
+   "b": ["buy-g"],
+   "l": [
+    ["in", "", [["", "place_order({\"date\": \"2025-01-28\", \"start\": \"18:00\", \"end\": \"21:00\", \"kw\": 50.81, \"price_usd_per_kwh\": 2.04, \"deposit_usd\": 31.1})"]], ["buy-g"], 2],
+    ["calc", "", [["", "worth if delivered in full: "], ["n", "50.81 kW"], ["", " x 3 h x "], ["n", "$2.04"], ["", "/kWh = "], ["n", "$310.96"], ["", "  (worked out afterwards)"]], ["buy-g"], 1],
+    ["out", "", [["", "order grid-operator-need-2025-01-28: buyers are told at 27 Jan 10:00, and the answer is due by 27 Jan 16:00"]], ["buy-g"], 1],
+    ["note", "", [["", "This buyer is a stand-in on the run's own catalog: \"Mock events from public data... Not a real utility offer.\""]], ["buy-g"], 3]
+   ]
+  },
+  {
+   "i": 1,
+   "tq": 0,
+   "n": "The utility places its order",
+   "w": "",
+   "sd": "h",
+   "b": ["buy-u"],
+   "l": [
+    ["in", "", [["", "place_order({\"date\": \"2025-01-28\", \"start\": \"18:00\", \"end\": \"21:00\", \"kw\": 84.69, \"price_usd_per_kwh\": 2.04, \"deposit_usd\": 51.83})"]], ["buy-u"], 2],
+    ["calc", "", [["", "worth if delivered in full: "], ["n", "84.69 kW"], ["", " x 3 h x "], ["n", "$2.04"], ["", "/kWh = "], ["n", "$518.30"], ["", "  (worked out afterwards)"]], ["buy-u"], 0],
+    ["out", "", [["", "order flex-need-2025-01-28: buyers are told at 27 Jan 10:00, and the answer is due by 27 Jan 16:00"]], ["buy-u"], 0],
+    ["note", "", [["", "This buyer is a stand-in on the run's own catalog: \"Mock events from public data... Not a real utility offer.\""]], ["buy-u"], 0]
+   ]
+  },
+  {
+   "i": 2,
+   "tq": 1,
+   "n": "The call reaches home 71",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["town", "h-agent"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:"], ["h", "Home 71"], ["", ":discover:grid-operator-need-2025-01-28:call:0:d8868543dba707d1  from=coordinator  to="], ["h", "Home 71"], ["", "  kind=beckn.discover"]], ["town"], 0],
+    ["note", "", [["", "context   action=discover  transactionId=community-grid-operator-need-2025-01-28  messageId=3d94145d-de44-4e48-8654-5cdb92d52a6a  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig b6cc27847a83e462…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      1,826 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to "], ["h", "Home 71"], ["", "), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["h", "Home 71"], ["", " says: Offer for grid-operator-need-2025-01-28: [14.49, 14.49, 14.49, 14.49, 14.49, 14.49] kW per slot, "], ["n", "43.47 kWh"], ["", ", confidence 0.9."]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 3,
+   "tq": 1,
+   "n": "Steps 1 to 4: the safe figure",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-agent"],
+   "l": [
+    ["calc", "", [["", "1 read schedule: in {\"day\": \"2025-01-28\", \"end\": \"2025-01-28 21:00\", \"start\": \"2025-01-28 18:00\"}, out {\"blocks\": [], \"blocks_in_window\": 0}"]], ["h-agent"], 2],
+    ["calc", "", [["", "2 forecast: in {\"end\": \"2025-01-28 21:00\", \"method\": \"load: hour-of-day regression on day-ahead temperature, previ\", \"start\": \"2025-01-28 18:00\"}, out {\"car_kw\": 0.0, \"load_kw\": 5.586, \"solar_kw\": 0.013, \"steps\": 12}"]], ["h-agent"], 1],
+    ["calc", "", [["", "3 check devices: in {\"sensors\": \"ok\", \"shelf\": [\"delay_appliance\", \"discharge_car\", \"limit_ev_charging\", \"set_battery\", \"set_thermostat\", \"set_water_heater\"]}, out {\"by_device_kw\": {\"dish\": 0.066, \"dryer\": 0.278, \"hpwh\": 0.319, \"v2h\": 2.601}, \"by_part_kw\": {\"ac_kw\": 2.095, \"app_kw\": 2.61, \"battery_kw\": 9.78}}"]], ["h-agent"], 3, [["", "3 check devices: in {\"sensors\": \"ok\", \"shelf\": [\"delay_appliance\", \"discharge_car\", \"limit_ev_charging\", \"set_battery\", \"set_thermostat\", \"set_water_heater\"]}, out {\"by_device_kw\": {\"dish\": 0.066, \"dryer\": 0.278, \"hpwh\": 0.319, \"v2h\": 2.601}, \"by_part_kw\": {\"ac_kw\": 2.095, \"app_kw\": 2.61, "], ["d", "… 21 more characters"]]],
+    ["calc", "", [["", "4 estimate sellable: in {\"battery\": {\"energy_scale\": 0.851, \"kw\": 11.5, \"kwh\": 38.88, \"usable_kwh\": 29.34, \"window_start_kwh\": {\"event\": 29.34, \"no_event\": 11.0}}, \"forecast\": \"load: hour-of-day regression on day-ahead temperature, previ\"}, out {\"energy_kwh\": 43.47, \"firm_kw\": [9.78, 9.78, 9.78, 9.78, 9.78, 9.78], \"safe_kw_per_half_hour\": [14.49, 14.49, 14.49, 14.49, 14.49, 14.49]}"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 4,
+   "tq": 1,
+   "n": "Each node gets its contract",
+   "w": "",
+   "sd": "h",
+   "b": ["co-market"],
+   "l": [
+    ["out", "", [["", "confirm to 10 nodes: kW per half hour, price, opt-out time, when the car may restart"]], ["co-market"], 2],
+    ["note", "", [["", "the grid operator's contract is active too: 1 contract_active entries in the log"]], ["co-market"], 1]
+   ]
+  },
+  {
+   "i": 5,
+   "tq": 1,
+   "n": "The contract reaches home 71",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["town", "h-agent"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:"], ["h", "Home 71"], ["", ":confirm:grid-operator-need-2025-01-28:"], ["h", "Home 71"], ["", ":1:5ef0653886af5119  from=coordinator  to="], ["h", "Home 71"], ["", "  kind=beckn.confirm"]], ["town"], 1],
+    ["note", "", [["", "context   action=confirm  transactionId=community-grid-operator-need-2025-01-28  messageId=b1f79272-0571-44c3-9c4c-322a1ce23fe0  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig 91c45e179367a4bd…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 3],
+    ["note", "", [["", "body      1,608 bytes, carried unread"]], ["town"], 3],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to "], ["h", "Home 71"], ["", "), and recorded 1 ack: status done, done processed"]], ["town"], 3],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "commitments [14.485, 14.485, 14.485, 14.485, 14.485, 14.485] kW, firm part [9.78, 9.78, 9.78, 9.78, 9.78, 9.78], opt out by 27 Jan 16:00, car restarts from 28 Jan 21:00, rule: the order's price on each measured kWh a node delivered, times its class's share: home battery or two-way car 0.7, building 0.5075, any other home device 0.18375. The buyer pays that divided by 0.7, so 0.3 of the bill is kept: 0.1 by the community's operator and 0.2 by the aggregator (devices/price_book.json)"]], ["h-agent"], 0],
+    ["in", "", [["h", "Home 71"], ["", " says: Contract grid-operator-need-2025-01-28:"], ["h", "Home 71"], ["", ": ACCEPTED (within_offer)."]], ["h-agent"], 2]
+   ]
+  },
+  {
+   "i": 6,
+   "tq": 1,
+   "n": "Step 6: code answers the contract",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-agent"],
+   "l": [
+    ["calc", "", [["", "asked: {\"changed_since_the_offer\": [], \"contract_id\": \"grid-operator-need-2025-01-28:"], ["h", "Home 71"], ["", "\", \"event_id\": \"grid-operator-need-2025-01-28\", \"kw_per_half_hour\": [14.485, 14.485, 14.485, 14.485, 14.485, 14.485]}"]], ["h-agent"], 0],
+    ["calc", "", [["", "the rule's plan: {\"answer\": \"accept\", \"what\": \"inside the offer and safe\"}"]], ["h-agent"], 0],
+    ["calc", "", [["", "code chose: {\"answer\": \"accept\"}"]], ["h-agent"], 0],
+    ["guard", "", [["", "less than the rule: False. By: rule: plans are decided by code. Facts cited: [{\"id\": \"commitment\", \"says\": \"The commitment is "], ["n", "14.5 kW"], ["", " per half hour on average, and code found it inside the offer.\"}, {\"id\": \"changed\", \"says\": \"Nothing changed since the offer went out.\"}]."]], ["h-agent"], 0],
+    ["calc", "", [["", "reason: Code decides the plans on this node, so this is code's own answer. The model wasn't asked."]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 7,
+   "tq": 1,
+   "n": "Home 71 says ACCEPTED",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["co-market", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=ae5acd108d6:"], ["h", "Home 71"], ["", ":coordinator:on_confirm:grid-operator-need-2025-01-28:"], ["h", "Home 71"], ["", "  from="], ["h", "Home 71"], ["", "  to=coordinator  kind=beckn.on_confirm"]], ["town"], 0],
+    ["note", "", [["", "context   action=on_confirm  transactionId=community-grid-operator-need-2025-01-28  messageId=117afc74-7e21-4240-890f-6cac11bbb01d  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer f1e4b80c2db65ec9…  sig 45edd90a99eb3099…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      723 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "reason: None"]], ["co-market"], 0],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 71"], ["", " ACCEPTED (None)"]], ["co-market"], 0]
+   ]
+  },
+  {
+   "i": 8,
+   "tq": 1,
+   "n": "The contract reaches home 90",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["town", "h-agent"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:"], ["h", "Home 90"], ["", ":confirm:grid-operator-need-2025-01-28:"], ["h", "Home 90"], ["", ":1:58e0a84d3c077380  from=coordinator  to="], ["h", "Home 90"], ["", "  kind=beckn.confirm"]], ["town"], 0],
+    ["note", "", [["", "context   action=confirm  transactionId=community-grid-operator-need-2025-01-28  messageId=4ed442ed-0ef1-4201-9589-ebff6e09faa9  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig 388a704e2063bed9…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      1,608 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to "], ["h", "Home 90"], ["", "), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "commitments [13.929, 13.929, 13.929, 18.729, 21.709, 13.929] kW, firm part [6.54, 6.54, 6.54, 6.54, 6.54, 6.54], opt out by 27 Jan 16:00, car restarts from 28 Jan 21:00, rule: the order's price on each measured kWh a node delivered, times its class's share: home battery or two-way car 0.7, building 0.5075, any other home device 0.18375. The buyer pays that divided by 0.7, so 0.3 of the bill is kept: 0.1 by the community's operator and 0.2 by the aggregator (devices/price_book.json)"]], ["h-agent"], 0],
+    ["in", "", [["h", "Home 90"], ["", " says: Contract grid-operator-need-2025-01-28:"], ["h", "Home 90"], ["", ": ACCEPTED (within_offer)."]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 9,
+   "tq": 1,
+   "n": "Step 6: code answers the contract",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-agent"],
+   "l": [
+    ["calc", "", [["", "asked: {\"changed_since_the_offer\": [], \"contract_id\": \"grid-operator-need-2025-01-28:"], ["h", "Home 90"], ["", "\", \"event_id\": \"grid-operator-need-2025-01-28\", \"kw_per_half_hour\": [13.929, 13.929, 13.929, 18.729, 21.709, 13.929]}"]], ["h-agent"], 0],
+    ["calc", "", [["", "the rule's plan: {\"answer\": \"accept\", \"what\": \"inside the offer and safe\"}"]], ["h-agent"], 0],
+    ["calc", "", [["", "code chose: {\"answer\": \"accept\"}"]], ["h-agent"], 0],
+    ["guard", "", [["", "less than the rule: False. By: rule: plans are decided by code. Facts cited: [{\"id\": \"commitment\", \"says\": \"The commitment is "], ["n", "16.0 kW"], ["", " per half hour on average, and code found it inside the offer.\"}, {\"id\": \"changed\", \"says\": \"Nothing changed since the offer went out.\"}]."]], ["h-agent"], 0],
+    ["calc", "", [["", "reason: Code decides the plans on this node, so this is code's own answer. The model wasn't asked."]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 10,
+   "tq": 1,
+   "n": "Home 90 says ACCEPTED",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["co-market", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=a99396065fc:"], ["h", "Home 90"], ["", ":coordinator:on_confirm:grid-operator-need-2025-01-28:"], ["h", "Home 90"], ["", "  from="], ["h", "Home 90"], ["", "  to=coordinator  kind=beckn.on_confirm"]], ["town"], 0],
+    ["note", "", [["", "context   action=on_confirm  transactionId=community-grid-operator-need-2025-01-28  messageId=0aa06497-6aea-4e99-9d79-5f3926e38a25  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db6abb54595661ff…  sig 0bb776cc701a8586…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      723 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "reason: None"]], ["co-market"], 0],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 90"], ["", " ACCEPTED (None)"]], ["co-market"], 0]
+   ]
+  },
+  {
+   "i": 11,
+   "tq": 1,
+   "n": "The contract reaches the shopping center",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["town", "b-agent"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:"], ["b", "the shopping center"], ["", ":confirm:grid-operator-need-2025-01-28:"], ["b", "the shopping center"], ["", ":1:0d273a8acbbd8a37  from=coordinator  to="], ["b", "the shopping center"], ["", "  kind=beckn.confirm"]], ["town"], 0],
+    ["note", "", [["", "context   action=confirm  transactionId=community-grid-operator-need-2025-01-28  messageId=d8ba7ad8-a32b-4926-8f59-4f5cc114ad86  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig 8b438d0cfeee8e16…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      1,614 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to "], ["b", "the shopping center"], ["", "), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "commitments [9.152, 9.152, 9.152, 9.152, 9.152, 9.152] kW, firm part [4.886, 4.886, 4.886, 4.886, 4.886, 4.886], opt out by 27 Jan 16:00, car restarts from 28 Jan 21:00, rule: the order's price on each measured kWh a node delivered, times its class's share: home battery or two-way car 0.7, building 0.5075, any other home device 0.18375. The buyer pays that divided by 0.7, so 0.3 of the bill is kept: 0.1 by the community's operator and 0.2 by the aggregator (devices/price_book.json)"]], ["b-agent"], 0],
+    ["in", "", [["b", "The shopping center"], ["", " says: Contract grid-operator-need-2025-01-28:"], ["b", "the shopping center"], ["", ": ACCEPTED (within_offer)."]], ["b-agent"], 0]
+   ]
+  },
+  {
+   "i": 12,
+   "tq": 1,
+   "n": "Step 6: code answers the contract",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["b-agent"],
+   "l": [
+    ["calc", "", [["", "asked: {\"changed_since_the_offer\": [], \"contract_id\": \"grid-operator-need-2025-01-28:"], ["b", "the shopping center"], ["", "\", \"event_id\": \"grid-operator-need-2025-01-28\", \"kw_per_half_hour\": [9.152, 9.152, 9.152, 9.152, 9.152, 9.152]}"]], ["b-agent"], 0],
+    ["calc", "", [["", "the rule's plan: {\"answer\": \"accept\", \"what\": \"inside the offer and safe\"}"]], ["b-agent"], 0],
+    ["calc", "", [["", "code chose: {\"answer\": \"accept\"}"]], ["b-agent"], 0],
+    ["guard", "", [["", "less than the rule: False. By: rule: plans are decided by code. Facts cited: [{\"id\": \"commitment\", \"says\": \"The commitment is "], ["n", "9.2 kW"], ["", " per half hour on average, and code found it inside the offer.\"}, {\"id\": \"changed\", \"says\": \"Nothing changed since the offer went out.\"}]."]], ["b-agent"], 0],
+    ["calc", "", [["", "reason: Code decides the plans on this node, so this is code's own answer. The model wasn't asked."]], ["b-agent"], 0]
+   ]
+  },
+  {
+   "i": 13,
+   "tq": 1,
+   "n": "The shopping center says ACCEPTED",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["co-market", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=ade207b4b5a:"], ["b", "the shopping center"], ["", ":coordinator:on_confirm:grid-operator-need-2025-01-28:"], ["b", "the shopping center"], ["", "  from="], ["b", "the shopping center"], ["", "  to=coordinator  kind=beckn.on_confirm"]], ["town"], 0],
+    ["note", "", [["", "context   action=on_confirm  transactionId=community-grid-operator-need-2025-01-28  messageId=c9f7f36d-7c00-49ae-a769-6b087ccc1694  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer d953331145c9c5cf…  sig 902226e65f90a933…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      728 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "reason: None"]], ["co-market"], 0],
+    ["in", "", [["", "coordinator says: "], ["b", "the shopping center"], ["", " ACCEPTED (None)"]], ["co-market"], 0]
+   ]
+  },
+  {
+   "i": 14,
+   "tq": 97,
+   "n": "Step 6 prepare",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["b-agent"],
+   "l": [
+    ["note", "", [["", "record row 24: step 6 prepare entered at 08:00, hash 1b6eed8a2311a14e…, chained to 4b69400f4bd7ddff…"]], ["b-agent"], 0]
+   ]
+  },
+  {
+   "i": 15,
+   "tq": 97,
+   "n": "No morning pre-cool here",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["b-agent"],
+   "l": [
+    ["note", "", [["", "record rows 24 and 25: step 6 prepare entered and done at 08:00, with nothing between them"]], ["b-agent"], 2]
+   ]
+  },
+  {
+   "i": 16,
+   "tq": 113,
+   "n": "The desk asks who can add",
+   "w": "",
+   "sd": "h",
+   "b": ["co-desk"],
+   "l": [
+    ["calc", "", [["", "{\"id\": \"gap-2025-01-28T18:15-6db729\", \"kind\": \"gap\", \"start\": \"2025-01-28 18:15\", \"end\": \"2025-01-28 21:00\", \"price_usd_per_kwh\": 2.04}"]], ["co-desk"], 0],
+    ["out", "", [["", "rt_ask to 3 members now, at "], ["n", "$2.04"], ["", " per kWh"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 17,
+   "tq": 113,
+   "n": "The desk adds up what is short",
+   "w": "",
+   "sd": "h",
+   "b": ["co-desk"],
+   "l": [
+    ["calc", "", [["", "{\"gap_id\": \"gap-2025-01-28T18:15-6db729\", \"home\": \""], ["h", "Home 90"], ["", "\", \"homes\": 7, \"kw\": 35.51, \"start\": \"2025-01-28 18:15\", \"end\": \"2025-01-28 21:00\", \"reason\": \"the forecast changed\"}"]], ["co-desk"], 3]
+   ]
+  },
+  {
+   "i": 18,
+   "tq": 113,
+   "n": "The desk dispatches",
+   "w": "",
+   "sd": "h",
+   "b": ["co-desk"],
+   "l": [
+    ["calc", "", [["", "{\"call_id\": \"gap-2025-01-28T18:15-6db729\", \"call_kind\": \"gap\", \"homes\": 3, \"confirmed_kw\": 2.941, \"short_kw\": 32.568, \"answers\": 3}"]], ["co-desk"], 0],
+    ["out", "", [["", "confirmed "], ["n", "2.941 kW"], ["", ", short "], ["n", "32.568 kW"], ["", ", at "], ["n", "$2.04"], ["", " per kWh"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 19,
+   "tq": 113,
+   "n": "Home 71 answers the desk",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=a01606ccc65:"], ["h", "Home 71"], ["", ":coordinator:rt_answer:gap-2025-01-28T18:15-6db729  from="], ["h", "Home 71"], ["", "  to=coordinator  kind=beckn.rt_answer"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_answer  transactionId=gap-2025-01-28T18:15-6db729  messageId=53d8f99e-3dcf-45cd-9797-ff2e94eeedbd  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer f1e4b80c2db65ec9…  sig 73e9f85c12f52473…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      628 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["out", "", [["", "rt_answer: {\"id\": \"gap-2025-01-28T18:15-6db729\", \"kw\": 1.0}"]], ["town"], 0],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 71"], ["", " can add "], ["n", "1.0 kW"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 20,
+   "tq": 113,
+   "n": "Home 71 takes a dispatch",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["town", "h-agent"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:"], ["h", "Home 71"], ["", ":rt_dispatch:gap-2025-01-28T18:15-6db729:gap-2025-01-28T18:15-6db729:0:1:ffa1ef1f73c8bd54  from=coordinator  to="], ["h", "Home 71"], ["", "  kind=beckn.rt_dispatch"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_dispatch  transactionId=gap-2025-01-28T18:15-6db729  messageId=9d63c23c-1368-4580-a082-248854633cd3  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig 1fb4a5bf19c0ca0e…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      1,038 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to "], ["h", "Home 71"], ["", "), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "dispatch gap-2025-01-28T18:15-6db729: {\"2025-01-28 18:15\": 0.113, \"2025-01-28 18:30\": 0.074, \"2025-01-28 18:45\": 0.405, \"2025-01-28 19:00\": 0.12, \"2025-01-28 19:15\": 0.069, \"2025-01-28 19:30\": 0.509, \"2025-01-28 19:45\": 0.663, \"2025-01-28 20:00\": 0.625, \"2025-01-28 20:15\": 0.713, \"2025-01-28 20:30\": 0.719, \"2025-01-28 20:45\": 1.0}"]], ["h-agent"], 0],
+    ["in", "", [["h", "Home 71"], ["", " says: dispatch gap-2025-01-28T18:15-6db729: 11 steps"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 21,
+   "tq": 113,
+   "n": "Home 90 tells the desk",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=91683b66:"], ["h", "Home 90"], ["", ":coordinator:rt_capacity:2025-01-28 14:00:ba0007d57b:3e5bad70599df8cc  from="], ["h", "Home 90"], ["", "  to=coordinator  kind=beckn.rt_capacity"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_capacity  transactionId=cap-"], ["h", "Home 90"], ["", "  messageId=85fdc4ae-a15c-4005-8d02-06753f3ad3af  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db6abb54595661ff…  sig f313c55a7ebb4bca…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      732 bytes, carried unread"]], ["town"], 1],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "short: {\"2025-01-28 18:45\": 1.863, \"2025-01-28 19:30\": 13.3, \"2025-01-28 19:45\": 18.736, \"2025-01-28 20:00\": 14.038, \"2025-01-28 20:15\": 2.528, \"2025-01-28 20:45\": 6.23}, drift: True"]], ["co-desk"], 2],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 90"], ["", " short "], ["n", "18.73 kW"], ["", " from 2025-01-28 18:45: checked at the next 5 minutes"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 22,
+   "tq": 113,
+   "n": "The shopping center answers the desk",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=ae8d8bc4d1b:"], ["b", "the shopping center"], ["", ":coordinator:rt_answer:gap-2025-01-28T18:15-6db729  from="], ["b", "the shopping center"], ["", "  to=coordinator  kind=beckn.rt_answer"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_answer  transactionId=gap-2025-01-28T18:15-6db729  messageId=5a64e5db-ebf8-4686-ab63-b92798bb4490  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer d953331145c9c5cf…  sig ddb9d5a421db4132…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      631 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["out", "", [["", "rt_answer: {\"id\": \"gap-2025-01-28T18:15-6db729\", \"kw\": 0.653}"]], ["town"], 0],
+    ["in", "", [["", "coordinator says: "], ["b", "the shopping center"], ["", " can add "], ["n", "0.653 kW"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 23,
+   "tq": 113,
+   "n": "The shopping center takes a dispatch",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["town", "b-agent"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:"], ["b", "the shopping center"], ["", ":rt_dispatch:gap-2025-01-28T18:15-6db729:gap-2025-01-28T18:15-6db729:0:1:75047a6889c441c5  from=coordinator  to="], ["b", "the shopping center"], ["", "  kind=beckn.rt_dispatch"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_dispatch  transactionId=gap-2025-01-28T18:15-6db729  messageId=bb21e1d7-1c30-4512-9490-30a9062263ba  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig 14d83ffc19ee93a7…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      1,042 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to "], ["b", "the shopping center"], ["", "), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "dispatch gap-2025-01-28T18:15-6db729: {\"2025-01-28 18:15\": 0.074, \"2025-01-28 18:30\": 0.048, \"2025-01-28 18:45\": 0.264, \"2025-01-28 19:00\": 0.079, \"2025-01-28 19:15\": 0.045, \"2025-01-28 19:30\": 0.332, \"2025-01-28 19:45\": 0.433, \"2025-01-28 20:00\": 0.408, \"2025-01-28 20:15\": 0.465, \"2025-01-28 20:30\": 0.47, \"2025-01-28 20:45\": 0.653}"]], ["b-agent"], 0],
+    ["in", "", [["b", "The shopping center"], ["", " says: dispatch gap-2025-01-28T18:15-6db729: 11 steps"]], ["b-agent"], 0]
+   ]
+  },
+  {
+   "i": 24,
+   "tq": 117,
+   "n": "The desk asks who can add",
+   "w": "",
+   "sd": "h",
+   "b": ["co-desk"],
+   "l": [
+    ["calc", "", [["", "{\"id\": \"gap-2025-01-28T18:15-c72e74\", \"kind\": \"gap\", \"start\": \"2025-01-28 18:15\", \"end\": \"2025-01-28 21:00\", \"price_usd_per_kwh\": 2.04}"]], ["co-desk"], 0],
+    ["out", "", [["", "rt_ask to 3 members now, at "], ["n", "$2.04"], ["", " per kWh"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 25,
+   "tq": 117,
+   "n": "The desk adds up what is short",
+   "w": "",
+   "sd": "h",
+   "b": ["co-desk"],
+   "l": [
+    ["calc", "", [["", "{\"gap_id\": \"gap-2025-01-28T18:15-c72e74\", \"home\": \""], ["h", "Home 90"], ["", "\", \"homes\": 7, \"kw\": 37.31, \"start\": \"2025-01-28 18:15\", \"end\": \"2025-01-28 21:00\", \"reason\": \"the forecast changed\"}"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 26,
+   "tq": 117,
+   "n": "The desk dispatches",
+   "w": "",
+   "sd": "h",
+   "b": ["co-desk"],
+   "l": [
+    ["calc", "", [["", "{\"call_id\": \"gap-2025-01-28T18:15-c72e74\", \"call_kind\": \"gap\", \"homes\": 2, \"confirmed_kw\": 0.716, \"short_kw\": 36.594, \"answers\": 3}"]], ["co-desk"], 0],
+    ["out", "", [["", "confirmed "], ["n", "0.716 kW"], ["", ", short "], ["n", "36.594 kW"], ["", ", at "], ["n", "$2.04"], ["", " per kWh"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 27,
+   "tq": 117,
+   "n": "The desk dispatches",
+   "w": "",
+   "sd": "h",
+   "b": ["co-desk"],
+   "l": [
+    ["calc", "", [["", "{\"call_id\": \"gap-2025-01-28T18:15-c72e74\", \"call_kind\": \"gap\", \"homes\": 0, \"confirmed_kw\": 0.0, \"short_kw\": 36.594, \"answers\": 0}"]], ["co-desk"], 0],
+    ["out", "", [["", "confirmed "], ["n", "0.0 kW"], ["", ", short "], ["n", "36.594 kW"], ["", ", at "], ["n", "$2.04"], ["", " per kWh"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 28,
+   "tq": 117,
+   "n": "Home 71 answers the desk",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=aa732bfa803:"], ["h", "Home 71"], ["", ":coordinator:rt_answer:gap-2025-01-28T18:15-c72e74  from="], ["h", "Home 71"], ["", "  to=coordinator  kind=beckn.rt_answer"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_answer  transactionId=gap-2025-01-28T18:15-c72e74  messageId=b0735146-238a-4acb-918d-b756ce497202  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer f1e4b80c2db65ec9…  sig 50392205b0c8763a…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      630 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["out", "", [["", "rt_answer: {\"id\": \"gap-2025-01-28T18:15-c72e74\", \"kw\": 0.376}"]], ["town"], 0],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 71"], ["", " can add "], ["n", "0.376 kW"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 29,
+   "tq": 117,
+   "n": "Home 71 takes a dispatch",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["town", "h-agent"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:"], ["h", "Home 71"], ["", ":rt_dispatch:gap-2025-01-28T18:15-c72e74:gap-2025-01-28T18:15-c72e74:0:1:753fa1b07cef8e1e  from=coordinator  to="], ["h", "Home 71"], ["", "  kind=beckn.rt_dispatch"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_dispatch  transactionId=gap-2025-01-28T18:15-c72e74  messageId=c5c1403c-25ca-4943-b138-89ce3a1b7dfe  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig e252377bc9799af9…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      1,016 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to "], ["h", "Home 71"], ["", "), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "dispatch gap-2025-01-28T18:15-c72e74: {\"2025-01-28 18:15\": 0.101, \"2025-01-28 18:30\": 0.066, \"2025-01-28 18:45\": 0.046, \"2025-01-28 19:00\": 0.014, \"2025-01-28 19:30\": 0.124, \"2025-01-28 19:45\": 0.217, \"2025-01-28 20:00\": 0.188, \"2025-01-28 20:15\": 0.305, \"2025-01-28 20:30\": 0.376, \"2025-01-28 20:45\": 0.267}"]], ["h-agent"], 0],
+    ["in", "", [["h", "Home 71"], ["", " says: dispatch gap-2025-01-28T18:15-c72e74: 10 steps"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 30,
+   "tq": 117,
+   "n": "Home 90 tells the desk",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=91683b66:"], ["h", "Home 90"], ["", ":coordinator:rt_capacity:2025-01-28 15:00:2f9a27e97a:e0db2080c97d5042  from="], ["h", "Home 90"], ["", "  to=coordinator  kind=beckn.rt_capacity"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_capacity  transactionId=cap-"], ["h", "Home 90"], ["", "  messageId=e55b391e-7f8c-46dd-9691-5c779e1e5f16  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db6abb54595661ff…  sig 5ae14c6d46c74e3a…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      734 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "short: {\"2025-01-28 18:45\": 2.064, \"2025-01-28 19:30\": 15.887, \"2025-01-28 19:45\": 18.423, \"2025-01-28 20:00\": 2.887, \"2025-01-28 20:15\": 14.371, \"2025-01-28 20:30\": 4.513}, drift: True"]], ["co-desk"], 2],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 90"], ["", " short "], ["n", "18.42 kW"], ["", " from 2025-01-28 18:45: checked at the next 5 minutes"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 31,
+   "tq": 117,
+   "n": "The shopping center answers the desk",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=a44f2eb165e:"], ["b", "the shopping center"], ["", ":coordinator:rt_answer:gap-2025-01-28T18:15-c72e74  from="], ["b", "the shopping center"], ["", "  to=coordinator  kind=beckn.rt_answer"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_answer  transactionId=gap-2025-01-28T18:15-c72e74  messageId=48248183-a9d7-498e-95ad-c28d6f2cf768  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer d953331145c9c5cf…  sig 39db8e83bb457596…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      632 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["out", "", [["", "rt_answer: {\"id\": \"gap-2025-01-28T18:15-c72e74\", \"kw\": 0.034}"]], ["town"], 0],
+    ["in", "", [["", "coordinator says: "], ["b", "the shopping center"], ["", " can add "], ["n", "0.034 kW"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 32,
+   "tq": 120,
+   "n": "The desk adds up what is short",
+   "w": "",
+   "sd": "h",
+   "b": ["co-desk"],
+   "l": [
+    ["calc", "", [["", "{\"gap_id\": \"gap-2025-01-28T18:15-905867\", \"home\": \""], ["h", "Home 90"], ["", "\", \"homes\": 7, \"kw\": 40.82, \"start\": \"2025-01-28 18:15\", \"end\": \"2025-01-28 21:00\", \"reason\": \"the forecast changed\"}"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 33,
+   "tq": 120,
+   "n": "Home 71 answers the desk",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=a528e0f4ab4:"], ["h", "Home 71"], ["", ":coordinator:rt_answer:gap-2025-01-28T18:15-905867  from="], ["h", "Home 71"], ["", "  to=coordinator  kind=beckn.rt_answer"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_answer  transactionId=gap-2025-01-28T18:15-905867  messageId=52c242c3-b8fd-41c9-b904-81c52ec0a07b  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer f1e4b80c2db65ec9…  sig e873ae65bfac6c42…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      631 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["out", "", [["", "rt_answer: {\"id\": \"gap-2025-01-28T18:15-905867\", \"kw\": 0.138}"]], ["town"], 0],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 71"], ["", " can add "], ["n", "0.138 kW"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 34,
+   "tq": 120,
+   "n": "Home 71 takes a dispatch",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["town", "h-agent"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:"], ["h", "Home 71"], ["", ":rt_dispatch:gap-2025-01-28T18:15-905867:gap-2025-01-28T18:15-905867:0:1:d8c5d7107e52212d  from=coordinator  to="], ["h", "Home 71"], ["", "  kind=beckn.rt_dispatch"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_dispatch  transactionId=gap-2025-01-28T18:15-905867  messageId=b82466dd-e331-4a8d-921e-9b4b6f04024b  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig 9f430c67cb349aaf…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      1,016 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to "], ["h", "Home 71"], ["", "), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "dispatch gap-2025-01-28T18:15-905867: {\"2025-01-28 18:15\": 0.033, \"2025-01-28 18:30\": 0.022, \"2025-01-28 18:45\": 0.015, \"2025-01-28 19:00\": 0.005, \"2025-01-28 19:30\": 0.041, \"2025-01-28 19:45\": 0.071, \"2025-01-28 20:00\": 0.047, \"2025-01-28 20:15\": 0.111, \"2025-01-28 20:30\": 0.138, \"2025-01-28 20:45\": 0.088}"]], ["h-agent"], 0],
+    ["in", "", [["h", "Home 71"], ["", " says: dispatch gap-2025-01-28T18:15-905867: 10 steps"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 35,
+   "tq": 120,
+   "n": "The shopping center answers the desk",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=a2f790cb82f:"], ["b", "the shopping center"], ["", ":coordinator:rt_answer:gap-2025-01-28T18:15-905867  from="], ["b", "the shopping center"], ["", "  to=coordinator  kind=beckn.rt_answer"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_answer  transactionId=gap-2025-01-28T18:15-905867  messageId=e1c064f9-6253-4457-8a09-9a3e0ac9838e  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer d953331145c9c5cf…  sig 3c0962ca1abd935f…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      632 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["out", "", [["", "rt_answer: {\"id\": \"gap-2025-01-28T18:15-905867\", \"kw\": 0.034}"]], ["town"], 0],
+    ["in", "", [["", "coordinator says: "], ["b", "the shopping center"], ["", " can add "], ["n", "0.034 kW"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 36,
+   "tq": 121,
+   "n": "Home 71 answers the desk",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=a7f43be8a1b:"], ["h", "Home 71"], ["", ":coordinator:rt_answer:gap-2025-01-28T18:15-7f285a  from="], ["h", "Home 71"], ["", "  to=coordinator  kind=beckn.rt_answer"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_answer  transactionId=gap-2025-01-28T18:15-7f285a  messageId=cf417323-25b7-4e46-b8c7-55aa47b087f2  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer f1e4b80c2db65ec9…  sig 11e3c85c1ca409a5…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      630 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["out", "", [["", "rt_answer: {\"id\": \"gap-2025-01-28T18:15-7f285a\", \"kw\": 0.066}"]], ["town"], 0],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 71"], ["", " can add "], ["n", "0.066 kW"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 37,
+   "tq": 121,
+   "n": "Home 71 takes a dispatch",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["town", "h-agent"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:"], ["h", "Home 71"], ["", ":rt_dispatch:gap-2025-01-28T18:15-7f285a:gap-2025-01-28T18:15-7f285a:0:1:0e767bb3a3876581  from=coordinator  to="], ["h", "Home 71"], ["", "  kind=beckn.rt_dispatch"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_dispatch  transactionId=gap-2025-01-28T18:15-7f285a  messageId=874cb5d6-e461-40ce-a9a2-f76186b1d674  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig c24be3422f992abb…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      988 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to "], ["h", "Home 71"], ["", "), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "dispatch gap-2025-01-28T18:15-7f285a: {\"2025-01-28 18:15\": 0.015, \"2025-01-28 18:30\": 0.01, \"2025-01-28 18:45\": 0.01, \"2025-01-28 19:00\": 0.006, \"2025-01-28 19:45\": 0.016, \"2025-01-28 20:00\": 0.034, \"2025-01-28 20:15\": 0.046, \"2025-01-28 20:30\": 0.066, \"2025-01-28 20:45\": 0.05}"]], ["h-agent"], 0],
+    ["in", "", [["h", "Home 71"], ["", " says: dispatch gap-2025-01-28T18:15-7f285a: 9 steps"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 38,
+   "tq": 121,
+   "n": "Home 90 tells the desk",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=91683b66:"], ["h", "Home 90"], ["", ":coordinator:rt_capacity:2025-01-28 16:00:7ac370e3c3:dba90dbaa6588ffd  from="], ["h", "Home 90"], ["", "  to=coordinator  kind=beckn.rt_capacity"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_capacity  transactionId=cap-"], ["h", "Home 90"], ["", "  messageId=92f23b4c-d9b2-48f0-adde-eb4bc363bbce  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db6abb54595661ff…  sig 0540481bf2950605…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      758 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "short: {\"2025-01-28 18:45\": 1.519, \"2025-01-28 19:30\": 4.503, \"2025-01-28 19:45\": 7.708, \"2025-01-28 20:00\": 13.882, \"2025-01-28 20:15\": 13.886, \"2025-01-28 20:30\": 6.109, \"2025-01-28 20:45\": 6.113}, drift: True"]], ["co-desk"], 0],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 90"], ["", " short "], ["n", "13.89 kW"], ["", " from 2025-01-28 18:45: checked at the next 5 minutes"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 39,
+   "tq": 125,
+   "n": "Home 71 answers the desk",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["co-desk", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=a2bad61f4b9:"], ["h", "Home 71"], ["", ":coordinator:rt_answer:gap-2025-01-28T18:15-34857a  from="], ["h", "Home 71"], ["", "  to=coordinator  kind=beckn.rt_answer"]], ["town"], 0],
+    ["note", "", [["", "context   action=rt_answer  transactionId=gap-2025-01-28T18:15-34857a  messageId=4bfb15d5-adb0-435d-9013-69c99d97b445  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer f1e4b80c2db65ec9…  sig 9b3bd7c5c902a8f1…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      630 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["out", "", [["", "rt_answer: {\"id\": \"gap-2025-01-28T18:15-34857a\", \"kw\": 0.066}"]], ["town"], 0],
+    ["in", "", [["", "coordinator says: "], ["h", "Home 71"], ["", " can add "], ["n", "0.066 kW"]], ["co-desk"], 0]
+   ]
+  },
+  {
+   "i": 40,
+   "tq": 113,
+   "n": "The aggregator asks a solar-and-battery plant",
+   "w": "",
+   "sd": "h",
+   "b": ["site-pv"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=aggregator:site-pv-01:request:req-site-pv-01-2025-01-28  from=aggregator  to=site-pv-01  kind=community.request"]], ["site-pv"], 1],
+    ["note", "", [["", "context   action=request  transactionId=req-site-pv-01-2025-01-28  messageId=aggregator:site-pv-01:request:req-site-pv-01-2025-01-28  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["site-pv"], 1],
+    ["sign", "", [["", "signer 15f540a72601369c…  sig ac5492cd09fb3dbb…  Ed25519 over the canonical JSON of the whole body"]], ["site-pv"], 3],
+    ["note", "", [["", "body      3,416 bytes, carried unread"]], ["site-pv"], 1],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to site-pv-01), and recorded 1 ack: status done, done processed"]], ["site-pv"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["site-pv"], 0],
+    ["in", "", [["", "its battery to give, by hour: 19:00 "], ["n", "9,936 kW"], ["", " · 20:00 "], ["n", "5,835 kW"]], ["site-pv"], 3],
+    ["in", "", [["", "site-pv-01 says: request taken: 40 quarter hours"]], ["site-pv"], 2]
+   ]
+  },
+  {
+   "i": 41,
+   "tq": 113,
+   "n": "The aggregator asks a solar-and-battery plant",
+   "w": "",
+   "sd": "h",
+   "b": ["site-pv"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=aggregator:site-pv-02:request:req-site-pv-02-2025-01-28  from=aggregator  to=site-pv-02  kind=community.request"]], ["site-pv"], 0],
+    ["note", "", [["", "context   action=request  transactionId=req-site-pv-02-2025-01-28  messageId=aggregator:site-pv-02:request:req-site-pv-02-2025-01-28  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["site-pv"], 0],
+    ["sign", "", [["", "signer 15f540a72601369c…  sig e6f66672510e2287…  Ed25519 over the canonical JSON of the whole body"]], ["site-pv"], 0],
+    ["note", "", [["", "body      3,416 bytes, carried unread"]], ["site-pv"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to site-pv-02), and recorded 1 ack: status done, done processed"]], ["site-pv"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["site-pv"], 0],
+    ["in", "", [["", "its battery to give, by hour: 19:00 "], ["n", "7,780 kW"], ["", " · 20:00 "], ["n", "7,118 kW"]], ["site-pv"], 0],
+    ["in", "", [["", "site-pv-02 says: request taken: 40 quarter hours"]], ["site-pv"], 2]
+   ]
+  },
+  {
+   "i": 42,
+   "tq": 113,
+   "n": "The aggregator asks a data center",
+   "w": "",
+   "sd": "h",
+   "b": ["site-dc"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=aggregator:site-dc-01:request:req-site-dc-01-2025-01-28  from=aggregator  to=site-dc-01  kind=community.request"]], ["site-dc"], 0],
+    ["note", "", [["", "context   action=request  transactionId=req-site-dc-01-2025-01-28  messageId=aggregator:site-dc-01:request:req-site-dc-01-2025-01-28  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["site-dc"], 0],
+    ["sign", "", [["", "signer 15f540a72601369c…  sig 1029a36ed2a34da3…  Ed25519 over the canonical JSON of the whole body"]], ["site-dc"], 0],
+    ["note", "", [["", "body      3,430 bytes, carried unread"]], ["site-dc"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to site-dc-01), and recorded 1 ack: status done, done processed"]], ["site-dc"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["site-dc"], 0],
+    ["in", "", [["", "its battery to give, by hour: 18:00 "], ["n", "2,502 kW"], ["", " · 19:00 "], ["n", "3,681 kW"], ["", " · 20:00 "], ["n", "3,681 kW"]], ["site-dc"], 0],
+    ["in", "", [["", "site-dc-01 says: request taken: 40 quarter hours"]], ["site-dc"], 0]
+   ]
+  },
+  {
+   "i": 43,
+   "tq": 127,
+   "n": "Step 7 watch",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-agent"],
+   "l": [
+    ["note", "", [["", "record row 24: step 7 watch entered at 17:30, hash 92982cecdda65147…, chained to 74ba4b63cfcd3a36…"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 44,
+   "tq": 127,
+   "n": "Guard: set_battery done",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-tools", "h-guard"],
+   "l": [
+    ["tool", "", [["", "set_battery({\"action\": \"discharge\", \"kw\": 9.78, \"target\": \"home-battery\"})  from 18:00 to 21:00"]], ["h-tools"], 0],
+    ["guard", "", [["", "run_call: arguments clean, {\"action\": \"discharge\", \"kw\": 9.78, \"target\": \"home-battery\"}"]], ["h-tools"], 0],
+    ["guard", "", [["", "policy 2026-11-06: allow=True by rule allow.4, for the role \"agent\" via code"]], ["h-tools"], 0],
+    ["calc", "", [["", "what the guard could see: owed "], ["n", "15.934999999999999 kW"], ["", ", alarm None, stopped False, menu {\"set_battery\": [\"home-battery\"]}, the devices {\"battery\": {\"at_reserve\": false, \"can_give_kw\": 9.78, \"charge_limit_kw\": 8.0, \"full\": true, \"giving\": false, \"soc_pct\": 100, \"target\": \"home-battery\", \"tool\": \"set_battery\", \"tripped\": false}, \"car\": {\"can_give_kw\": 0.0, \"leaves\": null, \"max_kwh\": 0.0, \"status\": \"away\", \"target\": \"car\", \"tool\": \"discharge_car\"}, \"charger\": {\"can_give_kw\": 0.0, \"charge_kw\": 0.0, \"leaves\": null, \"max_amps\": 16, \"status\": \"away\", \"target\": "], ["d", "… 425 more characters"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:64"], ["", "  if f.get(\"alarm\"):  "], ["w", "# step 1"], ["", "   "], ["d", "-> no"]], ["h-guard"], 1],
+    ["guard", "", [["d", "guard.py:66"], ["", "  if f.get(\"stopped\"):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:69"], ["", "  if tool not in f[\"shelf\"]:  "], ["w", "# step 2"], ["", "   "], ["d", "-> no"]], ["h-guard"], 3],
+    ["guard", "", [["d", "guard.py:71"], ["", "  if d is None:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:75"], ["", "  if tool in owner.blocked_tools(self.wishes) and not keeps:  "], ["w", "# step 5: the owner first"], ["", "   "], ["d", "-> no"]], ["h-guard"], 3],
+    ["guard", "", [["d", "guard.py:77"], ["", "  hidden = off_list(f, tool, target)  "], ["w", "# step 2: the list comes after the owner, whose words say more"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:78"], ["", "  if hidden:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:80"], ["", "  ans = getattr(self, \"_\" + tool)(a, d, f, call)  "], ["w", "# steps 3 to 5"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:92"], ["", "  if act not in (\"charge\", \"discharge\", \"hold\"):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:94"], ["", "  if d[\"tripped\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:96"], ["", "  if act == \"hold\":   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:98"], ["", "  if kw is None or kw <= 0:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:101"], ["", "  if act == \"charge\":   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:111"], ["", "  if give <= 0:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:113"], ["", "  if kw > give:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:115"], ["", "  return answer(\"done\", t, {\"action\": \"discharge\", \"kw\": kw}, kw)"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:81"], ["", "  if ans[\"status\"] in (\"done\", \"adjusted\"):  "], ["w", "# step 6"], ["", "   "], ["n", "-> yes"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:83"], ["", "  if w and w[\"start\"] < call[\"end\"] and call[\"start\"] < w[\"end\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:87"], ["", "  return ans"]], ["h-guard"], 0],
+    ["out", "", [["", "guard says done: applied {\"action\": \"discharge\", \"kw\": 9.78}, expected "], ["n", "9.78 kW"]], ["h-guard"], 2]
+   ]
+  },
+  {
+   "i": 45,
+   "tq": 127,
+   "n": "Seal and write to home-battery",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-seal", "h-driver"],
+   "l": [
+    ["sign", "", [["", "guard seals the command: nonce c105a88243cb9ea1  seal a8c81f9b176b3aa5  (HMAC over the exact values, works once)"]], ["h-seal"], 1],
+    ["write", "", [["", "SimulatedDriver.send  charge_discharge  node="], ["h", "Home 71"], ["", "  tool=set_battery  target=home-battery  values={\"action\": \"discharge\", \"kw\": 9.78}  18:00 to 21:00"]], ["h-driver"], 0],
+    ["in", "", [["", "driver answers done"]], ["h-driver"], 0],
+    ["note", "", [["", "The driver in this run is the simulated one."]], ["h-driver"], 0]
+   ]
+  },
+  {
+   "i": 46,
+   "tq": 127,
+   "n": "home-battery takes the write",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-dev"],
+   "l": [
+    ["write", "", [["", "home-battery: applied {\"action\": \"discharge\", \"kw\": 9.78}, expected "], ["n", "9.78 kW"], ["", ", confirm by 18:00"]], ["h-dev"], 0],
+    ["write", "", [["", "devices.battery.giving: false -> true"]], ["h-dev"], 1],
+    ["note", "", [["", "device reads at 17:30: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.7  grid_cf_kw=3.7"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:45: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.0  grid_cf_kw=2.9"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 20:45: soc_pct=32  batt_kw=8.6  ev_kw=0.0  grid_kw=-6.9  grid_cf_kw=4.2"]], ["h-dev"], 0],
+    ["note", "", [["", "This device is simulated: the write lands on the simulator's model of the node, not on hardware."]], ["h-dev"], 0]
+   ]
+  },
+  {
+   "i": 47,
+   "tq": 127,
+   "n": "Guard: set_thermostat done",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-tools", "h-guard"],
+   "l": [
+    ["tool", "", [["", "set_thermostat({\"less_comfort_c\": 2.72, \"target\": \"main-thermostat\"})  from 18:00 to 21:00"]], ["h-tools"], 0],
+    ["guard", "", [["", "run_call: arguments clean, {\"less_comfort_c\": 2.72, \"target\": \"main-thermostat\"}"]], ["h-tools"], 0],
+    ["guard", "", [["", "policy 2026-11-06: allow=True by rule allow.4, for the role \"agent\" via code"]], ["h-tools"], 0],
+    ["calc", "", [["", "what the guard could see: owed "], ["n", "15.934999999999999 kW"], ["", ", alarm None, stopped False, menu {\"set_thermostat\": [\"main-thermostat\"]}, the devices {\"battery\": {\"at_reserve\": false, \"can_give_kw\": 9.78, \"charge_limit_kw\": 8.0, \"full\": true, \"giving\": true, \"soc_pct\": 100, \"target\": \"home-battery\", \"tool\": \"set_battery\", \"tripped\": false}, \"car\": {\"can_give_kw\": 0.0, \"leaves\": null, \"max_kwh\": 0.0, \"status\": \"away\", \"target\": \"car\", \"tool\": \"discharge_car\"}, \"charger\": {\"can_give_kw\": 0.0, \"charge_kw\": 0.0, \"leaves\": null, \"max_amps\": 16, \"status\": \"away\", "], ["d", "… 435 more characters"]], ["h-guard"], 0],
+    ["guard", "", [["", "points already held when this call came: home-battery; wishes: []"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:64"], ["", "  if f.get(\"alarm\"):  "], ["w", "# step 1"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:66"], ["", "  if f.get(\"stopped\"):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:69"], ["", "  if tool not in f[\"shelf\"]:  "], ["w", "# step 2"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:71"], ["", "  if d is None:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:75"], ["", "  if tool in owner.blocked_tools(self.wishes) and not keeps:  "], ["w", "# step 5: the owner first"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:77"], ["", "  hidden = off_list(f, tool, target)  "], ["w", "# step 2: the list comes after the owner, whose words say more"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:78"], ["", "  if hidden:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:80"], ["", "  ans = getattr(self, \"_\" + tool)(a, d, f, call)  "], ["w", "# steps 3 to 5"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:153"], ["", "  if c is None:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:155"], ["", "  if not d[\"running\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:157"], ["", "  if c <= 0:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:160"], ["", "  if c > d[\"limit_c\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:163"], ["", "  return answer(status, t, {\"less_comfort_c\": applied}, d[\"run_kw\"] * share, why)"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:81"], ["", "  if ans[\"status\"] in (\"done\", \"adjusted\"):  "], ["w", "# step 6"], ["", "   "], ["n", "-> yes"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:83"], ["", "  if w and w[\"start\"] < call[\"end\"] and call[\"start\"] < w[\"end\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:87"], ["", "  return ans"]], ["h-guard"], 0],
+    ["out", "", [["", "guard says done: applied {\"less_comfort_c\": 2.72}, expected "], ["n", "2.01 kW"]], ["h-guard"], 2]
+   ]
+  },
+  {
+   "i": 48,
+   "tq": 127,
+   "n": "Seal and write to main-thermostat",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-seal", "h-driver"],
+   "l": [
+    ["sign", "", [["", "guard seals the command: nonce b09d5d401212e118  seal 4c5b169d0aba9384  (HMAC over the exact values, works once)"]], ["h-seal"], 0],
+    ["write", "", [["", "SimulatedDriver.send  setpoint  node="], ["h", "Home 71"], ["", "  tool=set_thermostat  target=main-thermostat  values={\"less_comfort_c\": 2.72}  18:00 to 21:00"]], ["h-driver"], 0],
+    ["in", "", [["", "driver answers done"]], ["h-driver"], 0],
+    ["note", "", [["", "The driver in this run is the simulated one."]], ["h-driver"], 0]
+   ]
+  },
+  {
+   "i": 49,
+   "tq": 127,
+   "n": "main-thermostat takes the write",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-dev"],
+   "l": [
+    ["write", "", [["", "main-thermostat: applied {\"less_comfort_c\": 2.72}, expected "], ["n", "2.01 kW"], ["", ", confirm by 18:00"]], ["h-dev"], 0],
+    ["write", "", [["", "no device fact moved at this moment: the write takes effect through the plan at the next step"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:30: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.7  grid_cf_kw=3.7"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:45: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.0  grid_cf_kw=2.9"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 20:45: soc_pct=32  batt_kw=8.6  ev_kw=0.0  grid_kw=-6.9  grid_cf_kw=4.2"]], ["h-dev"], 0],
+    ["note", "", [["", "This device is simulated: the write lands on the simulator's model of the node, not on hardware."]], ["h-dev"], 0]
+   ]
+  },
+  {
+   "i": 50,
+   "tq": 127,
+   "n": "Guard: set_water_heater done",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-tools", "h-guard"],
+   "l": [
+    ["tool", "", [["", "set_water_heater({\"action\": \"hold\", \"target\": \"water-heater\"})  from 18:00 to 21:00"]], ["h-tools"], 0],
+    ["guard", "", [["", "run_call: arguments clean, {\"action\": \"hold\", \"target\": \"water-heater\"}"]], ["h-tools"], 0],
+    ["guard", "", [["", "policy 2026-11-06: allow=True by rule allow.4, for the role \"agent\" via code"]], ["h-tools"], 0],
+    ["calc", "", [["", "what the guard could see: owed "], ["n", "15.934999999999999 kW"], ["", ", alarm None, stopped False, menu {\"set_water_heater\": [\"water-heater\"]}, the devices {\"battery\": {\"at_reserve\": false, \"can_give_kw\": 9.78, \"charge_limit_kw\": 8.0, \"full\": true, \"giving\": true, \"soc_pct\": 100, \"target\": \"home-battery\", \"tool\": \"set_battery\", \"tripped\": false}, \"car\": {\"can_give_kw\": 0.0, \"leaves\": null, \"max_kwh\": 0.0, \"status\": \"away\", \"target\": \"car\", \"tool\": \"discharge_car\"}, \"charger\": {\"can_give_kw\": 0.0, \"charge_kw\": 0.0, \"leaves\": null, \"max_amps\": 16, \"status\": \"away\", "], ["d", "… 435 more characters"]], ["h-guard"], 0],
+    ["guard", "", [["", "points already held when this call came: home-battery, main-thermostat; wishes: []"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:64"], ["", "  if f.get(\"alarm\"):  "], ["w", "# step 1"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:66"], ["", "  if f.get(\"stopped\"):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:69"], ["", "  if tool not in f[\"shelf\"]:  "], ["w", "# step 2"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:71"], ["", "  if d is None:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:75"], ["", "  if tool in owner.blocked_tools(self.wishes) and not keeps:  "], ["w", "# step 5: the owner first"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:77"], ["", "  hidden = off_list(f, tool, target)  "], ["w", "# step 2: the list comes after the owner, whose words say more"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:78"], ["", "  if hidden:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:80"], ["", "  ans = getattr(self, \"_\" + tool)(a, d, f, call)  "], ["w", "# steps 3 to 5"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:171"], ["", "  if not d[\"valve\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:173"], ["", "  if act == \"load_up\":   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:179"], ["", "  if act != \"hold\":   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:181"], ["", "  if not d[\"hot_ok\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:183"], ["", "  return answer(\"done\", t, {\"action\": \"hold\"}, d[\"can_give_kw\"])"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:81"], ["", "  if ans[\"status\"] in (\"done\", \"adjusted\"):  "], ["w", "# step 6"], ["", "   "], ["n", "-> yes"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:83"], ["", "  if w and w[\"start\"] < call[\"end\"] and call[\"start\"] < w[\"end\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:87"], ["", "  return ans"]], ["h-guard"], 0],
+    ["out", "", [["", "guard says done: applied {\"action\": \"hold\"}, expected "], ["n", "0.31 kW"]], ["h-guard"], 0]
+   ]
+  },
+  {
+   "i": 51,
+   "tq": 127,
+   "n": "Seal and write to water-heater",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-seal", "h-driver"],
+   "l": [
+    ["sign", "", [["", "guard seals the command: nonce 06b264b94e40b89c  seal c0ad84611bdf9335  (HMAC over the exact values, works once)"]], ["h-seal"], 0],
+    ["write", "", [["", "SimulatedDriver.send  schedule  node="], ["h", "Home 71"], ["", "  tool=set_water_heater  target=water-heater  values={\"action\": \"hold\"}  18:00 to 21:00"]], ["h-driver"], 0],
+    ["in", "", [["", "driver answers done"]], ["h-driver"], 0],
+    ["note", "", [["", "The driver in this run is the simulated one."]], ["h-driver"], 0]
+   ]
+  },
+  {
+   "i": 52,
+   "tq": 127,
+   "n": "water-heater takes the write",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-dev"],
+   "l": [
+    ["write", "", [["", "water-heater: applied {\"action\": \"hold\"}, expected "], ["n", "0.31 kW"], ["", ", confirm by 18:00"]], ["h-dev"], 0],
+    ["write", "", [["", "no device fact moved at this moment: the write takes effect through the plan at the next step"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:30: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.7  grid_cf_kw=3.7"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:45: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.0  grid_cf_kw=2.9"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 20:45: soc_pct=32  batt_kw=8.6  ev_kw=0.0  grid_kw=-6.9  grid_cf_kw=4.2"]], ["h-dev"], 0],
+    ["note", "", [["", "This device is simulated: the write lands on the simulator's model of the node, not on hardware."]], ["h-dev"], 0]
+   ]
+  },
+  {
+   "i": 53,
+   "tq": 127,
+   "n": "Step 7: code's opening, on a receipt",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-agent"],
+   "l": [
+    ["calc", "", [["", "asked: {\"letters\": {\"A\": \"set_battery home-battery\", \"B\": \"set_thermostat main-thermostat\", \"C\": \"set_water_heater water-heater\"}, \"owed_kw\": 15.93, \"question\": \"ad438118cc5d45f3…\", \"what_changed\": \"The sale opens.\"}"]], ["h-agent"], 0],
+    ["calc", "", [["", "the rule's plan: {\"left_kw\": 3.84, \"open\": [\"A\", \"B\", \"C\"]}"]], ["h-agent"], 0],
+    ["calc", "", [["", "code chose: {\"left_kw\": 3.83, \"open\": [\"A\", \"B\", \"C\"], \"release\": [], \"report\": null}"]], ["h-agent"], 0],
+    ["guard", "", [["", "less than the rule: False. By: rule: plans are decided by code. Facts cited: [{\"id\": \"changed\", \"says\": \"The sale opens.\"}, {\"id\": \"owed\", \"says\": \""], ["n", "15.9 kW"], ["", " were owed and calls running covered "], ["n", "0.0 kW"], ["", ".\"}, {\"id\": \"rule\", \"says\": \"Code's own plan opens A, B, C and leaves "], ["n", "3.8 kW"], ["", " uncovered.\"}]."]], ["h-agent"], 0],
+    ["calc", "", [["", "reason: Code decides the plans on this node, so this is code's own answer. The model wasn't asked."]], ["h-agent"], 0],
+    ["calc", "", [["", "what changed: The sale opens. Owed "], ["n", "15.93 kW"], ["", ". Uncovered after the plan "], ["n", "3.83 kW"], ["", ", and the rule's plan would leave "], ["n", "3.84 kW"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 54,
+   "tq": 127,
+   "n": "Code carries out its own plan",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-agent"],
+   "l": [
+    ["calc", "", [["", "the rule's plan: open [\"A\", \"B\", \"C\"], which leaves "], ["n", "3.84 kW"], ["", " uncovered"]], ["h-agent"], 0],
+    ["calc", "", [["", "code's plan: open [\"A\", \"B\", \"C\"], let go [], tell the desk \"none\", changed from the rule: False"]], ["h-agent"], 0],
+    ["calc", "", [["", "uncovered kW after the plan, by the receipt: 3.83"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 55,
+   "tq": 127,
+   "n": "Step 7 watch",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-agent"],
+   "l": [
+    ["note", "", [["", "record row 24: step 7 watch entered at 17:30, hash 774c95057bcac481…, chained to 9688fb9fea6d4377…"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 56,
+   "tq": 127,
+   "n": "Guard: set_battery done",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-tools", "h-guard"],
+   "l": [
+    ["tool", "", [["", "set_battery({\"action\": \"discharge\", \"kw\": 6.54, \"target\": \"home-battery\"})  from 18:00 to 21:00"]], ["h-tools"], 0],
+    ["guard", "", [["", "run_call: arguments clean, {\"action\": \"discharge\", \"kw\": 6.54, \"target\": \"home-battery\"}"]], ["h-tools"], 0],
+    ["guard", "", [["", "policy 2026-11-06: allow=True by rule allow.4, for the role \"agent\" via code"]], ["h-tools"], 0],
+    ["calc", "", [["", "what the guard could see: owed "], ["n", "21.709 kW"], ["", ", alarm None, stopped False, menu {\"set_battery\": [\"home-battery\"]}, the devices {\"battery\": {\"at_reserve\": false, \"can_give_kw\": 6.54, \"charge_limit_kw\": 11.5, \"full\": true, \"giving\": false, \"soc_pct\": 100, \"target\": \"home-battery\", \"tool\": \"set_battery\", \"tripped\": false}, \"car\": {\"can_give_kw\": 6.46, \"leaves\": \"05:45\", \"max_kwh\": 19.4, \"status\": \"idle\", \"target\": \"car\", \"tool\": \"discharge_car\"}, \"charger\": {\"can_give_kw\": 0.0, \"charge_kw\": 0.0, \"leaves\": \"05:45\", \"max_amps\": 40, \"status\": \"idle\", \"target\": "], ["d", "… 495 more characters"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:64"], ["", "  if f.get(\"alarm\"):  "], ["w", "# step 1"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:66"], ["", "  if f.get(\"stopped\"):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:69"], ["", "  if tool not in f[\"shelf\"]:  "], ["w", "# step 2"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:71"], ["", "  if d is None:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:75"], ["", "  if tool in owner.blocked_tools(self.wishes) and not keeps:  "], ["w", "# step 5: the owner first"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:77"], ["", "  hidden = off_list(f, tool, target)  "], ["w", "# step 2: the list comes after the owner, whose words say more"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:78"], ["", "  if hidden:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:80"], ["", "  ans = getattr(self, \"_\" + tool)(a, d, f, call)  "], ["w", "# steps 3 to 5"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:92"], ["", "  if act not in (\"charge\", \"discharge\", \"hold\"):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:94"], ["", "  if d[\"tripped\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:96"], ["", "  if act == \"hold\":   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:98"], ["", "  if kw is None or kw <= 0:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:101"], ["", "  if act == \"charge\":   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:111"], ["", "  if give <= 0:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:113"], ["", "  if kw > give:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:115"], ["", "  return answer(\"done\", t, {\"action\": \"discharge\", \"kw\": kw}, kw)"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:81"], ["", "  if ans[\"status\"] in (\"done\", \"adjusted\"):  "], ["w", "# step 6"], ["", "   "], ["n", "-> yes"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:83"], ["", "  if w and w[\"start\"] < call[\"end\"] and call[\"start\"] < w[\"end\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:87"], ["", "  return ans"]], ["h-guard"], 0],
+    ["out", "", [["", "guard says done: applied {\"action\": \"discharge\", \"kw\": 6.54}, expected "], ["n", "6.54 kW"]], ["h-guard"], 0]
+   ]
+  },
+  {
+   "i": 57,
+   "tq": 127,
+   "n": "Seal and write to home-battery",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-seal", "h-driver"],
+   "l": [
+    ["sign", "", [["", "guard seals the command: nonce 20d9f78d70036e24  seal 8d506a2f897aea2f  (HMAC over the exact values, works once)"]], ["h-seal"], 0],
+    ["write", "", [["", "SimulatedDriver.send  charge_discharge  node="], ["h", "Home 90"], ["", "  tool=set_battery  target=home-battery  values={\"action\": \"discharge\", \"kw\": 6.54}  18:00 to 21:00"]], ["h-driver"], 0],
+    ["in", "", [["", "driver answers done"]], ["h-driver"], 0],
+    ["note", "", [["", "The driver in this run is the simulated one."]], ["h-driver"], 0]
+   ]
+  },
+  {
+   "i": 58,
+   "tq": 127,
+   "n": "home-battery takes the write",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-dev"],
+   "l": [
+    ["write", "", [["", "home-battery: applied {\"action\": \"discharge\", \"kw\": 6.54}, expected "], ["n", "6.54 kW"], ["", ", confirm by 18:00"]], ["h-dev"], 0],
+    ["write", "", [["", "devices.battery.giving: false -> true"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:30: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=2.9  grid_cf_kw=2.9"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:45: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.0  grid_cf_kw=3.0"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 20:45: soc_pct=26  batt_kw=6.5  ev_kw=0.0  grid_kw=-11.4  grid_cf_kw=2.6"]], ["h-dev"], 0],
+    ["note", "", [["", "This device is simulated: the write lands on the simulator's model of the node, not on hardware."]], ["h-dev"], 0]
+   ]
+  },
+  {
+   "i": 59,
+   "tq": 127,
+   "n": "Guard: discharge_car done",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-tools", "h-guard"],
+   "l": [
+    ["tool", "", [["", "discharge_car({\"kw\": 6.46, \"max_kwh\": 19.4, \"target\": \"car\"})  from 18:00 to 21:00"]], ["h-tools"], 0],
+    ["guard", "", [["", "run_call: arguments clean, {\"kw\": 6.46, \"max_kwh\": 19.4, \"target\": \"car\"}"]], ["h-tools"], 0],
+    ["guard", "", [["", "policy 2026-11-06: allow=True by rule allow.4, for the role \"agent\" via code"]], ["h-tools"], 0],
+    ["calc", "", [["", "what the guard could see: owed "], ["n", "21.709 kW"], ["", ", alarm None, stopped False, menu {\"discharge_car\": [\"car\"]}, the devices {\"battery\": {\"at_reserve\": false, \"can_give_kw\": 6.54, \"charge_limit_kw\": 11.5, \"full\": true, \"giving\": true, \"soc_pct\": 100, \"target\": \"home-battery\", \"tool\": \"set_battery\", \"tripped\": false}, \"car\": {\"can_give_kw\": 6.46, \"leaves\": \"05:45\", \"max_kwh\": 19.4, \"status\": \"idle\", \"target\": \"car\", \"tool\": \"discharge_car\"}, \"charger\": {\"can_give_kw\": 0.0, \"charge_kw\": 0.0, \"leaves\": \"05:45\", \"max_amps\": 40, \"status\": \"idle\", \"target\": "], ["d", "… 496 more characters"]], ["h-guard"], 0],
+    ["guard", "", [["", "points already held when this call came: home-battery; wishes: []"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:64"], ["", "  if f.get(\"alarm\"):  "], ["w", "# step 1"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:66"], ["", "  if f.get(\"stopped\"):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:69"], ["", "  if tool not in f[\"shelf\"]:  "], ["w", "# step 2"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:71"], ["", "  if d is None:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:75"], ["", "  if tool in owner.blocked_tools(self.wishes) and not keeps:  "], ["w", "# step 5: the owner first"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:77"], ["", "  hidden = off_list(f, tool, target)  "], ["w", "# step 2: the list comes after the owner, whose words say more"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:78"], ["", "  if hidden:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:80"], ["", "  ans = getattr(self, \"_\" + tool)(a, d, f, call)  "], ["w", "# steps 3 to 5"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:135"], ["", "  if d[\"status\"] == \"charging\":   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:137"], ["", "  if d[\"status\"] != \"idle\":   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:139"], ["", "  if kw is None or kw <= 0:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:141"], ["", "  if a.get(\"max_kwh\") is not None and (mx is None or mx <= 0):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:143"], ["", "  if d[\"can_give_kw\"] <= 0:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:146"], ["", "  if kw > d[\"can_give_kw\"] or (mx and mx > d[\"max_kwh\"]):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:148"], ["", "  return answer(\"done\", t, applied, applied[\"kw\"])"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:81"], ["", "  if ans[\"status\"] in (\"done\", \"adjusted\"):  "], ["w", "# step 6"], ["", "   "], ["n", "-> yes"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:83"], ["", "  if w and w[\"start\"] < call[\"end\"] and call[\"start\"] < w[\"end\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:87"], ["", "  return ans"]], ["h-guard"], 0],
+    ["out", "", [["", "guard says done: applied {\"kw\": 6.46, \"max_kwh\": 19.4}, expected "], ["n", "6.46 kW"]], ["h-guard"], 0]
+   ]
+  },
+  {
+   "i": 60,
+   "tq": 127,
+   "n": "Seal and write to car",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-seal", "h-driver"],
+   "l": [
+    ["sign", "", [["", "guard seals the command: nonce ee2d69612f48a5a3  seal 2a4a70f012bf2e7d  (HMAC over the exact values, works once)"]], ["h-seal"], 0],
+    ["write", "", [["", "SimulatedDriver.send  charge_discharge  node="], ["h", "Home 90"], ["", "  tool=discharge_car  target=car  values={\"kw\": 6.46, \"max_kwh\": 19.4}  18:00 to 21:00"]], ["h-driver"], 0],
+    ["in", "", [["", "driver answers done"]], ["h-driver"], 0],
+    ["note", "", [["", "The driver in this run is the simulated one."]], ["h-driver"], 0]
+   ]
+  },
+  {
+   "i": 61,
+   "tq": 127,
+   "n": "car takes the write",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-dev"],
+   "l": [
+    ["write", "", [["", "car: applied {\"kw\": 6.46, \"max_kwh\": 19.4}, expected "], ["n", "6.46 kW"], ["", ", confirm by 18:00"]], ["h-dev"], 0],
+    ["write", "", [["", "devices.car.status: \"idle\" -> \"giving\""]], ["h-dev"], 0],
+    ["write", "", [["", "devices.charger.status: \"idle\" -> \"giving\""]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:30: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=2.9  grid_cf_kw=2.9"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:45: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.0  grid_cf_kw=3.0"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 20:45: soc_pct=26  batt_kw=6.5  ev_kw=0.0  grid_kw=-11.4  grid_cf_kw=2.6"]], ["h-dev"], 0],
+    ["note", "", [["", "This device is simulated: the write lands on the simulator's model of the node, not on hardware."]], ["h-dev"], 0]
+   ]
+  },
+  {
+   "i": 62,
+   "tq": 127,
+   "n": "Guard: set_thermostat done",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-tools", "h-guard"],
+   "l": [
+    ["tool", "", [["", "set_thermostat({\"less_comfort_c\": 1.31, \"target\": \"main-thermostat\"})  from 18:00 to 21:00"]], ["h-tools"], 0],
+    ["guard", "", [["", "run_call: arguments clean, {\"less_comfort_c\": 1.31, \"target\": \"main-thermostat\"}"]], ["h-tools"], 0],
+    ["guard", "", [["", "policy 2026-11-06: allow=True by rule allow.4, for the role \"agent\" via code"]], ["h-tools"], 0],
+    ["calc", "", [["", "what the guard could see: owed "], ["n", "21.709 kW"], ["", ", alarm None, stopped False, menu {\"set_thermostat\": [\"main-thermostat\"]}, the devices {\"battery\": {\"at_reserve\": false, \"can_give_kw\": 6.54, \"charge_limit_kw\": 11.5, \"full\": true, \"giving\": true, \"soc_pct\": 100, \"target\": \"home-battery\", \"tool\": \"set_battery\", \"tripped\": false}, \"car\": {\"can_give_kw\": 6.46, \"leaves\": \"05:45\", \"max_kwh\": 19.4, \"status\": \"giving\", \"target\": \"car\", \"tool\": \"discharge_car\"}, \"charger\": {\"can_give_kw\": 0.0, \"charge_kw\": 0.0, \"leaves\": \"05:45\", \"max_amps\": 40, \"status\": \"giving\", "], ["d", "… 502 more characters"]], ["h-guard"], 0],
+    ["guard", "", [["", "points already held when this call came: car, home-battery; wishes: []"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:64"], ["", "  if f.get(\"alarm\"):  "], ["w", "# step 1"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:66"], ["", "  if f.get(\"stopped\"):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:69"], ["", "  if tool not in f[\"shelf\"]:  "], ["w", "# step 2"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:71"], ["", "  if d is None:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:75"], ["", "  if tool in owner.blocked_tools(self.wishes) and not keeps:  "], ["w", "# step 5: the owner first"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:77"], ["", "  hidden = off_list(f, tool, target)  "], ["w", "# step 2: the list comes after the owner, whose words say more"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:78"], ["", "  if hidden:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:80"], ["", "  ans = getattr(self, \"_\" + tool)(a, d, f, call)  "], ["w", "# steps 3 to 5"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:153"], ["", "  if c is None:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:155"], ["", "  if not d[\"running\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:157"], ["", "  if c <= 0:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:160"], ["", "  if c > d[\"limit_c\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:163"], ["", "  return answer(status, t, {\"less_comfort_c\": applied}, d[\"run_kw\"] * share, why)"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:81"], ["", "  if ans[\"status\"] in (\"done\", \"adjusted\"):  "], ["w", "# step 6"], ["", "   "], ["n", "-> yes"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:83"], ["", "  if w and w[\"start\"] < call[\"end\"] and call[\"start\"] < w[\"end\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:87"], ["", "  return ans"]], ["h-guard"], 0],
+    ["out", "", [["", "guard says done: applied {\"less_comfort_c\": 1.31}, expected "], ["n", "0.64 kW"]], ["h-guard"], 0]
+   ]
+  },
+  {
+   "i": 63,
+   "tq": 127,
+   "n": "Seal and write to main-thermostat",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-seal", "h-driver"],
+   "l": [
+    ["sign", "", [["", "guard seals the command: nonce 160fa7b70ad1fffb  seal 0bf677c1a6361900  (HMAC over the exact values, works once)"]], ["h-seal"], 0],
+    ["write", "", [["", "SimulatedDriver.send  setpoint  node="], ["h", "Home 90"], ["", "  tool=set_thermostat  target=main-thermostat  values={\"less_comfort_c\": 1.31}  18:00 to 21:00"]], ["h-driver"], 0],
+    ["in", "", [["", "driver answers done"]], ["h-driver"], 0],
+    ["note", "", [["", "The driver in this run is the simulated one."]], ["h-driver"], 0]
+   ]
+  },
+  {
+   "i": 64,
+   "tq": 127,
+   "n": "main-thermostat takes the write",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-dev"],
+   "l": [
+    ["write", "", [["", "main-thermostat: applied {\"less_comfort_c\": 1.31}, expected "], ["n", "0.64 kW"], ["", ", confirm by 18:00"]], ["h-dev"], 0],
+    ["write", "", [["", "no device fact moved at this moment: the write takes effect through the plan at the next step"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:30: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=2.9  grid_cf_kw=2.9"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 17:45: soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.0  grid_cf_kw=3.0"]], ["h-dev"], 0],
+    ["note", "", [["", "device reads at 20:45: soc_pct=26  batt_kw=6.5  ev_kw=0.0  grid_kw=-11.4  grid_cf_kw=2.6"]], ["h-dev"], 0],
+    ["note", "", [["", "This device is simulated: the write lands on the simulator's model of the node, not on hardware."]], ["h-dev"], 0]
+   ]
+  },
+  {
+   "i": 65,
+   "tq": 127,
+   "n": "Guard: delay_appliance done",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-tools", "h-guard"],
+   "l": [
+    ["tool", "", [["", "delay_appliance({\"finish_by\": \"23:30\", \"target\": \"dishwasher\"})  from 18:00 to 21:00"]], ["h-tools"], 0],
+    ["guard", "", [["", "run_call: arguments clean, {\"finish_by\": \"23:30\", \"target\": \"dishwasher\"}"]], ["h-tools"], 0],
+    ["guard", "", [["", "policy 2026-11-06: allow=True by rule allow.4, for the role \"agent\" via code"]], ["h-tools"], 0],
+    ["calc", "", [["", "what the guard could see: owed "], ["n", "21.709 kW"], ["", ", alarm None, stopped False, menu {\"delay_appliance\": [\"dishwasher\"]}, the devices {\"battery\": {\"at_reserve\": false, \"can_give_kw\": 6.54, \"charge_limit_kw\": 11.5, \"full\": true, \"giving\": true, \"soc_pct\": 100, \"target\": \"home-battery\", \"tool\": \"set_battery\", \"tripped\": false}, \"car\": {\"can_give_kw\": 6.46, \"leaves\": \"05:45\", \"max_kwh\": 19.4, \"status\": \"giving\", \"target\": \"car\", \"tool\": \"discharge_car\"}, \"charger\": {\"can_give_kw\": 0.0, \"charge_kw\": 0.0, \"leaves\": \"05:45\", \"max_amps\": 40, \"status\": \"giving\", \"target\": "], ["d", "… 492 more characters"]], ["h-guard"], 0],
+    ["guard", "", [["", "points already held when this call came: car, home-battery, main-thermostat; wishes: []"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:64"], ["", "  if f.get(\"alarm\"):  "], ["w", "# step 1"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:66"], ["", "  if f.get(\"stopped\"):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:69"], ["", "  if tool not in f[\"shelf\"]:  "], ["w", "# step 2"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:71"], ["", "  if d is None:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:75"], ["", "  if tool in owner.blocked_tools(self.wishes) and not keeps:  "], ["w", "# step 5: the owner first"], ["", "   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:77"], ["", "  hidden = off_list(f, tool, target)  "], ["w", "# step 2: the list comes after the owner, whose words say more"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:78"], ["", "  if hidden:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:80"], ["", "  ans = getattr(self, \"_\" + tool)(a, d, f, call)  "], ["w", "# steps 3 to 5"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:187"], ["", "  if not re.fullmatch(r\"([01]\\d|2[0-3]):[0-5]\\d\", by):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:189"], ["", "  if d[\"status\"] != \"waiting\":   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:192"], ["", "  if _mins(end) + d[\"cycle_min\"] > _mins(d[\"done_by\"]):   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:194"], ["", "  if by > d[\"done_by\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:196"], ["", "  return answer(\"done\", t, {\"finish_by\": by}, d[\"can_give_kw\"])"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:81"], ["", "  if ans[\"status\"] in (\"done\", \"adjusted\"):  "], ["w", "# step 6"], ["", "   "], ["n", "-> yes"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:83"], ["", "  if w and w[\"start\"] < call[\"end\"] and call[\"start\"] < w[\"end\"]:   "], ["d", "-> no"]], ["h-guard"], 0],
+    ["guard", "", [["d", "guard.py:87"], ["", "  return ans"]], ["h-guard"], 0],
+    ["out", "", [["", "guard says done: applied {\"finish_by\": \"23:30\"}, expected "], ["n", "0.2 kW"]], ["h-guard"], 0]
+   ]
+  },
+  {
+   "i": 66,
+   "tq": 127,
+   "n": "Seal and write to dishwasher",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-seal", "h-driver"],
+   "l": [
+    ["sign", "", [["", "guard seals the command: nonce 91dcaa2974a80a2e  seal 4b5aba168cd1abbc  (HMAC over the exact values, works once)"]], ["h-seal"], 0],
+    ["write", "", [["", "SimulatedDriver.send  schedule  node="], ["h", "Home 90"], ["", "  tool=delay_appliance  target=dishwasher  values={\"finish_by\": \"23:30\"}  18:00 to 21:00"]], ["h-driver"], 0],
+    ["in", "", [["", "driver answers done"]], ["h-driver"], 0],
+    ["note", "", [["", "The driver in this run is the simulated one."]], ["h-driver"], 0]
+   ]
+  },
+  {
+   "i": 67,
+   "tq": 129,
+   "n": "What reaches a person in the window",
+   "w": "",
+   "sd": "h",
+   "b": ["h-person", "b-person"],
+   "l": [
+    ["note", "", [["", "told rows in the record: [{\"node\": \""], ["b", "the shopping center"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"manager\"}, {\"node\": \""], ["h", "Home 2"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}, {\"node\": \""], ["h", "Home 39"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}, {\"node\": \""], ["h", "Home 71"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}, {\"node\": \""], ["h", "Home 84"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}, {\"node\": \""], ["h", "Home 90"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}, {\"node\": \""], ["h", "Home 139"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}, {\"node\": \""], ["h", "Home 197"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}]"]], ["h-person", "b-person"], 3, [["", "told rows in the record: [{\"node\": \""], ["b", "the shopping center"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"manager\"}, {\"node\": \""], ["h", "Home 2"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}, {\"node\": \""], ["h", "Home 39"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}, {\"node\": \""], ["h", "Home 71"], ["", "\", \"at\": \"2025-01-28 21:00\", \"to\": \"owner\"}, {\"node\": \""], ["h", "Home 84"], ["", "\", "], ["d", "… 228 more characters"]]]
+   ]
+  },
+  {
+   "i": 68,
+   "tq": 129,
+   "n": "Delivery, 18:00 to 18:30",
+   "w": "",
+   "sd": "h",
+   "b": ["h-dev", "b-dev"],
+   "l": [
+    ["calc", "", [["", "kW below the no-sale twin over the half hour: homes 71.9, buildings 19.9, all 91.8  (the settled twin run. The monitor's own mean reads 55.2: one of its samples was taken before the devices' step)"]], ["h-dev", "b-dev"], 2],
+    ["note", "", [["", "The twin is the same node with no sale, which only the simulator knows. It is simulation truth and the coordinator never reads it."]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 18:00 soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.0  grid_cf_kw=2.9"]], ["h-dev"], 1],
+    ["note", "", [["h", "Home 71"], ["", ": at 18:15 soc_pct=93  batt_kw=9.8  ev_kw=0.0  grid_kw=-8.0  grid_cf_kw=3.8"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 18:00 soc_pct=100  batt_kw=0.0  ev_kw=0.0  grid_kw=3.0  grid_cf_kw=3.0"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 18:15 soc_pct=93  batt_kw=6.5  ev_kw=0.0  grid_kw=-12.5  grid_cf_kw=2.1"]], ["h-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 18:00 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=9.12  t_in_c=22.8  t_dev_c=0.0  grid_kw=-112.882  grid_cf_kw=-122.0  owed_kw=9.152  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 18:15 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=9.18  t_in_c=22.8  t_dev_c=0.0  grid_kw=-113.621  grid_cf_kw=-122.8  owed_kw=9.226  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0]
+   ]
+  },
+  {
+   "i": 69,
+   "tq": 131,
+   "n": "Delivery, 18:30 to 19:00",
+   "w": "",
+   "sd": "h",
+   "b": ["h-dev", "b-dev"],
+   "l": [
+    ["calc", "", [["", "kW below the no-sale twin, mean of the two 15-minute steps: homes 69.8, buildings 20.0, all 89.8  (worked out afterwards from the monitor)"]], ["h-dev", "b-dev"], 2],
+    ["note", "", [["", "The twin is the same node with no sale, which only the simulator knows. It is simulation truth and the coordinator never reads it."]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 18:30 soc_pct=93  batt_kw=9.8  ev_kw=0.0  grid_kw=-8.0  grid_cf_kw=3.8"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 18:45 soc_pct=73  batt_kw=9.8  ev_kw=0.0  grid_kw=-7.4  grid_cf_kw=4.4"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 18:30 soc_pct=93  batt_kw=6.5  ev_kw=0.0  grid_kw=-12.5  grid_cf_kw=2.1"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 18:45 soc_pct=73  batt_kw=6.5  ev_kw=0.0  grid_kw=-8.0  grid_cf_kw=2.9"]], ["h-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 18:30 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=9.18  t_in_c=22.8  t_dev_c=0.0  grid_kw=-113.819  grid_cf_kw=-123.0  owed_kw=9.2  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 18:45 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=9.43  t_in_c=22.8  t_dev_c=0.0  grid_kw=-116.875  grid_cf_kw=-126.3  owed_kw=9.416  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0]
+   ]
+  },
+  {
+   "i": 70,
+   "tq": 133,
+   "n": "Delivery, 19:00 to 19:30",
+   "w": "",
+   "sd": "h",
+   "b": ["h-dev", "b-dev"],
+   "l": [
+    ["calc", "", [["", "kW below the no-sale twin, mean of the two 15-minute steps: homes 69.9, buildings 20.0, all 89.9  (worked out afterwards from the monitor)"]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["", "The twin is the same node with no sale, which only the simulator knows. It is simulation truth and the coordinator never reads it."]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 19:00 soc_pct=73  batt_kw=9.8  ev_kw=0.0  grid_kw=-7.4  grid_cf_kw=4.4"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 19:15 soc_pct=61  batt_kw=8.6  ev_kw=0.0  grid_kw=-6.2  grid_cf_kw=5.2"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 19:00 soc_pct=73  batt_kw=6.5  ev_kw=0.0  grid_kw=-8.0  grid_cf_kw=2.9"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 19:15 soc_pct=60  batt_kw=6.5  ev_kw=0.0  grid_kw=-12.6  grid_cf_kw=2.1"]], ["h-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 19:00 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=9.71  t_in_c=22.8  t_dev_c=0.0  grid_kw=-121.492  grid_cf_kw=-131.2  owed_kw=9.231  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 19:15 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=9.46  t_in_c=22.8  t_dev_c=0.0  grid_kw=-118.239  grid_cf_kw=-127.7  owed_kw=9.197  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0]
+   ]
+  },
+  {
+   "i": 71,
+   "tq": 135,
+   "n": "Delivery, 19:30 to 20:00",
+   "w": "",
+   "sd": "h",
+   "b": ["h-dev", "b-dev"],
+   "l": [
+    ["calc", "", [["", "kW below the no-sale twin, mean of the two 15-minute steps: homes 69.6, buildings 19.9, all 89.5  (worked out afterwards from the monitor)"]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["", "The twin is the same node with no sale, which only the simulator knows. It is simulation truth and the coordinator never reads it."]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 19:30 soc_pct=61  batt_kw=8.6  ev_kw=0.0  grid_kw=-6.2  grid_cf_kw=5.2"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 19:45 soc_pct=49  batt_kw=8.6  ev_kw=0.0  grid_kw=-7.4  grid_cf_kw=3.9"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 19:30 soc_pct=60  batt_kw=6.5  ev_kw=0.0  grid_kw=-12.6  grid_cf_kw=2.1"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 19:45 soc_pct=46  batt_kw=6.5  ev_kw=0.0  grid_kw=-9.1  grid_cf_kw=2.1"]], ["h-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 19:30 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=9.53  t_in_c=22.8  t_dev_c=0.0  grid_kw=-119.274  grid_cf_kw=-128.8  owed_kw=9.484  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 19:45 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=9.4  t_in_c=22.8  t_dev_c=0.0  grid_kw=-117.796  grid_cf_kw=-127.2  owed_kw=9.585  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0]
+   ]
+  },
+  {
+   "i": 72,
+   "tq": 137,
+   "n": "Delivery, 20:00 to 20:30",
+   "w": "",
+   "sd": "h",
+   "b": ["h-dev", "b-dev"],
+   "l": [
+    ["calc", "", [["", "kW below the no-sale twin, mean of the two 15-minute steps: homes 68.2, buildings 19.1, all 87.3  (worked out afterwards from the monitor)"]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["", "The twin is the same node with no sale, which only the simulator knows. It is simulation truth and the coordinator never reads it."]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 20:00 soc_pct=49  batt_kw=8.6  ev_kw=0.0  grid_kw=-7.4  grid_cf_kw=3.9"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 20:15 soc_pct=49  batt_kw=8.6  ev_kw=0.0  grid_kw=-7.4  grid_cf_kw=3.9"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 20:00 soc_pct=46  batt_kw=6.5  ev_kw=0.0  grid_kw=-9.1  grid_cf_kw=2.1"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 20:15 soc_pct=46  batt_kw=6.5  ev_kw=0.0  grid_kw=-9.1  grid_cf_kw=2.1"]], ["h-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 20:00 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=8.73  t_in_c=22.8  t_dev_c=0.0  grid_kw=-112.17  grid_cf_kw=-120.9  owed_kw=9.56  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 20:15 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=8.85  t_in_c=22.8  t_dev_c=0.0  grid_kw=-113.748  grid_cf_kw=-122.6  owed_kw=9.617  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0]
+   ]
+  },
+  {
+   "i": 73,
+   "tq": 139,
+   "n": "Delivery, 20:30 to 21:00",
+   "w": "",
+   "sd": "h",
+   "b": ["h-dev", "b-dev"],
+   "l": [
+    ["calc", "", [["", "kW below the no-sale twin, mean of the two 15-minute steps: homes 69.8, buildings 18.9, all 88.7  (worked out afterwards from the monitor)"]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["", "The twin is the same node with no sale, which only the simulator knows. It is simulation truth and the coordinator never reads it."]], ["h-dev", "b-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 20:30 soc_pct=32  batt_kw=8.6  ev_kw=0.0  grid_kw=-6.9  grid_cf_kw=4.2"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 71"], ["", ": at 20:45 soc_pct=32  batt_kw=8.6  ev_kw=0.0  grid_kw=-6.9  grid_cf_kw=4.2"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 20:30 soc_pct=26  batt_kw=6.5  ev_kw=0.0  grid_kw=-11.4  grid_cf_kw=2.6"]], ["h-dev"], 0],
+    ["note", "", [["h", "Home 90"], ["", ": at 20:45 soc_pct=26  batt_kw=6.5  ev_kw=0.0  grid_kw=-11.4  grid_cf_kw=2.6"]], ["h-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 20:30 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=8.79  t_in_c=22.8  t_dev_c=0.0  grid_kw=-112.909  grid_cf_kw=-121.7  owed_kw=9.622  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0],
+    ["note", "", [["b", "The shopping center"], ["", ": at 20:45 soc_pct=0.0  batt_kw=0.0  ev_kw=0.0  cool_kw=0.0  light_dim_kw=8.79  t_in_c=22.8  t_dev_c=0.0  grid_kw=-113.008  grid_cf_kw=-121.8  owed_kw=9.805  mode=rolling  occupied=True  state=committed"]], ["b-dev"], 0]
+   ]
+  },
+  {
+   "i": 74,
+   "tq": 133,
+   "n": "The owner is told",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-person"],
+   "l": [
+    ["out", "", [["", "to the owner: I sold "], ["n", "45.7 kWh"], ["", " tonight and the meter shows "], ["n", "34.6 kWh"], ["", " delivered, "], ["n", "11.1 kWh"], ["", " less. Only what the meter shows is paid."]], ["h-person"], 2],
+    ["note", "", [["", "record row 87: told at delivery, hash edcc298577632369…"]], ["h-person"], 1]
+   ]
+  },
+  {
+   "i": 75,
+   "tq": 133,
+   "n": "The owner is told",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-person"],
+   "l": [
+    ["out", "", [["", "to the owner: I sold "], ["n", "48.1 kWh"], ["", " tonight and the meter shows "], ["n", "40.3 kWh"], ["", " delivered, "], ["n", "7.8 kWh"], ["", " less. Only what the meter shows is paid."]], ["h-person"], 2],
+    ["note", "", [["", "record row 70: told at delivery, hash b8a02bd487c6091f…"]], ["h-person"], 1]
+   ]
+  },
+  {
+   "i": 76,
+   "tq": 133,
+   "n": "The manager is told",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["b-person"],
+   "l": [
+    ["out", "", [["", "to the manager: I sold "], ["n", "28 kWh"], ["", " tonight and the meter shows "], ["n", "28 kWh"], ["", " delivered, "], ["n", "1 kWh"], ["", " less. Only what the meter shows is paid."]], ["b-person"], 1],
+    ["note", "", [["", "record row 52: told at delivery, hash 64de6d3e74e3c6fa…"]], ["b-person"], 3]
+   ]
+  },
+  {
+   "i": 77,
+   "tq": 141,
+   "n": "Step 9 report",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-agent"],
+   "l": [
+    ["note", "", [["", "record row 86: step 9 report entered at 21:00, hash a1c91d7e7ca3f904…, chained to bb17e6b77b84eb48…"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 78,
+   "tq": 141,
+   "n": "Step 9: the model words the report",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-model"],
+   "l": [
+    ["in", "", [["", "model qwen3.5:4b-q4_K_M, digest d8b0f5e9760cd168…, options {\"temperature\": 0.0, \"top_p\": 0.8, \"top_k\": 20, \"seed\": 7, \"num_predict\": 300, \"num_ctx\": 32768}, prompt version 2026-11-07, question hash 8bc51b1074da143e…"]], ["h-model"], 3],
+    ["think", "", [["", "system: You write a short report for the owner or manager of a home or building after a power sale. Use only the facts given, and copy each number as it is. Say what was owed, what was done and whether anything went wrong. Two short sentences, in plain words."]], ["h-model"], 0],
+    ["think", "", [["", "user: Facts:\n- The sale ran 18:00 to 21:00 and the home owed "], ["n", "16.2 kW"], ["", ".\n- home-battery: done, "], ["n", "9.78 kW"], ["", " expected.\n- main-thermostat: done, "], ["n", "2.01 kW"], ["", " expected.\n- water-heater: done, "], ["n", "0.31 kW"], ["", " expected.\n- home-battery: done, "], ["n", "8.55 kW"], ["", " expected.\n- main-thermostat: done, "], ["n", "2.32 kW"], ["", " expected.\n- water-heater: done, "], ["n", "0.31 kW"], ["", " expected.\n- home-battery: done, "], ["n", "8.56 kW"], ["", " expected.\n- main-thermostat: done, "], ["n", "2.60 kW"], ["", " expected.\n- water-heater: done, "], ["n", "0.31 kW"], ["", " expected.\n- Battery at "], ["n", "26%"], ["", " at 21:00.\n- The home sold "], ["", "45.7 kWh, and the meter shows 34.6 kWh delivered, 11.1 kWh short.\n- The meter … 218 more characters"]], ["h-model"], 0],
+    ["tool", "", [["", "tools offered: file_report"]], ["h-model"], 1],
+    ["tool", "", [["q", "answer: file_report({\"summary\": \"The power sale ran from 18:00 to 21:00 and the home owed 16.2 kW, but only 34.6 kWh was delivered out of 45.7 kWh sold, leaving an 11.1 kWh shortfall. All components were done as expected, though the battery ended at 26% and the meter shows 11.5 kW delivered on average with 11.1 kWh missed in the steps that fell short.\"})"]], ["h-model"], 2, [["", "answer: file_report({\"summary\": \"The power sale ran from 18:00 to 21:00 and the home owed "], ["n", "16.2 kW"], ["", ", but only "], ["n", "34.6 kWh"], ["", " was delivered out of "], ["n", "45.7 kWh"], ["", " sold, leaving an "], ["n", "11.1 kWh"], ["", " shortfall. All components were done as expected, though the battery ended at "], ["n", "26%"], ["", " and the meter shows "], ["n", "11.5 kW"], ["", " delivered on "], ["d", "… 62 more characters"]]],
+    ["note", "", [["", "632 tokens read, 128 written, "], ["n", "2,029 ms"], ["", "."]], ["h-model"], 0]
+   ]
+  },
+  {
+   "i": 79,
+   "tq": 141,
+   "n": "Home 71 sends its report up",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["co-market", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=7c95f8e6:"], ["h", "Home 71"], ["", ":coordinator:on_status:report:2025-01-28 18:00:2025-01-28 21:00:6b14d76a7aaf7350  from="], ["h", "Home 71"], ["", "  to=coordinator  kind=beckn.on_status"]], ["town"], 0],
+    ["note", "", [["", "context   action=on_status  transactionId=report-"], ["h", "Home 71"], ["", "  messageId=3208c1d1-e23c-4807-ad1e-7239c67634e8  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer f1e4b80c2db65ec9…  sig 39f61f58ed61b466…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      702 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "coordinator says: report from "], ["h", "Home 71"]], ["co-market"], 0]
+   ]
+  },
+  {
+   "i": 80,
+   "tq": 141,
+   "n": "The report for the owner",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["h-person"],
+   "l": [
+    ["note", "", [["", "report by None: None"]], ["h-person"], 0],
+    ["note", "", [["", "The record shows this report at the node and the coordinator. It shows no message that carries it to a person."]], ["h-person"], 0]
+   ]
+  },
+  {
+   "i": 81,
+   "tq": 141,
+   "n": "Step 9 report",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-agent"],
+   "l": [
+    ["note", "", [["", "record row 69: step 9 report entered at 21:00, hash 0e5ab81a6f3e9cf2…, chained to 5f01593b047db394…"]], ["h-agent"], 0]
+   ]
+  },
+  {
+   "i": 82,
+   "tq": 141,
+   "n": "Step 9: the model words the report",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-model"],
+   "l": [
+    ["in", "", [["", "model qwen3.5:4b-q4_K_M, digest d8b0f5e9760cd168…, options {\"temperature\": 0.0, \"top_p\": 0.8, \"top_k\": 20, \"seed\": 7, \"num_predict\": 300, \"num_ctx\": 32768}, prompt version 2026-11-07, question hash f8225879f3e05095…"]], ["h-model"], 0],
+    ["think", "", [["", "system: You write a short report for the owner or manager of a home or building after a power sale. Use only the facts given, and copy each number as it is. Say what was owed, what was done and whether anything went wrong. Two short sentences, in plain words."]], ["h-model"], 0],
+    ["think", "", [["", "user: Facts:\n- The sale ran 18:00 to 21:00 and the home owed "], ["n", "21.7 kW"], ["", ".\n- home-battery: done, "], ["n", "6.54 kW"], ["", " expected.\n- car: done, "], ["n", "6.46 kW"], ["", " expected.\n- main-thermostat: done, "], ["n", "0.64 kW"], ["", " expected.\n- dishwasher: done, "], ["n", "0.20 kW"], ["", " expected.\n- water-heater: done, "], ["n", "0.19 kW"], ["", " expected.\n- Battery at "], ["n", "19%"], ["", " at 21:00.\n- The home sold "], ["n", "48.1 kWh"], ["", ", and the meter shows "], ["n", "40.3 kWh"], ["", " delivered, "], ["n", "7.8 kWh"], ["", " short.\n- The meter shows "], ["n", "13.4 kW"], ["", " delivered on average, and "], ["", "8.8 kWh missed in the steps that fell short.\n- Told the owner: I sold 48.1 kWh tonight and the meter shows 40.3 kWh delivered, 7.8 kWh less. Only what the meter shows is paid."]], ["h-model"], 0],
+    ["tool", "", [["", "tools offered: file_report"]], ["h-model"], 0],
+    ["tool", "", [["q", "answer: file_report({\"summary\": \"The home owed 21.7 kW but only sold 48.1 kWh, with 7.8 kWh short on the meter. All appliances were done and the battery ended at 19%.\"})"]], ["h-model"], 2],
+    ["note", "", [["", "559 tokens read, 68 written, "], ["n", "1,214 ms"], ["", "."]], ["h-model"], 0]
+   ]
+  },
+  {
+   "i": 83,
+   "tq": 141,
+   "n": "Home 90 sends its report up",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["co-market", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=91683b66:"], ["h", "Home 90"], ["", ":coordinator:on_status:report:2025-01-28 18:00:2025-01-28 21:00:dafc84935dc70ddd  from="], ["h", "Home 90"], ["", "  to=coordinator  kind=beckn.on_status"]], ["town"], 0],
+    ["note", "", [["", "context   action=on_status  transactionId=report-"], ["h", "Home 90"], ["", "  messageId=94a1df09-c883-4fac-82cc-7897becb83f4  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db6abb54595661ff…  sig 65f5771db740fa4f…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      700 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "coordinator says: report from "], ["h", "Home 90"]], ["co-market"], 0]
+   ]
+  },
+  {
+   "i": 84,
+   "tq": 141,
+   "n": "The report for the owner",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["h-person"],
+   "l": [
+    ["note", "", [["", "report by None: None"]], ["h-person"], 0],
+    ["note", "", [["", "The record shows this report at the node and the coordinator. It shows no message that carries it to a person."]], ["h-person"], 0]
+   ]
+  },
+  {
+   "i": 85,
+   "tq": 141,
+   "n": "Step 9 report",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["b-agent"],
+   "l": [
+    ["note", "", [["", "record row 51: step 9 report entered at 21:00, hash 5a3bc32591b43443…, chained to dea9450be45de5b4…"]], ["b-agent"], 0]
+   ]
+  },
+  {
+   "i": 86,
+   "tq": 141,
+   "n": "Step 9: the model words the report",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["b-model"],
+   "l": [
+    ["in", "", [["", "model qwen3.5:4b-q4_K_M, digest d8b0f5e9760cd168…, options {\"temperature\": 0.0, \"top_p\": 0.8, \"top_k\": 20, \"seed\": 7, \"num_predict\": 300, \"num_ctx\": 32768}, prompt version 2026-11-07, question hash 8664867b83033960…"]], ["b-model"], 0],
+    ["think", "", [["", "system: You write a short report for the owner or manager of a home or building after a power sale. Use only the facts given, and copy each number as it is. Say what was owed, what was done and whether anything went wrong. Two short sentences, in plain words."]], ["b-model"], 0],
+    ["think", "", [["", "user: Facts:\n- The sale ran 18:00 to 21:00 and the building owed "], ["n", "9.8 kW"], ["", ".\n- store-lights: done, "], ["n", "5.79 kW"], ["", " expected.\n- common-area-lights: done, "], ["n", "1.45 kW"], ["", " expected.\n- common-area-air-handlers: done, "], ["n", "1.20 kW"], ["", " expected.\n- kiosk-plugs: done, "], ["n", "0.24 kW"], ["", " expected.\n- mall-level-2-ports: done, "], ["n", "0.24 kW"], ["", " expected.\n- The building sold "], ["n", "28 kWh"], ["", ", and the meter shows "], ["n", "28 kWh"], ["", " delivered, "], ["n", "1 kWh"], ["", " short.\n- The meter shows "], ["n", "9 kW"], ["", " delivered on average, and "], ["n", "1 kWh"], ["", " missed in the steps that fell short.\n- Told the manager: I sold "], ["", "28 kWh tonight and the meter shows 28 kWh delivered, 1 kWh less. Only what the meter shows is paid."]], ["b-model"], 0],
+    ["tool", "", [["", "tools offered: file_report"]], ["b-model"], 0],
+    ["tool", "", [["q", "answer: file_report({\"summary\": \"The building owed 9.8 kW but only 28 kWh was sold and delivered, leaving a 1 kWh shortfall. All equipment was done correctly with no errors.\"})"]], ["b-model"], 0],
+    ["note", "", [["", "535 tokens read, 60 written, "], ["n", "1,169 ms"], ["", "."]], ["b-model"], 0]
+   ]
+  },
+  {
+   "i": 87,
+   "tq": 141,
+   "n": "The shopping center sends its report up",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["co-market", "town"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=26c7cdfc:"], ["b", "the shopping center"], ["", ":coordinator:on_status:report:2025-01-28 18:00:2025-01-28 21:00:8ab74c40666d2c3f  from="], ["b", "the shopping center"], ["", "  to=coordinator  kind=beckn.on_status"]], ["town"], 0],
+    ["note", "", [["", "context   action=on_status  transactionId=report-"], ["b", "the shopping center"], ["", "  messageId=80f646a0-1f9b-4094-bf16-a1bd4785b9b2  ttl=PT900S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer d953331145c9c5cf…  sig c64428d302981f69…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      704 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "coordinator says: report from "], ["b", "the shopping center"]], ["co-market"], 0]
+   ]
+  },
+  {
+   "i": 88,
+   "tq": 141,
+   "n": "The report for the manager",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["b-person"],
+   "l": [
+    ["note", "", [["", "report by None: None"]], ["b-person"], 0],
+    ["note", "", [["", "The record shows this report at the node and the coordinator. It shows no message that carries it to a person."]], ["b-person"], 0]
+   ]
+  },
+  {
+   "i": 89,
+   "tq": 144,
+   "n": "Home 71 sends its readings",
+   "w": "Home 71",
+   "sd": "h",
+   "b": ["town", "r-read"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=7c95f8e6:"], ["h", "Home 71"], ["", ":coordinator:on_status:readings:d72e95935b:9384d2fb846572a8:coordinator  from="], ["h", "Home 71"], ["", "  to=coordinator  kind=beckn.on_status"]], ["town"], 1],
+    ["note", "", [["", "context   action=on_status  transactionId=readings-"], ["h", "Home 71"], ["", "  messageId=48f3c237-2895-4c8d-8183-7576863f1e1d  ttl=PT86400S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer f1e4b80c2db65ec9…  sig 2079a101b539ee85…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 3],
+    ["note", "", [["", "body      5,951 bytes, carried unread"]], ["town"], 3],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 3],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "6 readings in one envelope, each signed on its own. The first: slot 0, committed "], ["n", "14.63 kW"], ["", ", usage -"], ["n", "8.404 kW"], ["", ", battery "], ["n", "9.78 kW"], ["", ", pre-event "], ["n", "3.477 kW"]], ["r-read"], 0],
+    ["sign", "", [["", "that reading: signer f1e4b80c2db65ec9…  sig ec0e5f804e1c07aa…"]], ["town"], 0],
+    ["note", "", [["", "Not in a reading of this run: the battery's state of charge at the end of the half hour; the node's modes; whether the car was held. See data/BRIDGE.md."]], ["town"], 0],
+    ["in", "", [["", "coordinator says: reading "], ["h", "Home 71"], ["", " slot 0: -"], ["n", "8.404 kW"], ["", "; reading "], ["h", "Home 71"], ["", " slot 1: -"], ["n", "7.582 kW"], ["", "; reading "], ["h", "Home 71"], ["", " slot 2: -"], ["n", "6.961 kW"], ["", "; reading "], ["h", "Home 71"], ["", " slot 3: -"], ["n", "6.803 kW"], ["", "; reading "], ["h", "Home 71"], ["", " slot 4: -"], ["n", "6.724 kW"], ["", "; reading "], ["h", "Home 71"], ["", " slot 5: -"], ["n", "6.617 kW"]], ["r-read"], 2]
+   ]
+  },
+  {
+   "i": 90,
+   "tq": 144,
+   "n": "Home 90 sends its readings",
+   "w": "Home 90",
+   "sd": "h",
+   "b": ["town", "r-read"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=91683b66:"], ["h", "Home 90"], ["", ":coordinator:on_status:readings:b9b2d88e17:1a911b318a57da8e:coordinator  from="], ["h", "Home 90"], ["", "  to=coordinator  kind=beckn.on_status"]], ["town"], 0],
+    ["note", "", [["", "context   action=on_status  transactionId=readings-"], ["h", "Home 90"], ["", "  messageId=4d4b4ce4-dce7-416b-a112-676f6990a3c8  ttl=PT86400S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db6abb54595661ff…  sig ba9f57d4f35f6dbd…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      5,947 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "6 readings in one envelope, each signed on its own. The first: slot 0, committed "], ["n", "13.929 kW"], ["", ", usage -"], ["n", "12.561 kW"], ["", ", battery "], ["n", "13.0 kW"], ["", ", pre-event "], ["n", "3.317 kW"]], ["r-read"], 0],
+    ["sign", "", [["", "that reading: signer db6abb54595661ff…  sig 7d29a00135d66412…"]], ["town"], 0],
+    ["note", "", [["", "Not in a reading of this run: the battery's state of charge at the end of the half hour; the node's modes; whether the car was held. See data/BRIDGE.md."]], ["town"], 0],
+    ["in", "", [["", "coordinator says: reading "], ["h", "Home 90"], ["", " slot 0: -"], ["n", "12.561 kW"], ["", "; reading "], ["h", "Home 90"], ["", " slot 1: -"], ["n", "9.258 kW"], ["", "; reading "], ["h", "Home 90"], ["", " slot 2: -"], ["n", "12.624 kW"], ["", "; reading "], ["h", "Home 90"], ["", " slot 3: -"], ["n", "10.01 kW"], ["", "; reading "], ["h", "Home 90"], ["", " slot 4: -"], ["n", "12.568 kW"], ["", "; reading "], ["h", "Home 90"], ["", " slot 5: -"], ["n", "8.793 kW"]], ["r-read"], 0]
+   ]
+  },
+  {
+   "i": 91,
+   "tq": 144,
+   "n": "The shopping center sends its readings",
+   "w": "the shopping center",
+   "sd": "b",
+   "b": ["town", "r-read"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=26c7cdfc:"], ["b", "the shopping center"], ["", ":coordinator:on_status:readings:d66df2b9f0:c9135c1c4d07ae00:coordinator  from="], ["b", "the shopping center"], ["", "  to=coordinator  kind=beckn.on_status"]], ["town"], 0],
+    ["note", "", [["", "context   action=on_status  transactionId=readings-"], ["b", "the shopping center"], ["", "  messageId=1c1d1f86-a136-4bd8-9f3a-afe2c89b6251  ttl=PT86400S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer d953331145c9c5cf…  sig 84bfea4d37bf7290…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      5,979 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "6 readings in one envelope, each signed on its own. The first: slot 0, committed "], ["n", "9.189 kW"], ["", ", usage "], ["n", "113.251 kW"], ["", ", battery "], ["n", "0.0 kW"], ["", ", pre-event "], ["n", "129.0 kW"]], ["r-read"], 0],
+    ["sign", "", [["", "that reading: signer d953331145c9c5cf…  sig c96251fcea44b66f…"]], ["town"], 0],
+    ["note", "", [["", "Not in a reading of this run: the battery's state of charge at the end of the half hour; the node's modes; whether the car was held. See data/BRIDGE.md."]], ["town"], 0],
+    ["in", "", [["", "coordinator says: reading "], ["b", "the shopping center"], ["", " slot 0: "], ["n", "113.251 kW"], ["", "; reading "], ["b", "the shopping center"], ["", " slot 1: "], ["n", "115.347 kW"], ["", "; reading "], ["b", "the shopping center"], ["", " slot 2: "], ["n", "119.865 kW"], ["", "; reading "], ["b", "the shopping center"], ["", " slot 3: "], ["n", "118.535 kW"], ["", "; reading "], ["b", "the shopping center"], ["", " slot 4: "], ["n", "112.959 kW"], ["", "; reading "], ["b", "the shopping center"], ["", " slot 5: "], ["n", "112.959 kW"]], ["r-read"], 0]
+   ]
+  },
+  {
+   "i": 92,
+   "tq": 144,
+   "n": "Readings are in",
+   "w": "",
+   "sd": "h",
+   "b": ["r-check"],
+   "l": [
+    ["in", "", [["", "10 envelopes of readings to the coordinator, 60 readings in the event state"]], ["r-check"], 0],
+    ["guard", "", [["", "each reading is checked at each door: its signature, its slot, its numbers. Refused here: 0"]], ["r-check"], 0],
+    ["out", "", [["", "readings are in: 10 meters, 60 readings, 0 missing, called slots [], abnormal {}"]], ["r-check"], 2]
+   ]
+  },
+  {
+   "i": 93,
+   "tq": 144,
+   "n": "The coordinator says readings are in",
+   "w": "",
+   "sd": "h",
+   "b": ["town", "r-read"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=3306e48b:coordinator:utility:update:order-flex-need-2025-01-28-504652cda6:readings_in:b5aa9a91c2:0a4cd2f617ffb766  from=coordinator  to=utility  kind=beckn.update"]], ["town"], 0],
+    ["note", "", [["", "context   action=update  transactionId=order-flex-need-2025-01-28-504652cda6  messageId=34d1054f-c76d-409f-808a-6f9399dfd26f  ttl=PT86400S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer db89b0fea5a56020…  sig 88a1433555b73093…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      1,935 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to utility), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "utility says: settled 310.6803 USD"]], ["r-read"], 0]
+   ]
+  },
+  {
+   "i": 94,
+   "tq": 144,
+   "n": "The buyer counts each meter",
+   "w": "",
+   "sd": "h",
+   "b": ["r-settle"],
+   "l": [
+    ["calc", "", [["h", "Home 71"], ["", ", half hour 0: baseline 5.37 - usage -8.40 = "], ["n", "13.77 kW"], ["", ", of it battery "], ["n", "9.78 kW"]], ["r-settle"], 1],
+    ["calc", "", [["h", "Home 71"], ["", ", half hour 1: baseline 6.16 - usage -7.58 = "], ["n", "13.75 kW"], ["", ", of it battery "], ["n", "9.78 kW"]], ["r-settle"], 1],
+    ["calc", "", [["h", "Home 71"], ["", ", half hour 2: baseline 8.69 - usage -6.96 = "], ["n", "15.65 kW"], ["", ", of it battery "], ["n", "9.16 kW"]], ["r-settle"], 3],
+    ["calc", "", [["h", "Home 71"], ["", ", half hour 3: baseline 9.08 - usage -6.80 = "], ["n", "15.88 kW"], ["", ", of it battery "], ["n", "8.55 kW"]], ["r-settle"], 3],
+    ["calc", "", [["h", "Home 71"], ["", ", half hour 4: baseline 9.34 - usage -6.72 = "], ["n", "16.06 kW"], ["", ", of it battery "], ["n", "8.55 kW"]], ["r-settle"], 3],
+    ["calc", "", [["h", "Home 71"], ["", ", half hour 5: baseline 9.52 - usage -6.62 = "], ["n", "16.14 kW"], ["", ", of it battery "], ["n", "8.56 kW"]], ["r-settle"], 3],
+    ["calc", "", [["h", "Home 90"], ["", ", half hour 0: baseline 3.55 - usage -12.56 = "], ["n", "16.11 kW"], ["", ", of it battery "], ["n", "13.00 kW"]], ["r-settle"], 3],
+    ["calc", "", [["h", "Home 90"], ["", ", half hour 1: baseline 2.79 - usage -9.26 = "], ["n", "12.05 kW"], ["", ", of it battery "], ["n", "12.05 kW"]], ["r-settle"], 0],
+    ["calc", "", [["h", "Home 90"], ["", ", half hour 2: baseline 2.64 - usage -12.62 = "], ["n", "15.27 kW"], ["", ", of it battery "], ["n", "13.00 kW"]], ["r-settle"], 0],
+    ["calc", "", [["h", "Home 90"], ["", ", half hour 3: baseline 2.61 - usage -10.01 = "], ["n", "12.62 kW"], ["", ", of it battery "], ["n", "12.62 kW"]], ["r-settle"], 0],
+    ["calc", "", [["h", "Home 90"], ["", ", half hour 4: baseline 2.52 - usage -12.57 = "], ["n", "15.08 kW"], ["", ", of it battery "], ["n", "13.00 kW"]], ["r-settle"], 0],
+    ["calc", "", [["h", "Home 90"], ["", ", half hour 5: baseline 2.50 - usage -8.79 = "], ["n", "11.29 kW"], ["", ", of it battery "], ["n", "9.16 kW"]], ["r-settle"], 0],
+    ["calc", "", [["b", "The shopping center"], ["", ", half hour 0: baseline 126.68 - usage 113.25 = "], ["n", "13.43 kW"], ["", ", of it battery "], ["n", "0.00 kW"]], ["r-settle"], 0],
+    ["calc", "", [["b", "The shopping center"], ["", ", half hour 1: baseline 126.78 - usage 115.35 = "], ["n", "11.44 kW"], ["", ", of it battery "], ["n", "0.00 kW"]], ["r-settle"], 0],
+    ["calc", "", [["b", "The shopping center"], ["", ", half hour 2: baseline 128.85 - usage 119.86 = "], ["n", "8.99 kW"], ["", ", of it battery "], ["n", "0.00 kW"]], ["r-settle"], 0],
+    ["calc", "", [["b", "The shopping center"], ["", ", half hour 3: baseline 129.16 - usage 118.53 = "], ["n", "10.63 kW"], ["", ", of it battery "], ["n", "0.00 kW"]], ["r-settle"], 0],
+    ["calc", "", [["b", "The shopping center"], ["", ", half hour 4: baseline 122.51 - usage 112.96 = "], ["n", "9.55 kW"], ["", ", of it battery "], ["n", "0.00 kW"]], ["r-settle"], 0],
+    ["calc", "", [["b", "The shopping center"], ["", ", half hour 5: baseline 121.86 - usage 112.96 = "], ["n", "8.90 kW"], ["", ", of it battery "], ["n", "0.00 kW"]], ["r-settle"], 0]
+   ]
+  },
+  {
+   "i": 95,
+   "tq": 144,
+   "n": "The grid operator settles",
+   "w": "",
+   "sd": "h",
+   "b": ["r-settle"],
+   "l": [
+    ["calc", "tbl", [["", "half hour  sold to it  delivered  price     pay"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        0        37.5       37.9   2.04  "], ["n", "$32.07"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        1        37.0       36.6   2.04  "], ["n", "$31.45"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        2        35.5       37.0   2.04  "], ["n", "$31.21"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        3        37.1       37.1   2.04  "], ["n", "$31.43"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        4        38.1       37.1   2.04  "], ["n", "$31.27"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        5        35.5       34.8   2.04  "], ["n", "$28.97"]], ["r-settle"], 0],
+    ["calc", "", [["", "total "], ["n", "$186.39"], ["", ". Paid on what was delivered, with no penalty for a shortfall."]], ["r-settle"], 2],
+    ["calc", "", [["", "deposit: held "], ["n", "$12.28"], ["", ", credited "], ["n", "$12.28"], ["", ", refund "], ["n", "$0.00"], ["", ", still due "], ["n", "$174.11"]], ["r-settle"], 0]
+   ]
+  },
+  {
+   "i": 96,
+   "tq": 144,
+   "n": "The utility settles",
+   "w": "",
+   "sd": "h",
+   "b": ["r-settle"],
+   "l": [
+    ["calc", "tbl", [["", "half hour  sold to it  delivered  price     pay"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        0        62.4       63.1   2.04  "], ["n", "$53.45"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        1        61.6       61.0   2.04  "], ["n", "$52.42"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        2        59.1       61.6   2.04  "], ["n", "$52.03"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        3        61.9       61.8   2.04  "], ["n", "$52.39"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        4        63.5       61.8   2.04  "], ["n", "$52.11"]], ["r-settle"], 0],
+    ["calc", "tbl", [["", "        5        59.1       58.1   2.04  "], ["n", "$48.28"]], ["r-settle"], 0],
+    ["calc", "", [["", "total "], ["n", "$310.68"], ["", ". Paid on what was delivered, with no penalty for a shortfall."]], ["r-settle"], 2],
+    ["calc", "", [["", "deposit: held "], ["n", "$20.47"], ["", ", credited "], ["n", "$20.47"], ["", ", refund "], ["n", "$0.00"], ["", ", still due "], ["n", "$290.21"]], ["r-settle"], 0]
+   ]
+  },
+  {
+   "i": 97,
+   "tq": 144,
+   "n": "The settlement goes to the coordinator",
+   "w": "",
+   "sd": "h",
+   "b": ["town", "r-settle"],
+   "l": [
+    ["out", "", [["", "envelope  message_id=4423abca:utility:coordinator:on_status:order-flex-need-2025-01-28-504652cda6:settled:0:914ff7e1aa719347  from=utility  to=coordinator  kind=beckn.on_status"]], ["town"], 0],
+    ["note", "", [["", "context   action=on_status  transactionId=order-flex-need-2025-01-28-504652cda6  messageId=3aacf883-3ce0-4429-b47e-e2b7465c5173  ttl=PT86400S  domain=beckn.one:deg:demand-flex:2.0.0"]], ["town"], 0],
+    ["sign", "", [["", "signer 28e64faee0bdf005…  sig 2bd4f0b748cf0fa9…  Ed25519 over the canonical JSON of the whole body"]], ["town"], 0],
+    ["note", "", [["", "body      5,859 bytes, carried unread"]], ["town"], 0],
+    ["note", "", [["", "Town accepted it after 1 attempt to deliver, leased it 1 time (last to coordinator), and recorded 1 ack: status done, done processed"]], ["town"], 0],
+    ["note", "", [["", "NANDA Town carried this envelope: it accepted it, leased it to the addressee and recorded the ack. It reads no field of the body."]], ["town"], 0],
+    ["in", "", [["", "coordinator says: settlement received"]], ["r-settle"], 0]
+   ]
+  }
+ ],
+ "moments": [
+  {
+   "q": 1,
+   "tq": 0,
+   "id": "orders",
+   "n": "Two buyers order the same evening",
+   "b": "buy-u",
+   "w": "",
+   "hero": ["136 kW", "asked for each half hour, 18:00 to 21:00"],
+   "tag": null,
+   "p": [],
+   "c": "",
+   "lit": ["buy-u", "buy-g"],
+   "tv": 1,
+   "k": {
+    "kind": "buyers",
+    "cb": "buy-u",
+    "l": 1,
+    "who": [["The grid operator, the utility", ""]],
+    "in": [],
+    "out": ["The grid operator places its order", "community agent", "1"],
+    "did": "The utility orders 85 kW from 18:00 to 21:00 on 2025-01-28 at $2.04 per kWh, and puts down a $51.83 deposit.",
+    "rule": "",
+    "cd": [
+     {
+      "h": "Utility",
+      "rows": [
+       ["Demand", "85 kW", 0],
+       ["Window", "18:00 to 21:00", 0],
+       ["Price", "$2.04 per kWh", 0],
+       ["Order value", "$518.30", 0],
+       ["Deposit", "$51.83", 0]
+      ]
+     },
+     {
+      "h": "Grid operator",
+      "rows": [
+       ["Demand", "51 kW", 0],
+       ["Window", "18:00 to 21:00", 0],
+       ["Price", "$2.04 per kWh", 0],
+       ["Order value", "$310.96", 0],
+       ["Deposit", "$31.10", 0]
+      ]
+     },
+     {
+      "h": "Both orders",
+      "rows": [
+       ["Asked", "136 kW", 1],
+       ["Deposits", "$82.93", 0],
+       ["Buyers told", "27 Jan 10:00", 0],
+       ["Answer due", "27 Jan 16:00", 0]
+      ],
+      "hot": 1
+     }
+    ],
+    "cols": "1fr 1fr 1fr",
+    "term": ["buyers", "utility, grid operator: orders, contracts, calls"],
+    "big": ["136 kW", "asked for each half hour, 18:00 to 21:00"]
+   },
+   "s": [0, 1]
+  },
+  {
+   "q": 2,
+   "tq": 1,
+   "id": "home-safe",
+   "n": "A home's code works out what it can safely sell",
+   "b": "h-agent",
+   "w": "Home 71",
+   "hero": ["14.49 kW", "the planner's safe figure. The offer is made from it"],
+   "tag": null,
+   "p": ["town", "h-agent"],
+   "c": "call for offers",
+   "lit": ["town", "h-agent"],
+   "tv": 1,
+   "k": {
+    "kind": "node",
+    "cb": "h-agent",
+    "l": 4,
+    "who": [["Home 71", ""], ["", "code"]],
+    "in": ["The call reaches home 71", "community agent", ""],
+    "out": [],
+    "did": "That figure is the rule's plan, and code makes the offer from it: no model is asked.",
+    "rule": "",
+    "cd": [
+     {
+      "h": "Home 71",
+      "rows": [["Kind", "home", 0], ["Plans", "by code", 0], ["Devices", "battery, car", 0], ["Shelf", "6 tools", 0]]
+     },
+     {
+      "h": "Nine steps",
+      "nine": [
+       [1, "Read schedule", "", 1, 0],
+       [2, "Forecast", "regression", 1, 0],
+       [3, "Check devices", "", 1, 0],
+       [4, "Sellable kW", "", 1, 0],
+       [5, "Decide offer", "code", 0, 0],
+       [6, "Commit", "code", 0, 0],
+       [7, "Opening", "code", 0, 0],
+       [8, "Exception", "code", 0, 0],
+       [9, "Report", "AI", 0, 1]
+      ]
+     },
+     {
+      "h": "Its numbers",
+      "rows": [["Safe offer", "14.49 kW", 1], ["Of it firm", "9.78 kW", 0], ["Tentative", "4.71 kW", 0]],
+      "hot": 1
+     }
+    ],
+    "cols": "1fr 1.72fr 1.1fr",
+    "term": ["Home 71", "home_agent: every step as recorded"],
+    "big": ["14.49 kW", "the planner's safe figure. The offer is made from it"]
+   },
+   "s": [2, 3]
+  },
+  {
+   "q": 3,
+   "tq": 1,
+   "id": "node-contract",
+   "n": "Every node gets a contract. Its code answers",
+   "b": "co-market",
+   "w": "",
+   "hero": ["10", "contracts, one per node"],
+   "tag": null,
+   "p": ["co-market", "town", "h-agent"],
+   "c": "contract",
+   "lit": ["co-market", "town", "h-agent", "b-agent"],
+   "tv": 1,
+   "k": {
+    "kind": "market",
+    "cb": "co-market",
+    "l": 2,
+    "who": [["community agent", ""], ["", "code"]],
+    "in": ["Home 71 says ACCEPTED", "", "2"],
+    "out": ["The contract reaches home 71", "", "2"],
+    "did": "Both buyers are signed, so 10 nodes each get one contract. A node doesn't know who buys.",
+    "rule": "plans are decided by code",
+    "cd": [
+     {"h": "Order book", "rows": [["Asked", "136 kW", 0], ["Sold", "100 kW", 0]]},
+     {"h": "Offers", "rows": [["In", "10 of 10", 0], ["Offered", "110 kW", 0]]},
+     {"h": "Second round", "rows": [["Asked again", "0 nodes", 0]]},
+     {"h": "Margin", "rows": [["Fixed", "10%", 0]]},
+     {"h": "Homes, buildings", "rows": [["Homes", "92 kW", 0], ["Buildings", "18 kW", 0]]},
+     {"h": "Reserve", "rows": [["Reserve", "10 kW", 0], ["Of nodes", "110 kW", 0]]}
+    ],
+    "cols": "repeat(4,minmax(0,1fr))",
+    "term": ["community agent", "market.py, rt_market.py: the working"],
+    "big": ["10", "contracts, one per node"]
+   },
+   "s": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+  },
+  {
+   "q": 4,
+   "tq": 97,
+   "id": "precool",
+   "n": "Morning: code sets the pre-cool",
+   "b": "b-agent",
+   "w": "the shopping center",
+   "hero": ["No pre-cool", "code makes no call this morning"],
+   "tag": null,
+   "p": [],
+   "c": "device call",
+   "lit": ["b-agent"],
+   "tv": 0,
+   "k": {
+    "kind": "node",
+    "cb": "b-agent",
+    "l": 4,
+    "who": [["The shopping center", ""], ["", "code"]],
+    "in": [],
+    "out": [],
+    "did": "The shopping center enters step \"6 prepare\" and leaves it again",
+    "rule": "",
+    "cd": [
+     {
+      "h": "The shopping center",
+      "rows": [
+       ["Kind", "building", 0],
+       ["Plans", "by code", 0],
+       ["Devices", "dim_lights:common-area …", 0],
+       ["Shelf", "6 tools", 0]
+      ]
+     },
+     {
+      "h": "Nine steps",
+      "nine": [
+       [1, "Read schedule", "", 0, 0],
+       [2, "Forecast", "regression", 0, 0],
+       [3, "Check devices", "", 0, 0],
+       [4, "Sellable kW", "", 0, 0],
+       [5, "Decide offer", "code", 0, 0],
+       [6, "Commit", "code", 1, 0],
+       [7, "Opening", "code", 0, 0],
+       [8, "Exception", "code", 0, 0],
+       [9, "Report", "AI", 0, 1]
+      ]
+     },
+     {
+      "h": "Its numbers",
+      "rows": [
+       ["Safe offer", "9.15 kW", 0],
+       ["Of it firm", "4.89 kW", 0],
+       ["Tentative", "4.26 kW", 0],
+       ["Offered", "9.15 kW", 0],
+       ["Contract", "9.15 kW", 0]
+      ],
+      "hot": 1
+     }
+    ],
+    "cols": "1fr 1.72fr 1.1fr",
+    "term": ["The shopping center", "building_agent: every step as recorded"],
+    "big": ["No pre-cool", "code makes no call this morning"]
+   },
+   "s": [14, 15]
+  },
+  {
+   "q": 5,
+   "tq": 113,
+   "id": "desk-day",
+   "n": "Afternoon: a shortfall reaches the desk",
+   "b": "co-desk",
+   "w": "",
+   "hero": ["18.83 kW", "reported short, by Home 90"],
+   "tag": null,
+   "p": ["h-agent", "town", "co-desk"],
+   "c": "shortfall",
+   "lit": ["co-desk", "town", "h-agent", "b-agent"],
+   "tv": 1,
+   "k": {
+    "kind": "desk",
+    "cb": "co-desk",
+    "l": 2,
+    "who": [["community agent", ""], ["", "code"]],
+    "in": ["Home 71 answers the desk", "", "13"],
+    "out": ["Home 71 takes a dispatch", "", "5"],
+    "did": "A shortfall of 35.5 kW from 18:15 is more than the reserve covers, so the desk moves power.",
+    "rule": "",
+    "cd": [
+     {"h": "Reported", "rows": [["Node", "Home 90", 0], ["Short by", "18.83 kW", 1], ["From", "18:45", 0]], "hot": 1},
+     {"h": "The desk's sum, kW", "rows": [["Reserve", "10 kW", 0]]},
+     {"h": "What the desk did", "rows": [["Asked", "3 members", 0], ["Confirmed", "3.6 kW", 1], ["Reserve", "10 kW", 0]]}
+    ],
+    "cols": "1fr 1.2fr 1fr",
+    "term": ["desk", "rt_market.py: what is short, and what moved"],
+    "big": ["18.83 kW", "reported short, by Home 90"]
+   },
+   "s": [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+  },
+  {
+   "q": 6,
+   "tq": 113,
+   "id": "site-ask",
+   "n": "The aggregator asks single sites too",
+   "b": "site-pv",
+   "w": "",
+   "hero": ["9.9 MW", "asked of the largest solar-and-battery plant at 19:00. The same signed request a community gets"],
+   "tag": null,
+   "p": [],
+   "c": "signed request",
+   "lit": ["site-pv", "site-dc", "town"],
+   "tv": 1,
+   "k": {
+    "kind": "aggpart",
+    "cb": "site-pv",
+    "l": 2,
+    "who": [["A solar-and-battery plant's own agent", ""], ["", "its own key on NANDA Town"]],
+    "in": [],
+    "out": [],
+    "did": "The aggregator's agent asks this solar-and-battery plant for its part of the evening's need",
+    "rule": "",
+    "cd": [
+     {"h": "Solar plant, 9.9 MW battery", "rows": [["Asked at 19:00", "9.94 MW", 0], ["Asked at 20:00", "5.84 MW", 0]]},
+     {"h": "Solar plant, 7.8 MW battery", "rows": [["Asked at 19:00", "7.78 MW", 0], ["Asked at 20:00", "7.12 MW", 0]]},
+     {
+      "h": "Data center, 3.7 MW battery",
+      "rows": [["Asked at 18:00", "2.50 MW", 0], ["Asked at 19:00", "3.68 MW", 0], ["Asked at 20:00", "3.68 MW", 0]]
+     }
+    ],
+    "cols": "1fr 1fr 1fr",
+    "term": ["single site", "its signed messages with the aggregator"],
+    "big": ["9.9 MW", "asked of the largest solar-and-battery plant at 19:00. The same signed request a community gets"]
+   },
+   "s": [40, 41, 42]
+  },
+  {
+   "q": 7,
+   "tq": 127,
+   "id": "watch-home",
+   "n": "The same in a home",
+   "b": "h-agent",
+   "w": "Home 71",
+   "hero": ["3", "device calls at this home"],
+   "tag": null,
+   "p": ["h-agent", "h-tools", "h-guard", "h-seal", "h-driver", "h-dev"],
+   "c": "device call",
+   "lit": ["h-agent", "h-tools", "h-guard", "h-seal", "h-driver", "h-dev"],
+   "tv": 1,
+   "k": {
+    "kind": "chain",
+    "cb": "h-guard",
+    "l": 5,
+    "who": [["Home 71, home 90", ""], ["", "code"], ["", "guard"]],
+    "in": [],
+    "out": ["home-battery takes the write", "", "7"],
+    "did": "As the sale opens, code's plan opens 3 device calls, and 3.83 kW stay uncovered. The receipt says the model wasn't asked.",
+    "rule": "plans are decided by code",
+    "cd": [
+     {
+      "h": "The call",
+      "rows": [
+       ["Tool", "set_battery", 0],
+       ["Target", "home-battery", 0],
+       ["Values", "action discharge, kw 9.78", 0],
+       ["When", "18:00 to 21:00", 0],
+       ["Expected", "9.78 kW", 1]
+      ]
+     },
+     {
+      "h": "Safety guard",
+      "rows": [["Says", "done", 1], ["Policy", "allow.4", 0]],
+      "hot": 1,
+      "six": [
+       [1, "Safety state", "ok"],
+       [2, "Allowed", "ok"],
+       [3, "Range", "ok"],
+       [4, "Timing", "ok"],
+       [5, "Service", "ok"],
+       [6, "One writer", "ok"]
+      ]
+     },
+     {
+      "h": "8 calls here",
+      "rows": [],
+      "tbl": [
+       ["home-battery", "9.78 kW"],
+       ["main-thermostat", "2.01 kW"],
+       ["water-heater", "0.31 kW"],
+       ["home-battery", "6.54 kW"],
+       ["and 4 more", null]
+      ]
+     }
+    ],
+    "cols": "1.14fr 1.08fr 1.2fr",
+    "term": ["tool server", "context.py, guard.py, drivers.py"],
+    "big": ["3", "device calls at this home"]
+   },
+   "s": [43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66]
+  },
+  {
+   "q": 8,
+   "tq": 129,
+   "id": "window",
+   "n": "The sale runs",
+   "b": "h-dev",
+   "w": "",
+   "hero": ["92 kW", "below the no-sale twin in the first half hour"],
+   "tag": null,
+   "p": [],
+   "c": "",
+   "lit": ["h-dev", "h-person", "b-dev", "b-person"],
+   "tv": 1,
+   "k": {
+    "kind": "device",
+    "cb": "h-dev",
+    "l": 6,
+    "who": [["10 nodes", ""]],
+    "in": [],
+    "out": [],
+    "did": "From 18:00 the community runs 92 kW below what it would have used: 72 kW from homes and 20 kW from buildings.",
+    "rule": "",
+    "cd": [
+     {
+      "h": "Below the no-sale twin",
+      "rows": [],
+      "hot": 1,
+      "tbl": [
+       ["kW", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30"],
+       ["Homes", "72", "70", "70", "70", "68", "70"],
+       ["Buildings", "20", "20", "20", "20", "19", "19"],
+       ["All", "92", "90", "90", "90", "87", "89"]
+      ]
+     },
+     {"h": "So far", "rows": [["Below the twin", "268 kWh", 1], ["Nodes", "10", 0], ["People told", "8", 0]]}
+    ],
+    "cols": "2.2fr 1fr",
+    "term": ["devices", "each write, with readings before and after"],
+    "big": ["92 kW", "below the no-sale twin in the first half hour"]
+   },
+   "s": [67, 68, 69, 70, 71, 72, 73]
+  },
+  {
+   "q": 9,
+   "tq": 133,
+   "id": "told",
+   "n": "The person is told in plain words",
+   "b": "h-person",
+   "w": "Home 71",
+   "hero": ["In plain words", "the person hears why the node gave less"],
+   "tag": ["Surprise", "Owner's note"],
+   "p": ["h-agent", "h-person"],
+   "c": "plain words",
+   "lit": ["h-agent", "h-person", "b-person"],
+   "tv": 0,
+   "k": {
+    "kind": "people",
+    "cb": "h-person",
+    "l": 7,
+    "who": [["Home owner", ""]],
+    "in": ["plain words", "Home agent", ""],
+    "out": ["The owner is told", "", "2"],
+    "did": "Home 71 tells the owner in plain words: I sold 45.7 kWh tonight and the meter shows 34.6 kWh delivered, 11.1 kWh less.",
+    "rule": "",
+    "cd": [
+     {
+      "h": "What the home owner was told",
+      "rows": [],
+      "hot": 1,
+      "q": "I sold 45.7 kWh tonight and the meter shows 34.6 kWh delivered, 11.1 kWh less. Only what the meter shows is paid."
+     },
+     {
+      "h": "What they can write",
+      "rows": [],
+      "says": [
+       ["a note", "read by the small model as words, never as an order"],
+       ["need_now", "takes a device back at once"],
+       ["set_limit", "signed, moves a limit"],
+       ["close_group, open_group", "signed, shuts or opens a group"]
+      ]
+     }
+    ],
+    "cols": "1.2fr 1fr",
+    "term": ["people", "what is kept for them, and what they said"],
+    "big": ["In plain words", "the person hears why the node gave less"]
+   },
+   "s": [74, 75, 76]
+  },
+  {
+   "q": 10,
+   "tq": 141,
+   "id": "report",
+   "n": "The small model words the report",
+   "b": "h-model",
+   "w": "Home 71",
+   "hero": ["No one reads it", "it stays beside the sale"],
+   "tag": null,
+   "p": ["h-agent", "h-model", "h-agent", "town", "co-market"],
+   "c": "labelled report",
+   "lit": ["co-market", "town", "h-agent", "h-model", "h-person", "b-agent", "b-model", "b-person"],
+   "tv": 0,
+   "k": {
+    "kind": "model",
+    "cb": "h-model",
+    "l": 4,
+    "who": [["Home 71, home 90 and 1 more", ""], ["", "AI model"]],
+    "in": ["labelled report", "Home agent", ""],
+    "out": ["Home 71 sends its report up", "community agent", "2"],
+    "did": "Code gathers home 71's facts and marks where each came from, and the model only words them. The model answers: file_report.",
+    "rule": "Use only the facts given, and copy each number as it is",
+    "cd": [
+     {"h": "Asked", "rows": [["For", "Home 71", 0], ["Answers", "3", 0], ["Tools", "file_report", 0]]},
+     {
+      "h": "Answer",
+      "rows": [["Wrote", "the report", 1], ["It says", "The power sale ran from 18:00 to 21:00 and the home owed …", 0]],
+      "hot": 1
+     },
+     {
+      "h": "The model",
+      "rows": [["Model", "Qwen 3.5 4B", 0], ["Read", "632 tokens", 0], ["Wrote", "128 tokens", 0], ["Took", "2.0 s", 0]]
+     }
+    ],
+    "cols": "1.12fr 1.42fr 1fr",
+    "term": ["model", "prompts and answers, in full. Nothing is hidden"],
+    "big": ["No one reads it", "it stays beside the sale"]
+   },
+   "s": [77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88]
+  },
+  {
+   "q": 11,
+   "tq": 144,
+   "id": "readings",
+   "n": "Signed readings come in",
+   "b": "r-check",
+   "w": "",
+   "hero": ["60 of 60", "readings in, 0 refused"],
+   "tag": null,
+   "p": ["h-dev", "r-read", "r-check"],
+   "c": "signed readings",
+   "lit": ["town", "h-dev", "r-read", "r-check"],
+   "tv": 1,
+   "k": {
+    "kind": "ret",
+    "cb": "r-check",
+    "l": 8,
+    "who": [["community agent", ""], ["", "code"]],
+    "in": ["Home 71 sends its readings", "", "2"],
+    "out": [],
+    "did": "The community agent doesn't relay them: each buyer already has its own signed copy.",
+    "rule": "each reading is checked at each door: its signature, its slot, its numbers",
+    "cd": [
+     {"h": "Readings", "rows": [["In", "60", 1], ["Due", "60", 0], ["Meters", "10", 0]]},
+     {"h": "Checks", "rows": [["Refused", "0", 1], ["Missing", "0", 0]], "hot": 1}
+    ],
+    "cols": "repeat(2,minmax(0,1fr))",
+    "term": ["return path", "readings, checks, settlement, payment"],
+    "big": ["60 of 60", "readings in, 0 refused"]
+   },
+   "s": [89, 90, 91, 92, 93]
+  },
+  {
+   "q": 12,
+   "tq": 144,
+   "id": "settle",
+   "n": "Buyers settle on the meters",
+   "b": "r-settle",
+   "w": "",
+   "hero": ["$497.07", "buyers pay for 294 kWh on the meters"],
+   "tag": null,
+   "p": ["r-check", "r-settle"],
+   "c": "settlement",
+   "lit": ["town", "r-check", "r-settle"],
+   "tv": 1,
+   "k": {
+    "kind": "ret",
+    "cb": "r-settle",
+    "l": 8,
+    "who": [["The utility, the grid operator", ""]],
+    "in": ["settlement", "Checks", ""],
+    "out": [],
+    "did": "Each buyer works out delivery from its own copy of the signed readings: baseline less usage, meter by meter.",
+    "rule": "",
+    "cd": [
+     {"h": "Readings", "rows": [["In", "60", 0], ["Due", "60", 0], ["Meters", "10", 0]]},
+     {"h": "Checks", "rows": [["Refused", "0", 0], ["Missing", "0", 0]]},
+     {
+      "h": "Settlement",
+      "rows": [["Buyers", "$497.07", 1], ["Utility", "$310.68", 0], ["Grid op.", "$186.39", 0], ["Meters", "294 kWh", 0]],
+      "hot": 1
+     }
+    ],
+    "cols": "repeat(3,minmax(0,1fr))",
+    "term": ["return path", "readings, checks, settlement, payment"],
+    "big": ["$497.07", "buyers pay for 294 kWh on the meters"]
+   },
+   "s": [94, 95, 96, 97]
+  }
+ ]
+}

@@ -121,7 +121,7 @@ class GapCalls:
                        "kind": rec["kind"]}}
         items = [self._item(h, "rt_ask", rec["id"], msg, rec.get("round", 0), rec.get("waves", 0)) for h in homes]      # a second round or wave may ask a member again
         self.m._broadcast(items)
-        rec["asked"] = sorted(set(rec.get("asked", [])) | set(homes))
+        rec["asked"] = sorted(set(rec.get("asked", [])) | set(homes))     # whose answers this round waits for: a call's next wave adds to them, a gap's next round begins its own (_raise)
         rec["asked_at"] = self.m.now()
         rec["asked_wall"] = time.time()
 
@@ -214,12 +214,14 @@ class GapCalls:
 
     def _raise(self, rec: dict[str, Any]) -> None:
         """Offer what is left once more, at the next price on the ladder, to the homes that could cover it and have not
-        been dispatched for it yet (a home below its owner's minimum price may now say yes). Nobody left: warn."""
+        been dispatched for it yet (a home below its owner's minimum price may now say yes). Nobody left: warn.
+        The new round counts its own answers, from the homes it asks: a home asked before and not again owes none, so the round
+        is filled when the last of its own has answered, and an answer that comes again from a home already dispatched is not taken twice."""
         rec["round"] += 1
         rec["price"] = round(rec["price"] * PRICE_LADDER[rec["round"]] / PRICE_LADDER[rec["round"] - 1], 4)
         rec["kw"], rec["dispatched_kw"] = rec["short_kw"], 0.0
         rec["short_by_ts"] = {t: v * rec["short_kw"] / max(1e-6, max(rec["short_by_ts"].values())) for t, v in rec["short_by_ts"].items()}
-        rec["answers"], rec["phase"] = {}, "asking"
+        rec["answers"], rec["asked"], rec["phase"] = {}, [], "asking"
         short_now = {h for h, r in self.reports.items() if any(t > self.m.now() for t in r)}
         others = [h for h in self._parent(rec["start"], rec["from"])[1] if h not in rec["alloc"] and h not in short_now]
         self.m.log("rt_price_up", gap_id=rec["id"], price=rec["price"], kw=round(rec["kw"], 3), asked=len(others))

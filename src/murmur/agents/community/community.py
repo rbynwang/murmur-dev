@@ -118,6 +118,8 @@ class Community(CommunityFeed, CommunityAsked):
     report_ended: bool = False                                        # on a real clock: a quarter hour's row is written once it has ended, when its meter reading exists
     log: Callable[..., None] = lambda *a, **k: None
     last_step: str | None = None
+    rows_due: list[str] = field(default_factory=list)                 # on a real clock: quarter hours the clock passed over in its last move, whose rows wait for their meter readings, oldest first
+    play: str | None = None                                           # the market's play the last step was taken in: a new one begins its report afresh
     keep_rows: int = 96 * 14
     sales: list[dict[str, Any]] = field(default_factory=list)         # per sale: what its members offered, what it promised upward, what was delivered
     gaps: list[dict[str, Any]] = field(default_factory=list)          # per sale: delivery less promise, for the community and for each member. For the record only: no rule reads it

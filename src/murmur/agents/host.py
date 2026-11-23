@@ -29,6 +29,7 @@ from murmur.node import record
 from murmur.node.llm_client import SharedModel
 from murmur.protocol import envelope as beckn
 from murmur.protocol.transport import TownSession
+from murmur.replay import Follower
 from murmur.agents.host_common import log
 from murmur.agents.host_people import HostPeople
 from murmur.agents.home import HomeNodes
@@ -36,6 +37,7 @@ from murmur.agents.home import HomeNodes
 KEEP_DECISIONS = 300           # what the status API keeps of a thinking node's decisions (all of them go to the file)
 KEEP_SEEN = 512                # message ids a node remembers, so a repeat from Town changes nothing
 RETRY_S = (5.0, 15.0, 45.0, 120.0, 300.0)   # a batch of readings goes once, after the window: these waits outlast a dropped connection
+PASS_S = 1.0                   # the tick's cadence: a pass over the nodes starts this long after the last one began, or at once when a node's clock is set
 
 
 class NodeLock:
@@ -157,6 +159,7 @@ class NodeHost(HostPeople, HomeNodes):
         self.tick_worst = 0.0                             # a sale's steps solve every home's plan: this must stay under a step
         self.busy_passes = 0                              # a node skipped in a pass because it was busy: it catches up next pass
         self.ticked: str | None = None                    # the step every node ticked at in the last whole pass: what the conductor waits for (cfg clock_waits)
+        self.follower = Follower()                        # the tick, for every node's clock: one of them set starts its next pass, and each clock door answers its last whole pass
         self.keydir = config.CONFIG_DIR / "fleet" / "keys"
         self.keydir.mkdir(parents=True, exist_ok=True)
         # one client for every session: each client holds a TLS context of its own
@@ -168,6 +171,7 @@ class NodeHost(HostPeople, HomeNodes):
             self.locks[name] = NodeLock()
             self.entries[name] = h
             self.homes[name] = self.make_node(h, lambda to, k, body, mid, t=town: self._send(t, to, k, body, mid))
+            self.homes[name].replay.follower = self.follower
         # thinking nodes
         self.mind: SharedModel | None = None
         self.agents: dict[str, Any] = {}
@@ -271,10 +275,13 @@ class NodeHost(HostPeople, HomeNodes):
             if only and name != only:
                 continue
             r = h.replay
-            r.configure(kw.get("start", r.start), float(kw.get("step_seconds", r.step_seconds)),
-                        int(kw.get("loop_days", r.loop_days)), kw.get("at"), kw.get("at_wall"), hold=bool(kw.get("hold")))
-            if not kw.get("keep"):        # a new run starts each home afresh; a change of speed (keep) goes on with it
-                h.adapter.idx = None
+            line = (kw.get("start", r.start), float(kw.get("step_seconds", r.step_seconds)), int(kw.get("loop_days", r.loop_days)), kw.get("at"), kw.get("at_wall"), bool(kw.get("hold")))
+            if kw.get("keep"):            # a change of speed, or a step on: the home goes on from where it is
+                r.configure(*line)
+            else:                         # a new run starts each home afresh. Under its lock: the pass the set clock starts never finds the new clock with the old place
+                with self.locks[name]:
+                    r.configure(*line)
+                    h.adapter.idx = None
             out = r.clock()
         return out or {}
 
@@ -297,12 +304,13 @@ class NodeHost(HostPeople, HomeNodes):
 
 
     def tick_loop(self) -> None:
+        f = self.follower
         while True:
-            t0 = time.time()
+            t0, moves = time.time(), f.moves
             if self.held():
                 self.kept_passes += 1
                 self.ready = True                         # no node steps on a kept day, so there's no pass to wait for
-                time.sleep(1.0)
+                f.wait(moves, PASS_S)
                 continue
             whole = True
             for name, h in list(self.homes.items()):
@@ -324,11 +332,13 @@ class NodeHost(HostPeople, HomeNodes):
                 self.alarm_kept(name)
             seen = {(h.adapter.tel or {}).get("ts") for h in self.homes.values()}
             self.ticked = next(iter(seen)) if whole and len(seen) == 1 else None
+            if self.ticked:
+                f.passed(moves, self.ticked)
             self.ready = True
             d = round(time.time() - t0, 3)
             self.tick_s.append(d)
             self.tick_worst = max(self.tick_worst, d)
-            time.sleep(max(0.2, 1.0 - (time.time() - t0)))
+            f.wait(moves, max(0.2, PASS_S - (time.time() - t0)))
 
     def take(self, name: str, msg: dict[str, Any]) -> None:
         """One claimed message: handled under the node's lock, then acknowledged."""

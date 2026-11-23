@@ -94,7 +94,7 @@ before a sale step before a report).
   status the first came to.
 - `POST /person/{node}` takes a person's signed word: the one way an alarm ends and a limit goes up.
 
-Doors: `GET /health`, `/telemetry` (each node's latest row; with `since`, up to 12 rows after that dataset time, which the runner's
+Doors: `GET /health`, `/telemetry` (each node's latest row; with `since`, up to 192 rows after that dataset time, which the runner's
 meter feed reads), `/homes/{name}`, `/agents`, `/agents/{name}/receipts`, `/demo/clock`; `POST /person/{name}`, `/demo/reset`,
 `/demo/clock` and `/demo/scenario`, which takes `weather` (`pv`, `load`, `dT`, `from`, `hours`), an `override` of one node (homes:
 `ev_now`, `comfort`, `stop`, `depart_at`, `clear`, `note`, `alarm`; buildings: `comfort`, `lights`, `stop`, `clear`, `alarm`),
@@ -274,7 +274,7 @@ defaults and the stand-in buyers'.
 
 | When | What happens | Messages |
 |---|---|---|
-| D-1 09:45 | `/demo/start` sets every participant's clock to this step, held; the runner places each buyer's order (`POST /needs`) | HTTP doors |
+| D-1 09:45 | `/demo/start` sets every participant's clock to this step, held, before the runner's gate at 10:00; the runner places each buyer's order (`POST /needs`) and opens the gate | HTTP doors |
 | D-1 10:00 | the community agent asks each buyer for tomorrow's needs; the clock waits for the first buyer's answer, until 16:00 at most | `discover`, `on_discover` |
 | every buyer asked has answered (a silent buyer holds it 30 s at most) | the call for offers goes to every member; with `community_forecast`, the community forecast is made | `discover` with the need |
 | offers come in | each offer is checked at the door (member record, nameplate, numbers); members with no offer in hear the call again every 30 minutes | `on_discover` |
@@ -295,45 +295,75 @@ defaults and the stand-in buyers'.
 | every buyer settled | the split: each member paid by measured delivery, reputations moved (0.7 of the old mark and 0.3 of the share delivered, at most 1.2; a member with no counted reading keeps 0.7 of its mark); the sale's record is written | `on_status` with the payment |
 | later readings, for a day | top-up settlements and top-up payments; a buyer that has not settled is asked again every hour | `on_status`, `update` |
 
-The demo runner follows the sale: it ends `settled` once the sale has been `done` for 8 × `step_seconds` of wall time with no
-reading missing; at once on `failed` or `no_offer`; at 03:00 the morning after (`settled, with an alarm standing` when the sale is
-done, else `not settled`); or `timed out` after 170 × `step_seconds` + 900 s of wall time.
+The demo runner follows the sale. Once the sale is `done` with no reading missing it tells the clock to hold, and it ends `settled`
+when the clock says the step in hand is finished. It ends at once on `failed` or `no_offer`; where the clock stands before the
+evening's last step, 03:00 the morning after, or on the last step of the data (`settled, with an alarm standing` when the sale is
+done, else `not settled`); or `timed out` when neither the clock nor the sale has said anything new for a step's pace and 900 s
+more.
 
-## 4. The waiting clock and its gates
+## 4. The waiting clock, its gates and its leaps
 
 Every participant keeps the dataset's clock (`replay.Replay`): wall time mapped onto 15-minute dataset steps, on an absolute line that
 the community agent sets for all of them, so they agree on the step at the same wall moment. A held clock stays on its step until it
-is set again.
+is set again. The loop that works by a clock (a host's tick, a site's, the aggregator's, a buyer's, the market's) starts its next pass
+as soon as the clock is set, and the part's `GET /demo/clock` answers `ticked`: the dataset time of that loop's last whole pass since
+then. A clock set several quarter hours on loses none of them: a home steps each in order (192 at most) and its host gives back as
+many meter rows, a site steps and reports each, and the community agent writes a report row for each.
 
-With `clock_waits`, the community agent moves every clock one step at a time. `POST /demo/start` (`event`, `step_seconds` from 2 to
-120, `lead_s`) posts `/demo/reset` and then `/demo/clock` to every participant it knows (the first buyer at `utility_url`, the homes'
-host at `host_url`, each building at `building_urls`, the rest at `clock_extra_targets`), sets them to 09:45 the day before the event,
+With `clock_waits`, the community agent moves every clock (`agents/community/conductor.py`). `POST /demo/start` (`event`;
+`step_seconds` from 2 to 120, the participants' own clock setting; `pace_s` from 0 to 120, when not given `step_seconds`; `leap`;
+`lead_s`) posts `/demo/reset` and then `/demo/clock` to every participant it knows (the first buyer at `utility_url`, the homes' host
+at `host_url`, each building at `building_urls`, the rest at `clock_extra_targets`), sets them to 09:45 the day before the event,
 held, all starting `lead_s` later, and starts the clock loop. It refuses with 503 while the agent's inbox is still clearing old
 messages, unless `force` is set.
 
-The loop looks every 0.4 s. A held step ends when all of these hold:
+The loop looks at the step every clock holds: at once after a move, every `clock_poll_s` (0.05 s) while that step waits on the
+participants, at the end of a played step's pace, and every 0.5 s while nothing can move; a word at its door or a meter reading fed
+wakes it at once. A step that is played is finished when all of these hold:
 
-1. It has lasted `step_seconds`: the run's pace.
+1. It has lasted its pace: `pace_s` as the start or the door set it (0: no time of its own), else `step_seconds`; never less than
+   `clock_min_step_s`.
 2. Every node service (`clock_wait_urls`, by default the homes' host and the buildings' host) says through `GET /agents` that all
    its nodes ticked at this step, no agent is deciding, no message is leaving, and none left in the last `clock_wait_quiet_s`.
-3. No signed message other than a meter reading went through the community agent's wire log or the first buyer's in the last
-   `clock_wait_quiet_s`.
-4. The market waits on nothing only an answer can bring: offers to come, the buyers' contract, commitments to answer, the buyers'
+3. Every other participant that says how far its loop is has caught up with this step (`ticked`: the buyers, the aggregator, the
+   sites; one that does not say, or does not answer, is not waited for), and so has the market's own loop. With `clock_wait_meter`,
+   the community's meter holds a reading for every quarter hour since the step the clocks moved from.
+4. No signed message other than a meter reading went through the community agent's wire log or the first buyer's in the last
+   `clock_wait_quiet_s`. A clock that runs fast (it leaps, or its pace is under `step_seconds`) also waits that long from the moment
+   every participant had caught up, the time an inbox takes to be looked at; one that leaps does not wait after a report row the
+   community sent upward, which nothing answers.
+5. The market waits on nothing only an answer can bring: offers to come, the buyers' contract, commitments to answer, the buyers'
    settlement, a call's answers, readings due, reports the gap desk has not read, and from 10:00 to 16:00 the day before, the first
    buyer's answer for tomorrow.
 
-Then the agent posts the next step, held, to every participant in parallel and moves its own clock. Once every node service has
-finished a step, the gap desk reads that step's shortfall reports together.
+Then the agent posts the step the clocks move to, held, to every participant in parallel and moves its own clock. Once every node
+service has finished a step, the gap desk reads that step's shortfall reports together.
 
+- **Leaping.** With `clock_leap`, or `leap` at the start or at the door, the clock plays only the steps something is scheduled at
+  and moves over the empty quarter hours between them in one move: to the next stop, or `clock_leap_max_steps` on (12 by default,
+  192 at most) when no stop comes first. A stop is a gate (and, once it is opened, its step and the one after), a step the driver
+  named (`stops`, `run_to`), the last step of the data, and every quarter hour the market has something at
+  (`market_schedule.py`): the day's question from 10:00 to 16:00 while a buyer has not answered it, a sale's contract while it is
+  open, its notice, its evening from `clock_lead_minutes` (30) before the window through its readings to its settlement, and a call
+  of the gap desk. An empty step the clock lands on lasts no pace and no inbox's time: it is finished once every participant has
+  caught up and nothing else of the list is still to come. Each leap is on the record with the wall time it took (`leaps`, and a
+  `clock_leap` event).
 - **Going on.** When the list of waits stays the same for `clock_wait_idle_s` (180 s by default; the runner sets 600 s), the clock
   goes on without them, and each such step is on the record (`went_on`, and a `clock_went_on` event).
 - **Lines sent again.** A participant a post does not reach is named once (`clock_not_reached`). Every 20 s the agent reads each
   participant's clock and sends its own line again to any part on another line (`clock_sent_again`).
 - **Gates.** `POST /demo/conductor {"gates": [step, ...]}` names steps the clock stops before. At a gate the clock holds on the step
   before it with everything else done, and `GET /demo/conductor` shows `at_gate`. A runner posts what happens at that step and opens
-  it with `{"open": step}`, so a scripted event lands before any node sees its step. Gates stay through `/demo/start`.
-- `GET /demo/conductor` also says whether the clock waits, the steps moved, the seconds held beyond the pace, what it waits on now
-  and every step it went on without something.
+  it with `{"open": step}`, so a scripted event lands before any node sees its step. Gates and stops stay through `/demo/start`.
+- **A driver's word.** The same door takes, alone or together: `{"stops": [step, ...]}`, steps of the data a leap must land on (a
+  new list takes the old one's place); `{"leap": true}` or `false`; `{"pace_s": 0 to 120}`; `{"hold": true}`, which stops the clock
+  once the step in hand is finished, and `false`, which lets it go on; `{"step": n}`, which plays n steps, a leap counting as one,
+  and holds again; `{"run_to": step}`, which goes on to that step and holds there. A word that cannot be read is refused whole (400).
+- `GET /demo/conductor` says whether the clock waits, the step it holds, the steps moved, the seconds held beyond the pace, what it
+  waits on now, every step it went on without something, its gates, its stops and the next step it must play (`next_stop`), its
+  pace, whether it leaps and how far, whether the driver holds it, its last 50 leaps (`from`, `to`, `steps`, `wall_ms`) and its last
+  50 played steps (`sim`, `wall_ms`, `waited_on`), and its `mode`: `idle`, `playing`, `waiting`, `leaping`, `at_gate`, `held` or
+  `ended`.
 
 ## 5. The package
 
@@ -362,7 +392,7 @@ src/murmur/
 | `node/`: the road to a device | `context.py`, `calls.py` with `home_plans_past.npz`, `policy.py`, `guard.py`, `guard_building.py`, `guard_building_rules.py`, `guard_building_tools.py`, `drivers.py`, `tools.py` with `tools.json`, `shelves.json`, `home_setup.json` | the context server, the call checks and the homes' day-before plans, who may change what, the guards, the seal and the drivers, the tool cards and each node's shelf |
 | `node/`: records | `record.py`, `person.py` | the decision record; a person's word, the alarm and the signed limits on disk; the deploy's commands for the token and a person's key |
 | `agents/` | `host.py`, `host_common.py`, `host_people.py`, `host_doors.py`, `home.py`, `building.py`, `aggregator.py`, `site.py`, `site_service.py` | the hosts and their doors, the aggregator, a single site |
-| `agents/community/` | `service.py`, `doors.py`, `community.py`, `community_asked.py`, `community_feed.py`, `community_rules.py`, `members.py`, `forecast.py`, `market*.py`, `gaps*.py` | the community agent (section 1.3) and its waiting clock |
+| `agents/community/` | `service.py`, `doors.py`, `conductor*.py`, `community.py`, `community_asked.py`, `community_feed.py`, `community_rules.py`, `members.py`, `forecast.py`, `market*.py`, `gaps*.py` | the community agent (section 1.3) and its waiting clock (`conductor.py`, with what a step waits on, which steps must be played, and its door) |
 | `settlement/` | `rules.py`, `meter_check.py`, `market_checks.py` | the baseline rule, the class shares and keeps of the price book, the split; what a reading, an order, a call and a settlement may say before money moves |
 
 The rest of the repository: `demo/runner/` (section 6), `demo/page_builder/` (the demo pages, from the recorded evenings in
@@ -413,7 +443,7 @@ The settings that set behaviour, with their defaults (`config.py` and each reade
 | every part | `replay_start` (the dataset's), `replay_step_seconds` (60), `replay_loop_days` (1); `max_message_age_s` (900) for the community agent, the nodes and the buyers; `town_poll_seconds` (1) and `town_poll_idle_seconds` (3) for all but the hosts |
 | community: the sale | `roster`, `buildings` (none), `buyers` (none: one buyer, `utility_name`, default `utility`), `community` (no definition), `report_rule`, `clear_margin` (0.10), `clear_lead_minutes` (180), `fill_to_ask` and `second_round` (on in a pooled market), `community_forecast` (on in a pooled market), `rebound_tolerance` (0), `coordinator_fee_share` (0) |
 | community: waits | in dataset minutes `discover_retry_minutes`, `utility_retry_minutes` (doubling), `offers_retry_minutes` and `confirm_retry_minutes` (30 each), `confirm_retries` (3), `utility_retries` (5), `readings_wait_minutes` (120); in wall seconds `discover_retry_wall_seconds` (30), `utility_retry_wall_seconds` (60, doubling), `offers_retry_wall_seconds`, `confirm_retry_wall_seconds` and `readings_chase_wall_seconds` (120 each), `readings_quiet_s` (30), `report_up_retry_s` (30), `rt_answer_wait_s` (25, plus the bus's lag up to `rt_answer_wait_max_extra_s`, 90) |
-| community: workers and clock | `send_workers` (8), `inbox_workers` (4), `catchup_workers` (16); `clock_waits` (off), `clock_wait_idle_s` (180), `clock_wait_quiet_s` (4); `sync_broadcast` (off: sends in line and no wall-time floors, for the tests) |
+| community: workers and clock | `send_workers` (8), `inbox_workers` (4), `catchup_workers` (16); `clock_waits` (off), `clock_wait_idle_s` (180), `clock_wait_quiet_s` (4), `clock_wait_meter` (off), `clock_leap` (off), `clock_leap_max_steps` (12), `clock_lead_minutes` (30), `clock_poll_s` (0.05), `clock_min_step_s` (0); `sync_broadcast` (off: sends in line and no wall-time floors, for the tests) |
 | hosts | `homes` and `buildings` (every one), `control_mode` (`fixed`), `forecast` (`temp_regression`), `buyers`, `report_rule`, `utility_name`, `community_pubkeys`, `person_keys`, `opt_out_days`, `owner_limits`, `rt_min_price` (0), `send_workers` (8), `host_poll_workers` (8), `host_poll_seconds` (5), `host_poll_idle_seconds` (15), `host_sweep_seconds` (60) |
 | agents | `llm_enabled` (off), `llm_slots` (1), `llm_temperature`, `llm_seed`, `thinking_homes` (none), `thinking_buildings` (every building), `careful_notes` (off) |
 | buyers | `utility_aggregators` (`community`), `utility_settle_wait_minutes` (30), `utility_settle_quiet_s` (30), `utility_inbox_workers` (12), `grid_watch` (on), `call_settle_after_min` (60) |
@@ -426,27 +456,31 @@ The settings that set behaviour, with their defaults (`config.py` and each reade
 From the repository root: `python -m demo.runner example`, then
 `python -m demo.runner evening --config demo/runner/config.example.json`. Paths in a configuration are read from the
 configuration's own folder. `evening` exits 0 when the run ends `settled` (or `settled, with an alarm standing`), else 1.
+`python -m demo.runner compare RUN_A RUN_B` exits 0 when two finished runs were the same evening, 1 when they differ and 2 when a
+run folder cannot be read.
 
 | Module | What it adds |
 |---|---|
-| `__main__.py` | the commands: `example [--out FOLDER]`, `evening --config FILE [--feed-port N]`, `feed --run FOLDER [--host H] [--port N]`, `bus [--host H] --port PORT --runs FILE` |
-| `settings.py` | one JSON configuration (`config.example.json`): the run's id, the host every part listens on and is called at, a fresh run folder, the ports (`"free"` or a block from 51000), the data and model folders, the evening, the sites, the pace (`step_seconds`), the quiet seconds, the devices (`all` by default), the model (`{"stand_in": true}` or a server's address on the host and its name), the scripted events, the feed's port. It is checked before anything starts |
+| `__main__.py` | the commands: `example [--out FOLDER]`, `evening --config FILE [--feed-port N]`, `compare RUN_A RUN_B`, `feed --run FOLDER [--host H] [--port N]`, `bus [--host H] --port PORT --runs FILE` |
+| `settings.py` | one JSON configuration (`config.example.json`): the run's id, the host every part listens on and is called at, a fresh run folder, the ports (`"free"` or a block from 51000), the data and model folders, the evening, the sites, the participants' clock setting (`step_seconds`, 2 to 120), the pace of a played step (`pace_s`, 0 to 120; a file that names none plays at `step_seconds`), whether the clock leaps (`leap`, off unless named; on in the example) and how far at most (`leap_max_steps`, 1 to 192, 96 unless named), the quiet seconds, the devices (`all` by default), the model (`{"stand_in": true}` or a server's address on the host and its name), the scripted events, the feed's port. It is checked before anything starts |
 | `bus.py` | the local message bus: the contract of section 1.7 in memory, leases of 30 s, `GET /health`, and `GET /runs/{run}/record?after=N`, every accepted message and every ack from the Nth on |
 | `grants.py` | one controller key per name in the run folder; for the run, a grant naming a fresh session key (`join`, `send`, `claim`, `ack`), valid for one hour, signed by the controller; the bus pins each name's controller key and checks the grant and the session's proof at the join |
 | `stack.py` | writes each part's folder (its `agent.json`, its keys, its grants and tokens, the public keys it must trust) and starts each part as its own process with only the environment it needs: the bus, the stand-in model, the community agent, the buyers, the homes' host, the buildings' host, the aggregator, each site. It waits for the bus's `/health`, then for each other part's but the stand-in model's, and stops only the processes it started |
-| `evening.py` | resets the buyers, sets the gates, posts `/demo/start`, places each buyer's order (a deposit of a tenth of what it could pay), feeds the community's meter each quarter hour once every member has reported it (the feed's base load plus each member's `grid_kw - grid_cf_kw` from its host's `/telemetry`), posts each scripted event at its gate (`note`, `car_now`, `building_closed`, `zone_event`, `cloud`, `emergency`), follows the sale to its settlement and writes `summary.json` |
+| `evening.py` | resets the buyers; tells the clock its gates (10:00 the day before, where the buyers are asked for their orders; each scripted event's step; the evening's last step, 03:00 the morning after or where its feed ends) and its stops (the step each request of the aggregator goes at, and the quarter hour after it); posts `/demo/start` with `pace_s`; places each buyer's order (a deposit of a tenth of what it could pay) and opens the first gate; feeds the community's meter each quarter hour once every member has reported it (the feed's base load plus each member's `grid_kw - grid_cf_kw` from its host's `/telemetry`, read every eighth of the pace, between 0.05 and 0.25 s, and after a leap for every quarter hour since the last one fed); posts each scripted event at its gate (`note`, `car_now`, `building_closed`, `zone_event`, `cloud`, `emergency`); follows the sale, holds the clock once the money is final (section 3), and writes `summary.json` (with `clock`: the steps moved, every leap and played step, the seconds held beyond the pace, the run's wall seconds) and `record.json.gz`, the bus record whole |
+| `compare.py` | says whether two finished runs were the same evening, from their `summary.json` and `record.json.gz`: the outcome (how each ended, the sale as the community holds it, the aggregator's view), every message that is no report row (between each sender and receiver the same messages of each kind, as often and in the same order) and the report rows as a set. Wall times, message ids, signatures, keys and the tag a run ends an id with are left out, and so is what only follows from which of two messages between different pairs came first: `result.components`, the aggregator's last 200 flags, and which buyer's order a pooled sale goes by (a note says when the two runs differ in that). It prints what differs, 20 lines of each kind |
 | `feed.py` | the read-only state feed, `GET /live/state.json` (schema `murmur.live.v1`, CORS open): each part's `/health`, the community's `/v2/summary` and the buyers' `/contracts`, read every 5 s. It sends nothing to any part |
 | `model.py` | the stand-in model server (`--host`, `--port`, `--ms`, `--log`): it answers a `POST` to any path after `--ms` (50 ms). Given tools, a note becomes `set_owner_wish` by its words (battery, then chiller or cooling, then car) or `no_wish`, a report is two plain sentences with no numbers, and any other question gets `no_action` where it is offered, else the first tool; without tools it answers one plain sentence |
 | `buyers/` | the stand-in buyers (section 1.6): `utility.py`, `utility_orders.py`, `utility_settle.py`, `utility_doors.py`, `utility_meters.py`, `grid_watch.py`, `stand_in.py` |
 | `synthetic.py`, `example.py` | the synthetic community, seeded, byte for byte the same on every machine: three homes, one office, two single sites, their devices, the price book and the buyers' catalog. `example` writes `data/` (25 days, 2025-01-05 to 2025-01-29), `models/forecast/` (three plain one-leaf tree models and `fleet_errors.json`, which keeps no day out: `community_load` gives the community's load as the mean of its own last 14 days, within 10 % either way; `home_base_load` and `solar_per_kw` are the homes' two models the community's forecaster is built on, which replaces the load one and has no array of its own), `sites.json` and `evening.json` (the evening of 2025-01-28 from 18:00 to 21:00, two orders, the community's definition, the evening's feed and the aggregator's battery request). With 22 whole days before the call for offers, the community's outlook fits its own hours there; with fewer than 21 it falls back to `community_load`. The test fixtures are its two-day form |
 
-The runner's settings for every part: `bind_host`, the bus, the replay from 00:00 of the evening's day with no loop, the pace, the
-rolling controller, the temperature forecast, both buyers and the exception rule, with short polls and retry waits scaled to the
-pace. Every home and building gets an agent (`llm_enabled`, the model's address and name, every home in `thinking_homes`, one model
-slot, temperature 0, seed 7) and the community's key in `community_pubkeys`; no other part gets a model's address. The community
-agent gets `clock_waits`, the roster, the clock's targets (`utility_url`, `host_url`, `building_urls`, `clock_extra_targets`) and
-its definition with the aggregator's id and key. The aggregator gets the evening's battery request and each site's requests, and
-the community and the sites with their keys.
+The runner's settings for every part: `bind_host`, the bus, the replay from 00:00 of the evening's day with no loop at
+`step_seconds` a step, the rolling controller, the temperature forecast, both buyers and the exception rule, with short polls and
+retry waits scaled to `step_seconds`. Every home and building gets an agent (`llm_enabled`, the model's address and name, every home
+in `thinking_homes`, one model slot, temperature 0, seed 7) and the community's key in `community_pubkeys`; no other part gets a
+model's address. The community agent gets `clock_waits`, `clock_wait_meter`, `clock_leap` and `clock_leap_max_steps` from the
+configuration, the roster, the clock's targets (`utility_url`, `host_url`, `building_urls`, `clock_extra_targets`) and its
+definition with the aggregator's id and key. The aggregator gets the evening's battery request and each site's requests, and the
+community and the sites with their keys.
 
 ```
 <run folder>/
@@ -455,6 +489,7 @@ the community and the sites with their keys.
   controllers/                <name>.controller.key, one per name
   logs/                       one log per process; model_answers.jsonl
   summary.json                what the evening came to
+  record.json.gz              every message the bus accepted and every ack
   community/                  agent.json, secrets/, state/, logs/ (the buyers run in this folder)
   homes/, buildings/          agent.json, secrets/ (town_grants.json, host_tokens.json), fleet/keys/, state/
   aggregator/, site-pv-01/, site-dc-01/    agent.json, secrets/, logs/

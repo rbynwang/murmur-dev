@@ -2,7 +2,8 @@
 
 A profile is a dataset file stem (homes/HH001 -> homes/HH001.csv.gz and homes/HH001_ev.csv); the dataset's profile_alias may name one.
 All participants agree on the step at the same wall moment (an absolute line set by the community agent), and a held clock stays on its
-step until it is set again.
+step until it is set again. A clock that is set starts the next pass of the loop that works by it at once, and says the dataset time
+that loop last finished (Follower).
 """
 from __future__ import annotations
 
@@ -67,6 +68,37 @@ def _load(profile: str):
         return _CACHE[profile]
 
 
+class Follower:
+    """The loop that works by a clock, as the clock knows it. The clock tells it every time it is set (Replay.configure), so the loop's wait between two
+    passes ends at once in place of running its whole time; the loop says the dataset time of its last whole pass since then (`ticked`), which
+    Replay.clock() answers. A node host has one loop for all its homes' clocks, so those clocks share one follower (agents/host.py)."""
+
+    def __init__(self) -> None:
+        self._told = threading.Condition()
+        self.moves = 0                                   # how many times a clock of this loop was set
+        self.ticked: str | None = None                   # the dataset time of the loop's last whole pass since a clock was set: None until there is one
+
+    def moved(self) -> None:
+        with self._told:
+            self.moves += 1
+            self.ticked = None                           # the pass at the new time is still to come
+            self._told.notify_all()
+
+    def wait(self, seen: int, seconds: float) -> None:
+        """The loop's wait between two passes: `seconds`, its cadence, or until a clock is set. `seen` is `moves` as the loop read it before its pass,
+        so a clock set while the pass ran ends the wait at once: no move is slept through."""
+        with self._told:
+            if self.moves == seen:
+                self._told.wait(seconds)
+
+    def passed(self, seen: int, ts: str) -> None:
+        """The loop finished a whole pass that began at dataset time `ts`, with `moves` at `seen`. A pass the clock was set under says nothing:
+        the one that follows it at once will."""
+        with self._told:
+            if self.moves == seen:
+                self.ticked = ts
+
+
 class Replay:
     def __init__(self, profile: str, start: str, step_seconds: float, loop_days: int = 1):
         self.profile = profile
@@ -77,13 +109,15 @@ class Replay:
         # this clock's own what-if weather, for this node alone (node/surprises.py: a building closed for the day
         # runs on a share of its load); None: the process's WEATHER
         self.weather: dict[str, Any] | None = None
+        self.follower = Follower()                       # the loop that works by this clock
         self.configure(start, step_seconds, loop_days)
 
     def configure(self, start: str, step_seconds: float, loop_days: int = 1, at: str | None = None,
                   at_wall: float | None = None, hold: bool = False) -> None:
         """`at`: jump so that the current step shows that dataset time. With `at_wall` (unix seconds) and
         loop_days = 0 the jump is absolute, so agents configured at different moments still agree; without it the
-        jump counts from now. hold: stay on that step until the clock is set again."""
+        jump counts from now. hold: stay on that step until the clock is set again. The loop that works by this clock
+        is told once the clock is set, and starts its next pass at once."""
         if start not in self.index:
             raise ValueError(f"replay start {start!r} not in dataset")
         step, loop = float(step_seconds), int(loop_days)
@@ -105,10 +139,16 @@ class Replay:
         # line or the new one, never half of each
         self._line = (wall0, step, i0, loop, held if hold else None)
         self.start, self.step_seconds, self.loop_days, self.i0, self.at_wall, self.wall0 = start, step, loop, i0, aw, wall0
+        self.follower.moved()
 
     @property
     def held(self) -> bool:
         return self._line[4] is not None
+
+    @property
+    def ticked(self) -> str | None:
+        """The dataset time of the last whole pass of this clock's loop since the clock was set: what a waiting clock reads before it moves on."""
+        return self.follower.ticked
 
     def current(self) -> int:
         wall0, step, i0, loop, held = self._line
@@ -122,7 +162,7 @@ class Replay:
 
     def clock(self) -> dict[str, Any]:
         return {"start": self.start, "step_seconds": self.step_seconds, "loop_days": self.loop_days,
-                "at_wall": self.at_wall, "now": self.ts(self.current()), "held": self.held}
+                "at_wall": self.at_wall, "now": self.ts(self.current()), "held": self.held, "ticked": self.ticked}
 
     def row(self, i: int) -> dict[str, Any]:
         r = self.rows[max(0, min(i, len(self.rows) - 1))]

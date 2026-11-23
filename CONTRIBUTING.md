@@ -77,3 +77,10 @@ python -m demo.runner evening --config demo/runner/config.example.json
 
 `evening` prints the address of its read-only state feed. Open `demo/pages/index.html?live=<that address>` and the page adds its
 Live view beside the replay. `python -m demo.runner feed --run FOLDER` serves the feed of a run folder under `out/runs/`.
+
+To present an evening, start the presenter's console instead: `python -m demo.console --config demo/runner/config.example.json
+--port 0`. It writes its link, with the presenter's key, beside its key file; the page it serves plays the running network in the
+split view, with Start, Hold, Step, the speeds, eight surprises and a timeline. `python -m demo.page_builder.checks.live demo/pages`
+and `python -m demo.page_builder.checks.live_run --config demo/runner/config.example.json` check it in a browser. With `--loop-days`
+and `--audience` the console plays evening after evening by itself and lets every viewer trigger one of six preset events;
+`python -m demo.page_builder.checks.live_public --config demo/runner/config.example.json` checks that.
