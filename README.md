@@ -31,6 +31,9 @@ Every participant is a process with its own key and its own name on the message 
 each step until the network has finished it; asked to, it leaps over the quarter hours nothing is scheduled at.
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) has the whole picture.
 
+An agent that wants to use a network as a grid buyer (order, emergency call, settlement) starts at
+[docs/AGENT_GUIDE.md](docs/AGENT_GUIDE.md).
+
 ## Directory map
 
 | Path | What |
@@ -48,7 +51,7 @@ each step until the network has finished it; asked to, it leaps over the quarter
 | `experiments/engie/` | offline pipelines on ENGIE's 2025 data: meter cleaning, peak allocation, the referee, the year runs |
 | `tests/` | the test suite, on synthetic fixtures in `tests/fixtures/` |
 | `scripts/verify_clean_repo.py` | the trace scanner every file must pass |
-| `docs/` | [ARCHITECTURE](docs/ARCHITECTURE.md), [PROTOCOL_AND_SAFETY](docs/PROTOCOL_AND_SAFETY.md), [DATA_AND_LIMITS](docs/DATA_AND_LIMITS.md) |
+| `docs/` | [AGENT_GUIDE](docs/AGENT_GUIDE.md), [ARCHITECTURE](docs/ARCHITECTURE.md), [PROTOCOL_AND_SAFETY](docs/PROTOCOL_AND_SAFETY.md), [DATA_AND_LIMITS](docs/DATA_AND_LIMITS.md) |
 
 ## Quickstart
 
