@@ -267,13 +267,14 @@ class Parts:
         self.clock = {"now": "2025-01-27 09:45", "mode": "playing", "at_gate": None, "pace_s": 0.0, "leap": True, "leap_max_steps": 96, "steps": 0, "held_s": 0.0,
                       "waiting_on": [], "went_on": [], "leaps": [], "played": []}
         self.sale = {"phase": "homes", "offers": 3, "accepted": 3, "readings": 0}
+        self.calls: list[dict] = []                          # what each buyer's GET /calls lists
         self.rows: dict[str, dict] = {}                      # a host's name -> its /telemetry answer
         self.record = {"events": [], "next": 0}
 
     def get(self, url: str):
         self.asked.append(url)
         part, path = url.split("/", 1)
-        doors = {"demo/conductor": self.clock, "v2/summary": {"now": self.clock["now"], "events": {"flex-need-2025-01-28": self.sale}}, "aggregator": {"flagged": 0}}
+        doors = {"demo/conductor": self.clock, "v2/summary": {"now": self.clock["now"], "events": {"flex-need-2025-01-28": self.sale}}, "aggregator": {"flagged": 0}, "calls": {"calls": self.calls}}
         body = self.rows[part] if path.startswith("telemetry") else self.record if path.startswith("runs/") else doors[path]
         return SimpleNamespace(json=lambda: body, raise_for_status=lambda: None)
 

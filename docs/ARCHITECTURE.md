@@ -295,11 +295,13 @@ defaults and the stand-in buyers'.
 | every buyer settled | the split: each member paid by measured delivery, reputations moved (0.7 of the old mark and 0.3 of the share delivered, at most 1.2; a member with no counted reading keeps 0.7 of its mark); the sale's record is written | `on_status` with the payment |
 | later readings, for a day | top-up settlements and top-up payments; a buyer that has not settled is asked again every hour | `on_status`, `update` |
 
-The demo runner follows the sale. Once the sale is `done` with no reading missing it tells the clock to hold, and it ends `settled`
-when the clock says the step in hand is finished. It ends at once on `failed` or `no_offer`; where the clock stands before the
-evening's last step, 03:00 the morning after, or on the last step of the data (`settled, with an alarm standing` when the sale is
-done, else `not settled`); or `timed out` when neither the clock nor the sale has said anything new for a step's pace and 900 s
-more.
+The demo runner follows the sale. Once the sale is `done` with no reading missing, and no buyer holds an emergency call it has
+not settled (each buyer's `GET /calls`; a call that overlaps the window is settled 120 minutes after the window ends, so until then
+the clock goes on), it tells the clock to hold, and it ends `settled` when the clock says the step in hand is finished. It ends at
+once on `failed` or `no_offer`; where the clock stands before the evening's last step, 03:00 the morning after, or on the last step
+of the data (`settled, with an alarm standing` when the sale is done with a reading missing, `settled, with a call open` when only
+a call is still open 10 s after the clock got there, else `not settled`); or `timed out` when neither the clock nor the sale has
+said anything new for a step's pace and 900 s more.
 
 ## 4. The waiting clock, its gates and its leaps
 
@@ -455,7 +457,7 @@ The settings that set behaviour, with their defaults (`config.py` and each reade
 `config.example.json`, and when none is given): it is every part's `bind_host` and the host of every address the runner hands out.
 From the repository root: `python -m demo.runner example`, then
 `python -m demo.runner evening --config demo/runner/config.example.json`. Paths in a configuration are read from the
-configuration's own folder. `evening` exits 0 when the run ends `settled` (or `settled, with an alarm standing`), else 1.
+configuration's own folder. `evening` exits 0 when the run ends `settled` (or `settled, with an alarm standing`, or `settled, with a call open`), else 1.
 `python -m demo.runner compare RUN_A RUN_B` exits 0 when two finished runs were the same evening, 1 when they differ and 2 when a
 run folder cannot be read.
 

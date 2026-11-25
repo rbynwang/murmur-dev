@@ -33,6 +33,7 @@ STEP_MIN = 15
 LEAD_S = 1.0                   # the clock's first step is looked at this long after the start: the least the community takes. The orders' gate holds it, not this
 FAST_S, SLOW_S = 0.05, 0.25    # between two looks at the hosts' telemetry, and at the clock: an eighth of the pace, never outside these
 STALL_S = IDLE_S + 300.0       # a run in which nothing new is said for a step's pace and this long is given up: the clock itself goes on after IDLE_S of the same waits
+CALLS_S = 10.0                 # at the evening's last step, how long a call a buyer still holds open is waited for before the run ends with it open
 RECORD = "record.json.gz"      # every message the bus accepted and every ack, as the bus gave them at the end of the run
 SAID = ("now", "mode", "pace_s", "leap", "leap_max_steps", "steps", "held_s", "went_on")      # what the summary keeps of the clock's last answer, beside its leaps and played steps
 
@@ -91,6 +92,8 @@ class Evening:
         self.errors: list[str] = []
         self.t0: float | None = None                     # the wall time the evening was started
         self.holding = False                             # the clock was told to hold: the money is final
+        self.owing = False                               # said once: the sale is done and a buyer's call is still to settle
+        self.at_end: float | None = None                 # the wall time the clock was first seen at the evening's end with only a call open
         self.line: tuple | None = None                   # the sale's phase and counts as last said
         self.last: tuple | None = None                   # what the clock and the sale last said, and since when: a run that says nothing new is given up
         self.changed = 0.0
@@ -219,11 +222,13 @@ class Evening:
         """One look at the clock and the sale: how the evening ended, or None while it goes on.
 
         A gate the clock stands at is answered at once: what was configured for that step is posted, and the gate opened. The evening
-        ends `settled` once the sale is done with no reading missing and the clock, told to hold there, has finished the step in hand:
-        every part has caught up with it and nothing is on its way, by the clock's own word. It ends at once on a sale that failed or
+        ends `settled` once the sale is done with no reading missing, no buyer holds a call it has not settled (owed), and the clock,
+        told to hold there, has finished the step in hand: every part has caught up with it and nothing is on its way, by the clock's
+        own word. While a call is open the clock goes on, to the step its buyer settles it at. It ends at once on a sale that failed or
         found no offer; where the clock stands before the evening's last step, or on the last step of the data (`settled, with an alarm
-        standing` when the sale is done, else `not settled`); and `timed out` when neither the clock nor the sale has said anything new
-        for a step's pace and STALL_S more."""
+        standing` when the sale is done with a reading missing, `settled, with a call open` when only a call is still open CALLS_S
+        after the clock got there, else `not settled`); and `timed out` when neither the clock nor the sale has said anything new for
+        a step's pace and STALL_S more."""
         if self.k.stopped():
             raise RuntimeError(f"stopped: {self.k.stopped()}")
         c = self.clock = self.get(COMMUNITY, "/demo/conductor")
@@ -242,20 +247,34 @@ class Evening:
         if ev.get("phase") in ("failed", "no_offer"):
             return ev["phase"]
         done = ev.get("phase") == "done"
-        if done and not ev.get("readings_missing"):
+        final = done and not ev.get("readings_missing")
+        owed = self.owed() if final and not self.holding else []
+        if owed and not self.owing:
+            self.say(f"{s.get('now') or ''} the sale is done; {len(owed)} call(s) still to settle, so the clock goes on")
+            self.owing = True
+        if final and not owed:
             if self.holding and stands:
                 return "settled"
             if not self.holding:                          # the money is final: the clock stops once the step in hand is finished
                 self.post(COMMUNITY, "/demo/conductor", {"hold": True})
                 self.holding = True
         elif gate == self.end or c.get("mode") == "ended":
-            return "settled, with an alarm standing" if done else "not settled"
+            if not final:
+                return "settled, with an alarm standing" if done else "not settled"
+            self.at_end = self.wall() if self.at_end is None else self.at_end       # only a call is open: its buyer may be settling it on this very step
+            if self.wall() - self.at_end > CALLS_S:
+                return "settled, with a call open"
         said, t = (c.get("now"), c.get("mode"), c.get("steps"), tuple(c.get("waiting_on") or ()), line), self.wall()
         if said != self.last:
             self.last, self.changed = said, t
         elif t - self.changed > self.s.pace_s + STALL_S:
             return "timed out"
         return None
+
+    def owed(self) -> list[str]:
+        """The calls the buyers raised during the evening and have not settled yet (each buyer's GET /calls), by id. A buyer settles a
+        call that overlaps a sale after the sale's window, so the sale's money is final first; the evening's is final once these are too."""
+        return sorted(str(c["id"]) for b in self.s.buyers for c in self.get(b, "/calls").get("calls") or [] if c.get("status") == "OPEN")
 
     def read(self, part: str, path: str) -> Any:
         """A part's answer for the summary, or the fault that kept it away."""
